@@ -7,7 +7,7 @@
 					<el-input v-model="filters.roleName" placeholder="角色名称"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getRoleList">查询</el-button>
+					<el-button type="primary" v-on:click="getRoleListPage">查询</el-button>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="handleAdd">新增</el-button>
@@ -65,7 +65,7 @@
 
 <script>
 	import util from '../../common/js/util';
-	import { getRoleList, removeRole, batchRemoveRole, editRole, addRole } from '../../api/api';
+	import { getRoleListPage, removeRole, batchRemoveRole, editRole, addRole } from '../../api/api';
 
 	export default {
 		data() {
@@ -109,16 +109,16 @@
 		methods: {
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getRoleList();
+				this.getRoleListPage();
 			},
 			//获取用户列表
-			getRoleList() {
+			getRoleListPage() {
 				let para = {
 					page: this.page,
 					roleName: this.filters.roleName
 				};
 				this.listLoading = true;
-				getRoleList(para).then((resp) => {
+				getRoleListPage(para).then((resp) => {
 					this.total = resp.total;
 					this.roleList = resp.roleList;
 					this.listLoading = false;
@@ -137,7 +137,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getRoleList();
+						this.getRoleListPage();
 					});
 				}).catch(() => {
 
@@ -170,7 +170,7 @@
 								});
 								this.$refs['editForm'].resetFields();
 								this.editFormVisible = false;
-								this.getRoleList();
+								this.getRoleListPage();
 							});
 						});
 					}
@@ -191,7 +191,7 @@
 								});
 								this.$refs['addForm'].resetFields();
 								this.addFormVisible = false;
-								this.getRoleList();
+								this.getRoleListPage();
 							});
 						});
 					}
@@ -214,7 +214,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getRoleList();
+						this.getRoleListPage();
 					});
 				}).catch(() => {
 
@@ -222,7 +222,7 @@
 			}
 		},
 		mounted() {
-			this.getRoleList();
+			this.getRoleListPage();
 		}
 	}
 

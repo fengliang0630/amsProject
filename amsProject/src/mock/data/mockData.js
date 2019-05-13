@@ -10,11 +10,12 @@ const LoginUsers = [
   }
 ];
 
-let Users = [], Roles = [], Menus = [];
+let Users = [], Roles = [], Menus = [], HasRoles = [];
 
 for (let i = 0; i < 86; i++) {
+  let userId = Mock.Random.guid();
   Users.push(Mock.mock({
-    id: Mock.Random.guid(),
+    id: userId,
     name: Mock.Random.cname(),
     addr: Mock.mock('@county(true)'),
     'age|18-60': 1,
@@ -22,18 +23,29 @@ for (let i = 0; i < 86; i++) {
     sex: Mock.Random.integer(0, 1)
   }));
 
-  Roles.push(Mock.mock({
-    id: Mock.Random.guid(),
-    roleName: `角色${i}`
-  }));
+  if (i < 50) {
+    let roleId = Mock.Random.guid();
+    Roles.push(Mock.mock({
+      id: roleId,
+      roleName: `角色${i}`
+    }));
 
-  Menus.push(Mock.mock({
-    id: Mock.Random.guid(),
-    menuName: `菜单${i}`,
-    parentMenuName: `父菜单名称${i}`,
-    parentMenuId: Mock.Random.guid(),
-    menuLink: Mock.Random.url()
-  }));
+    if (i%2 === 0) {
+      HasRoles.push(Mock.mock(roleId));
+    }
+    
+  }
+
+  if (i < 15) {
+    let menuId = Mock.Random.guid();
+    Menus.push(Mock.mock({
+      id: menuId,
+      menuName: `菜单${i}`,
+      parentMenuName: `父菜单名称${i}`,
+      parentMenuId: Mock.Random.guid(),
+      menuLink: Mock.Random.url()
+    }));
+  }
 }
 
-export { LoginUsers, Users, Roles, Menus };
+export { LoginUsers, Users, Roles, Menus, HasRoles };

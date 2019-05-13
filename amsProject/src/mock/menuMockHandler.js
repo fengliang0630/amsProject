@@ -5,7 +5,7 @@ let _Menus = Menus;
 const MenusMockHandler = {
     init(mock) {
     //获取菜单列表（分页）
-    mock.onPost('/menu/list').reply(config => {
+    mock.onPost('/menu/listPage').reply(config => {
         let {page, menuName} = JSON.parse(config.data);
         let mockMenus = _Menus.filter(menu => {
           if (menuName && menu.menuName.indexOf(menuName) == -1) return false;

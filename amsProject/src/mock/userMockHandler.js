@@ -5,7 +5,7 @@ let _Users = Users;
 const UserMockHandler = {
     init(mock) {
         //获取用户列表（分页）
-    mock.onPost('/user/list').reply(config => {
+    mock.onPost('/user/listPage').reply(config => {
         let {page, name} = JSON.parse(config.data);
         let mockUsers = _Users.filter(user => {
           if (name && user.name.indexOf(name) == -1) return false;

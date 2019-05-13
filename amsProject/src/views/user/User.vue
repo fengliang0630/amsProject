@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section id="userPage">
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
@@ -7,7 +7,7 @@
 					<el-input v-model="filters.name" placeholder="姓名"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getUserList">查询</el-button>
+					<el-button type="primary" v-on:click="getUserListPage">查询</el-button>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="handleAdd">新增</el-button>
@@ -31,8 +31,9 @@
 			</el-table-column>
 			<el-table-column prop="addr" label="地址" min-width="180" sortable>
 			</el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column label="操作" width="300">
 				<template slot-scope="scope">
+					<el-button size="small" @click="showRoleHandler(scope.$index, scope.row)">分配角色</el-button>
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
@@ -101,12 +102,23 @@
 				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
 			</div>
 		</el-dialog>
+
+		<el-dialog title="配置角色页面" v-model="addRoleVisible" :close-on-click-modal="false" center>
+			<el-transfer filterable filter-placeholder="请输入角色名称" :titles="['未选角色', '已选角色']" 
+				v-model="hasRoleList" :data="roleList" :props="{key: 'id', label: 'roleName'}">	
+			</el-transfer>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click.native="addRoleVisible = false">取消</el-button>
+				<el-button type="primary" @click.native="addRoleHandler" :loading="addRoleLoading">提交</el-button>
+			</div>
+		</el-dialog>
+
 	</section>
 </template>
 
 <script>
 	import util from '../../common/js/util';
-	import { getUserList, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser, getRoleList, getHasRoleIdsByUserId, setRoleIdsByUserId } from '../../api/api';
 
 	export default {
 		data() {
@@ -151,8 +163,12 @@
 					age: 0,
 					birth: '',
 					addr: ''
-				}
+				},
 
+				roleList: [],
+				hasRoleList: [],
+				addRoleLoading: false,
+				addRoleVisible: false
 			}
 		},
 		methods: {
@@ -162,16 +178,16 @@
 			},
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getUserList();
+				this.getUserListPage();
 			},
 			//获取用户列表
-			getUserList() {
+			getUserListPage() {
 				let para = {
 					page: this.page,
 					name: this.filters.name
 				};
 				this.listLoading = true;
-				getUserList(para).then((resp) => {
+				getUserListPage(para).then((resp) => {
 					this.total = resp.total;
 					this.userList = resp.userList;
 					this.listLoading = false;
@@ -190,7 +206,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getUserList();
+						this.getUserListPage();
 					});
 				}).catch(() => {
 
@@ -228,7 +244,7 @@
 								});
 								this.$refs['editForm'].resetFields();
 								this.editFormVisible = false;
-								this.getUserList();
+								this.getUserListPage();
 							});
 						});
 					}
@@ -250,7 +266,7 @@
 								});
 								this.$refs['addForm'].resetFields();
 								this.addFormVisible = false;
-								this.getUserList();
+								this.getUserListPage();
 							});
 						});
 					}
@@ -273,18 +289,55 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getUserList();
+						this.getUserListPage();
 					});
 				}).catch(() => {
 
 				});
+			},
+			showRoleHandler(index, row) {
+				getHasRoleIdsByUserId({userId: row.id}).then(res => {
+					this.hasRoleList = res.hasRoleIds;
+				});
+				this.addRoleVisible = true;
+			},
+			addRoleHandler() {
+				const param = {roleIds: this.hasRoleList, userId: ''};
+				this.addRoleLoading = true;
+				setRoleIdsByUserId(param).then((res) => {
+					this.addRoleLoading = false;
+					this.$message({
+						message: '设置角色成功',
+						type: 'success'
+					});
+					this.getUserListPage();
+					this.addRoleVisible = false;
+				});
+				
 			}
 		},
 		mounted() {
-			this.getUserList();
+			this.getUserListPage();
+			getRoleList().then(res => {
+				this.roleList = res.roleList;
+			});
 		}
 	}
 
 </script>
 
-<style scoped></style>
+<style lang="scss">
+	#userPage {
+		.el-transfer-panel{
+		width: 45%;
+		height: 500px;
+			.el-transfer-panel__body {
+				height: 80%;
+				.is-filterable.el-transfer-panel__list {
+					height: 80%;	
+				}
+			}
+		
+		}
+	}
+</style>
