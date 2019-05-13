@@ -334,7 +334,7 @@
 			.el-transfer-panel__body {
 				height: 80%;
 				.is-filterable.el-transfer-panel__list {
-					height: 80%;	
+					height: 100%;	
 				}
 			}
 		
