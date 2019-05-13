@@ -48,6 +48,9 @@ export const addRole = params => { return axios.post(`${base}/role/add`, params)
 // 获取菜单列表（分页）
 export const getMenuListPage = params => { return axios.post(`${base}/menu/listPage`, params).then(res => res.data); };
 
+// 获取菜单树
+export const getMenuTree = params => { return axios.post(`${base}/menu/tree`, params).then(res => res.data); };
+
 // 删除菜单
 export const removeMenu = params => { return axios.post(`${base}/menu/remove`, params).then(res => res.data); };
 

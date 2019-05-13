@@ -10,7 +10,7 @@ const LoginUsers = [
   }
 ];
 
-let Users = [], Roles = [], Menus = [], HasRoles = [];
+let Users = [], Roles = [], Menus = [], HasRoles = [], MenuTree = [];
 
 for (let i = 0; i < 86; i++) {
   let userId = Mock.Random.guid();
@@ -48,4 +48,26 @@ for (let i = 0; i < 86; i++) {
   }
 }
 
-export { LoginUsers, Users, Roles, Menus, HasRoles };
+MenuTree = [
+  {
+    id: '1',
+    menuName: '系统功能',
+    iconCls: 'el-icon-message',
+    children: [
+      {id: '1_1', menuName: '菜单管理', menuLink: '/menu'},
+      {id: '1_2', menuName: '用户管理', menuLink: '/user'},
+      {id: '1_3', menuName: '角色管理', menuLink: '/role'}
+    ]
+  },
+  {
+    id: '2',
+    menuName: '业务功能',
+    iconCls: 'el-icon-message',
+    children: [
+      {id: '2_1', menuName: '工程地理图像查询', menuLink: '/sss'}
+    ]
+  }
+];
+
+
+export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree };
