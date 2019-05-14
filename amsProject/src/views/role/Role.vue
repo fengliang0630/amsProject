@@ -18,7 +18,11 @@
 		<!--列表-->
 		<el-table :data="roleList" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="55"></el-table-column>
-			<el-table-column type="index" width="60"></el-table-column>
+			<el-table-column width="60">
+				<template slot-scope="scope">
+					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="roleName" label="角色名称" sortable></el-table-column>
 			<el-table-column label="操作" width="350">
 				<template slot-scope="scope">
@@ -32,12 +36,13 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
 			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="sizes, prev, pager, next" :page-sizes="[20, 50, 100]" @size-change="handleSizeChange"
+			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+		<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 				<el-form-item label="角色名称" prop="roleName">
 					<el-input v-model="editForm.roleName" auto-complete="off"></el-input>
@@ -50,7 +55,7 @@
 		</el-dialog>
 
 		<!--新增界面-->
-		<el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
+		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 				<el-form-item label="角色名称" prop="roleName">
 					<el-input v-model="addForm.roleName" auto-complete="off"></el-input>
@@ -63,7 +68,7 @@
 		</el-dialog>
 
 		<!-- 分配菜单-->
-		<el-dialog title="分配菜单" v-model="setMenuVisible" :close-on-click-modal="false">
+		<el-dialog title="分配菜单" :visible.sync="setMenuVisible" :close-on-click-modal="false">
 			<div style="height:400px;overflow:auto;">
 				<el-tree v-if="setMenuVisible" :props="{label: 'menuName'}" :data="menuTreeData" node-key="id" ref="menuTree"
 					:default-checked-keys="selectMenuIds" show-checkbox @check-change="handleCheckChange">
@@ -90,7 +95,8 @@
 				},
 				roleList: [],
 				total: 0,
-				page: 1,
+				pageNum: 1,
+				pageSize: 20,
 				listLoading: false,
 				sels: [],//列表选中列
 
@@ -126,17 +132,22 @@
 			}
 		},
 		methods: {
-			handleCheckChange(data, checked, indeterminate) {
+			handleSizeChange(pageSize) {
+				this.pageSize = pageSize;
+				this.getRoleListPage();
+			},
+			handleCheckChange() {
 				this.selectMenuIds = this.$refs.menuTree.getCheckedKeys();
 			},
-			handleCurrentChange(val) {
-				this.page = val;
+			handleCurrentChange(pageNum) {
+				this.pageNum = pageNum;
 				this.getRoleListPage();
 			},
 			//获取用户列表
 			getRoleListPage() {
 				let para = {
-					page: this.page,
+					pageNum: this.pageNum,
+					pageSize: this.pageSize,
 					roleName: this.filters.roleName
 				};
 				this.listLoading = true;

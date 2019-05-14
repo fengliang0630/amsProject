@@ -6,13 +6,13 @@ const UserMockHandler = {
     init(mock) {
         //获取用户列表（分页）
     mock.onPost('/user/listPage').reply(config => {
-        let {page, name} = JSON.parse(config.data);
+        let {pageNum, pageSize, name} = JSON.parse(config.data);
         let mockUsers = _Users.filter(user => {
           if (name && user.name.indexOf(name) == -1) return false;
           return true;
         });
         let total = mockUsers.length;
-        mockUsers = mockUsers.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
+        mockUsers = mockUsers.filter((u, index) => index < pageSize * pageNum && index >= pageSize * (pageNum - 1));
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve([200, {

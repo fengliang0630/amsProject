@@ -9,13 +9,13 @@ const MenusMockHandler = {
     
       //获取菜单列表（分页）
     mock.onPost('/menu/listPage').reply(config => {
-      let {page, menuName} = JSON.parse(config.data);
+      let {pageNum, pageSize, menuName} = JSON.parse(config.data);
       let mockMenus = _Menus.filter(menu => {
         if (menuName && menu.menuName.indexOf(menuName) == -1) return false;
         return true;
       });
       let total = mockMenus.length;
-      mockMenus = mockMenus.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
+      mockMenus = mockMenus.filter((u, index) => index < pageSize * pageNum && index >= pageSize * (pageNum - 1));
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {

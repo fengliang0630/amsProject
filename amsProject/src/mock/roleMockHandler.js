@@ -8,13 +8,13 @@ const RolesMockHandler = {
 
     //获取角色列表（分页）
     mock.onPost('/role/listPage').reply(config => {
-      let {page, roleName} = JSON.parse(config.data);
+      let {pageNum, pageSize, roleName} = JSON.parse(config.data);
       let mockRoles = _Roles.filter(role => {
         if (roleName && role.roleName.indexOf(roleName) == -1) return false;
         return true;
       });
       let total = mockRoles.length;
-      mockRoles = mockRoles.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
+      mockRoles = mockRoles.filter((u, index) => index < pageSize * pageNum && index >= pageSize * (pageNum - 1));
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {

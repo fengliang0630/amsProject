@@ -206,6 +206,7 @@
 				width: 230px;
 				.el-menu{
 					height: 100%;
+					width: 100%!important;
 				}
 				.collapsed{
 					width:60px;
