@@ -47,19 +47,8 @@
 		<!-- 修改角色-->
 		<ams-role-edit v-if="editShow" :callback="callback" :editForm="editForm"></ams-role-edit>
 
-		<!-- 分配菜单-->
-		<el-dialog title="分配菜单" :visible.sync="setMenuVisible" :close-on-click-modal="false">
-			<div style="height:400px;overflow:auto;">
-				<el-tree v-if="setMenuVisible" :props="{label: 'menuName'}" :data="menuTreeData" node-key="id" ref="menuTree"
-					:default-checked-keys="selectMenuIds" show-checkbox @check-change="handleCheckChange">
-				</el-tree>
-			</div>
-
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="setMenuVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="setMenuHandler" :loading="setMenuLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<!-- 角色分配菜单 -->
+		<ams-role-set-menu v-if="setMenuShow" :currentRoleId="currentRoleId" :callback="callback"></ams-role-set-menu>
 	</section>
 </template>
 
@@ -68,6 +57,7 @@
 	import { getRoleListPage, removeRole, batchRemoveRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
 	import RoleAdd from './RoleAdd';
 	import RoleEdit from './RoleEdit';
+	import RoleSetMenu from './RoleSetMenu';
 
 	export default {
 		data() {
@@ -86,10 +76,8 @@
 				editForm: {},
 				addShow: false,
 
-				setMenuVisible: false,
-				setMenuLoading: false,
-				menuTreeData: [],
-				selectMenuIds: []
+				setMenuShow: false,
+				currentRoleId: ''
 			}
 		},
 		methods: {
@@ -103,9 +91,6 @@
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
 				this.getRoleListPage();
-			},
-			handleCheckChange() {
-				this.selectMenuIds = this.$refs.menuTree.getCheckedKeys();
 			},
 			handleCurrentChange(pageNum) {
 				this.pageNum = pageNum;
@@ -154,31 +139,8 @@
 				this.addShow = true;
 			},
 			showSetMenu(index, row) {
-				getMenuIdsByRoleId({ roleId: row.id }).then(resp => {
-					this.selectMenuIds = resp.selectMenuIds;
-					this.setMenuVisible = true;
-				});
-			},
-			//编辑
-			editSubmit: function () {
-				this.$refs.editForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.editLoading = true;
-							let para = Object.assign({}, this.editForm);
-							editRole(para).then((res) => {
-								this.editLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['editForm'].resetFields();
-								this.editFormVisible = false;
-								this.getRoleListPage();
-							});
-						});
-					}
-				});
+				this.currentRoleId = row.id;
+				this.setMenuShow = true;
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
@@ -202,31 +164,16 @@
 				}).catch(() => {
 
 				});
-			},
-			setMenuHandler() {
-				setMenuIdsByRoleId({selectMenuIds: this.selectMenuIds}).then(resp => {
-					this.$message({
-						message: '配置菜单成功',
-						type: 'success'
-					});
-					this.setMenuVisible = false;
-				}); 
-				
-			},
-			getMenuTree() {
-				getMenuTree().then(resp => {
-					this.menuTreeData = resp.menuTree;
-				});
 			}
 		},
 		mounted() {
 			this.getRoleListPage();
-			this.getMenuTree();
 
 		},
 		components: {
 			'ams-role-add': RoleAdd,
-			'ams-role-edit': RoleEdit
+			'ams-role-edit': RoleEdit,
+			'ams-role-set-menu': RoleSetMenu
 		}
 	}
 

@@ -2,7 +2,7 @@
 	<section>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑" :visible.sync="show" :close-on-click-modal="false">
+		<el-dialog title="编辑角色" :visible.sync="show" :close-on-click-modal="false" :show-close="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 				<el-form-item label="角色名称" prop="roleName">
 					<el-input v-model="editForm.roleName" auto-complete="off"></el-input>

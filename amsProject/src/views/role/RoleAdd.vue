@@ -2,7 +2,7 @@
 	<section>
 
 		<!--新增界面-->
-		<el-dialog title="新增" :visible.sync="show" :close-on-click-modal="false">
+		<el-dialog title="新增角色" :visible.sync="show" :close-on-click-modal="false" :show-close="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 				<el-form-item label="角色名称" prop="roleName">
 					<el-input v-model="addForm.roleName" auto-complete="off"></el-input>
