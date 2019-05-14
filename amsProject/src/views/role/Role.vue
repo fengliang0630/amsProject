@@ -40,32 +40,12 @@
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
+		
+		<!-- 新增角色-->
+		<ams-role-add v-if="addShow" :callback="callback"></ams-role-add>
 
-		<!--编辑界面-->
-		<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
-			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="角色名称" prop="roleName">
-					<el-input v-model="editForm.roleName" auto-complete="off"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="editFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
-			</div>
-		</el-dialog>
-
-		<!--新增界面-->
-		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
-			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="角色名称" prop="roleName">
-					<el-input v-model="addForm.roleName" auto-complete="off"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<!-- 修改角色-->
+		<ams-role-edit v-if="editShow" :callback="callback" :editForm="editForm"></ams-role-edit>
 
 		<!-- 分配菜单-->
 		<el-dialog title="分配菜单" :visible.sync="setMenuVisible" :close-on-click-modal="false">
@@ -85,7 +65,9 @@
 
 <script>
 	import util from '../../common/js/util';
-	import { getRoleListPage, removeRole, batchRemoveRole, editRole, addRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
+	import { getRoleListPage, removeRole, batchRemoveRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
+	import RoleAdd from './RoleAdd';
+	import RoleEdit from './RoleEdit';
 
 	export default {
 		data() {
@@ -100,30 +82,9 @@
 				listLoading: false,
 				sels: [],//列表选中列
 
-				editFormVisible: false,//编辑界面是否显示
-				editLoading: false,
-				editFormRules: {
-					roleName: [
-						{ required: true, message: '请输入角色名称', trigger: 'blur' }
-					]
-				},
-				//编辑界面数据
-				editForm: {
-					id: 0,
-					roleName: ''
-				},
-
-				addFormVisible: false,//新增界面是否显示
-				addLoading: false,
-				addFormRules: {
-					roleName: [
-						{ required: true, message: '请输入角色名称', trigger: 'blur' }
-					]
-				},
-				//新增界面数据
-				addForm: {
-					roleName: ''
-				},
+				editShow: false,
+				editForm: {},
+				addShow: false,
 
 				setMenuVisible: false,
 				setMenuLoading: false,
@@ -132,6 +93,13 @@
 			}
 		},
 		methods: {
+			callback(respData) {
+				this[respData.type + 'Show'] = false;
+				if (respData.data) {
+					this.$message(respData.data);
+					this.getRoleListPage();
+				}
+			},
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
 				this.getRoleListPage();
@@ -178,22 +146,18 @@
 			},
 			//显示编辑界面
 			handleEdit: function (index, row) {
-				this.editFormVisible = true;
+				this.editShow = true;
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
 			handleAdd: function () {
-				this.addFormVisible = true;
-				this.addForm = {
-					roleName: ''
-				};
+				this.addShow = true;
 			},
 			showSetMenu(index, row) {
 				getMenuIdsByRoleId({ roleId: row.id }).then(resp => {
 					this.selectMenuIds = resp.selectMenuIds;
 					this.setMenuVisible = true;
 				});
-				
 			},
 			//编辑
 			editSubmit: function () {
@@ -210,27 +174,6 @@
 								});
 								this.$refs['editForm'].resetFields();
 								this.editFormVisible = false;
-								this.getRoleListPage();
-							});
-						});
-					}
-				});
-			},
-			//新增
-			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.addLoading = true;
-							let para = Object.assign({}, this.addForm);
-							addRole(para).then((res) => {
-								this.addLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
 								this.getRoleListPage();
 							});
 						});
@@ -280,6 +223,10 @@
 			this.getRoleListPage();
 			this.getMenuTree();
 
+		},
+		components: {
+			'ams-role-add': RoleAdd,
+			'ams-role-edit': RoleEdit
 		}
 	}
 
