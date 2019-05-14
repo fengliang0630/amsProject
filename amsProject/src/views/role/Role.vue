@@ -20,8 +20,9 @@
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column type="index" width="60"></el-table-column>
 			<el-table-column prop="roleName" label="角色名称" sortable></el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column label="操作" width="350">
 				<template slot-scope="scope">
+					<el-button size="small" @click="showSetMenu(scope.$index, scope.row)">分配菜单</el-button>
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
@@ -60,12 +61,26 @@
 				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
 			</div>
 		</el-dialog>
+
+		<!-- 分配菜单-->
+		<el-dialog title="分配菜单" v-model="setMenuVisible" :close-on-click-modal="false">
+			<div style="height:400px;overflow:auto;">
+				<el-tree v-if="setMenuVisible" :props="{label: 'menuName'}" :data="menuTreeData" node-key="id" ref="menuTree"
+					:default-checked-keys="selectMenuIds" show-checkbox @check-change="handleCheckChange">
+				</el-tree>
+			</div>
+
+			<div slot="footer" class="dialog-footer">
+				<el-button @click.native="setMenuVisible = false">取消</el-button>
+				<el-button type="primary" @click.native="setMenuHandler" :loading="setMenuLoading">提交</el-button>
+			</div>
+		</el-dialog>
 	</section>
 </template>
 
 <script>
 	import util from '../../common/js/util';
-	import { getRoleListPage, removeRole, batchRemoveRole, editRole, addRole } from '../../api/api';
+	import { getRoleListPage, removeRole, batchRemoveRole, editRole, addRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
 
 	export default {
 		data() {
@@ -102,11 +117,18 @@
 				//新增界面数据
 				addForm: {
 					roleName: ''
-				}
+				},
 
+				setMenuVisible: false,
+				setMenuLoading: false,
+				menuTreeData: [],
+				selectMenuIds: []
 			}
 		},
 		methods: {
+			handleCheckChange(data, checked, indeterminate) {
+				this.selectMenuIds = this.$refs.menuTree.getCheckedKeys();
+			},
 			handleCurrentChange(val) {
 				this.page = val;
 				this.getRoleListPage();
@@ -154,6 +176,13 @@
 				this.addForm = {
 					roleName: ''
 				};
+			},
+			showSetMenu(index, row) {
+				getMenuIdsByRoleId({ roleId: row.id }).then(resp => {
+					this.selectMenuIds = resp.selectMenuIds;
+					this.setMenuVisible = true;
+				});
+				
 			},
 			//编辑
 			editSubmit: function () {
@@ -219,10 +248,27 @@
 				}).catch(() => {
 
 				});
+			},
+			setMenuHandler() {
+				setMenuIdsByRoleId({selectMenuIds: this.selectMenuIds}).then(resp => {
+					this.$message({
+						message: '配置菜单成功',
+						type: 'success'
+					});
+					this.setMenuVisible = false;
+				}); 
+				
+			},
+			getMenuTree() {
+				getMenuTree().then(resp => {
+					this.menuTreeData = resp.menuTree;
+				});
 			}
 		},
 		mounted() {
 			this.getRoleListPage();
+			this.getMenuTree();
+
 		}
 	}
 

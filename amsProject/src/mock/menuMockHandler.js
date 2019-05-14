@@ -1,7 +1,8 @@
-import { Menus, MenuTree } from './data/mockData.js';
+import { Menus, MenuTree, SelectMenuIds } from './data/mockData.js';
 
 let _Menus = Menus;
 let _MenuTree = MenuTree;
+let _SelectMenuIds = SelectMenuIds;
 
 const MenusMockHandler = {
     init(mock) {
@@ -95,14 +96,45 @@ const MenusMockHandler = {
       });
     });
 
-        // 获取菜单树
+    // 获取菜单树
     mock.onPost('/menu/tree').reply(config => {
-      let {userId} = JSON.parse(config.data);
+      if (config.data) {
+        let {userId} = JSON.parse(config.data);
+      }
+      
       let menuTree = _MenuTree;
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
             menuTree: menuTree
+          }]);
+        }, 1000);
+      });
+    });
+
+    // 获取该角色已经选中的菜单id
+    mock.onPost('/menu/getMenuIdsByRoleId').reply(config => {
+      let {roleId} = JSON.parse(config.data);      
+      let selectMenuIds = _SelectMenuIds;
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            selectMenuIds: selectMenuIds
+          }]);
+        }, 1000);
+      });
+    });
+
+    // 获取该角色已经选中的菜单id
+    mock.onPost('/menu/setMenuIdsByRoleId').reply(config => {
+      let {selectMenuIds} = JSON.parse(config.data);   
+      debugger;   
+      _SelectMenuIds = selectMenuIds;
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            code: 200,
+            msg: '新增成功'
           }]);
         }, 1000);
       });

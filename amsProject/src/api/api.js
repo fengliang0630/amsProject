@@ -51,6 +51,12 @@ export const getMenuListPage = params => { return axios.post(`${base}/menu/listP
 // 获取菜单树
 export const getMenuTree = params => { return axios.post(`${base}/menu/tree`, params).then(res => res.data); };
 
+// 获取该角色已经选中的菜单id
+export const getMenuIdsByRoleId = params => { return axios.post(`${base}/menu/getMenuIdsByRoleId`, params).then(res => res.data); };
+
+// 设置已经选中的菜单id
+export const setMenuIdsByRoleId = params => { return axios.post(`${base}/menu/setMenuIdsByRoleId`, params).then(res => res.data); };
+
 // 删除菜单
 export const removeMenu = params => { return axios.post(`${base}/menu/remove`, params).then(res => res.data); };
 

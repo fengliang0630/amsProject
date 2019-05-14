@@ -10,7 +10,7 @@ const LoginUsers = [
   }
 ];
 
-let Users = [], Roles = [], Menus = [], HasRoles = [], MenuTree = [];
+let Users = [], Roles = [], Menus = [], HasRoles = [], MenuTree = [], SelectMenuIds = [];
 
 for (let i = 0; i < 86; i++) {
   let userId = Mock.Random.guid();
@@ -69,5 +69,7 @@ MenuTree = [
   }
 ];
 
+SelectMenuIds = ['1_1', '1_3', '2_1'];
 
-export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree };
+
+export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds };
