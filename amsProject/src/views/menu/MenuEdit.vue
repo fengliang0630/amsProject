@@ -2,32 +2,37 @@
 	<section>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑角色" :visible.sync="show" :close-on-click-modal="false" :show-close="false">
+		<el-dialog title="编辑" :visible.sync="show" :close-on-click-modal="false" :show-close="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="角色名称" prop="roleName">
-					<el-input v-model="editForm.roleName" auto-complete="off"></el-input>
+				<el-form-item label="菜单名称" prop="menuName">
+					<el-input v-model="editForm.menuName" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="父菜单" prop="parentMenuId">
+					<el-input v-model="editForm.parentMenuId" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="跳转路径" prop="menuLink">
+					<el-input v-model="editForm.menuLink" auto-complete="off"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="cancelHandle">取消</el-button>
+				<el-button @click.native="editFormVisible = false">取消</el-button>
 				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
 			</div>
 		</el-dialog>
-
 	</section>
 </template>
 
 <script>
-	import { editRole } from '../../api/api';
+	import { editMenu } from '../../api/api';
 
 	export default {
 		data() {
 			return {
-                show: true,
+				show: true,
 				editLoading: false,
 				editFormRules: {
-					roleName: [
-						{ required: true, message: '请输入角色名称', trigger: 'blur' }
+					menuName: [
+						{ required: true, message: '请输入菜单名称名称', trigger: 'blur' }
 					]
 				}
 			}
@@ -40,12 +45,12 @@
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.editLoading = true;
 							let para = Object.assign({}, this.editForm);
-							editRole(para).then((res) => {
+							editMenu(para).then((res) => {
 								this.editLoading = false;
 								this.$refs['editForm'].resetFields();
 								this.callback({
                                     type: 'edit',
-                                    data: {message: '修改角色成功', type: 'success'}
+                                    data: {message: '修改菜单成功', type: 'success'}
                                 });
 							});
 						});
@@ -58,4 +63,7 @@
 		},
         props: ['editForm', 'callback']
 	}
+
 </script>
+
+<style scoped></style>

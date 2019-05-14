@@ -45,9 +45,7 @@
 				
 			},
             cancelHandle() {
-                this.callback({
-                    type: 'userSetRole'
-                });
+                this.callback({type: 'userSetRole'});
             }
 		},
 		mounted() {

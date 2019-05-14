@@ -68,9 +68,7 @@
 				});
 			},
             cancelHandle() {
-                this.callback({
-                    type: 'edit'
-                });
+                this.callback({type: 'edit'});
             }
 		},
         props: ['editForm', 'callback']

@@ -44,48 +44,18 @@
 		</el-col>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
-			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="菜单名称" prop="menuName">
-					<el-input v-model="editForm.menuName" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="父菜单" prop="parentMenuId">
-					<el-input v-model="editForm.parentMenuId" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="跳转路径" prop="menuLink">
-					<el-input v-model="editForm.menuLink" auto-complete="off"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="editFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<ams-menu-edit v-if="editShow" :callback="callback" :editForm="editForm"></ams-menu-edit>
 
 		<!--新增界面-->
-		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
-			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="菜单名称" prop="menuName">
-					<el-input v-model="addForm.menuName" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="父菜单" prop="parentMenuId">
-					<el-input v-model="addForm.parentMenuId" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="跳转路径" prop="menuLink">
-					<el-input v-model="addForm.menuLink" auto-complete="off"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<ams-menu-add v-if="addShow" :callback="callback"></ams-menu-add>
+
 	</section>
 </template>
 
 <script>
-	import util from '../../common/js/util';
-	import { getMenuListPage, removeMenu, batchRemoveMenu, editMenu, addMenu } from '../../api/api';
+	import { getMenuListPage, removeMenu, batchRemoveMenu } from '../../api/api';
+	import MenuAdd from './MenuAdd';
+	import MenuEdit from './MenuEdit';
 
 	export default {
 		data() {
@@ -100,38 +70,19 @@
 				sels: [],//列表选中列
 				pageSize: 20,
 
-				editFormVisible: false,//编辑界面是否显示
-				editLoading: false,
-				editFormRules: {
-					menuName: [
-						{ required: true, message: '请输入菜单名称名称', trigger: 'blur' }
-					]
-				},
-				//编辑界面数据
-				editForm: {
-					id: 0,
-					menuName: '',
-					parentMenuId: '',
-					menuLink: ''
-				},
-
-				addFormVisible: false,//新增界面是否显示
-				addLoading: false,
-				addFormRules: {
-					menuName: [
-						{ required: true, message: '请输入菜单名称', trigger: 'blur' }
-					]
-				},
-				//新增界面数据
-				addForm: {
-					menuName: '',
-					parentMenuId: '',
-					menuLink: ''
-				}
-
+				editShow: false,
+				editForm: {},
+				addShow: false,
 			}
 		},
 		methods: {
+			callback(respData) {
+				this[respData.type + 'Show'] = false;
+				if (respData.data) {
+					this.$message(respData.data);
+					this.getMenuListPage();
+				}
+			},
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
 				this.getMenuListPage();
@@ -175,57 +126,12 @@
 			},
 			//显示编辑界面
 			handleEdit: function (index, row) {
-				this.editFormVisible = true;
+				this.editShow = true;
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
 			handleAdd: function () {
-				this.addFormVisible = true;
-				this.addForm = {
-					roleName: ''
-				};
-			},
-			//编辑
-			editSubmit: function () {
-				this.$refs.editForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.editLoading = true;
-							let para = Object.assign({}, this.editForm);
-							editMenu(para).then((res) => {
-								this.editLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['editForm'].resetFields();
-								this.editFormVisible = false;
-								this.getMenuListPage();
-							});
-						});
-					}
-				});
-			},
-			//新增
-			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.addLoading = true;
-							let para = Object.assign({}, this.addForm);
-							addMenu(para).then((res) => {
-								this.addLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
-								this.getMenuListPage();
-							});
-						});
-					}
-				});
+				this.addShow = true;
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
@@ -253,6 +159,10 @@
 		},
 		mounted() {
 			this.getMenuListPage();
+		},
+		components: {
+			'ams-menu-add': MenuAdd,
+			'ams-menu-edit': MenuEdit
 		}
 	}
 

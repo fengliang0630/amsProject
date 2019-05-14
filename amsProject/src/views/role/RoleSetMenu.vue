@@ -53,9 +53,7 @@
 				});
 			},
             cancelHandle() {
-                this.callback({
-                    type: 'setMenu'
-                });
+                this.callback({type: 'setMenu'});
             }
 		},
 		mounted() {

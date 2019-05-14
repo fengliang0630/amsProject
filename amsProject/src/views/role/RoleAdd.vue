@@ -55,9 +55,7 @@
 				});
 			},
             cancelHandle() {
-                this.callback({
-                    type: 'add'
-                });
+                this.callback({type: 'add'});
             }
 		},
         props: ['callback']
