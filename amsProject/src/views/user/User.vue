@@ -46,77 +46,22 @@
 		</el-col>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
-			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="editForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="editFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<ams-user-edit v-if="editShow" :callback="callback" :editForm="editForm"></ams-user-edit>
 
 		<!--新增界面-->
-		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
-			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="addForm.name" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="addForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="addForm.addr"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
-			</div>
-		</el-dialog>
+		<ams-user-add v-if="addShow" :callback="callback"></ams-user-add>
 
-		<el-dialog title="配置角色页面" :visible.sync="addRoleVisible" :close-on-click-modal="false">
-			<el-transfer filterable filter-placeholder="请输入角色名称" :titles="['未选角色', '已选角色']" 
-				v-model="hasRoleList" :data="roleList" :props="{key: 'id', label: 'roleName'}">	
-			</el-transfer>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addRoleVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addRoleHandler" :loading="addRoleLoading">提交</el-button>
-			</div>
-		</el-dialog>
-
+		<!-- 用户配置角色 -->
+		<ams-user-add-role v-if="userSetRoleShow" :callback="callback" :currentUserId="currentUserId"></ams-user-add-role>
 	</section>
 </template>
 
 <script>
 	import util from '../../common/js/util';
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser, getRoleList, getHasRoleIdsByUserId, setRoleIdsByUserId } from '../../api/api';
+	import { getUserListPage, removeUser, batchRemoveUser } from '../../api/api';
+	import UserAdd from './UserAdd';
+	import UserEdit from './UserEdit';
+	import UserAddRole from './UserAddRole';
 
 	export default {
 		data() {
@@ -131,46 +76,22 @@
 				listLoading: false,
 				sels: [],//列表选中列
 
-				editFormVisible: false,//编辑界面是否显示
-				editLoading: false,
-				editFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
-				},
-				//编辑界面数据
-				editForm: {
-					id: 0,
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				},
+				editShow: false,
+				editForm: {},
+				addShow: false,
 
-				addFormVisible: false,//新增界面是否显示
-				addLoading: false,
-				addFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
-				},
-				//新增界面数据
-				addForm: {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				},
-
-				roleList: [],
-				hasRoleList: [],
-				addRoleLoading: false,
-				addRoleVisible: false
+				userSetRoleShow: false,
+				currentUserId: ''
 			}
 		},
 		methods: {
+			callback(respData) {
+				this[respData.type + 'Show'] = false;
+				if (respData.data) {
+					this.$message(respData.data);
+					this.getRoleListPage();
+				}
+			},
 			//性别显示转换
 			formatSex: function (row, column) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
@@ -218,63 +139,12 @@
 			},
 			//显示编辑界面
 			handleEdit: function (index, row) {
-				this.editFormVisible = true;
+				this.editShow = true;
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
 			handleAdd: function () {
-				this.addFormVisible = true;
-				this.addForm = {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				};
-			},
-			//编辑
-			editSubmit: function () {
-				this.$refs.editForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.editLoading = true;
-							let para = Object.assign({}, this.editForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							editUser(para).then((res) => {
-								this.editLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['editForm'].resetFields();
-								this.editFormVisible = false;
-								this.getUserListPage();
-							});
-						});
-					}
-				});
-			},
-			//新增
-			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.addLoading = true;
-							let para = Object.assign({}, this.addForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							addUser(para).then((res) => {
-								this.addLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
-								this.getUserListPage();
-							});
-						});
-					}
-				});
+				this.addShow = true;
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
@@ -300,48 +170,17 @@
 				});
 			},
 			showRoleHandler(index, row) {
-				getHasRoleIdsByUserId({userId: row.id}).then(res => {
-					this.hasRoleList = res.hasRoleIds;
-				});
-				this.addRoleVisible = true;
-			},
-			addRoleHandler() {
-				const param = {roleIds: this.hasRoleList, userId: ''};
-				this.addRoleLoading = true;
-				setRoleIdsByUserId(param).then((res) => {
-					this.addRoleLoading = false;
-					this.$message({
-						message: '设置角色成功',
-						type: 'success'
-					});
-					this.getUserListPage();
-					this.addRoleVisible = false;
-				});
-				
+				this.currentUserId = row.id;
+				this.userSetRoleShow = true;
 			}
 		},
 		mounted() {
 			this.getUserListPage();
-			getRoleList().then(res => {
-				this.roleList = res.roleList;
-			});
+		},
+		components: {
+			'ams-user-add': UserAdd,
+			'ams-user-edit': UserEdit,
+			'ams-user-add-role': UserAddRole
 		}
 	}
-
 </script>
-
-<style lang="scss">
-	#userPage {
-		.el-transfer-panel{
-		width: 40%;
-		height: 500px;
-			.el-transfer-panel__body {
-				height: 80%;
-				.is-filterable.el-transfer-panel__list {
-					height: 100%;	
-				}
-			}
-		
-		}
-	}
-</style>

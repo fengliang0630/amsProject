@@ -45,7 +45,7 @@
 								this.$refs['editForm'].resetFields();
 								this.callback({
                                     type: 'edit',
-                                    data: {message: '修改成功', type: 'success'}
+                                    data: {message: '修改角色成功', type: 'success'}
                                 });
 							});
 						});

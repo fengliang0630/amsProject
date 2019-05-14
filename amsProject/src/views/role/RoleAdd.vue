@@ -47,7 +47,7 @@
 								this.$refs['addForm'].resetFields();
 								this.callback({
                                     type: 'add',
-                                    data: {message: '提交成功', type: 'success'}
+                                    data: {message: '新增角色成功', type: 'success'}
                                 });
 							});
 						});

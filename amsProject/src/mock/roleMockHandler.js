@@ -117,7 +117,6 @@ const RolesMockHandler = {
     // 通过userId查询已经配置的角色id
     mock.onPost('/role/setRolesByUserId').reply((config) => {
       let { userId, roleIds } = JSON.parse(config.data);
-      debugger;
       _HasRoles = roleIds;
       return new Promise((resolve, reject) => {
         setTimeout(() => {
