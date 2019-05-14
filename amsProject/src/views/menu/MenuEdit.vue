@@ -7,8 +7,11 @@
 				<el-form-item label="菜单名称" prop="menuName">
 					<el-input v-model="editForm.menuName" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="父菜单" prop="parentMenuId">
-					<el-input v-model="editForm.parentMenuId" auto-complete="off"></el-input>
+				<el-form-item label="父菜单" prop="parentMenuName">
+					<el-input placeholder="请选择父菜单" v-model="editForm.parentMenuName" class="input-with-select" readonly>
+						<el-button slot="append" icon="el-icon-search" @click="selectParentMenu"></el-button>
+					</el-input>
+					<el-input v-model="editForm.parentMenuId" style="display: none;"></el-input>
 				</el-form-item>
 				<el-form-item label="跳转路径" prop="menuLink">
 					<el-input v-model="editForm.menuLink" auto-complete="off"></el-input>
@@ -59,9 +62,16 @@
 			},
             cancelHandle() {
                 this.callback({type: 'edit'});
-            }
+            },
+			selectParentMenu() {
+				this.showMenuTreeHandler(this.editForm.parentMenuId, 'Edit');
+			},
+			setParmentMenu(menuNode) {
+				this.editForm.parentMenuId = menuNode.id;
+				this.editForm.parentMenuName = menuNode.menuName;
+			}
 		},
-        props: ['editForm', 'callback']
+        props: ['editForm', 'callback', 'showMenuTreeHandler']
 	}
 
 </script>

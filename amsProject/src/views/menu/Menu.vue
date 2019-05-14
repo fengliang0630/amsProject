@@ -44,10 +44,14 @@
 		</el-col>
 
 		<!--编辑界面-->
-		<ams-menu-edit v-if="editShow" :callback="callback" :editForm="editForm"></ams-menu-edit>
+		<ams-menu-edit v-if="editShow" ref="menuEditComponent" :callback="callback" 
+			:showMenuTreeHandler="showMenuTreeHandler" :editForm="editForm"></ams-menu-edit>
 
 		<!--新增界面-->
-		<ams-menu-add v-if="addShow" :callback="callback"></ams-menu-add>
+		<ams-menu-add v-if="addShow" ref="menuAddComponent" :callback="callback" :showMenuTreeHandler="showMenuTreeHandler"></ams-menu-add>
+
+		<!-- 选择菜单-->
+		<ams-menu-tree v-if="menuTreeShow" :callback="callback" :menuIds="checkedMenuIds"></ams-menu-tree>
 
 	</section>
 </template>
@@ -56,6 +60,7 @@
 	import { getMenuListPage, removeMenu, batchRemoveMenu } from '../../api/api';
 	import MenuAdd from './MenuAdd';
 	import MenuEdit from './MenuEdit';
+	import MenuTree from './MenuTree';
 
 	export default {
 		data() {
@@ -73,15 +78,34 @@
 				editShow: false,
 				editForm: {},
 				addShow: false,
+				menuTreeShow: false,
+				checkedMenuIds:[],
+				showType: ''
 			}
 		},
 		methods: {
 			callback(respData) {
 				this[respData.type + 'Show'] = false;
+
+				if (respData.type !== 'menuTree') {
+					this.checkedMenuIds = [];
+					this.showType = '';
+				}
+
 				if (respData.data) {
 					this.$message(respData.data);
 					this.getMenuListPage();
 				}
+
+				if (respData.checkedNode) {
+					this.$refs[`menu${this.showType}Component`].setParmentMenu(respData.checkedNode);
+				}
+
+			},
+			showMenuTreeHandler(menuId, type) {
+				this.checkedMenuIds = [menuId];
+				this.menuTreeShow = true;
+				this.showType = type;
 			},
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
@@ -127,6 +151,7 @@
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editShow = true;
+				debugger;
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
@@ -162,7 +187,8 @@
 		},
 		components: {
 			'ams-menu-add': MenuAdd,
-			'ams-menu-edit': MenuEdit
+			'ams-menu-edit': MenuEdit,
+			'ams-menu-tree': MenuTree
 		}
 	}
 

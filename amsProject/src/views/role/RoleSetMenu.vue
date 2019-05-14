@@ -18,7 +18,7 @@
 
 <script>
 	import util from '../../common/js/util';
-	import { getRoleListPage, removeRole, batchRemoveRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
+	import { getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
 
 	export default {
 		data() {
