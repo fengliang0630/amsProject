@@ -1,0 +1,21 @@
+{
+	"header": {
+		"reqUserId": "",
+		"reqSerialNumber": "",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "",
+		"reqpageIndex": "",
+		"rspPageCount": ""
+	}
+	"username": "xxw2",
+	"name": "111111",
+	"password": "MAN",
+	"deptId": 5,
+	"email": "tang@sinopes.cn",
+	"mobile": "15191455132",
+	"status": 5,
+	"sex": 18,
+	"user_create": "12",
+	"user_modified": "12"
+}

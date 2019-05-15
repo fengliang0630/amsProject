@@ -127,8 +127,7 @@ const MenusMockHandler = {
 
     // 获取该角色已经选中的菜单id
     mock.onPost('/menu/setMenuIdsByRoleId').reply(config => {
-      let {selectMenuIds} = JSON.parse(config.data);   
-      debugger;   
+      let {selectMenuIds} = JSON.parse(config.data);
       _SelectMenuIds = selectMenuIds;
       return new Promise((resolve, reject) => {
         setTimeout(() => {
