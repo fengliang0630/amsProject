@@ -151,7 +151,6 @@
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editShow = true;
-				debugger;
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面

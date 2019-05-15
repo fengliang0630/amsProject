@@ -9,7 +9,7 @@
 			</div>
 
 			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="">取消</el-button>
+				<el-button @click.native="cancelHandle">取消</el-button>
 				<el-button type="primary" @click.native="menuTreeSubmit">提交</el-button>
 			</div>
 		</el-dialog>
