@@ -4,6 +4,7 @@ import { LoginUsers } from './data/mockData.js';
 import UserMockHandler from './userMockHandler.js';
 import RolesMockHandler from './roleMockHandler.js';
 import MenusMockHandler from './menuMockHandler.js';
+import MapMockHandler from './MapMockHandler.js';
 
 export default {
   /**
@@ -53,5 +54,8 @@ export default {
 
     // 菜单mock方法处理
     MenusMockHandler.init(mock);
+
+    // 地图mock方法处理
+    MapMockHandler.init(mock);
   }
 };

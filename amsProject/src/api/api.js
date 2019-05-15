@@ -20,7 +20,6 @@ export const editUser = params => { return axios.post(`${base}/user/edit`, param
 // 新增用户
 export const addUser = params => { return axios.post(`${base}/user/add`, params).then(res => res.data); };
 
-
 // 获取角色列表（无分页）
 export const getRoleList = params => { return axios.post(`${base}/role/list`, params).then(res => res.data); };
 
@@ -69,3 +68,5 @@ export const editMenu = params => { return axios.post(`${base}/menu/edit`, param
 // 新增菜单
 export const addMenu = params => { return axios.post(`${base}/menu/add`, params).then(res => res.data); };
 
+// 获取地图区域点
+export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };
