@@ -13,7 +13,6 @@
 				<el-form-item label="角色备注" prop="remark">
 					<el-input type="textarea" v-model="addForm.remark"></el-input>
 				</el-form-item>
-				
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button  @click.native="cancelHandle">取消</el-button>
