@@ -4,8 +4,14 @@
 		<!--编辑界面-->
 		<el-dialog title="编辑角色" :visible.sync="show" :close-on-click-modal="false" :show-close="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+				<el-form-item label="角色标识" prop="roleSign">
+					<el-input v-model="editForm.roleSign" auto-complete="off"></el-input>
+				</el-form-item>
 				<el-form-item label="角色名称" prop="roleName">
 					<el-input v-model="editForm.roleName" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="角色备注" prop="remark">
+					<el-input type="textarea" v-model="editForm.remark"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -40,9 +46,19 @@
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.editLoading = true;
 							let para = Object.assign({}, this.editForm);
-							editRole(para).then((res) => {
+							editRole(para).then((resp) => {
 								this.editLoading = false;
 								this.$refs['editForm'].resetFields();
+
+								if (resp.header.rspReturnCode !== '000000') {
+									this.$message({
+										message: '修改角色失败',
+										type: 'error'
+									});
+									return;
+								}
+
+
 								this.callback({
                                     type: 'edit',
                                     data: {message: '修改角色成功', type: 'success'}

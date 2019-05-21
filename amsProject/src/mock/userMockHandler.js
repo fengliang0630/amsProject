@@ -21,7 +21,7 @@ const UserMockHandler = {
               header: {
                 reqpageIndex: 1,
                 reqUserId: "xxw",
-                rspPageCount: 86,
+                rspPageCount: total,
                 rspReturnMsg: "【1130134024585609216】交易成功",
                 reqpageSize: 20,
                 rspReturnCode: "000000"

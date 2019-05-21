@@ -22,7 +22,7 @@ const RolesMockHandler = {
             header: {
               reqpageIndex: 1,
               reqUserId: "xxw",
-              rspPageCount: 86,
+              rspPageCount: total,
               rspReturnMsg: "【1130134024585609216】交易成功",
               reqpageSize: 20,
               rspReturnCode: "000000"
@@ -54,35 +54,51 @@ const RolesMockHandler = {
     });
 
     //编辑角色
-    mock.onPost('/role/edit').reply(config => {
-      let { id, roleName } = JSON.parse(config.data);
+    mock.onPost('/ams/updateRole').reply(config => {
+      let { id, roleSign, roleName, remark } = JSON.parse(config.data);
       _Roles.some(r => {
         if (r.id === id) {
+          r.roleSign = roleSign;
           r.roleName = roleName;
+          r.remark = remark;
           return true;
         }
       });
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '编辑成功'
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】角色修改成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
           }]);
         }, 500);
       });
     });
 
     // 新增角色
-    mock.onPost('/role/add').reply(config => {
-      let { roleName } = JSON.parse(config.data);
+    mock.onPost('/ams/addRole').reply(config => {
+      let { roleSign, roleName, remark } = JSON.parse(config.data);
       _Roles.push({
-        roleName: roleName
+        roleSign: roleSign,
+        roleName: roleName,
+        remark: remark
       });
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '新增成功'
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】角色添加成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
           }]);
         }, 500);
       });

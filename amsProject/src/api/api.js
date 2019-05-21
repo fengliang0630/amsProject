@@ -45,10 +45,16 @@ export const removeRole = params => {
 };
 
 // 编辑角色
-export const editRole = params => { return axios.post(`${base}/role/edit`, params).then(res => res.data); };
+export const editRole = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/updateRole`, p).then(res => res.data); 
+};
 
 // 新增角色
-export const addRole = params => { return axios.post(`${base}/role/add`, params).then(res => res.data); };
+export const addRole = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/addRole`, p).then(res => res.data); 
+};
 
 // 获取菜单列表（分页）
 export const getMenuListPage = params => { return axios.post(`${base}/menu/listPage`, params).then(res => res.data); };
