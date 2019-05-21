@@ -14,7 +14,6 @@
 </template>
 
 <script>
-	import util from '../../common/js/util';
 	import { getRoleList, getHasRoleIdsByUserId, setRoleIdsByUserId } from '../../api/api';
 
 	export default {

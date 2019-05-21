@@ -16,8 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="userList" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
-			<el-table-column type="selection" width="55"></el-table-column>
+		<el-table :data="userList" highlight-current-row v-loading="listLoading" style="width: 100%;">
 			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
@@ -25,9 +24,12 @@
 			</el-table-column>
 			<el-table-column prop="name" label="姓名" width="120" sortable></el-table-column>
 			<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable></el-table-column>
-			<el-table-column prop="age" label="年龄" width="100" sortable></el-table-column>
-			<el-table-column prop="birth" label="生日" width="120" sortable></el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="180" sortable></el-table-column>
+			<el-table-column prop="email" label="email" width="150" sortable></el-table-column>
+			<el-table-column prop="mobile" label="联系电话" width="120" sortable></el-table-column>
+			<el-table-column prop="userName" label="用户名" min-width="100" sortable></el-table-column>
+			<el-table-column prop="status" label="状态" min-width="80" sortable></el-table-column>
+			<el-table-column prop="gmtCreate" label="创建时间" min-width="180" sortable></el-table-column>
+			<el-table-column prop="gmtModified" label="修改时间" min-width="180" sortable></el-table-column>
 			<el-table-column label="操作" width="300">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showRoleHandler(scope.$index, scope.row)">分配角色</el-button>
@@ -39,7 +41,6 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
 			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
 				:page-size="pageSize" :total="total" :page-sizes="[20, 50, 100]" style="float:right;">
 			</el-pagination>
@@ -74,7 +75,6 @@
 				pageNum: 1,
 				pageSize: 20,
 				listLoading: false,
-				sels: [],//列表选中列
 
 				editShow: false,
 				editForm: {},
@@ -94,7 +94,7 @@
 			},
 			//性别显示转换
 			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
+				return row.sex;
 			},
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
@@ -107,15 +107,21 @@
 			//获取用户列表
 			getUserListPage() {
 				let para = {
-					pageNum: this.pageNum,
-					pageSize: this.pageSize,
 					name: this.filters.name
 				};
 				this.listLoading = true;
-				getUserListPage(para).then((resp) => {
-					this.total = resp.total;
-					this.userList = resp.userList;
+				getUserListPage(para, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: '查询用户数据失败',
+							type: 'error'
+						});
+						return;
+					}
+
+					this.total = resp.header.rspPageCount;
+					this.userList = resp.userList;
 				});
 			},
 			//删除
@@ -125,10 +131,19 @@
 				}).then(() => {
 					this.listLoading = true;
 					let para = { id: row.id };
-					removeUser(para).then((res) => {
+					removeUser(para).then((resp) => {
 						this.listLoading = false;
+
+						if (resp.header.rspReturnCode !== '000000') {
+							this.$message({
+								message: '删除用户失败',
+								type: 'error'
+							});
+							return;
+						}
+
 						this.$message({
-							message: '删除成功',
+							message: '删除用户成功',
 							type: 'success'
 						});
 						this.getUserListPage();
@@ -145,29 +160,6 @@
 			//显示新增界面
 			handleAdd: function () {
 				this.addShow = true;
-			},
-			selsChange: function (sels) {
-				this.sels = sels;
-			},
-			//批量删除
-			batchRemove: function () {
-				var ids = this.sels.map(item => item.id).toString();
-				this.$confirm('确认删除选中记录吗？', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					let para = { ids: ids };
-					batchRemoveUser(para).then((res) => {
-						this.listLoading = false;
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUserListPage();
-					});
-				}).catch(() => {
-
-				});
 			},
 			showRoleHandler(index, row) {
 				this.currentUserId = row.id;

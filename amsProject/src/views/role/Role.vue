@@ -16,14 +16,17 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="roleList" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
-			<el-table-column type="selection" width="55"></el-table-column>
+		<el-table :data="roleList" highlight-current-row v-loading="listLoading" style="width: 100%;">
 			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
+			<el-table-column prop="roleSign" label="角色标识" sortable></el-table-column>
 			<el-table-column prop="roleName" label="角色名称" sortable></el-table-column>
+			<el-table-column prop="gmtCreate" label="创建时间" sortable></el-table-column>
+			<el-table-column prop="gmtModified" label="修改时间" sortable></el-table-column>
+			<el-table-column prop="remark" label="备注" sortable></el-table-column>
 			<el-table-column label="操作" width="350">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showSetMenu(scope.$index, scope.row)">分配菜单</el-button>
@@ -35,7 +38,6 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
 			<el-pagination layout="sizes, prev, pager, next" :page-sizes="[20, 50, 100]" @size-change="handleSizeChange"
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
@@ -53,7 +55,6 @@
 </template>
 
 <script>
-	import util from '../../common/js/util';
 	import { getRoleListPage, removeRole, batchRemoveRole, getMenuTree, getMenuIdsByRoleId, setMenuIdsByRoleId } from '../../api/api';
 	import RoleAdd from './RoleAdd';
 	import RoleEdit from './RoleEdit';
@@ -70,7 +71,6 @@
 				pageNum: 1,
 				pageSize: 20,
 				listLoading: false,
-				sels: [],//列表选中列
 
 				editShow: false,
 				editForm: {},
@@ -99,15 +99,21 @@
 			//获取用户列表
 			getRoleListPage() {
 				let para = {
-					pageNum: this.pageNum,
-					pageSize: this.pageSize,
 					roleName: this.filters.roleName
 				};
 				this.listLoading = true;
-				getRoleListPage(para).then((resp) => {
-					this.total = resp.total;
-					this.roleList = resp.roleList;
+				getRoleListPage(para, this.pageSize, this.pageNum).then((resp) => {					
 					this.listLoading = false;
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: '查询角色数据失败',
+							type: 'error'
+						});
+						return;
+					}
+
+					this.total = resp.header.rspPageCount;
+					this.roleList = resp.roleList;
 				});
 			},
 			//删除
@@ -117,10 +123,18 @@
 				}).then(() => {
 					this.listLoading = true;
 					let para = { id: row.id };
-					removeRole(para).then((res) => {
+					removeRole(para).then((resp) => {
 						this.listLoading = false;
+						if (resp.header.rspReturnCode !== '000000') {
+							this.$message({
+								message: '删除角色失败',
+								type: 'error'
+							});
+							return;
+						}
+
 						this.$message({
-							message: '删除成功',
+							message: '删除角色成功',
 							type: 'success'
 						});
 						this.getRoleListPage();
@@ -141,29 +155,6 @@
 			showSetMenu(index, row) {
 				this.currentRoleId = row.id;
 				this.setMenuShow = true;
-			},
-			selsChange: function (sels) {
-				this.sels = sels;
-			},
-			//批量删除
-			batchRemove: function () {
-				var ids = this.sels.map(item => item.id).toString();
-				this.$confirm('确认删除选中记录吗？', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					let para = { ids: ids };
-					batchRemoveRole(para).then((res) => {
-						this.listLoading = false;
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getRoleListPage();
-					});
-				}).catch(() => {
-
-				});
 			}
 		},
 		mounted() {

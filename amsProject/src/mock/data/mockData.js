@@ -17,17 +17,29 @@ for (let i = 0; i < 86; i++) {
   Users.push(Mock.mock({
     id: userId,
     name: Mock.Random.cname(),
-    addr: Mock.mock('@county(true)'),
-    'age|18-60': 1,
-    birth: Mock.Random.date(),
-    sex: Mock.Random.integer(0, 1)
+    email: 'tang@sinopes.cn' + 'i',
+    gmtCreate: '2019-05-19 23:11:51',
+    gmtModified: '2019-05-19 23:11:51',
+    mobile: '15191455132',
+    password: '111',
+    sex: '男',
+    userCreate: '张三',
+    userModified: '李四',
+    userName: 'xxw' + i,
+    status: '123'
   }));
 
   if (i < 50) {
     let roleId = Mock.Random.guid();
     Roles.push(Mock.mock({
       id: roleId,
-      roleName: `角色${i}`
+      roleSign: `00${i}`,
+      roleName: `角色${i}`,
+      remark: '的fuhu维护d维护的',
+      gmtCreate: '2019-05-19 23:39:12',
+      gmtModified: '2019-05-19 23:39:12',
+      userCreate: 'xxw2',
+      userModified: 'xxw2'
     }));
 
     if (i%2 === 0) {

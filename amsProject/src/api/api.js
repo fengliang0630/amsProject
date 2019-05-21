@@ -6,13 +6,16 @@ let base = '';
 export const login = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
 
 // 获取用户列表（分页）
-export const getUserListPage = params => { return axios.post(`${base}/user/listPage`, params).then(res => res.data); };
+export const getUserListPage = (params, pageSize, pageNum) => {
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/getUserByname`, p).then(res => res.data); 
+};
 
 // 删除用户
-export const removeUser = params => { return axios.post(`${base}/user/remove`, params).then(res => res.data); };
-
-// 批量删除用户
-export const batchRemoveUser = params => { return axios.post(`${base}/user/batchremove`, params).then(res => res.data); };
+export const removeUser = params => { 
+    const p = pckParam(params, {});
+     return axios.post(`${base}/ams/deleteUser`, p).then(res => res.data); 
+};
 
 // 编辑用户
 export const editUser = params => { return axios.post(`${base}/user/edit`, params).then(res => res.data); };
@@ -30,13 +33,16 @@ export const getHasRoleIdsByUserId = params => { return axios.post(`${base}/role
 export const setRoleIdsByUserId = params => { return axios.post(`${base}/role/setRolesByUserId`, params).then(res => res.data); };
 
 // 获取角色列表（分页）
-export const getRoleListPage = params => { return axios.post(`${base}/role/listPage`, params).then(res => res.data); };
+export const getRoleListPage = (params, pageSize, pageNum) => { 
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/getRoleByRolename`, p).then(res => res.data); 
+};
 
 // 删除角色
-export const removeRole = params => { return axios.post(`${base}/role/remove`, params).then(res => res.data); };
-
-// 批量删除角色
-export const batchRemoveRole = params => { return axios.post(`${base}/role/batchremove`, params).then(res => res.data); };
+export const removeRole = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/deleteRole`, p).then(res => res.data); 
+};
 
 // 编辑角色
 export const editRole = params => { return axios.post(`${base}/role/edit`, params).then(res => res.data); };
@@ -70,3 +76,21 @@ export const addMenu = params => { return axios.post(`${base}/menu/add`, params)
 
 // 获取地图区域点
 export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };
+
+
+
+const pckParam = (params, headerParam) => {
+    const userInfo = JSON.parse(sessionStorage.getItem('user'));
+    const p = Object.assign({}, params);
+    let header = {
+        reqUserId: userInfo['id'],
+		rspReturnCode: "",
+		rspReturnMsg:"",
+		reqpageSize: "",
+		reqpageIndex: "",
+		rspPageCount: ""
+    };
+    header = Object.assign(header, headerParam);
+    p['header'] = header;
+    return p;
+}

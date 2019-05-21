@@ -1,0 +1,26 @@
+localhost:8899/ams/deleteRole
+
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"59"
+}
+
+"id"  为必输项
+
+{
+	"header": {
+		"reqpageIndex": 0,
+		"reqpageSize": 0,
+		"rspPageCount": 0,
+		"rspReturnCode": "000000",
+		"rspReturnMsg": "【1130138387521601536】角色删除成功"
+	}
+}

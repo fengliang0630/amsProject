@@ -1,0 +1,24 @@
+localhost:8899/ams/addRole
+
+{
+	"header": {
+		"reqUserId": "xxw2",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"roleName":"管理员",
+	"roleSign":"0001",
+	"remark":"的fu'ze的负责 zheng'ge整个xi't整个系统 d的guan'li的管理wei'hu的管理维护d的管理维护的 "
+}
+
+
+
+
+roleName角色名不能为空
+
+
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130135356600090624】角色添加成功"}}

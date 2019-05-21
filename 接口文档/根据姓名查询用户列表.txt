@@ -1,0 +1,55 @@
+localhost:8899/ams/getUserByname
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"name": "薛雄"
+}
+
+通过name模糊匹配
+
+{
+	"userList": [{
+		"deptId": 5,
+		"email": "tang@sinopes.cn",
+		"gmtCreate": "2019-05-19 23:11:51",
+		"gmtModified": "2019-05-19 23:11:51",
+		"id": 140,
+		"mobile": "15191455132",
+		"name": "薛雄伟",
+		"password": "MTIzNDU2",
+		"sex": 18,
+		"status": 5,
+		"userCreate": "xxw",
+		"userModified": "xxw",
+		"userName": "xxw3"
+	}, {
+		"deptId": 5,
+		"email": "tang@sinopes.cn",
+		"gmtCreate": "2019-05-19 23:18:40",
+		"gmtModified": "2019-05-19 23:18:40",
+		"id": 141,
+		"mobile": "15191455132",
+		"name": "薛雄伟5",
+		"password": "MTIzNDU2",
+		"sex": 18,
+		"status": 5,
+		"userCreate": "xxw",
+		"userModified": "xxw",
+		"userName": "xxw5"
+	}],
+	"header": {
+		"reqpageIndex": 1,
+		"reqUserId": "xxw",
+		"rspPageCount": 2,
+		"rspReturnMsg": "【1130134024585609216】交易成功",
+		"reqpageSize": 20,
+		"rspReturnCode": "000000"
+	}
+}

@@ -1,0 +1,20 @@
+localhost:8899/ams/updateRole
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"58",
+	"roleName":"管理员",
+	"roleSign":"0001",
+	"remark":"管理维护d的管理维护的"
+}
+
+"id":"58","roleName":"管理员" 为必输项
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130137894678298624】角色修改成功"}}

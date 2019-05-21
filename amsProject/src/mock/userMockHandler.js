@@ -5,48 +5,47 @@ let _Users = Users;
 const UserMockHandler = {
     init(mock) {
         //获取用户列表（分页）
-    mock.onPost('/user/listPage').reply(config => {
-        let {pageNum, pageSize, name} = JSON.parse(config.data);
+    mock.onPost('/ams/getUserByname').reply(config => {
+        let {header, name} = JSON.parse(config.data);
+        let {reqpageSize, reqpageIndex} = header;
         let mockUsers = _Users.filter(user => {
           if (name && user.name.indexOf(name) == -1) return false;
           return true;
         });
         let total = mockUsers.length;
-        mockUsers = mockUsers.filter((u, index) => index < pageSize * pageNum && index >= pageSize * (pageNum - 1));
+        mockUsers = mockUsers.filter((u, index) => index < reqpageSize * reqpageIndex && index >= reqpageSize * (reqpageIndex - 1));
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve([200, {
-              total: total,
-              userList: mockUsers
+              userList: mockUsers,
+              header: {
+                reqpageIndex: 1,
+                reqUserId: "xxw",
+                rspPageCount: 86,
+                rspReturnMsg: "【1130134024585609216】交易成功",
+                reqpageSize: 20,
+                rspReturnCode: "000000"
+              }
             }]);
           }, 1000);
         });
       });
   
       //删除用户
-      mock.onPost('/user/remove').reply(config => {
+      mock.onPost('/ams/deleteUser').reply(config => {
         let { id } = JSON.parse(config.data);
         _Users = _Users.filter(u => u.id !== id);
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve([200, {
-              code: 200,
-              msg: '删除成功'
-            }]);
-          }, 500);
-        });
-      });
-      
-      //批量删除用户
-      mock.onPost('/user/batchremove').reply(config => {
-        let { ids } = JSON.parse(config.data);
-        ids = ids.split(',');
-        _Users = _Users.filter(u => !ids.includes(u.id));
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve([200, {
-              code: 200,
-              msg: '删除成功'
+              header: {
+                reqpageIndex: 1,
+                reqUserId: "xxw",
+                rspPageCount: 86,
+                rspReturnMsg: "【1130130350522105856】用户删除成功",
+                reqpageSize: 20,
+                rspReturnCode: "000000"
+              }
             }]);
           }, 500);
         });
