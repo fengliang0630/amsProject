@@ -1,0 +1,15 @@
+localhost:8899/ams/getRoleByUserId
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"140"
+}
+
+{"header":{"reqpageIndex":1,"reqUserId":"xxw","rspPageCount":0,"rspReturnMsg":"【1130817016106713088】交易成功","reqpageSize":20,"rspReturnCode":"000000"},"roleList":[{"gmtCreate":"2019-05-19 23:39:12","gmtModified":"2019-05-19 23:39:12","id":60,"remark":"的fu'ze的负责xiang'mu项目wei'hu维护d维护的","roleName":"职员2","roleSign":"0003","userCreate":"xxw2","userModified":"xxw2"}]}

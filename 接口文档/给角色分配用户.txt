@@ -1,0 +1,24 @@
+localhost:8899/ams/addRoleAddMenu
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg": "",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"roleMenuList": [{
+			"roleId": "58",
+			"menuId": "212"
+		},
+		{
+			"roleId": "58",
+			"menuId": "213"
+		}
+	]
+}
+
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130832407184932864】用户角色分配成功"}}
