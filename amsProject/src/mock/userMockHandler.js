@@ -52,14 +52,15 @@ const UserMockHandler = {
       });
   
       //编辑用户
-      mock.onPost('/user/edit').reply(config => {
-        let { id, name, addr, age, birth, sex } = JSON.parse(config.data);
+      mock.onPost('/ams/updateUser').reply(config => {
+        let { id, name, username, password, email, mobile, sex } = JSON.parse(config.data);
         _Users.some(u => {
           if (u.id === id) {
             u.name = name;
-            u.addr = addr;
-            u.age = age;
-            u.birth = birth;
+            u.username = username;
+            u.password = password;
+            u.email = email;
+            u.mobile = mobile;
             u.sex = sex;
             return true;
           }
@@ -67,8 +68,14 @@ const UserMockHandler = {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve([200, {
-              code: 200,
-              msg: '编辑成功'
+              header: {
+                reqpageIndex: 1,
+                reqUserId: "xxw",
+                rspPageCount: 86,
+                rspReturnMsg: "【1130130350522105856】用户修改成功",
+                reqpageSize: 20,
+                rspReturnCode: "000000"
+              }
             }]);
           }, 500);
         });

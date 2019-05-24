@@ -6,20 +6,20 @@
 				<el-form-item label="姓名" prop="name">
 					<el-input v-model="editForm.name" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="性别">
+				<el-form-item label="登录名" prop="username">
+					<el-input v-model="editForm.username" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="email" prop="email">
+					<el-input v-model="editForm.email" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="性别" prop="sex">
 					<el-radio-group v-model="editForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
+						<el-radio class="radio" :label="'男'"></el-radio>
+						<el-radio class="radio" :label="'女'"></el-radio>
 					</el-radio-group>
 				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
+				<el-form-item label="联系电话" prop="mobile">
+					<el-input v-model="editForm.mobile" auto-complete="off"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -41,7 +41,19 @@
 				editLoading: false,
 				editFormRules: {
 					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
+						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
+					username: [
+						{ required: true, validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
+					email: [
+						{ required: true, validator: util.validatorUtils.checkEmail, trigger: 'blur' }
+					],
+					mobile: [
+						{ required: true, validator: util.validatorUtils.checkMobile, trigger: 'blur' }
+					],
+					sex: [
+						{ required: true, message: '请输入性别', trigger: 'blur' }
 					]
 				}
 			}
@@ -53,10 +65,18 @@
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.editLoading = true;
-							let para = Object.assign({}, this.editForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							editUser(para).then((res) => {
+							let para = Object.assign({}, this.editForm);							
+							editUser(para).then((resp) => {
 								this.editLoading = false;
+
+								if (resp.header.rspReturnCode !== '000000') {
+									this.$message({
+										message: '修改用户失败',
+										type: 'error'
+									});
+									return;
+								}
+
 								this.$refs['editForm'].resetFields();
 								this.callback({
                                     type: 'edit',

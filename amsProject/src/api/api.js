@@ -18,7 +18,10 @@ export const removeUser = params => {
 };
 
 // 编辑用户
-export const editUser = params => { return axios.post(`${base}/user/edit`, params).then(res => res.data); };
+export const editUser = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/updateUser`, p).then(res => res.data); 
+};
 
 // 新增用户
 export const addUser = params => { 
