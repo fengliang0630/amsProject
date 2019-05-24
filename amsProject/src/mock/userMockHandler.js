@@ -75,20 +75,26 @@ const UserMockHandler = {
       });
   
       //新增用户
-      mock.onPost('/user/add').reply(config => {
-        let { name, addr, age, birth, sex } = JSON.parse(config.data);
+      mock.onPost('/ams/addUser').reply(config => {
+        let { name, username, email, mobile, sex } = JSON.parse(config.data);
         _Users.push({
           name: name,
-          addr: addr,
-          age: age,
-          birth: birth,
+          username: username,
+          email: email,
+          mobile: mobile,
           sex: sex
         });
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve([200, {
-              code: 200,
-              msg: '新增成功'
+              header: {
+                reqpageIndex: 1,
+                reqUserId: "xxw",
+                rspPageCount: 86,
+                rspReturnMsg: "【1130130350522105856】用户添加成功",
+                reqpageSize: 20,
+                rspReturnCode: "000000"
+              }
             }]);
           }, 500);
         });

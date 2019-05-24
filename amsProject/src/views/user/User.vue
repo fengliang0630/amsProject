@@ -89,7 +89,7 @@
 				this[respData.type + 'Show'] = false;
 				if (respData.data) {
 					this.$message(respData.data);
-					this.getRoleListPage();
+					this.getUserListPage();
 				}
 			},
 			//性别显示转换

@@ -21,7 +21,10 @@ export const removeUser = params => {
 export const editUser = params => { return axios.post(`${base}/user/edit`, params).then(res => res.data); };
 
 // 新增用户
-export const addUser = params => { return axios.post(`${base}/user/add`, params).then(res => res.data); };
+export const addUser = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/addUser`, p).then(res => res.data); 
+};
 
 // 获取角色列表（无分页）
 export const getRoleList = params => { return axios.post(`${base}/role/list`, params).then(res => res.data); };

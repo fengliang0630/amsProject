@@ -17,9 +17,8 @@ export default {
         r = null;
         return context == null || context == "" || context == "undefined" ? "" : context;
     },
+
     formatDate: {
-
-
         format: function (date, pattern) {
             pattern = pattern || DEFAULT_PATTERN;
             return pattern.replace(SIGN_REGEXP, function ($0) {
@@ -56,6 +55,62 @@ export default {
             return null;
         }
 
+    },
+
+    validatorUtils: {
+        checkSpecialChar(rule, value, callback) {
+            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\-+\'';
+            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\-+\']');
+            if (reg.test(value)) {
+                return callback(new Error());
+            } else {
+                return callback();
+            }
+        },
+
+        checkSpecialCharNotEmpty(rule, value, callback) {
+            if (!value) {
+                rule.message = '不能为空';
+                return callback(new Error());
+            }
+
+            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\-+\'';
+            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\-+\']');
+            if (reg.test(value)) {
+                return callback(new Error());
+            } else {
+                return callback();
+            }
+        },
+        checkEmail(rule, value, callback) {
+
+            if (!value) {
+                return callback(new Error('email不能为空'));
+            }
+    
+            const reg = new RegExp('^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$');
+            if (reg.test(value)) {
+                return callback();
+            } else {
+                return callback(new Error('email格式不正确'));
+            }
+        },
+
+        checkMobile(rule, value, callback) {
+            const reg = new RegExp('^1[3|4|5|7|8][0-9]{9}$');
+
+            if (!value) {
+                return callback(new Error('联系电话不能为空'));
+            }
+
+            if (reg.test(value)) {
+                return callback();
+            } else {
+                return callback(new Error('联系电话格式不正确'));
+            }
+
+        }
     }
+
 
 };
