@@ -16,7 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="menuList" highlight-current-row v-loading="listLoading" @selection-change="selsChange">
+		<el-table :data="menuList" highlight-current-row v-loading="listLoading" @selection-change="selsChange"  stripe border>
 			<el-table-column type="selection" width="55"></el-table-column>
 			<el-table-column width="60">
 				<template slot-scope="scope">

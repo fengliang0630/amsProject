@@ -16,7 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="roleList" highlight-current-row v-loading="listLoading" style="width: 100%;">
+		<el-table :data="roleList" highlight-current-row v-loading="listLoading" style="width: 100%;" stripe border>
 			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
