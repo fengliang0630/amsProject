@@ -3,7 +3,16 @@ import axios from 'axios';
 let base = '';
 
 // 登录接口
-export const login = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
+export const login = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/amsLogin`, p).then(res => res.data); 
+};
+
+// 登出接口
+export const logout = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/amsLogout`, p).then(res => res.data); 
+};
 
 // 获取用户列表（分页）
 export const getUserListPage = (params, pageSize, pageNum) => {
@@ -95,7 +104,7 @@ const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));
     const p = Object.assign({}, params);
     let header = {
-        reqUserId: userInfo['id'],
+        reqUserId: '1' || userInfo['id'],
 		rspReturnCode: "",
 		rspReturnMsg:"",
 		reqpageSize: "",

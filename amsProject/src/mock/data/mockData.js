@@ -2,11 +2,19 @@ import Mock from 'mockjs';
 
 const LoginUsers = [
   {
-    id: 1,
-    username: 'admin',
-    password: '123456',
-    avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png',
-    name: '张某某'
+    gmtModified: "2019-05-2213:37:20",
+    sex: 18,
+    deptId: 5,
+    mobile: "15191455132",
+    gmtCreate: "2019-05-1710:37:59",
+    userName: "admin",
+    userCreate: "xxw",
+    password: "123456",
+    name: "张三",
+    id: 139,
+    email: "tang@sinopes.cn",
+    userModified: "xxw",
+    status: 5
   }
 ];
 

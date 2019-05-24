@@ -13,35 +13,57 @@ export default {
   bootstrap() {
     let mock = new MockAdapter(axios);
 
-    // mock success request
-    mock.onGet('/success').reply(200, {
-      msg: 'success'
-    });
-
-    // mock error request
-    mock.onGet('/error').reply(500, {
-      msg: 'failure'
-    });
-
     //登录
-    mock.onPost('/login').reply(config => {
+    mock.onPost('/ams/amsLogin').reply(config => {
       let {username, password} = JSON.parse(config.data);
       return new Promise((resolve, reject) => {
-        let user = null;
+        let respData = {};
         setTimeout(() => {
           let hasUser = LoginUsers.some(u => {
-            if (u.username === username && u.password === password) {
-              user = JSON.parse(JSON.stringify(u));
-              user.password = undefined;
+            if (u.userName === username && u.password === password) {
+              respData = JSON.parse(JSON.stringify(u));
               return true;
             }
           });
-
           if (hasUser) {
-            resolve([200, { code: 200, msg: '请求成功', user }]);
+            respData.header = {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】用户登录成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            };
+            resolve([200, respData]);
           } else {
-            resolve([200, { code: 500, msg: '账号或密码错误' }]);
+            respData.header = {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】用户登录失败",
+              reqpageSize: 20,
+              rspReturnCode: "000001"
+            };
+            resolve([200, respData]);
           }
+        }, 1000);
+      });
+    });
+
+    // 用户登出系统
+    mock.onPost('/ams/amsLogout').reply(config => {
+      return new Promise((resolve, reject) => {
+        let respData = {};
+        setTimeout(() => {
+          respData.header = {
+            reqpageIndex: 1,
+            reqUserId: "xxw",
+            rspPageCount: 86,
+            rspReturnMsg: "【1131538952285716480】用户退出成功",
+            reqpageSize: 20,
+            rspReturnCode: "000000"
+          };
+          resolve([200, respData]);
         }, 1000);
       });
     });

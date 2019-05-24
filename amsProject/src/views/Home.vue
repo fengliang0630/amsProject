@@ -67,7 +67,7 @@
 
 <script>
 
-	import { getMenuTree } from '../api/api';
+	import { getMenuTree, logout } from '../api/api';
 
 	export default {
 		data() {
@@ -75,7 +75,7 @@
 				sysName:'ams 系统',
 				collapsed:false,
 				sysUserName: '',
-				sysUserAvatar: '',
+				sysUserAvatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png',
 				menuTree: [],
 				form: {
 					name: '',
@@ -99,13 +99,19 @@
 				this.$confirm('确认退出吗?', '提示', {
 					//type: 'warning'
 				}).then(() => {
-					sessionStorage.removeItem('user');
-					_this.$router.push('/login');
-				}).catch(() => {
-
+					logout({}).then(resp => {
+						if (resp.header.rspReturnCode !== '000000') {
+							this.$message({
+								message: '退出系统失败',
+								type: 'error'
+							});
+						} else {
+							sessionStorage.removeItem('user');
+							_this.$router.push('/login');
+						}
+					});
+					
 				});
-
-
 			},
 			//折叠导航栏
 			collapse:function(){
@@ -125,7 +131,6 @@
 			if (user) {
 				user = JSON.parse(user);
 				this.sysUserName = user.name || '';
-				this.sysUserAvatar = user.avatar || '';
 			}
 
 			this.getMenuTree(user.id);

@@ -9,7 +9,7 @@
     </el-form-item>
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
+      <el-button type="primary" style="width:100%;" @click.native.prevent="loginHandler" :loading="logining">登录</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -36,29 +36,28 @@
       };
     },
     methods: {
-      handleSubmit2(ev) {
+      loginHandler(ev) {
         var _this = this;
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.logining = true;
             var loginParams = { username: this.loginForm.account, password: this.loginForm.checkPass };
-            login(loginParams).then(data => {
+            login(loginParams).then(resp => {
               this.logining = false;
-              let { msg, code, user } = data;
-              if (code !== 200) {
+
+              if (resp.header.rspReturnCode !== '000000') {
                 this.$message({
-                  message: msg,
+                  message: '登录失败',
                   type: 'error'
                 });
               } else {
+                let user = resp;
+                delete user.header;
                 sessionStorage.setItem('user', JSON.stringify(user));
                 this.$router.push({ path: '/user' });
               }
             });
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+          } 
         });
       }
     }

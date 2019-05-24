@@ -1,0 +1,16 @@
+localhost:8899/ams/amsLogin
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg": "",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"username": "admin",
+	"password":"123456"
+}
+
+{"gmtModified":"2019-05-2213:37:20","sex":18,"deptId":5,"mobile":"15191455132","gmtCreate":"2019-05-1710:37:59","userName":"admin","userCreate":"xxw","password":"MTIzNDU2","name":"111111","header":{"reqpageIndex":1,"reqUserId":"xxw","rspPageCount":0,"rspReturnMsg":"【1131538496645890048】登录成功","reqpageSize":20,"rspReturnCode":"000000"},"id":139,"email":"tang@sinopes.cn","userModified":"xxw","status":5}
