@@ -25,6 +25,7 @@
 
 <script>
 	import { editRole } from '../../api/api';
+	import util from '../../common/js/util';
 
 	export default {
 		data() {
@@ -32,8 +33,14 @@
                 show: true,
 				editLoading: false,
 				editFormRules: {
+					roleSign: [
+						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
 					roleName: [
-						{ required: true, message: '请输入角色名称', trigger: 'blur' }
+						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
+					remark: [
+						{ required: true,  validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' }
 					]
 				}
 			}

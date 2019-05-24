@@ -23,6 +23,7 @@
 </template>
 
 <script>
+	import util from '../../common/js/util';
 	import { addRole } from '../../api/api';
 
 	export default {
@@ -31,8 +32,14 @@
                 show: true,
 				addLoading: false,
 				addFormRules: {
+					roleSign: [
+						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
 					roleName: [
-						{ required: true, message: '请输入角色名称', trigger: 'blur' }
+						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+					],
+					remark: [
+						{ required: true,  validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' }
 					]
 				},
 				//新增界面数据
