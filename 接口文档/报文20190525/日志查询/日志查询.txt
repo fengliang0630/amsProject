@@ -1,0 +1,76 @@
+localhost:8899/ams/api/userOperation/queryUserOperByDate
+
+日期格式：YYYY-MM-DD
+operAction:新增,删除,修改
+operDesc：项目基本信息，项目属性信息，项目明细信息
+
+
+请求：
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "startDate": "2019-05-25",
+    "endDate": "2019-05-25",
+    "operAction": "新增",
+    "operDesc":"项目基本信息"
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 5,
+        "rspReturnMsg": "【1132217401132318720】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    },
+    "userOperationList": [
+        {
+            "id": 3,
+            "operAction": "新增",
+            "operDesc": "项目属性信息",
+            "prjSN": "许可证号222",
+            "userID": "99999",
+            "userName": "1"
+        },
+        {
+            "id": 8,
+            "operAction": "新增",
+            "operDesc": "项目属性信息",
+            "prjSN": "许可证号333",
+            "userID": "99999",
+            "userName": "1"
+        },
+        {
+            "id": 11,
+            "operAction": "新增",
+            "operDesc": "项目明细信息",
+            "prjSN": "b",
+            "userID": "99999",
+            "userName": "1"
+        },
+        {
+            "id": 16,
+            "operAction": "新增",
+            "operDesc": "项目明细信息",
+            "prjSN": "许可证号333",
+            "userID": "99999",
+            "userName": "1"
+        },
+        {
+            "id": 18,
+            "operAction": "新增",
+            "operDesc": "项目基本信息",
+            "prjSN": "许可证号A",
+            "userID": "99999",
+            "userName": "1"
+        }
+    ]
+}

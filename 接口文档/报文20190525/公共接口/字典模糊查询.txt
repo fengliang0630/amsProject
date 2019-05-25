@@ -1,0 +1,53 @@
+localhost:8899/ams/api/mh/queryDicByNameLike
+
+name 为字典名称
+other 为分级信息，除 项目分级信息外，均无分级数据
+
+请求：
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "name": "屯",
+    "other": ""
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 0,
+        "rspReturnMsg": "【1132205846177120256】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    },
+    "classifiDicList": [
+        {
+            "code": "110105014000",
+            "id": "5050b4fcb64d4cc0baca9dab542d4012",
+            "name": "六里屯街道办事处   ",
+            "other": "",
+            "type": "CYXZGHB"
+        },
+        {
+            "code": "110105025000",
+            "id": "5419e418bec343d1bc4a4a4d5c548947",
+            "name": "大屯街道办事处     ",
+            "other": "",
+            "type": "CYXZGHB"
+        },
+        {
+            "code": "110105004000",
+            "id": "61961f23263c4d54b78fdaf0ebe5532e",
+            "name": "三里屯街道办事处   ",
+            "other": "",
+            "type": "CYXZGHB"
+        }
+    ]
+}

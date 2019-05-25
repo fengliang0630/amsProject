@@ -1,0 +1,61 @@
+localhost:8899/ams/api/xmjbxx/query
+
+
+项目基本信息表中字段及数据库ID均支持查询，但界面开发需按文档开发
+
+支持模糊查询字段：
+	许可证号、建设单位、建设位置、特别告知事项、发件日期、备注
+
+请求：
+
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "prjSN": "许可证号A",
+    "prjUnit": "建设单位",
+    "prjAdr": "建设位置",
+    "prjName": "a",
+    "prjType": "新建",
+    "contacts": "c",
+    "contactInf": "b",
+    "prjTemSN": "d",
+    "specialNotifi": "d",
+    "noticeTime": "2019-12-01",
+    "effectiveTime": "d",
+    "remark": "d"
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 1,
+        "rspReturnMsg": "【1132166944280150016】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    },
+    "xmjbxxList": [
+        {
+            "contactInf": "b",
+            "contacts": "c",
+            "effectiveTime": "d",
+            "id": 105,
+            "noticeTime": "2019-12-01",
+            "prjAdr": "建设位置",
+            "prjName": "a",
+            "prjSN": "许可证号A",
+            "prjTemSN": "d",
+            "prjType": "新建",
+            "prjUnit": "建设单位",
+            "remark": "d",
+            "specialNotifi": "d"
+        }
+    ]
+}

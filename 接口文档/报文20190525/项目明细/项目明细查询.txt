@@ -1,0 +1,48 @@
+localhost:8899/ams/api/xmmx/query
+
+项目基本信息表中字段及数据库ID均支持查询，但界面开发需按文档开发
+请求：
+{
+    "header": {
+        "reqUserId": 99999,
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "id":901,
+    "aboveGroundArea": 4.2,
+    "aboveGroundLen": 7.2,
+    "blendArea": 6.2,
+    "prjClasfiCode": "",
+    "prjSN": "许可证号333",
+    "serialFunct": "建筑功能",
+    "serialNumber": 3,
+    "underGroundArea": 5.2
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 0,
+        "rspReturnMsg": "【1132182282103291904】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    },
+    "xmmxList": [
+        {
+            "aboveGroundArea": 4.2,
+            "aboveGroundLen": 7.2,
+            "blendArea": 6.2,
+            "id": 901,
+            "prjClasfiCode": "",
+            "prjSN": "许可证号333",
+            "serialFunct": "建筑功能",
+            "serialNumber": 3,
+            "underGroundArea": 5.2
+        }
+    ]
+}

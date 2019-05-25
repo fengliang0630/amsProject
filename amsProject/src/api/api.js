@@ -95,9 +95,35 @@ export const editMenu = params => { return axios.post(`${base}/menu/edit`, param
 // 新增菜单
 export const addMenu = params => { return axios.post(`${base}/menu/add`, params).then(res => res.data); };
 
+// 获取项目基本信息列表
+export const getJbxxListPage = params => { return axios.post(`${base}/ams/api/xmjbxx/query`, params).then(res => res.data); };
+
+// 删除项目基本信息
+export const removeJbxx = params => { return axios.post(`${base}/ams/api/xmjbxx/del`, params).then(res => res.data); };
+
+// 新增/修改 项目基本信息
+export const createOrUpdateJbxx = params => { return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, params).then(res => res.data); };
+
+// 获取项目明细列表
+export const getXmmxListPage = params => { return axios.post(`${base}/ams/api/xmmx/query`, params).then(res => res.data); };
+
+// 删除项目明细
+export const removeXmmx = params => { return axios.post(`${base}/ams/api/xmmx/del`, params).then(res => res.data); };
+
+// 新增/修改 项目明细
+export const createOrUpdateXmmx = params => { return axios.post(`${base}/ams/api/xmmx/createOrUpdate`, params).then(res => res.data); };
+
+// 获取项目属性列表
+export const getXmsxListPage = params => { return axios.post(`${base}/ams/api/xmsx/query`, params).then(res => res.data); };
+
+// 删除项目属性
+export const removeXmmx = params => { return axios.post(`${base}/ams/api/xmsx/del`, params).then(res => res.data); };
+
+// 新增/修改 项目属性
+export const createOrUpdateXmsx = params => { return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, params).then(res => res.data); };
+
 // 获取地图区域点
 export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };
-
 
 
 const pckParam = (params, headerParam) => {

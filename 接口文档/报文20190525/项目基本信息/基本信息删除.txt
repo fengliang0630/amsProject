@@ -1,0 +1,27 @@
+localhost:8899/ams/api/xmjbxx/del
+
+
+id 为此项目信息查询回来的数据库ID
+请求:
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "id":103
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 0,
+        "reqpageSize": 0,
+        "rspPageCount": 0,
+        "rspReturnCode": "000000",
+        "rspReturnMsg": "【1132162736663429120】删除成功 ！"
+    }
+}

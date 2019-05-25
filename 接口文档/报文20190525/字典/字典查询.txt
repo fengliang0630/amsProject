@@ -1,0 +1,1865 @@
+localhost:8899/ams/api/dic/queryByType
+
+请求：
+type：
+	FJ 分级字典
+	CYXZGHB 朝阳行政区划表
+
+分级字典code 为 上级+上级+....+本级编码
+{
+    "header": {
+        "reqUserId": "xxw",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "type": "FJ"
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "xxw",
+        "rspPageCount": 0,
+        "rspReturnMsg": "【1130489245899816960】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    },
+    "classifiDicList": [
+        {
+            "code": "0102K01603",
+            "id": "026b3d3da5344c82a888393d8af48756",
+            "name": "再生资源回收站",
+            "other": "5",
+            "parentID": "863859c2f4cc4f15979dce23f0d13ad8",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01605",
+            "id": "03110b9b6b1b45bf9844c462e4262e6f",
+            "name": "其他商业服务",
+            "other": "5",
+            "parentID": "863859c2f4cc4f15979dce23f0d13ad8",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S",
+            "id": "03bba196aa80429eaeba0e7febc7cd10",
+            "name": "城市交通设施项目",
+            "other": "3",
+            "parentID": "a67e067457f2409fae2aeab073d59a21",
+            "type": "FJ"
+        },
+        {
+            "code": "nullnullnull14102",
+            "id": "03e8242d7ba9487d81b928b6644d4ace",
+            "name": "人防工程（FS）",
+            "other": "5",
+            "parentID": "f1c5641a2bc4403aa62231e156b74c0c",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01311",
+            "id": "0439ac40d75a4a8b88e7b68b056f8176",
+            "name": "污水处理及再生利用装置",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01301",
+            "id": "05ddb816a15d452f8e933bd4162b035f",
+            "name": "燃气调压柜（箱）",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08402",
+            "id": "06920adbbc4848ff9a6028697a00a475",
+            "name": "地下车库",
+            "other": "5",
+            "parentID": "4807d0daf05a4996888709c8d6a70a74",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F11201",
+            "id": "07729e81957b4d06b7d959e20d797a1b",
+            "name": "绿隔产业",
+            "other": "5",
+            "parentID": "6701b08a294f49c280614248b99ff2e7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02303",
+            "id": "07828862ec11423f8ce263154df758da",
+            "name": "十二年一贯制",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04601",
+            "id": "08604565cbb84b2bad2de1703c0e8f1d",
+            "name": "城镇其他建设",
+            "other": "5",
+            "parentID": "cbb10f8ebf904beea150ef1f036ad08a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01101",
+            "id": "08d7f1d3d1794d3fb3fe4d89549a0537",
+            "name": "物业服务用房",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01316",
+            "id": "08e0525414344b73836d1906a3f0d9fd",
+            "name": "公共厕所",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D12101",
+            "id": "0a2e996288e74ea196f5d190b8b43846",
+            "name": "军事设施",
+            "other": "5",
+            "parentID": "579f4c3244c0490abd242892a51ff713",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02309",
+            "id": "0a6800867ff64c029cf9d5c927d5c329",
+            "name": "幼儿园",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09501",
+            "id": "0adf9fcffc314b8299eedaa1b605f752",
+            "name": "管道运输",
+            "other": "5",
+            "parentID": "b2e0c3b7eb624b12a78e40129ec973a0",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01325",
+            "id": "0b610c5071634d15b1f3dd54f141f79f",
+            "name": "其他配套用房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211P07101",
+            "id": "0bedf482b8b14dd4b36445fa9acf1d32",
+            "name": "历史文化街区等保护性建筑",
+            "other": "5",
+            "parentID": "800a8e3545074170aad46f139f1abe1b",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G104",
+            "id": "0e668fc6341e40f3b924c750331ae924",
+            "name": "生态景观绿地",
+            "other": "4",
+            "parentID": "fe0edbe73cf44f25be55cc3064fba70f",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R007",
+            "id": "0ee876a9ef314d07aaa7eb9f5a73f9d9",
+            "name": "危房改造",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01401",
+            "id": "0f46a93249e44e85b0193e88747f1325",
+            "name": "幼儿园",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A029",
+            "id": "0f486414378d4b8cab33b382ae7cf94f",
+            "name": "宗教项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01202",
+            "id": "11dba34e27d744518f1435b6cc552bcb",
+            "name": "存自行车处",
+            "other": "5",
+            "parentID": "361ea791d78e4c4faee835e32e8f9f3f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01309",
+            "id": "13cf97bc2dca46d0a1b7a40f8f598d66",
+            "name": "透水铺装",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "null20",
+            "id": "144b773d97ef4bf6bcef9becdf739401",
+            "name": "围墙和外立面装修等",
+            "other": "2",
+            "parentID": "7e302e1f1163432284d375c7ea358a42",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C064",
+            "id": "149cfb88487d44baa1ecacb19be51cba",
+            "name": "村庄其他建设项目",
+            "other": "4",
+            "parentID": "640771c4059542bdbe61972cf668e5f5",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K",
+            "id": "159f2d72e4b84d91b14ca791a36d520d",
+            "name": "配套公共服务设施",
+            "other": "3",
+            "parentID": "bb21b2e1a745497fa68555f4b896f34a",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R001",
+            "id": "159fd0a162894e258632555471454292",
+            "name": "商品房",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01405",
+            "id": "188cf1f021dd4824ae7278063fb6514c",
+            "name": "九年一贯制",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U05301",
+            "id": "1c591adabf614c7e9344d0d23777e13b",
+            "name": "安全设施",
+            "other": "5",
+            "parentID": "613350278b42478793760c3385105169",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U051",
+            "id": "2000fd127b324dcbb5a819a314f15284",
+            "name": "供应设施项目",
+            "other": "4",
+            "parentID": "d0ff2a581c364c989442a0f2147b444f",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04501",
+            "id": "2165de50b71246858a17b73d13de9ae0",
+            "name": "采矿",
+            "other": "5",
+            "parentID": "35796f5341eb4927a278cf5d929a7482",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02308",
+            "id": "23525c134a7a47ceaa0f8d19174fb194",
+            "name": "小学",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U05201",
+            "id": "243c3348cce74ef1a5cc6db1b307cd96",
+            "name": "环境设施",
+            "other": "5",
+            "parentID": "c37a921ddcae41d0947f971666fdf8b9",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02801",
+            "id": "247ae62176174650a55969a4d0c5622d",
+            "name": "社区综合服务设施",
+            "other": "5",
+            "parentID": "9c16aa99a6fc4f9ba68724193d581492",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B032",
+            "id": "294d7e4e2f93462c86f06354a6fe0d10",
+            "name": "商务项目",
+            "other": "4",
+            "parentID": "46a9d7c7d12a4a028389cb64a892d23a",
+            "type": "FJ"
+        },
+        {
+            "code": "0101X",
+            "id": "2b38486e9c7b45a5a01606494003e1de",
+            "name": "乡村住房项目",
+            "other": "3",
+            "parentID": "67ce295b41f1477688b325c15562c80b",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K011",
+            "id": "2be2b3b15400468baf192db5d333d724",
+            "name": "社区综合管理服务",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T094",
+            "id": "2c0fdb63d4c248e4bfb25758aa3878df",
+            "name": "机场项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "null20Z132",
+            "id": "2c1d3b2e6d484a6f91775e219b994109",
+            "name": "外立面装修",
+            "other": "4",
+            "parentID": "734c5c9cb61a43f6bebee3e142915a26",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A025",
+            "id": "2c9448c9d8fa4bae9689bf99ccace9b6",
+            "name": "医疗卫生项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R",
+            "id": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "name": " ",
+            "other": "3",
+            "parentID": "67ce295b41f1477688b325c15562c80b",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S086",
+            "id": "2dcbf3ff161544a283ab323dedc46a65",
+            "name": "其他城市交通设施项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01112",
+            "id": "2df4e2782ccb4d18a8898afc48ee5e76",
+            "name": "机构养老设施",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02901",
+            "id": "2e94c51ea05b4609a32774a916438f52",
+            "name": "宗教建筑",
+            "other": "5",
+            "parentID": "0f486414378d4b8cab33b382ae7cf94f",
+            "type": "FJ"
+        },
+        {
+            "code": "01",
+            "id": "2fdd43ee16284aa2b893a3d6d8a3791c",
+            "name": "居住类项目",
+            "other": "1",
+            "parentID": "",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02401",
+            "id": "2ff4ac077fbf41978b8860d17a2cf170",
+            "name": "体育设施",
+            "other": "5",
+            "parentID": "7e4662aad13d40eda39c6c163f5b5437",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B031",
+            "id": "301ddc1813794b6fa3d1419649adb792",
+            "name": "商业项目",
+            "other": "4",
+            "parentID": "46a9d7c7d12a4a028389cb64a892d23a",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08102",
+            "id": "3105e072cc754249a14e555db7ae5cba",
+            "name": "地下汽车走廊",
+            "other": "5",
+            "parentID": "86e4e4ce614642cc9c673e6ac187d37a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01303",
+            "id": "320e6bb57937454288f19bdb1362e1c6",
+            "name": "室内覆盖系统机房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A023",
+            "id": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "name": "教育科研项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "null20Z131",
+            "id": "32c7d66b6d404b17b16263b87b276421",
+            "name": "围墙",
+            "other": "4",
+            "parentID": "734c5c9cb61a43f6bebee3e142915a26",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S082",
+            "id": "334e5629b48c44078cec1d94eaea591f",
+            "name": "城市轨道交通项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01324",
+            "id": "34047e20c4db410b9aebede9a144e324",
+            "name": "设备用房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R002",
+            "id": "343bd4269e3e46a687e25027394f4c47",
+            "name": "定向安置房",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M045",
+            "id": "35796f5341eb4927a278cf5d929a7482",
+            "name": "采矿项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K012",
+            "id": "361ea791d78e4c4faee835e32e8f9f3f",
+            "name": "交通",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09101",
+            "id": "369c55791012417080b77212378dfc72",
+            "name": "铁路",
+            "other": "5",
+            "parentID": "fdb2e67c050d4c4d9dece683ae5c94d3",
+            "type": "FJ"
+        },
+        {
+            "code": "null20Z13101",
+            "id": "3813956f76f14f9dbd02f8656f455e19",
+            "name": "围墙",
+            "other": "5",
+            "parentID": "32c7d66b6d404b17b16263b87b276421",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02201",
+            "id": "386355ce7b2a4bf4a903f30821b80bb2",
+            "name": "文化设施",
+            "other": "5",
+            "parentID": "a2c3b831a84d4d2b975af1f3ff9af21a",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R005",
+            "id": "3908252f3a59412f8c01d6544a2cbeb1",
+            "name": "自住型商品房",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0211P",
+            "id": "3a9c727f9c594127813b40bcd8f12e03",
+            "name": "保护区项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U054",
+            "id": "3b5d80faad8c47e9b0a8977566daf230",
+            "name": "殡葬设施项目",
+            "other": "4",
+            "parentID": "d0ff2a581c364c989442a0f2147b444f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K013",
+            "id": "3d2534638bb94884bb1bd4405ee71df3",
+            "name": "市政公用",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K015",
+            "id": "3ff321442a2f415ead2c93814d441e37",
+            "name": "医疗卫生",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B03501",
+            "id": "41e903cec9cc43e0834a7ec5d7772421",
+            "name": "其他服务设施",
+            "other": "5",
+            "parentID": "ddceaeac27c24017874d09c51702f9ea",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G10501",
+            "id": "4295a84be0614549b4899ece521f715e",
+            "name": "园林生产绿地",
+            "other": "5",
+            "parentID": "7b7bad56d0434980ae7c44c548fa5fa3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B03401",
+            "id": "431d7a17e85d4f8fae7224c89098dedd",
+            "name": "综合性商业金融服务业",
+            "other": "5",
+            "parentID": "a77fd8d847074d52baa1358fe7d2a889",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04401",
+            "id": "445d3a4a89084936ae706e826e1bf3c3",
+            "name": "仓储",
+            "other": "5",
+            "parentID": "6044c23c1917496e9a7fdff5e642b7dd",
+            "type": "FJ"
+        },
+        {
+            "code": "0101X00801",
+            "id": "45809017517642068ceea01d28551015",
+            "name": "乡村住宅",
+            "other": "5",
+            "parentID": "5a6881a8cc614ec8bd1c69b11a072608",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B",
+            "id": "46a9d7c7d12a4a028389cb64a892d23a",
+            "name": "商业服务业设施项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S084",
+            "id": "4807d0daf05a4996888709c8d6a70a74",
+            "name": "社会停车场项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F11202",
+            "id": "4a7c27c689584adeaed4d2ff8bceb3b9",
+            "name": "绿色产业",
+            "other": "5",
+            "parentID": "6701b08a294f49c280614248b99ff2e7",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00401",
+            "id": "4b68b910e04245fa8d5b1a514b76cabb",
+            "name": "限价商品房",
+            "other": "5",
+            "parentID": "5749ddde4dc3422ea5ea20f922106085",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T092",
+            "id": "4da7fcb74a4d4a94adf64990ce352297",
+            "name": "公路项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R006",
+            "id": "4ee15cb9fa0847448697bd8f517c8287",
+            "name": "低密度住宅",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01302",
+            "id": "4f45ca20882648fa8ed60f5ba889db4d",
+            "name": "热力站",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01403",
+            "id": "4fcfd39a2e494cf4ac8b9e67a8c48d0e",
+            "name": "初中",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08101",
+            "id": "50be419b3a574fc9910d91d021ead483",
+            "name": "城市道路",
+            "other": "5",
+            "parentID": "86e4e4ce614642cc9c673e6ac187d37a",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A021",
+            "id": "52b4eb9a84184d119d9bc7d2dd5da878",
+            "name": "行政办公项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01407",
+            "id": "55d6e1be65ae4ff195d27a14e7410a98",
+            "name": "十二年一贯制",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01404",
+            "id": "56b0ecfff28f473f8aa297e403bc71ed",
+            "name": "高中",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R004",
+            "id": "5749ddde4dc3422ea5ea20f922106085",
+            "name": "限价商品房",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08601",
+            "id": "57920d60d5554a459fc9a7a5789e8242",
+            "name": "其他城市交通设施",
+            "other": "5",
+            "parentID": "2dcbf3ff161544a283ab323dedc46a65",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D121",
+            "id": "579f4c3244c0490abd242892a51ff713",
+            "name": "军事项目",
+            "other": "4",
+            "parentID": "f5b4ddd643ca4490badbf121fc856a50",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M042",
+            "id": "59afe545725242a8bb0a4d8dc8152d97",
+            "name": "工业研发项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0101X008",
+            "id": "5a6881a8cc614ec8bd1c69b11a072608",
+            "name": "乡村住宅",
+            "other": "4",
+            "parentID": "2b38486e9c7b45a5a01606494003e1de",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U05101",
+            "id": "5ddfda91f4c947c590dfdca2ec787f0c",
+            "name": "供应设施",
+            "other": "5",
+            "parentID": "2000fd127b324dcbb5a819a314f15284",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09201",
+            "id": "5e0d4209c9c14f218a450fce51b11151",
+            "name": "公路",
+            "other": "5",
+            "parentID": "4da7fcb74a4d4a94adf64990ce352297",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02304",
+            "id": "5e0eb5f6674e4cb4956ce420494ab244",
+            "name": "完全中学",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211",
+            "id": "5edeef608027423aad7dac721be3fb3a",
+            "name": "城乡建设项目",
+            "other": "2",
+            "parentID": "be05e7d4a4414378871dfa94b0a7f7a4",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04301",
+            "id": "5fde36eee3964ce08dd262429a75f6c9",
+            "name": "物流",
+            "other": "5",
+            "parentID": "d503e4a7f734498786565c4b294f08b4",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G10201",
+            "id": "603c365ad8544bcfbdf374f7cc26f4e3",
+            "name": "防护绿地",
+            "other": "5",
+            "parentID": "d2a1dd3219fb4bc0b16f3a5270a9e3e5",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M044",
+            "id": "6044c23c1917496e9a7fdff5e642b7dd",
+            "name": "仓储项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U053",
+            "id": "613350278b42478793760c3385105169",
+            "name": "安全设施项目",
+            "other": "4",
+            "parentID": "d0ff2a581c364c989442a0f2147b444f",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02307",
+            "id": "63431e7041954e418fee49ef354f101d",
+            "name": "初中",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D12201",
+            "id": "63b8c675519e49d682369f9920671702",
+            "name": "外事设施",
+            "other": "5",
+            "parentID": "babe7dc7eac74aaa87acc7ce93e6e8c1",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C",
+            "id": "640771c4059542bdbe61972cf668e5f5",
+            "name": "村庄建设项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A027",
+            "id": "64177855c96048a1aff72bf0410450ae",
+            "name": "文物古迹项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01201",
+            "id": "65abb07642d74543907fe0e797fd5f42",
+            "name": "出租汽车站",
+            "other": "5",
+            "parentID": "361ea791d78e4c4faee835e32e8f9f3f",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M041",
+            "id": "6679bce36ada473a872f40d9e0e19a99",
+            "name": "工业项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F112",
+            "id": "6701b08a294f49c280614248b99ff2e7",
+            "name": "绿隔政策区生产经营项目",
+            "other": "4",
+            "parentID": "ede37c78035d4145a7f0a0c1f6b2132f",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09601",
+            "id": "67429132f52441af9bb4966034ae0980",
+            "name": "区域综合交通枢纽",
+            "other": "5",
+            "parentID": "cb30078960b84cba8af0bccae437f222",
+            "type": "FJ"
+        },
+        {
+            "code": "0101",
+            "id": "67ce295b41f1477688b325c15562c80b",
+            "name": "住房项目",
+            "other": "2",
+            "parentID": "2fdd43ee16284aa2b893a3d6d8a3791c",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G10401",
+            "id": "6eff5c28d13b4b0b9192e4e3bf2f8592",
+            "name": "生态景观绿地",
+            "other": "5",
+            "parentID": "0e668fc6341e40f3b924c750331ae924",
+            "type": "FJ"
+        },
+        {
+            "code": "nullnullnull",
+            "id": "70d55194daeb457d9b1536cd40c592fd",
+            "name": "null",
+            "other": "3",
+            "parentID": "a7cb79e454944f1ea654a3aa93d4dc42",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01105",
+            "id": "722deaee9d444464a00fde6647341eef",
+            "name": "老年活动场站",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01308",
+            "id": "72403e60d9ed4dd181b340a743562aff",
+            "name": "下凹式绿地",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "null20Z",
+            "id": "734c5c9cb61a43f6bebee3e142915a26",
+            "name": "围墙和外立面装修等",
+            "other": "3",
+            "parentID": "144b773d97ef4bf6bcef9becdf739401",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04201",
+            "id": "73658965d4fd4ecf8f9f0e1dc4ce2ba6",
+            "name": "工业研发",
+            "other": "5",
+            "parentID": "59afe545725242a8bb0a4d8dc8152d97",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01318",
+            "id": "736f0a17322d418f865868b135a886f2",
+            "name": "邮政支局",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C062",
+            "id": "76331791601a42eea2e6661af3e4e3eb",
+            "name": "村庄产业项目",
+            "other": "4",
+            "parentID": "640771c4059542bdbe61972cf668e5f5",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02501",
+            "id": "7662a93164354e99adc0939e75bf9326",
+            "name": "医疗卫生设施",
+            "other": "5",
+            "parentID": "2c9448c9d8fa4bae9689bf99ccace9b6",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01314",
+            "id": "7770090623a44afe804643abaca89e69",
+            "name": "宏蜂窝基站机房（室外一体化基站）",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01313",
+            "id": "79802ee96ea4448a9544fc54a368fa6a",
+            "name": "固定通信机房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02601",
+            "id": "7b012e17b41343c6807fc43a383a0f16",
+            "name": "社会福利设施",
+            "other": "5",
+            "parentID": "bed6fe2f1d554bc4adc77a9fcebaa174",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G105",
+            "id": "7b7bad56d0434980ae7c44c548fa5fa3",
+            "name": "园林生产绿地",
+            "other": "4",
+            "parentID": "fe0edbe73cf44f25be55cc3064fba70f",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T",
+            "id": "7bc210b3328e43a5b05afec94496b7cd",
+            "name": "区域交通设施项目",
+            "other": "3",
+            "parentID": "a67e067457f2409fae2aeab073d59a21",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02311",
+            "id": "7c4ba13c95a64251ac00b79ecff21f1b",
+            "name": "科研院所",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "null",
+            "id": "7e302e1f1163432284d375c7ea358a42",
+            "name": "null",
+            "other": "1",
+            "parentID": "",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A024",
+            "id": "7e4662aad13d40eda39c6c163f5b5437",
+            "name": "体育项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C063",
+            "id": "7eb509a914674832a6769eedb99c4ccb",
+            "name": "村庄基础设施项目",
+            "other": "4",
+            "parentID": "640771c4059542bdbe61972cf668e5f5",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00701",
+            "id": "7fb69d06ff914bb082bca798c4d015f6",
+            "name": "危房改造",
+            "other": "5",
+            "parentID": "0ee876a9ef314d07aaa7eb9f5a73f9d9",
+            "type": "FJ"
+        },
+        {
+            "code": "0211P071",
+            "id": "800a8e3545074170aad46f139f1abe1b",
+            "name": "保护区项目",
+            "other": "4",
+            "parentID": "3a9c727f9c594127813b40bcd8f12e03",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01102",
+            "id": "80c628ec295342aba891b476fd810980",
+            "name": "室外运动场地",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02310",
+            "id": "83a282bc0ffa431b84e92937e5af22be",
+            "name": "特殊教育",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U05501",
+            "id": "8481d42f0e784f1d84ada9ecfded1d2c",
+            "name": "其他公用设施",
+            "other": "5",
+            "parentID": "8cb5824939894ee1b946b3801699ea74",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K016",
+            "id": "863859c2f4cc4f15979dce23f0d13ad8",
+            "name": "商业服务",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01406",
+            "id": "8646eaeb6de34a58a6be9d1c4b7f2fba",
+            "name": "完全中学",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S081",
+            "id": "86e4e4ce614642cc9c673e6ac187d37a",
+            "name": "城市道路项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G101",
+            "id": "8797f898971446bbae529788f54d9f6c",
+            "name": "公园绿地",
+            "other": "4",
+            "parentID": "fe0edbe73cf44f25be55cc3064fba70f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01310",
+            "id": "87aba9bbf80440118c01709bb5dd4f29",
+            "name": "雨水调蓄设施",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B033",
+            "id": "88d9196420b84a699a2b908971cac7a0",
+            "name": "娱乐康体项目",
+            "other": "4",
+            "parentID": "46a9d7c7d12a4a028389cb64a892d23a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01315",
+            "id": "8a0b72126277476a93b6e52b4321c46f",
+            "name": "有线电视机房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U055",
+            "id": "8cb5824939894ee1b946b3801699ea74",
+            "name": "其他公用设施项目",
+            "other": "4",
+            "parentID": "d0ff2a581c364c989442a0f2147b444f",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00201",
+            "id": "8d1851deb22a4895a1cc6187e0fa1f4c",
+            "name": "定向安置房",
+            "other": "5",
+            "parentID": "343bd4269e3e46a687e25027394f4c47",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01110",
+            "id": "90c418163fbc4b5bb46ceb7c48f0e781",
+            "name": "室内体育设施",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01204",
+            "id": "9427fbd39fac4d9ab7352de2e77e0a93",
+            "name": "公交首末站",
+            "other": "5",
+            "parentID": "361ea791d78e4c4faee835e32e8f9f3f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01502",
+            "id": "97d2179fa5f64abcbdbccefd7c7a00a8",
+            "name": "社区卫生服务中心",
+            "other": "5",
+            "parentID": "3ff321442a2f415ead2c93814d441e37",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00101",
+            "id": "982889d2859a4079a9961e0d70fbe87b",
+            "name": "商品房",
+            "other": "5",
+            "parentID": "159fd0a162894e258632555471454292",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09401",
+            "id": "9b2bad543dc742c3a70d69170628764e",
+            "name": "机场",
+            "other": "5",
+            "parentID": "2c0fdb63d4c248e4bfb25758aa3878df",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A028",
+            "id": "9c16aa99a6fc4f9ba68724193d581492",
+            "name": "社区综合服务设施项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F111",
+            "id": "9cb69b818444478c870b5aa28e90ab51",
+            "name": "其他类多功能项目",
+            "other": "4",
+            "parentID": "ede37c78035d4145a7f0a0c1f6b2132f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01304",
+            "id": "a0aab650fbc94cb9b0423d1d1fcf8ba9",
+            "name": "固定通信设备间",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02302",
+            "id": "a24de75d787d4be4b7bcf8a760cc1b12",
+            "name": "中等专业学校",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A022",
+            "id": "a2c3b831a84d4d2b975af1f3ff9af21a",
+            "name": "文化设施项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01501",
+            "id": "a54721bab61d4829a7dc422e0a7142be",
+            "name": "社区卫生服务站",
+            "other": "5",
+            "parentID": "3ff321442a2f415ead2c93814d441e37",
+            "type": "FJ"
+        },
+        {
+            "code": "0212",
+            "id": "a67e067457f2409fae2aeab073d59a21",
+            "name": "交通设施项目",
+            "other": "2",
+            "parentID": "be05e7d4a4414378871dfa94b0a7f7a4",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B034",
+            "id": "a77fd8d847074d52baa1358fe7d2a889",
+            "name": "综合性商业金融服务业项目",
+            "other": "4",
+            "parentID": "46a9d7c7d12a4a028389cb64a892d23a",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C061",
+            "id": "a78b381b3a094653bf78428235ef78ca",
+            "name": "村庄公共服务设施项目",
+            "other": "4",
+            "parentID": "640771c4059542bdbe61972cf668e5f5",
+            "type": "FJ"
+        },
+        {
+            "code": "nullnull",
+            "id": "a7cb79e454944f1ea654a3aa93d4dc42",
+            "name": "null",
+            "other": "2",
+            "parentID": "7e302e1f1163432284d375c7ea358a42",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S083",
+            "id": "a9db2ecc1ba744e3a25ca8f31a444ab6",
+            "name": "地面公共交通场站项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F11101",
+            "id": "aa1bde47f4a641c38c7237810f91eb0e",
+            "name": "多功能建筑/设施",
+            "other": "5",
+            "parentID": "9cb69b818444478c870b5aa28e90ab51",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02701",
+            "id": "ac4ac4902911479189ed4ef57704ad74",
+            "name": "文物古迹",
+            "other": "5",
+            "parentID": "64177855c96048a1aff72bf0410450ae",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01604",
+            "id": "adb1e23f2a4941358a551eaaff11c830",
+            "name": "菜市场",
+            "other": "5",
+            "parentID": "863859c2f4cc4f15979dce23f0d13ad8",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01320",
+            "id": "af0f5b2f033f430294a73abe7b2d0825",
+            "name": "移动通信汇接机房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01601",
+            "id": "af730246ea9c49bbab9dfa26ee745664",
+            "name": "小型商服（便利店）",
+            "other": "5",
+            "parentID": "863859c2f4cc4f15979dce23f0d13ad8",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01323",
+            "id": "b2e0b51515824d5eb61a78d4ad5d43cd",
+            "name": "密闭式垃圾分类收集站",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T095",
+            "id": "b2e0c3b7eb624b12a78e40129ec973a0",
+            "name": "管道运输项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T093",
+            "id": "b3a97f7ccc174f7db47dc583f74d2051",
+            "name": "港口项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01305",
+            "id": "b3eacd2461ae4779a10c9dff74138e01",
+            "name": "有线电视光电转换间",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01321",
+            "id": "b4464fe9a7a94cb38760245d119ef33a",
+            "name": "有线电视基站",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T09301",
+            "id": "b555ce231f82419ab4a60c74adc232f3",
+            "name": "港口",
+            "other": "5",
+            "parentID": "b3a97f7ccc174f7db47dc583f74d2051",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K014",
+            "id": "b6d942ab06184753bfe7119b5c211440",
+            "name": "教育",
+            "other": "4",
+            "parentID": "159f2d72e4b84d91b14ca791a36d520d",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G10101",
+            "id": "b792ee6debaf4c1bb83c2ecba86e8e3c",
+            "name": "公园绿地",
+            "other": "5",
+            "parentID": "8797f898971446bbae529788f54d9f6c",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02101",
+            "id": "b7a68b7ea5604032ac8f9b05a822af66",
+            "name": "行政办公",
+            "other": "5",
+            "parentID": "52b4eb9a84184d119d9bc7d2dd5da878",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01503",
+            "id": "b8ca25311d5649e793fa72d171f7e36c",
+            "name": "社区卫生监管所",
+            "other": "5",
+            "parentID": "3ff321442a2f415ead2c93814d441e37",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C06401",
+            "id": "b97de40eafcb47caa6656a397edf4689",
+            "name": "村庄其他建设",
+            "other": "5",
+            "parentID": "149cfb88487d44baa1ecacb19be51cba",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S085",
+            "id": "b9b942a2228747a79b38c2580eb9aec5",
+            "name": "加油加气站项目",
+            "other": "4",
+            "parentID": "03bba196aa80429eaeba0e7febc7cd10",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01107",
+            "id": "ba2c2aa53498440681467368a903faba",
+            "name": "社区服务中心",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D122",
+            "id": "babe7dc7eac74aaa87acc7ce93e6e8c1",
+            "name": "外事项目",
+            "other": "4",
+            "parentID": "f5b4ddd643ca4490badbf121fc856a50",
+            "type": "FJ"
+        },
+        {
+            "code": "0102",
+            "id": "bb21b2e1a745497fa68555f4b896f34a",
+            "name": "配套公共服务设施",
+            "other": "2",
+            "parentID": "2fdd43ee16284aa2b893a3d6d8a3791c",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B03101",
+            "id": "bc3e2f9fe5e5433fa0fff146f8d11a79",
+            "name": "商业建筑",
+            "other": "5",
+            "parentID": "301ddc1813794b6fa3d1419649adb792",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01203",
+            "id": "bd3ef4a83da940e8a3cf5766d8ab816d",
+            "name": "居民汽车场库",
+            "other": "5",
+            "parentID": "361ea791d78e4c4faee835e32e8f9f3f",
+            "type": "FJ"
+        },
+        {
+            "code": "02",
+            "id": "be05e7d4a4414378871dfa94b0a7f7a4",
+            "name": "非居住类项目",
+            "other": "1",
+            "parentID": "",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A026",
+            "id": "bed6fe2f1d554bc4adc77a9fcebaa174",
+            "name": "社会福利项目",
+            "other": "4",
+            "parentID": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B03201",
+            "id": "bf49658ed67d42c0b688c4557bf6c775",
+            "name": "商务建筑",
+            "other": "5",
+            "parentID": "294d7e4e2f93462c86f06354a6fe0d10",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02301",
+            "id": "bfe812bddf91487cb8f2adfbe85060de",
+            "name": "高等院校",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C06101",
+            "id": "c2f278e806e148df94565288e7736995",
+            "name": "村庄公共服务设施",
+            "other": "5",
+            "parentID": "a78b381b3a094653bf78428235ef78ca",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U052",
+            "id": "c37a921ddcae41d0947f971666fdf8b9",
+            "name": "环境设施项目",
+            "other": "4",
+            "parentID": "d0ff2a581c364c989442a0f2147b444f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01319",
+            "id": "c39856f0ea8b41a69769ffa2c0e517a9",
+            "name": "固定通信汇聚机房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01312",
+            "id": "c3bb4bc009bc4391aa3d480cb688b876",
+            "name": "锅炉房",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M",
+            "id": "c47e6c2452ac41ce9aa45caf8f308802",
+            "name": "工业、物流仓储、采矿和其他建设项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01104",
+            "id": "c82c6d28265c4c3dbfc79e8afc89c820",
+            "name": "托老所",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01109",
+            "id": "c9905a42dcf1474f8f0dc4448a58a354",
+            "name": "派出所",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01602",
+            "id": "ca751e7e22b442c1825a26f2004325f2",
+            "name": "再生资源回收点",
+            "other": "5",
+            "parentID": "863859c2f4cc4f15979dce23f0d13ad8",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T096",
+            "id": "cb30078960b84cba8af0bccae437f222",
+            "name": "区域综合交通枢纽项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "0213",
+            "id": "cb312668a7434f2982f079f586c36857",
+            "name": "绿地、多功能和特殊项目",
+            "other": "2",
+            "parentID": "be05e7d4a4414378871dfa94b0a7f7a4",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M046",
+            "id": "cbb10f8ebf904beea150ef1f036ad08a",
+            "name": "其他建设项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02306",
+            "id": "cbfb94f5d19c4563af009b648f5ca898",
+            "name": "高中",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01111",
+            "id": "ce1a13fa7d044b96b4222355d81c767a",
+            "name": "社区文化设施",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U",
+            "id": "d0ff2a581c364c989442a0f2147b444f",
+            "name": "公用设施项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "null20Z13201",
+            "id": "d13aae9c6e9b4040bcbeb2c5043a5a2a",
+            "name": "外立面装修",
+            "other": "5",
+            "parentID": "2c1d3b2e6d484a6f91775e219b994109",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G102",
+            "id": "d2a1dd3219fb4bc0b16f3a5270a9e3e5",
+            "name": "防护绿地",
+            "other": "4",
+            "parentID": "fe0edbe73cf44f25be55cc3064fba70f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01307",
+            "id": "d2c9c0fc890e48a8a74429e0a6cfd9fb",
+            "name": "生活垃圾分类收集点",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08201",
+            "id": "d4bb815d0dae4da3a3b55a4e2dd16e72",
+            "name": "城市轨道交通",
+            "other": "5",
+            "parentID": "334e5629b48c44078cec1d94eaea591f",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M043",
+            "id": "d503e4a7f734498786565c4b294f08b4",
+            "name": "物流项目",
+            "other": "4",
+            "parentID": "c47e6c2452ac41ce9aa45caf8f308802",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01108",
+            "id": "d66c4e3e24bd42d89175c6e725e56191",
+            "name": "街道办事处",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211U05401",
+            "id": "d6831f2950374da08ffb95d776a8c68f",
+            "name": "殡葬设施",
+            "other": "5",
+            "parentID": "3b5d80faad8c47e9b0a8977566daf230",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01106",
+            "id": "da27767e05e04a29ac73a8de1b257ce5",
+            "name": "社区助残服务中心",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B035",
+            "id": "ddceaeac27c24017874d09c51702f9ea",
+            "name": "其他服务设施项目",
+            "other": "4",
+            "parentID": "46a9d7c7d12a4a028389cb64a892d23a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01306",
+            "id": "ddeb474db15f43f681ad2931dcdc6154",
+            "name": "配电室（箱）",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G103",
+            "id": "df80a05e913b47aaa9590b09a57b875c",
+            "name": "广场项目",
+            "other": "4",
+            "parentID": "fe0edbe73cf44f25be55cc3064fba70f",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01317",
+            "id": "e024db6cff3b4644bbdd88de25938475",
+            "name": "邮政所",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01113",
+            "id": "e0eeab1cb5bf4c4fa05fdafb645dc7c5",
+            "name": "残疾人托养所",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00601",
+            "id": "e24ea887fd5049d296a0029db586ea67",
+            "name": "低密度住宅",
+            "other": "5",
+            "parentID": "4ee15cb9fa0847448697bd8f517c8287",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08401",
+            "id": "e7a7a0fe2ad643d9946a734d229c6b2e",
+            "name": "社会停车场",
+            "other": "5",
+            "parentID": "4807d0daf05a4996888709c8d6a70a74",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A02305",
+            "id": "e7b2800c19d74ce6a872db3a7c239e3b",
+            "name": "九年一贯制",
+            "other": "5",
+            "parentID": "32469cfbbec04b69a3fb65ef7963f4b7",
+            "type": "FJ"
+        },
+        {
+            "code": "nullnullnull14101",
+            "id": "e8a8bd119436480f9befc897bfe6f01f",
+            "name": "人防工程（DL）",
+            "other": "5",
+            "parentID": "f1c5641a2bc4403aa62231e156b74c0c",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00501",
+            "id": "e921780a9a3048b89bd2a84a4406d550",
+            "name": "自住型商品房",
+            "other": "5",
+            "parentID": "3908252f3a59412f8c01d6544a2cbeb1",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01402",
+            "id": "ebba13f7a25c4c5882ab04f60b353435",
+            "name": "小学",
+            "other": "5",
+            "parentID": "b6d942ab06184753bfe7119b5c211440",
+            "type": "FJ"
+        },
+        {
+            "code": "0213F",
+            "id": "ede37c78035d4145a7f0a0c1f6b2132f",
+            "name": "多功能和绿隔政策区项目",
+            "other": "3",
+            "parentID": "cb312668a7434f2982f079f586c36857",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R00301",
+            "id": "eeb2551b86bd4df89d9685a51308c7e5",
+            "name": "经济适用房",
+            "other": "5",
+            "parentID": "f36a1d76100a49988dc91e50d3ea94fc",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08301",
+            "id": "ef8112ccb7794cf098084a83f84730cb",
+            "name": "地面公交场站",
+            "other": "5",
+            "parentID": "a9db2ecc1ba744e3a25ca8f31a444ab6",
+            "type": "FJ"
+        },
+        {
+            "code": "nullnullnull141",
+            "id": "f1c5641a2bc4403aa62231e156b74c0c",
+            "name": "人防工程",
+            "other": "4",
+            "parentID": "70d55194daeb457d9b1536cd40c592fd",
+            "type": "FJ"
+        },
+        {
+            "code": "0211B03301",
+            "id": "f1fa040d67dc4d2c8ad8e81acbbebd74",
+            "name": "娱乐康体",
+            "other": "5",
+            "parentID": "88d9196420b84a699a2b908971cac7a0",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R003",
+            "id": "f36a1d76100a49988dc91e50d3ea94fc",
+            "name": "经济适用房",
+            "other": "4",
+            "parentID": "2d3e73a9b5bc4a90b0f3a1c052a735d0",
+            "type": "FJ"
+        },
+        {
+            "code": "0211A",
+            "id": "f3c3a0ec026e4ee1bef04fecb2b7fa8e",
+            "name": "公共管理与公共服务项目",
+            "other": "3",
+            "parentID": "5edeef608027423aad7dac721be3fb3a",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01103",
+            "id": "f4569d13897e408e88e653bb28fbde88",
+            "name": "社区管理服务用房",
+            "other": "5",
+            "parentID": "2be2b3b15400468baf192db5d333d724",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C06201",
+            "id": "f469e4f8bb7545be8d2cabe6716514b9",
+            "name": "村庄产业设施",
+            "other": "5",
+            "parentID": "76331791601a42eea2e6661af3e4e3eb",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D",
+            "id": "f5b4ddd643ca4490badbf121fc856a50",
+            "name": "特殊项目",
+            "other": "3",
+            "parentID": "cb312668a7434f2982f079f586c36857",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D123",
+            "id": "fa0c0e8ee30a49ed9f113aeeb5e6233b",
+            "name": "安保项目",
+            "other": "4",
+            "parentID": "f5b4ddd643ca4490badbf121fc856a50",
+            "type": "FJ"
+        },
+        {
+            "code": "0102K01322",
+            "id": "fa45fac5b8bd44c2a977610caeb8425a",
+            "name": "开闭所",
+            "other": "5",
+            "parentID": "3d2534638bb94884bb1bd4405ee71df3",
+            "type": "FJ"
+        },
+        {
+            "code": "0211C06301",
+            "id": "fa74fdfc5774439ab3acc7cb3ab81e9b",
+            "name": "村庄基础设施",
+            "other": "5",
+            "parentID": "7eb509a914674832a6769eedb99c4ccb",
+            "type": "FJ"
+        },
+        {
+            "code": "0212S08501",
+            "id": "faefb2a643a04a58898a43fa80c1765e",
+            "name": "加油加气站",
+            "other": "5",
+            "parentID": "b9b942a2228747a79b38c2580eb9aec5",
+            "type": "FJ"
+        },
+        {
+            "code": "0211M04101",
+            "id": "fb8a09ebc92b454b85d2d73be798b607",
+            "name": "工业",
+            "other": "5",
+            "parentID": "6679bce36ada473a872f40d9e0e19a99",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G10301",
+            "id": "fcc1c256c28e4e9bb8e2a0e6a460988f",
+            "name": "广场",
+            "other": "5",
+            "parentID": "df80a05e913b47aaa9590b09a57b875c",
+            "type": "FJ"
+        },
+        {
+            "code": "0213D12301",
+            "id": "fce9a4c8f94247df8005f47ed4b66aa8",
+            "name": "安保设施",
+            "other": "5",
+            "parentID": "fa0c0e8ee30a49ed9f113aeeb5e6233b",
+            "type": "FJ"
+        },
+        {
+            "code": "0212T091",
+            "id": "fdb2e67c050d4c4d9dece683ae5c94d3",
+            "name": "铁路项目",
+            "other": "4",
+            "parentID": "7bc210b3328e43a5b05afec94496b7cd",
+            "type": "FJ"
+        },
+        {
+            "code": "0213G",
+            "id": "fe0edbe73cf44f25be55cc3064fba70f",
+            "name": "绿地",
+            "other": "3",
+            "parentID": "cb312668a7434f2982f079f586c36857",
+            "type": "FJ"
+        }
+    ]
+}
