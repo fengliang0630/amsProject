@@ -93,9 +93,9 @@ MenuTree = [
     menuName: '业务功能',
     iconCls: 'el-icon-message',
     children: [
-      {id: '2_1', menuName: '项目基本信息管理', menuLink: '/jbxx'},
-      {id: '2_2', menuName: '项目属性信息管理', menuLink: '/xmsx'},
-      {id: '2_3', menuName: '项目明细信息管理', menuLink: '/xmmx'},
+      {id: '2_1', menuName: '项目基本信息管理', menuLink: '/project'},
+      {id: '2_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
+      {id: '2_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'},
       {id: '2_4', menuName: '工程地理图像查询', menuLink: '/amsMap'}
     ]
   }

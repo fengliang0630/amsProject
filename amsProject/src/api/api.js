@@ -105,49 +105,49 @@ export const editMenu = params => { return axios.post(`${base}/menu/edit`, param
 export const addMenu = params => { return axios.post(`${base}/menu/add`, params).then(res => res.data); };
 
 // 获取项目基本信息列表
-export const getJbxxListPage = (params, pageSize, pageNum) => { 
+export const getProjectListPage = (params, pageSize, pageNum) => { 
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
     return axios.post(`${base}/ams/api/xmjbxx/query`, p).then(res => res.data); 
 };
 
 // 删除项目基本信息
-export const removeJbxx = params => { 
+export const removeProject = params => { 
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/xmjbxx/del`, p).then(res => res.data); 
 };
 
 // 新增/修改 项目基本信息
-export const createOrUpdateJbxx = params => { 
+export const createOrUpdateProject = params => { 
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, p).then(res => res.data); 
 };
 
 // 获取项目明细列表
-export const getXmmxListPage = (params, pageSize, pageNum) => { 
+export const getProjectDtailListPage = (params, pageSize, pageNum) => { 
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
     return axios.post(`${base}/ams/api/xmmx/query`, p).then(res => res.data); 
 };
 
 // 删除项目明细
-export const removeXmmx = params => { 
+export const removeProjectDetail = params => { 
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/xmmx/del`, p).then(res => res.data); 
 };
 
 // 新增/修改 项目明细
-export const createOrUpdateXmmx = params => { 
+export const createOrUpdateProjectDetail = params => { 
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/xmmx/createOrUpdate`, p).then(res => res.data); 
 };
 
 // 获取项目属性列表
-export const getXmsxListPage = (params, pageSize, pageNum) => { 
+export const getProjectAttributeListPage = (params, pageSize, pageNum) => { 
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
     return axios.post(`${base}/ams/api/xmsx/query`, p).then(res => res.data); 
 };
 
 // 删除项目属性
-export const removeXmsx = params => { 
+export const removeProjectAttribute = params => { 
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/xmsx/del`, p).then(res => res.data); 
 };

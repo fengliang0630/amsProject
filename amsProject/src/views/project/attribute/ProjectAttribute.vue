@@ -7,7 +7,7 @@
 					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getXmsxListPage">查询</el-button>
+					<el-button type="primary" v-on:click="getProjectAttributeListPage">查询</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-	import { getXmsxListPage , removeXmsx } from '../../../api/api';
+	import { getProjectAttributeListPage , removeProjectAttribute } from '../../../api/api';
 
 	export default {
 		data() {
@@ -80,19 +80,19 @@
 		methods: {
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
-				this.getXmsxListPage();
+				this.getProjectAttributeListPage();
 			},
 			handleCurrentChange(pageNum) {
 				this.pageNum = pageNum;
-				this.getXmsxListPage();
+				this.getProjectAttributeListPage();
 			},
 			// 获取项目基本信息列表
-			getXmsxListPage() {
+			getProjectAttributeListPage() {
 				let para = {
 					prjSN: this.filters.prjSN
 				};
 				this.listLoading = true;
-				getXmsxListPage(para, this.pageSize, this.pageNum).then((resp) => {
+				getProjectAttributeListPage(para, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
@@ -113,7 +113,7 @@
 				}).then(() => {
 					this.listLoading = true;
 					let para = { id: row.id };
-					removeXmsx(para).then((resp) => {
+					removeProjectAttribute(para).then((resp) => {
 						this.listLoading = false;
 
 						if (resp.header.rspReturnCode !== '000000') {
@@ -128,13 +128,13 @@
 							message: '删除项目属性信息成功',
 							type: 'success'
 						});
-						this.getXmsxListPage();
+						this.getProjectAttributeListPage();
 					});
 				});
 			}
 		},
 		mounted() {
-			this.getXmsxListPage();
+			this.getProjectAttributeListPage();
 		}
 	}
 </script>

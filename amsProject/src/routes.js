@@ -5,9 +5,9 @@ import User from './views/user/User.vue';
 import Role from './views/role/Role.vue';
 import Menu from './views/menu/Menu.vue';
 import AmsMap from './views/AmsMap.vue';
-import ProjectJbxx from './views/project//jbxx/ProjectJbxx.vue';
-import ProjectSx from './views/project/xmsx/ProjectSx.vue';
-import ProjectMx from './views/project/xmmx/ProjectMx.vue';
+import Project from './views/project/Project.vue';
+import ProjectDetail from './views/project/detail/ProjectDetail.vue';
+import ProjectAttribute from './views/project/attribute/ProjectAttribute.vue';
 
 let routes = [
     {
@@ -39,9 +39,9 @@ let routes = [
         name: '业务功能',
         iconCls: 'el-icon-message', // 图标样式class
         children: [
-            { path: '/jbxx', component: ProjectJbxx, name: '项目基本信息管理' },
-            { path: '/xmsx', component: ProjectSx, name: '项目属性信息管理' },
-            { path: '/xmmx', component: ProjectMx, name: '项目明细信息管理' },
+            { path: '/project', component: Project, name: '项目基本信息管理' },
+            { path: '/ProjectAttribute', component: ProjectAttribute, name: '项目属性信息管理' },
+            { path: '/projectDetail', component: ProjectDetail, name: '项目明细信息管理' },
             { path: '/amsMap', component: AmsMap, name: '工程地理图像查询' }
         ]
     },

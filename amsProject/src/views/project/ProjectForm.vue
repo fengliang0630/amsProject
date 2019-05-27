@@ -50,8 +50,8 @@
 </template>
 
 <script>
-	import util from '../../../common/js/util';
-	import {createOrUpdateJbxx} from '../../../api/api';
+	import util from '../../common/js/util';
+	import {createOrUpdateProject} from '../../api/api';
 
 	export default {
 		data() {
@@ -123,7 +123,7 @@
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.formLoading = true;
 							let para = Object.assign({}, this.formData);
-							createOrUpdateJbxx(para).then((resp) => {
+							createOrUpdateProject(para).then((resp) => {
 								this.formLoading = false;
 								const respMsg= {message: '', type: ''}
 								

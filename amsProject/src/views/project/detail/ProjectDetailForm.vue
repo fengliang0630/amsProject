@@ -42,7 +42,7 @@
 
 <script>
 	import util from '../../../common/js/util';
-	import {createOrUpdateXmmx} from '../../../api/api';
+	import {createOrUpdateProjectDetail} from '../../../api/api';
 
 	export default {
 		data() {
@@ -89,7 +89,7 @@
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.formLoading = true;
 							let para = Object.assign({}, this.formData);
-							createOrUpdateXmmx(para).then((resp) => {
+							createOrUpdateProjectDetail(para).then((resp) => {
 								this.formLoading = false;
 								const respMsg= {message: '', type: ''}
 								

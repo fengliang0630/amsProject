@@ -122,7 +122,7 @@ const ProjectMockHandler = {
     });
 
     // 删除项目属性信息
-    mock.onPost('/ams/api/xmjbxx/del').reply(config => {
+    mock.onPost('/ams/api/xmsx/del').reply(config => {
       let { id } = JSON.parse(config.data);
       _XmsxList = _XmsxList.filter(r => r.id !== id);
       return new Promise((resolve, reject) => {

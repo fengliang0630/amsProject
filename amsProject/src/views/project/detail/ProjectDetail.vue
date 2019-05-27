@@ -4,10 +4,10 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-input v-model="filters.prjName" placeholder="项目名称"></el-input>
+					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getJbxxListPage">查询</el-button>
+					<el-button type="primary" v-on:click="getProjectDtailListPage">查询</el-button>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="showFormHandler(null, null)">新增</el-button>
@@ -16,24 +16,20 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="jbxxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
+		<el-table :data="xmmxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
 			<el-table-column fixed="left"  width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="120"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位" width="100"></el-table-column>
-			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
-			<el-table-column prop="prjName" label="工程名称" width="120"></el-table-column>
-			<el-table-column prop="prjType" label="建设类型" min-width="100"></el-table-column>
-			<el-table-column prop="contacts" label="联系人" min-width="80"></el-table-column>
-			<el-table-column prop="contactInf" label="联系方式" min-width="180"></el-table-column>
-			<el-table-column prop="prjTemSN" label="附带临建批号" min-width="180"></el-table-column>
-			<el-table-column prop="specialNotifi" label="特别告知事项" min-width="180"></el-table-column>
-			<el-table-column prop="noticeTime" label="发件日期" min-width="180"></el-table-column>
-			<el-table-column prop="effectiveTime" label="有效时间" min-width="180"></el-table-column>
-			<el-table-column prop="remark" label="备注" min-width="180"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" ></el-table-column>
+			<el-table-column prop="serialNumber" label="建筑序号" ></el-table-column>
+			<el-table-column prop="serialFunct" label="建筑功能" ></el-table-column>
+			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200px"></el-table-column>
+			<el-table-column prop="prjClasfiCode" label="分类代码" ></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
@@ -51,27 +47,26 @@
 
 
 		<!-- 项目基本信息增加/修改 -->
-		<ams-project-jbxx-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-jbxx-form>
-		
+		<ams-project-detail-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-detail-form>
+
 	</section>
 </template>
 
 <script>
-	import { getJbxxListPage , removeJbxx } from '../../../api/api';
-	import ProjectJbxxForm from './ProjectJbxxForm';
+	import { getProjectDtailListPage , removeProjectDetail } from '../../../api/api';
+	import ProjectDetailForm from './ProjectDetailForm';
 
 	export default {
 		data() {
 			return {
 				filters: {
-					prjName: ''
+					prjSN: ''
 				},
-				jbxxList: [],
+				xmmxList: [],
 				total: 0,
 				pageNum: 1,
 				pageSize: 20,
 				listLoading: false,
-				
 				formParams: {
 					show: false,
 					data: null
@@ -81,30 +76,30 @@
 		methods: {
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
-				this.getJbxxListPage();
+				this.getProjectDtailListPage();
 			},
 			handleCurrentChange(pageNum) {
 				this.pageNum = pageNum;
-				this.getJbxxListPage();
+				this.getProjectDtailListPage();
 			},
 			// 获取项目基本信息列表
-			getJbxxListPage() {
+			getProjectDtailListPage() {
 				let para = {
-					prjName: this.filters.prjName
+					prjSN: this.filters.prjSN
 				};
 				this.listLoading = true;
-				getJbxxListPage(para, this.pageSize, this.pageNum).then((resp) => {
+				getProjectDtailListPage(para, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询项目基本信息失败',
+							message: '查询项目属性信息失败',
 							type: 'error'
 						});
 						return;
 					}
-
+		
 					this.total = resp.header.rspPageCount;
-					this.jbxxList = resp.xmjbxxList;
+					this.xmmxList = resp.xmmxList;
 				});
 			},
 			//删除
@@ -114,22 +109,22 @@
 				}).then(() => {
 					this.listLoading = true;
 					let para = { id: row.id };
-					removeJbxx(para).then((resp) => {
+					removeProjectDetail(para).then((resp) => {
 						this.listLoading = false;
 
 						if (resp.header.rspReturnCode !== '000000') {
 							this.$message({
-								message: '删除项目基本信息失败',
+								message: '删除项目明细信息失败',
 								type: 'error'
 							});
 							return;
 						}
 
 						this.$message({
-							message: '删除项目基本信息成功',
+							message: '删除项目明细信息成功',
 							type: 'success'
 						});
-						this.getJbxxListPage();
+						this.getProjectDtailListPage();
 					});
 				});
 			},
@@ -142,16 +137,16 @@
 				this.formParams.show = false;
 				if (respData) {
 					this.$message(respData);
-					this.getJbxxListPage();
+					this.getProjectDtailListPage();
 				}
 				
 			}
 		},
 		mounted() {
-			this.getJbxxListPage();
+			this.getProjectDtailListPage();
 		},
 		components: {
-			'ams-project-jbxx-form': ProjectJbxxForm,
+			'ams-project-detail-form': ProjectDetailForm,
 		}
 	}
 </script>
