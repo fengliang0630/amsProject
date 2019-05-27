@@ -36,7 +36,7 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="sizes, prev, pager, next" :page-sizes="[20, 50, 100]" @size-change="handleSizeChange"
+			<el-pagination layout="sizes, prev, pager, next" :page-sizes="paginationSize" @size-change="handleSizeChange"
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -59,7 +59,8 @@
 	import MenuAdd from './MenuAdd';
 	import MenuEdit from './MenuEdit';
 	import MenuTree from './MenuTree';
-
+	import util from '../../common/js/util';
+	
 	export default {
 		data() {
 			return {
@@ -70,7 +71,8 @@
 				total: 0,
 				pageNum: 1,
 				listLoading: false,
-				pageSize: 20,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize,
 
 				editShow: false,
 				editForm: {},

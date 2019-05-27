@@ -22,7 +22,7 @@
 			<el-table-column prop="prjSN" label="许可证号" width="120"></el-table-column>
 			<el-table-column prop="serialNumber" label="建筑序号" width="120"></el-table-column>
 			<el-table-column prop="prjNature" label="项目性质" width="120"></el-table-column>
-			<el-table-column prop="prjAttr" label="规划项目性质/人防工程情况" width="120"></el-table-column>
+			<el-table-column prop="prjAttr" label="规划项目性质/人防工程情况" width="250"></el-table-column>
 			<el-table-column prop="peacetimeUses" label="平时用途" width="120"></el-table-column>
 			<el-table-column prop="aboveGroundLev" label="地上层数" width="120"></el-table-column>
 			<el-table-column prop="underGroundLev" label="地下层数" width="120"></el-table-column>
@@ -55,7 +55,7 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
 			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
-				:page-size="pageSize" :total="total" :page-sizes="[20, 50, 100]" style="float:right;">
+				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
 			</el-pagination>
 		</el-col>
 	</section>
@@ -63,6 +63,7 @@
 
 <script>
 	import { getProjectAttributeListPage , removeProjectAttribute } from '../../../api/api';
+	import util from '../../../common/js/util';
 
 	export default {
 		data() {
@@ -73,7 +74,8 @@
 				xmsxList: [],
 				total: 0,
 				pageNum: 1,
-				pageSize: 20,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize,
 				listLoading: false
 			}
 		},

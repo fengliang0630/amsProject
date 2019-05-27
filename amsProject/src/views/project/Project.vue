@@ -45,7 +45,7 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
 			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
-				:page-size="pageSize" :total="total" :page-sizes="[20, 50, 100]" style="float:right;">
+				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
 			</el-pagination>
 		</el-col>
 
@@ -59,6 +59,7 @@
 <script>
 	import { getProjectListPage , removeProject } from '../../api/api';
 	import ProjectForm from './ProjectForm';
+	import util from '../../common/js/util';
 
 	export default {
 		data() {
@@ -69,7 +70,8 @@
 				jbxxList: [],
 				total: 0,
 				pageNum: 1,
-				pageSize: 20,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize,
 				listLoading: false,
 				
 				formParams: {

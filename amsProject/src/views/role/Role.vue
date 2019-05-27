@@ -38,7 +38,7 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="sizes, prev, pager, next" :page-sizes="[20, 50, 100]" @size-change="handleSizeChange"
+			<el-pagination layout="sizes, prev, pager, next" :page-sizes="paginationSize" @size-change="handleSizeChange"
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -59,6 +59,7 @@
 	import RoleAdd from './RoleAdd';
 	import RoleEdit from './RoleEdit';
 	import RoleSetMenu from './RoleSetMenu';
+	import util from '../../common/js/util';
 
 	export default {
 		data() {
@@ -69,7 +70,8 @@
 				roleList: [],
 				total: 0,
 				pageNum: 1,
-				pageSize: 20,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize,
 				listLoading: false,
 
 				editShow: false,
