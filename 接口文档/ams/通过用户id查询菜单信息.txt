@@ -1,0 +1,63 @@
+localhost:8899/ams/selectMenusByUserId
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg": "",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"140"
+}
+
+{
+	"menuList": [{
+		"children": [{
+			"children": [],
+			"disId": "212_215",
+			"gmtCreate": "2019-05-21 21:46:26",
+			"gmtModified": "2019-05-21 21:46:26",
+			"id": 215,
+			"isMark": 0,
+			"name": "用户管理",
+			"orderNum": 1,
+			"parentId": 212,
+			"url": "/sys/usermanager",
+			"userCreate": "xxw",
+			"userModified": "xxw"
+		}, {
+			"children": [],
+			"disId": "212_213",
+			"gmtCreate": "2019-05-21 19:54:05",
+			"gmtModified": "2019-05-21 19:56:59",
+			"id": 213,
+			"isMark": 0,
+			"name": "角色管理",
+			"orderNum": 2,
+			"parentId": 212,
+			"url": "/sys/rolemanager",
+			"userCreate": "xxw",
+			"userModified": "xxw"
+		}],
+		"disId": "212",
+		"gmtCreate": "2019-05-21 19:52:52",
+		"gmtModified": "2019-05-21 19:52:52",
+		"id": 212,
+		"isMark": 0,
+		"name": "系统管理",
+		"orderNum": 1,
+		"url": "/sys/sysmanager",
+		"userCreate": "xxw",
+		"userModified": "xxw"
+	}],
+	"header": {
+		"reqpageIndex": 1,
+		"reqUserId": "xxw",
+		"rspPageCount": 3,
+		"rspReturnMsg": "【1132306152592375808】交易成功",
+		"reqpageSize": 20,
+		"rspReturnCode": "000000"
+	}
+}

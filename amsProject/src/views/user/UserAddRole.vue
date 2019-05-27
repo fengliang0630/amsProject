@@ -27,13 +27,28 @@
 		},
 		methods: {
 			getHasRoleIdsByUserId() {
-				getHasRoleIdsByUserId({userId: this.currentUserId}).then(res => {
-					this.hasRoleList = res.hasRoleIds;
+				getHasRoleIdsByUserId({id: this.currentUserId}).then(resp => {
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: '查询用户列表失败',
+							type: 'error'
+						});
+						return;
+					}
+					this.hasRoleList = resp.roleList.map(d => d.id);
+					
 				});
 			},
 			addRoleHandler() {
-				const param = {roleIds: this.hasRoleList, userId: this.currentUserId};
+				const param = {userRoleList: []}
+				this.hasRoleList.filter(d => {
+					param.userRoleList.push({
+						userId: this.currentUserId,
+						roleId: d
+					});
+				});
 				this.addRoleLoading = true;
+
 				setRoleIdsByUserId(param).then((res) => {
 					this.addRoleLoading = false;
 					this.callback({
@@ -49,8 +64,16 @@
 		},
 		mounted() {
 			this.getHasRoleIdsByUserId();
-			getRoleList().then(res => {
-				this.roleList = res.roleList;
+			getRoleList().then(resp => {
+				if (resp.header.rspReturnCode !== '000000') {
+					this.$message({
+						message: '查询用户列表失败',
+						type: 'error'
+					});
+					return;
+				}
+				
+				this.roleList = resp.roleList;
 			});
 		},
 		props: ['callback', 'currentUserId']

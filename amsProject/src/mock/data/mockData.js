@@ -51,7 +51,16 @@ for (let i = 0; i < 86; i++) {
     }));
 
     if (i%2 === 0) {
-      HasRoles.push(Mock.mock(roleId));
+      HasRoles.push(Mock.mock({
+        id: roleId,
+        roleSign: `00${i}`,
+        roleName: `角色${i}`,
+        remark: '的fuhu维护d维护的',
+        gmtCreate: '2019-05-19 23:39:12',
+        gmtModified: '2019-05-19 23:39:12',
+        userCreate: 'xxw2',
+        userModified: 'xxw2'
+      }));
     }
     
   }

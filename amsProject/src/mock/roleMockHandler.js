@@ -105,11 +105,19 @@ const RolesMockHandler = {
     });
 
     //获取角色列表（无分页）
-    mock.onPost('/role/list').reply(() => {
+    mock.onPost('/ams/getRoleAndPage').reply(() => {
       let mockRoles = _Roles;
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: mockRoles.length,
+              rspReturnMsg: "【1130134024585609216】交易成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            },
             roleList: mockRoles
           }]);
         }, 1000);
@@ -117,22 +125,37 @@ const RolesMockHandler = {
     });
 
     // 通过userId查询已经配置的角色id
-    mock.onPost('/role/hasRolesByUserId').reply((config) => {
-      let { userId } = JSON.parse(config.data);
+    mock.onPost('/ams/getRoleByUserId').reply((config) => {
+      let { id } = JSON.parse(config.data);
       let mockRoles = _HasRoles;
+      console.log(mockRoles);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            hasRoleIds: mockRoles
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: mockRoles.length,
+              rspReturnMsg: "【1130134024585609216】交易成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            },
+            roleList: mockRoles
           }]);
         }, 1000);
       });
     });
 
-    // 通过userId查询已经配置的角色id
-    mock.onPost('/role/setRolesByUserId').reply((config) => {
-      let { userId, roleIds } = JSON.parse(config.data);
-      _HasRoles = roleIds;
+    // 给用户分配角色信息
+    mock.onPost('/ams/addUserAddRole').reply((config) => {
+      let { userRoleList } = JSON.parse(config.data);
+      _HasRoles = [];
+      userRoleList.filter(d => {
+        _HasRoles.push({
+          id: d.roleId
+        });
+      });
+      console.log(_HasRoles);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {

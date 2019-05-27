@@ -39,13 +39,22 @@ export const addUser = params => {
 };
 
 // 获取角色列表（无分页）
-export const getRoleList = params => { return axios.post(`${base}/role/list`, params).then(res => res.data); };
+export const getRoleList = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/getRoleAndPage`, p).then(res => res.data); 
+};
 
 // 通过userId查询已经配置的角色id
-export const getHasRoleIdsByUserId = params => { return axios.post(`${base}/role/hasRolesByUserId`, params).then(res => res.data); };
+export const getHasRoleIdsByUserId = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/getRoleByUserId`, p).then(res => res.data); 
+};
 
 // 这只某个用户的角色id
-export const setRoleIdsByUserId = params => { return axios.post(`${base}/role/setRolesByUserId`, params).then(res => res.data); };
+export const setRoleIdsByUserId = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/addUserAddRole`, p).then(res => res.data); 
+};
 
 // 获取角色列表（分页）
 export const getRoleListPage = (params, pageSize, pageNum) => { 
@@ -117,7 +126,7 @@ export const createOrUpdateXmmx = params => { return axios.post(`${base}/ams/api
 export const getXmsxListPage = params => { return axios.post(`${base}/ams/api/xmsx/query`, params).then(res => res.data); };
 
 // 删除项目属性
-export const removeXmmx = params => { return axios.post(`${base}/ams/api/xmsx/del`, params).then(res => res.data); };
+export const removeXmsx = params => { return axios.post(`${base}/ams/api/xmsx/del`, params).then(res => res.data); };
 
 // 新增/修改 项目属性
 export const createOrUpdateXmsx = params => { return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, params).then(res => res.data); };
