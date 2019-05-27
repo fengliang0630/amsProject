@@ -117,7 +117,10 @@ export const removeJbxx = params => {
 };
 
 // 新增/修改 项目基本信息
-export const createOrUpdateJbxx = params => { return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, params).then(res => res.data); };
+export const createOrUpdateJbxx = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, p).then(res => res.data); 
+};
 
 // 获取项目明细列表
 export const getXmmxListPage = (params, pageSize, pageNum) => { 
@@ -132,7 +135,10 @@ export const removeXmmx = params => {
 };
 
 // 新增/修改 项目明细
-export const createOrUpdateXmmx = params => { return axios.post(`${base}/ams/api/xmmx/createOrUpdate`, params).then(res => res.data); };
+export const createOrUpdateXmmx = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmmx/createOrUpdate`, p).then(res => res.data); 
+};
 
 // 获取项目属性列表
 export const getXmsxListPage = (params, pageSize, pageNum) => { 

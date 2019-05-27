@@ -9,6 +9,9 @@
 				<el-form-item>
 					<el-button type="primary" v-on:click="getXmmxListPage">查询</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="showFormHandler(null, null)">新增</el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
@@ -22,14 +25,14 @@
 			<el-table-column prop="prjSN" label="许可证号" ></el-table-column>
 			<el-table-column prop="serialNumber" label="建筑序号" ></el-table-column>
 			<el-table-column prop="serialFunct" label="建筑功能" ></el-table-column>
-			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" ></el-table-column>
-			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" ></el-table-column>
-			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" ></el-table-column>
-			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" ></el-table-column>
+			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200px"></el-table-column>
+			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200px"></el-table-column>
 			<el-table-column prop="prjClasfiCode" label="分类代码" ></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -41,11 +44,16 @@
 				:page-size="pageSize" :total="total" :page-sizes="[20, 50, 100]" style="float:right;">
 			</el-pagination>
 		</el-col>
+
+
+		<!-- 项目基本信息增加/修改 -->
+		<ams-project-xmmx-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-xmmx-form>
 	</section>
 </template>
 
 <script>
 	import { getXmmxListPage , removeXmmx } from '../../../api/api';
+	import ProjectMxForm from './ProjectMxForm';
 
 	export default {
 		data() {
@@ -57,7 +65,11 @@
 				total: 0,
 				pageNum: 1,
 				pageSize: 20,
-				listLoading: false
+				listLoading: false,
+				formParams: {
+					show: false,
+					data: null
+				}
 			}
 		},
 		methods: {
@@ -114,10 +126,26 @@
 						this.getXmmxListPage();
 					});
 				});
+			},
+			// 新增 修改表单显示
+			showFormHandler(index, row) {
+				this.formParams.data = Object.assign({}, row);
+				this.formParams.show = true;
+			},
+			callback(respData) {
+				this.formParams.show = false;
+				if (respData) {
+					this.$message(respData);
+					this.getXmmxListPage();
+				}
+				
 			}
 		},
 		mounted() {
 			this.getXmmxListPage();
+		},
+		components: {
+			'ams-project-xmmx-form': ProjectMxForm,
 		}
 	}
 </script>

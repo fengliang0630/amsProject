@@ -9,6 +9,9 @@
 				<el-form-item>
 					<el-button type="primary" v-on:click="getJbxxListPage">查询</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="showFormHandler(null, null)">新增</el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
@@ -33,7 +36,7 @@
 			<el-table-column prop="remark" label="备注" min-width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -45,11 +48,17 @@
 				:page-size="pageSize" :total="total" :page-sizes="[20, 50, 100]" style="float:right;">
 			</el-pagination>
 		</el-col>
+
+
+		<!-- 项目基本信息增加/修改 -->
+		<ams-project-jbxx-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-jbxx-form>
+		
 	</section>
 </template>
 
 <script>
 	import { getJbxxListPage , removeJbxx } from '../../../api/api';
+	import ProjectJbxxForm from './ProjectJbxxForm';
 
 	export default {
 		data() {
@@ -61,7 +70,12 @@
 				total: 0,
 				pageNum: 1,
 				pageSize: 20,
-				listLoading: false
+				listLoading: false,
+				
+				formParams: {
+					show: false,
+					data: null
+				}
 			}
 		},
 		methods: {
@@ -118,10 +132,26 @@
 						this.getJbxxListPage();
 					});
 				});
+			},
+			// 新增 修改表单显示
+			showFormHandler(index, row) {
+				this.formParams.data = Object.assign({}, row);
+				this.formParams.show = true;
+			},
+			callback(respData) {
+				this.formParams.show = false;
+				if (respData) {
+					this.$message(respData);
+					this.getJbxxListPage();
+				}
+				
 			}
 		},
 		mounted() {
 			this.getJbxxListPage();
+		},
+		components: {
+			'ams-project-jbxx-form': ProjectJbxxForm,
 		}
 	}
 </script>

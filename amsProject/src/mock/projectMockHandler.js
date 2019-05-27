@@ -52,6 +52,48 @@ const ProjectMockHandler = {
       });
     });
 
+
+    // 新增或修改项目基本信息
+    mock.onPost('/ams/api/xmjbxx/createOrUpdate').reply(config => {
+      let { prjSN, prjUnit, prjAdr, prjName, prjType, contacts, contactInf, prjTemSN, specialNotifi, noticeTime, effectiveTime, remark } = JSON.parse(config.data);
+      if (typeof prjSN !== 'undefined') {
+        _XmjbxxList.some(u => {
+          if (u.prjSN === prjSN) {
+            u.prjUnit = prjUnit;
+            u.prjAdr = prjAdr;
+            u.prjName = prjName;
+            u.prjType = prjType;
+            u.contacts = contacts;
+            u.contactInf = contactInf;
+            u.prjTemSN = prjTemSN;
+            u.specialNotifi = specialNotifi;
+            u.noticeTime = noticeTime;
+            u.effectiveTime = effectiveTime;
+            u.remark = remark;
+            return true;
+          }
+        });
+      } else {
+        prjSN = Math.random();
+        _XmjbxxList.push({prjSN, prjUnit, prjAdr, prjName, prjType, contacts, contactInf, prjTemSN, specialNotifi, noticeTime, effectiveTime, remark});
+      }
+     
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】保存成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
+          }]);
+        }, 500);
+      });
+    });
+
     // 查询项目属性信息列表
     mock.onPost('/ams/api/xmsx/query').reply(config => {
       let {header, prjSN} = JSON.parse(config.data);
@@ -139,6 +181,44 @@ const ProjectMockHandler = {
               reqUserId: "xxw",
               rspPageCount: 86,
               rspReturnMsg: "【1130130350522105856】项目明细删除成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
+          }]);
+        }, 500);
+      });
+    });
+
+    // 新增或者修改项目明细
+    mock.onPost('/ams/api/xmmx/createOrUpdate').reply(config => {
+      let { id, prjSN, serialNumber, serialFunct, aboveGroundArea, underGroundArea, blendArea, aboveGroundLen, prjClasfiCode } = JSON.parse(config.data);
+      if (typeof id !== 'undefined') {
+        _XmmxList.some(u => {
+          if (u.id === id) {
+            u.prjSN = prjSN;
+            u.serialNumber = serialNumber;
+            u.serialFunct = serialFunct;
+            u.aboveGroundArea = aboveGroundArea;
+            u.underGroundArea = underGroundArea;
+            u.blendArea = blendArea;
+            u.aboveGroundLen = aboveGroundLen;
+            u.prjClasfiCode = prjClasfiCode;
+            return true;
+          }
+        });
+      } else {
+        id = Math.random();
+        _XmmxList.push({ prjSN, serialNumber, serialFunct, aboveGroundArea, underGroundArea, blendArea, aboveGroundLen, prjClasfiCode });
+      }
+     
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】保存成功",
               reqpageSize: 20,
               rspReturnCode: "000000"
             }
