@@ -3,7 +3,7 @@
 
 		<!--编辑界面-->
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh">
-			<el-form :model="formData" label-width="100px" :rules="formRules" ref="formData">
+			<el-form :model="formData" label-width="150px" :rules="formRules" ref="formData" size="medium">
 				<el-form-item v-if="typeof formData.prjSN !== 'undefined'" label="许可证号" prop="prjSN">
 					<el-input v-model="formData.prjSN" auto-complete="off" readOnly></el-input>
 				</el-form-item>
@@ -28,17 +28,17 @@
 				<el-form-item label="附带临建批号" prop="prjTemSN">
 					<el-input v-model="formData.prjTemSN" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="特别告知事项" prop="specialNotifi">
-					<el-input v-model="formData.specialNotifi" auto-complete="off"></el-input>
-				</el-form-item>
 				<el-form-item label="发件日期" prop="noticeTime">
 					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="有效时间" prop="effectiveTime">
 					<el-input v-model="formData.effectiveTime" auto-complete="off"></el-input>
 				</el-form-item>
+				<el-form-item label="特别告知事项" prop="specialNotifi">
+					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off"></el-input>
+				</el-form-item>
 				<el-form-item label="备注" prop="remark">
-					<el-input v-model="formData.remark" auto-complete="off"></el-input>
+					<el-input type="textarea" v-model="formData.remark" auto-complete="off"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-
+	import util from '../../../common/js/util';
 	import {createOrUpdateJbxx} from '../../../api/api';
 
 	export default {
@@ -58,10 +58,60 @@
 			return {
 				show: true,
 				formLoading: false,
-				title: 'aaaa',
+				title: '',
 				formRules: {
 					prjUnit: [
-						{ required: true, message: 'ddd', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 800, message: '最大长度800', trigger: 'blur' }
+					],
+					prjAdr: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 800, message: '最大长度800', trigger: 'blur' }
+					],
+					prjName: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 800, message: '最大长度800', trigger: 'blur' }
+					],
+					prjType: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					contacts: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					contactInf: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjTemSN: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					specialNotifi: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 1500, message: '最大长度1500', trigger: 'blur' }
+					],
+					noticeTime: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					effectiveTime: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					remark: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 900, message: '最大长度900', trigger: 'blur' }
 					]
 				}
 			}
@@ -99,7 +149,6 @@
             }
 		},
 		mounted() {
-			console.log(typeof(this.formData.prjSN));
 			this.title = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目基本信息' : '新增项目基本信息';
 		},
         props: ['formData', 'callback']

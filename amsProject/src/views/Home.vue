@@ -91,7 +91,7 @@
 		},
 		methods: {
 			onSubmit() {
-				console.log('submit!');
+				
 			},
 			//退出登录
 			logout: function () {

@@ -67,21 +67,6 @@ export default {
                 return callback();
             }
         },
-
-        checkSpecialCharNotEmpty(rule, value, callback) {
-            if (!value) {
-                rule.message = '不能为空';
-                return callback(new Error());
-            }
-
-            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\-+\'';
-            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\-+\']');
-            if (reg.test(value)) {
-                return callback(new Error());
-            } else {
-                return callback();
-            }
-        },
         checkEmail(rule, value, callback) {
 
             if (!value) {

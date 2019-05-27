@@ -128,7 +128,6 @@ const RolesMockHandler = {
     mock.onPost('/ams/getRoleByUserId').reply((config) => {
       let { id } = JSON.parse(config.data);
       let mockRoles = _HasRoles;
-      console.log(mockRoles);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
@@ -155,7 +154,6 @@ const RolesMockHandler = {
           id: d.roleId
         });
       });
-      console.log(_HasRoles);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {

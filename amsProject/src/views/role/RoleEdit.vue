@@ -34,10 +34,12 @@
 				editLoading: false,
 				editFormRules: {
 					roleSign: [
-						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' }
 					],
 					roleName: [
-						{ required: true,  validator: util.validatorUtils.checkSpecialCharNotEmpty, trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' }
 					],
 					remark: [
 						{ required: true,  validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' }

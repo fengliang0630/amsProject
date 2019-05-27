@@ -17,16 +17,16 @@
 					<el-input v-model="formData.serialFunct" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上建筑面积（平方米）" prop="aboveGroundArea">
-					<el-input v-model="formData.aboveGroundArea" auto-complete="off"></el-input>
+					<el-input-number v-model="formData.aboveGroundArea" :precision="2" :step="0.1" :max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下建筑面积（平方米）" prop="underGroundArea">
-					<el-input v-model="formData.underGroundArea" auto-complete="off"></el-input>
+					<el-input-number v-model="formData.underGroundArea" :precision="2" :step="0.1" :max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label="混合建筑面积（平方米）" prop="blendArea">
-					<el-input v-model="formData.blendArea" auto-complete="off"></el-input>
+					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上建筑长度（米）" prop="aboveGroundLen">
-					<el-input v-model="formData.aboveGroundLen" auto-complete="off"></el-input>
+					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label="分类代码" prop="prjClasfiCode">
 					<el-input v-model="formData.prjClasfiCode" auto-complete="off"></el-input>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+	import util from '../../../common/js/util';
 	import {createOrUpdateXmmx} from '../../../api/api';
 
 	export default {
@@ -50,8 +51,33 @@
 				formLoading: false,
 				title: 'aaaa',
 				formRules: {
-					prjUnit: [
-						{ required: true, message: 'ddd', trigger: 'blur' }
+					serialNumber: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					serialFunct: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					serialFunct: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					aboveGroundArea: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					underGroundArea: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					blendArea: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					aboveGroundLen: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
+					prjClasfiCode: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					]
 				}
 			}
@@ -89,7 +115,6 @@
             }
 		},
 		mounted() {
-			console.log(typeof(this.formData.prjSN));
 			this.title = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目明细信息' : '新增项目明细信息';
 		},
         props: ['formData', 'callback']
