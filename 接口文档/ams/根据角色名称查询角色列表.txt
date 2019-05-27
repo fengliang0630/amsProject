@@ -16,4 +16,41 @@ localhost:8899/ams/getRoleByRolename
 roleName  模糊匹配
 
 
-{"header":{"reqpageIndex":1,"reqUserId":"xxw","rspPageCount":4,"rspReturnMsg":"【1130137283119415296】交易成功","reqpageSize":20,"rspReturnCode":"000000"},"roleList":[{"gmtCreate":"2019-05-19 23:39:12","gmtModified":"2019-05-19 23:39:12","id":60,"remark":"的fu'ze的负责xiang'mu项目wei'hu维护d维护的","roleName":"职员2","roleSign":"0003","userCreate":"xxw2","userModified":"xxw2"},{"gmtCreate":"2019-05-19 23:39:19","gmtModified":"2019-05-19 23:39:19","id":61,"remark":"的fu'ze的负责xiang'mu项目wei'hu维护d维护的","roleName":"职员3","roleSign":"0004","userCreate":"xxw2","userModified":"xxw2"},{"gmtCreate":"2019-05-19 23:39:25","gmtModified":"2019-05-19 23:39:38","id":62,"remark":"的fu'ze的负责xiang'mu项目wei'hu维护d维护的","roleName":"职员4","roleSign":"0004","userCreate":"xxw2","userModified":"xxw2"}]}
+{
+	"header": {
+		"reqpageIndex": 1,
+		"reqUserId": "xxw",
+		"rspPageCount": 4,
+		"rspReturnMsg": "【1130137283119415296】交易成功",
+		"reqpageSize": 20,
+		"rspReturnCode": "000000"
+	},
+	"roleList": [{
+		"gmtCreate": "2019-05-19 23:39:12",
+		"gmtModified": "2019-05-19 23:39:12",
+		"id": 60,
+		"remark": "的fu'ze的负责xiang'mu项目wei'hu维护d维护的",
+		"roleName": "职员2",
+		"roleSign": "0003",
+		"userCreate": "xxw2",
+		"userModified": "xxw2"
+	}, {
+		"gmtCreate": "2019-05-19 23:39:19",
+		"gmtModified": "2019-05-19 23:39:19",
+		"id": 61,
+		"remark": "的fu'ze的负责xiang'mu项目wei'hu维护d维护的",
+		"roleName": "职员3",
+		"roleSign": "0004",
+		"userCreate": "xxw2",
+		"userModified": "xxw2"
+	}, {
+		"gmtCreate": "2019-05-19 23:39:25",
+		"gmtModified": "2019-05-19 23:39:38",
+		"id": 62,
+		"remark": "的fu'ze的负责xiang'mu项目wei'hu维护d维护的",
+		"roleName": "职员4",
+		"roleSign": "0004",
+		"userCreate": "xxw2",
+		"userModified": "xxw2"
+	}]
+}

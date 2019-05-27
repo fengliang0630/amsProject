@@ -5,6 +5,7 @@ import UserMockHandler from './userMockHandler.js';
 import RolesMockHandler from './roleMockHandler.js';
 import MenusMockHandler from './menuMockHandler.js';
 import MapMockHandler from './MapMockHandler.js';
+import ProjectMockHandler from './projectMockHandler.js';
 
 export default {
   /**
@@ -79,5 +80,8 @@ export default {
 
     // 地图mock方法处理
     MapMockHandler.init(mock);
+
+    // 项目信息mock方法处理
+    ProjectMockHandler.init(mock);
   }
 };

@@ -16,8 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="menuList" highlight-current-row v-loading="listLoading" @selection-change="selsChange"  stripe border>
-			<el-table-column type="selection" width="55"></el-table-column>
+		<el-table :data="menuList" highlight-current-row v-loading="listLoading" stripe border>
 			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
@@ -37,7 +36,6 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
 			<el-pagination layout="sizes, prev, pager, next" :page-sizes="[20, 50, 100]" @size-change="handleSizeChange"
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
@@ -57,7 +55,7 @@
 </template>
 
 <script>
-	import { getMenuListPage, removeMenu, batchRemoveMenu } from '../../api/api';
+	import { getMenuListPage, removeMenu } from '../../api/api';
 	import MenuAdd from './MenuAdd';
 	import MenuEdit from './MenuEdit';
 	import MenuTree from './MenuTree';
@@ -72,7 +70,6 @@
 				total: 0,
 				pageNum: 1,
 				listLoading: false,
-				sels: [],//列表选中列
 				pageSize: 20,
 
 				editShow: false,
@@ -136,8 +133,17 @@
 				}).then(() => {
 					this.listLoading = true;
 					let para = { id: row.id };
-					removeMenu(para).then((res) => {
+					removeMenu(para).then((resp) => {
 						this.listLoading = false;
+
+						if (resp.header.rspReturnCode !== '000000') {
+							this.$message({
+								message: '删除菜单失败',
+								type: 'error'
+							});
+							return;
+						}
+
 						this.$message({
 							message: '删除成功',
 							type: 'success'
@@ -156,29 +162,6 @@
 			//显示新增界面
 			handleAdd: function () {
 				this.addShow = true;
-			},
-			selsChange: function (sels) {
-				this.sels = sels;
-			},
-			//批量删除
-			batchRemove: function () {
-				var ids = this.sels.map(item => item.id).toString();
-				this.$confirm('确认删除选中记录吗？', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					let para = { ids: ids };
-					batchRemoveMenu(para).then((res) => {
-						this.listLoading = false;
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getMenuListPage();
-					});
-				}).catch(() => {
-
-				});
 			}
 		},
 		mounted() {

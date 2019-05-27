@@ -93,7 +93,10 @@ MenuTree = [
     menuName: '业务功能',
     iconCls: 'el-icon-message',
     children: [
-      {id: '2_1', menuName: '工程地理图像查询', menuLink: '/amsMap'}
+      {id: '2_1', menuName: '项目基本信息管理', menuLink: '/jbxx'},
+      {id: '2_2', menuName: '项目属性信息管理', menuLink: '/xmsx'},
+      {id: '2_3', menuName: '项目明细信息管理', menuLink: '/xmmx'},
+      {id: '2_4', menuName: '工程地理图像查询', menuLink: '/amsMap'}
     ]
   }
 ];
@@ -150,70 +153,66 @@ Points = [
   [{x: 116.51282467015228, y: 40.03430347354963}, {x: 116.51284169526187, y: 40.034099252384166}, {x: 116.51287121436215, y: 40.034100636854724}, {x: 116.51287129295227, y: 40.03409981781713}, {x: 116.51287382108391, y: 40.03407328972411}, {x: 116.51287856308939, y: 40.034023498217444}, {x: 116.51257733451023, y: 40.034010068209874}, {x: 116.51257733123904, y: 40.034010101709406}, {x: 116.51257241995648, y: 40.03406039944901}, {x: 116.51254975730731, y: 40.034292490605274}, {x: 116.51255116157199, y: 40.0342925493775}, {x: 116.51257407327591, y: 40.03429346259519}, {x: 116.5126212017471, y: 40.034295344624134}, {x: 116.51264412280486, y: 40.03429625779637}, {x: 116.51276734987982, y: 40.03430118081632}, {x: 116.51279028031819, y: 40.034302097540454}, {x: 116.51282467015228, y: 40.03430347354963}],
 ];
 
-let XmjbxxList = [
-  {
-    contactInf: 'b',
-    contacts: 'c',
-    effectiveTime: 'd',
-    id: 105,
-    noticeTime: '2019-12-01',
-    prjAdr: '建设位置',
-    prjName: 'a',
-    prjSN: '许可证号A',
-    prjTemSN: 'd',
-    prjType: '新建',
-    prjUnit: '建设单位',
-    remark: 'd',
-    specialNotifi: 'd'
-  }
-],
+let XmjbxxList = [], XmmxList = [], XmsxList = [];
 
 
-XmmxList = [
-  {
+for (let j = 0; j < 50; j++) {
+  XmjbxxList.push({
+    contactInf: `b${j}`,
+    contacts: `c${j}`,
+    effectiveTime: `d${j}`,
+    id: j,
+    noticeTime: `2019-12-01`,
+    prjAdr: `建设位置${j}`,
+    prjName: `a${j}`,
+    prjSN: `许可证号A${j}`,
+    prjTemSN: `d${j}`,
+    prjType: `新建${j}`,
+    prjUnit: `建设单位${j}`,
+    remark: `d${j}`,
+    specialNotifi: `d${j}`
+  });
+
+  XmmxList.push({
     aboveGroundArea: 4.2,
     aboveGroundLen: 7.2,
     blendArea: 6.2,
-    id: 901,
-    prjClasfiCode: '',
-    prjSN: '许可证号333',
-    serialFunct: '建筑功能',
+    id: j,
+    prjClasfiCode: ``,
+    prjSN: `许可证号${j}`,
+    serialFunct: `建筑功能${j}`,
     serialNumber: 3,
     underGroundArea: 5.2
-  }
-],
+  });
 
-XmsxList = [
-  {
+  XmsxList.push({
     aboveGroundHet: 8.1,
     aboveGroundLev: 6,
     buildings: 1,
-    cancelDate: '2019-05-18',
-    cancelSN: '撤（注）销证号',
-    checkDate: '2019-05-18',
-    checkDocDate: '2019-05-18',
-    checkDocSN: '验线文号',
-    checkSN: '验收文号',
-    correctionDate: '2019-05-18',
-    correctionSN: '补正证号',
-    delayCountDay: '延长期',
-    delaySN: '延期文号',
-    exproprInfo: '代征用地情况',
+    cancelDate: `2019-05-18`,
+    cancelSN: `撤（注）销证号${j}`,
+    checkDate: `2019-05-18`,
+    checkDocDate: `2019-05-18`,
+    checkDocSN: `验线文号${j}`,
+    checkSN: `验收文号${j}`,
+    correctionDate: `2019-05-18`,
+    correctionSN: `补正证号${j}`,
+    delayCountDay: `延长期${j}`,
+    delaySN: `延期文号${j}`,
+    exproprInfo: `代征用地情况${j}`,
     housingStockNum: 2,
-    id: 723,
-    imgJudgeRes: '影像判读结果',
-    peacetimeUses: '5',
-    prjAttr: '规划项目性质/人防工程情况',
-    prjNature: '项目性质',
-    prjSN: '许可证号222',
-    remark: '备注',
+    id: j,
+    imgJudgeRes: `影像判读结果${j}`,
+    peacetimeUses: `5`,
+    prjAttr: `规划项目性质/人防工程情况${j}`,
+    prjNature: `项目性质${j}`,
+    prjSN: `许可证号${j}`,
+    remark: `备注${j}`,
     serialNumber: 3,
-    strucType: '结构类型',
+    strucType: `结构类型${j}`,
     underGroundHet: 9.2,
     underGroundLev: 7
+  });
 }
-]
-
-;
 
 export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, XmjbxxList, XmmxList, XmsxList };

@@ -27,34 +27,25 @@ const MenusMockHandler = {
     });
 
     //删除菜单
-    mock.onPost('/menu/remove').reply(config => {
+    mock.onPost('/ams/deleteMenu').reply(config => {
       let { id } = JSON.parse(config.data);
       _Menus = _Menus.filter(m => m.id !== id);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '删除成功'
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】菜单删除成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
           }]);
         }, 500);
       });
     });
     
-    //批量删除菜单
-    mock.onPost('/menu/batchremove').reply(config => {
-      let { ids } = JSON.parse(config.data);
-      ids = ids.split(',');
-      _Menus = _Menus.filter(m => !ids.includes(m.id));
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve([200, {
-            code: 200,
-            msg: '删除成功'
-          }]);
-        }, 500);
-      });
-    });
-
     //编辑菜单
     mock.onPost('/menu/edit').reply(config => {
       let { id, menuName, parentMenuName, parentMenuId, menuLink } = JSON.parse(config.data);

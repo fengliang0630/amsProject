@@ -93,10 +93,10 @@ export const getMenuIdsByRoleId = params => { return axios.post(`${base}/menu/ge
 export const setMenuIdsByRoleId = params => { return axios.post(`${base}/menu/setMenuIdsByRoleId`, params).then(res => res.data); };
 
 // 删除菜单
-export const removeMenu = params => { return axios.post(`${base}/menu/remove`, params).then(res => res.data); };
-
-// 批量删除菜单
-export const batchRemoveMenu = params => { return axios.post(`${base}/menu/batchremove`, params).then(res => res.data); };
+export const removeMenu = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/deleteMenu`, p).then(res => res.data);
+};
 
 // 修改菜单
 export const editMenu = params => { return axios.post(`${base}/menu/edit`, params).then(res => res.data); };
@@ -105,28 +105,46 @@ export const editMenu = params => { return axios.post(`${base}/menu/edit`, param
 export const addMenu = params => { return axios.post(`${base}/menu/add`, params).then(res => res.data); };
 
 // 获取项目基本信息列表
-export const getJbxxListPage = params => { return axios.post(`${base}/ams/api/xmjbxx/query`, params).then(res => res.data); };
+export const getJbxxListPage = (params, pageSize, pageNum) => { 
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/api/xmjbxx/query`, p).then(res => res.data); 
+};
 
 // 删除项目基本信息
-export const removeJbxx = params => { return axios.post(`${base}/ams/api/xmjbxx/del`, params).then(res => res.data); };
+export const removeJbxx = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmjbxx/del`, p).then(res => res.data); 
+};
 
 // 新增/修改 项目基本信息
 export const createOrUpdateJbxx = params => { return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, params).then(res => res.data); };
 
 // 获取项目明细列表
-export const getXmmxListPage = params => { return axios.post(`${base}/ams/api/xmmx/query`, params).then(res => res.data); };
+export const getXmmxListPage = (params, pageSize, pageNum) => { 
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/api/xmmx/query`, p).then(res => res.data); 
+};
 
 // 删除项目明细
-export const removeXmmx = params => { return axios.post(`${base}/ams/api/xmmx/del`, params).then(res => res.data); };
+export const removeXmmx = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmmx/del`, p).then(res => res.data); 
+};
 
 // 新增/修改 项目明细
 export const createOrUpdateXmmx = params => { return axios.post(`${base}/ams/api/xmmx/createOrUpdate`, params).then(res => res.data); };
 
 // 获取项目属性列表
-export const getXmsxListPage = params => { return axios.post(`${base}/ams/api/xmsx/query`, params).then(res => res.data); };
+export const getXmsxListPage = (params, pageSize, pageNum) => { 
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/api/xmsx/query`, p).then(res => res.data); 
+};
 
 // 删除项目属性
-export const removeXmsx = params => { return axios.post(`${base}/ams/api/xmsx/del`, params).then(res => res.data); };
+export const removeXmsx = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmsx/del`, p).then(res => res.data); 
+};
 
 // 新增/修改 项目属性
 export const createOrUpdateXmsx = params => { return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, params).then(res => res.data); };
