@@ -165,10 +165,10 @@ export const getLogListPage = (params, pageSize, pageNum) => {
 };
 
 // 获取地图区域点
-export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };
-
-
-
+export const getPointsByprjSN = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/dxf/query`, p).then(res => res.data); 
+};
 
 const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));

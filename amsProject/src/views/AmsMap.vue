@@ -8,7 +8,7 @@
 
 <script>
 
-    import { getPoints } from '../api/api';
+    import { getPointsByprjSN } from '../api/api';
 
     export default {
 		data() {
@@ -19,25 +19,39 @@
 		methods: {
             init() {
                 this.map = new BMap.Map("map-containt-div");
-                this.map.centerAndZoom(new BMap.Point(116.53334519970919,40.035193753587585), 15);
                 this.map.enableScrollWheelZoom();
                 // this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
             },
             drowBlock() {
-                getPoints().then(resp => {
-                    var points = resp.points;
+                getPointsByprjSN({prjSN: '100'}).then(resp => {
 
-                    for(var i = 0;i < points.length; i++){
-                        var ps = points[i];
-                        var psT = [];
 
-                        for(var j = 0; j < ps.length; j++){
-                            var mp = new BMap.Point(ps[j].x, ps[j].y);
-                            mp.lat = mp.lat + 0.0070;
-                            mp.lng = mp.lng + 0.0064;
+                    if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: '查询经纬度失败',
+							type: 'error'
+						});
+						return;
+					}
+
+                    let points = resp.points;
+
+                    for(let i = 0;i < points.length; i++){
+                        let longlatVArray = points[i].longlatV.substring(0, points[i].longlatV.length - 1).split('|');
+                        let psT = [];
+                        for(var j = 0; j < longlatVArray.length; j++){
+                            let p = longlatVArray[j].split(',');
+                            
+                            var mp = new BMap.Point(p[0], p[1]);
+                            // 如果没有设置中心点 设置一个中心点
+                            if (this.map.centerPoint.lat === 0 && this.map.centerPoint.lng === 0) {
+                                this.map.centerAndZoom(mp, 15);
+                            }
+                            mp.lat = mp.lat;
+                            mp.lng = mp.lng;
                             psT.push(mp);
                         }
-                        
+
                         this.map.addOverlay(new BMap.Polyline(psT, {
                             strokeColor : "red",  
                             strokeWeight : 3,  
