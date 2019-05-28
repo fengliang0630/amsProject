@@ -158,8 +158,16 @@ export const createOrUpdateProjectAttribute = params => {
     return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, p).then(res => res.data); 
 };
 
+// 查询操作日志列表
+export const getLogListPage = (params, pageSize, pageNum) => {
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/api/userOperation/queryUserOperByDate`, p).then(res => res.data); 
+};
+
 // 获取地图区域点
 export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };
+
+
 
 
 const pckParam = (params, headerParam) => {

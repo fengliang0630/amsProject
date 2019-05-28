@@ -29,21 +29,21 @@ export default {
           if (hasUser) {
             respData.header = {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】用户登录成功",
+              rspReturnMsg: '【1130130350522105856】用户登录成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             };
             resolve([200, respData]);
           } else {
             respData.header = {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】用户登录失败",
+              rspReturnMsg: '【1130130350522105856】用户登录失败',
               reqpageSize: 20,
-              rspReturnCode: "000001"
+              rspReturnCode: '000001'
             };
             resolve([200, respData]);
           }
@@ -58,12 +58,36 @@ export default {
         setTimeout(() => {
           respData.header = {
             reqpageIndex: 1,
-            reqUserId: "xxw",
+            reqUserId: 'xxw',
             rspPageCount: 86,
-            rspReturnMsg: "【1131538952285716480】用户退出成功",
+            rspReturnMsg: '【1131538952285716480】用户退出成功',
             reqpageSize: 20,
-            rspReturnCode: "000000"
+            rspReturnCode: '000000'
           };
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
+    // 查询操作日志
+    mock.onPost('/ams/api/userOperation/queryUserOperByDate').reply(config => {
+      let {header, startDate, endDate, operAction, operDesc} = JSON.parse(config.data);
+      let {reqpageSize, reqpageIndex} = header;
+      return new Promise((resolve, reject) => {
+        let respData = {
+          header : {
+            reqpageIndex: 1,
+            reqUserId: 'xxw',
+            rspPageCount: 1,
+            rspReturnMsg: '【1131538952285716480】查询操作日志成功',
+            reqpageSize: 20,
+            rspReturnCode: '000000'
+          },
+          userOperationList: [
+            { id: 3, operAction: '新增', operDesc: '项目属性信息', prjSN: '许可证号222', userID: '99999', userName: '1' }
+          ]
+        };
+        setTimeout(() => {
           resolve([200, respData]);
         }, 1000);
       });

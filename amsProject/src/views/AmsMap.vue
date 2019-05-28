@@ -21,7 +21,7 @@
                 this.map = new BMap.Map("map-containt-div");
                 this.map.centerAndZoom(new BMap.Point(116.53334519970919,40.035193753587585), 15);
                 this.map.enableScrollWheelZoom();
-                this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
+                // this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
             },
             drowBlock() {
                 getPoints().then(resp => {
