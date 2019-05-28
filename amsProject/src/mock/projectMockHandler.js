@@ -141,6 +141,70 @@ const ProjectMockHandler = {
       });
     });
 
+    // 新增或者修改项目属性
+    mock.onPost('/ams/api/xmsx/createOrUpdate').reply(config => {
+      let { id, prjSN, serialNumber, prjNature, prjAttr, peacetimeUses, 
+        aboveGroundLev, underGroundLev, aboveGroundHet, underGroundHet, 
+        buildings, housingStockNum, strucType, checkDocSN, checkDocDate, 
+        checkSN, checkDate, delaySN, delayCountDay, cancelSN, cancelDate, 
+        correctionSN, correctionDate, imgJudgeRes, exproprInfo, remark } = JSON.parse(config.data);
+      
+      if (typeof id !== 'undefined') {
+        _XmsxList.some(u => {
+          if (u.id === id) {
+            u.prjSN = prjSN;
+            u.serialNumber = serialNumber;
+            u.prjNature = prjNature;
+            u.prjAttr = prjAttr;
+            u.peacetimeUses = peacetimeUses;
+            u.aboveGroundLev = aboveGroundLev;
+            u.underGroundLev = underGroundLev;
+            u.aboveGroundHet = aboveGroundHet;
+            u.underGroundHet = underGroundHet;
+            u.buildings = buildings;
+            u.housingStockNum = housingStockNum;
+            u.strucType = strucType;
+            u.checkDocSN = checkDocSN;
+            u.checkDocDate = checkDocDate;
+            u.checkSN = checkSN;
+            u.checkDate = checkDate;
+            u.delaySN = delaySN;
+            u.delayCountDay = delayCountDay;
+            u.cancelSN = cancelSN;
+            u.cancelDate = cancelDate;
+            u.correctionSN = correctionSN;
+            u.correctionDate = correctionDate;
+            u.imgJudgeRes = imgJudgeRes;
+            u.exproprInfo = exproprInfo;
+            u.remark = remark;
+            return true;
+          }
+        });
+      } else {
+        id = Math.random();
+        _XmsxList.push({ id, prjSN, serialNumber, prjNature, prjAttr, peacetimeUses, 
+          aboveGroundLev, underGroundLev, aboveGroundHet, underGroundHet, 
+          buildings, housingStockNum, strucType, checkDocSN, checkDocDate, 
+          checkSN, checkDate, delaySN, delayCountDay, cancelSN, cancelDate, 
+          correctionSN, correctionDate, imgJudgeRes, exproprInfo, remark });
+      }
+     
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 86,
+              rspReturnMsg: "【1130130350522105856】保存成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
+          }]);
+        }, 500);
+      });
+    });
+
 
     // 查询项目明细信息列表
     mock.onPost('/ams/api/xmmx/query').reply(config => {

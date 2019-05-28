@@ -51,6 +51,9 @@
 				formLoading: false,
 				title: 'aaaa',
 				formRules: {
+					prjSN: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
+					],
 					serialNumber: [
 						{ required: true,  message: '不能为空', trigger: 'blur' }
 					],
@@ -115,7 +118,7 @@
             }
 		},
 		mounted() {
-			this.title = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目明细信息' : '新增项目明细信息';
+			this.title = (typeof(this.formData.id) !== 'undefined') ? '修改项目明细信息' : '新增项目明细信息';
 		},
         props: ['formData', 'callback']
 	}

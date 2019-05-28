@@ -9,6 +9,9 @@
 				<el-form-item>
 					<el-button type="primary" v-on:click="getProjectAttributeListPage">查询</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="showFormHandler(null, null)">新增</el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
@@ -46,11 +49,14 @@
 			<el-table-column prop="remark" label="备注" width="120"></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
+
+		<!-- 项目属性信息增加/修改 -->
+		<ams-project-attribute-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-attribute-form>
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
@@ -64,6 +70,7 @@
 <script>
 	import { getProjectAttributeListPage , removeProjectAttribute } from '../../../api/api';
 	import util from '../../../common/js/util';
+	import ProjectAttributeForm from './ProjectAttributeForm';
 
 	export default {
 		data() {
@@ -76,7 +83,11 @@
 				pageNum: 1,
 				pageSize: util.paginationSize[0],
 				paginationSize: util.paginationSize,
-				listLoading: false
+				listLoading: false,
+				formParams: {
+					show: false,
+					data: null
+				}
 			}
 		},
 		methods: {
@@ -133,10 +144,26 @@
 						this.getProjectAttributeListPage();
 					});
 				});
+			},
+			// 新增 修改表单显示
+			showFormHandler(index, row) {
+				this.formParams.data = Object.assign({}, row);
+				this.formParams.show = true;
+			},
+			callback(respData) {
+				this.formParams.show = false;
+				if (respData) {
+					this.$message(respData);
+					this.getProjectAttributeListPage();
+				}
+				
 			}
 		},
 		mounted() {
 			this.getProjectAttributeListPage();
+		},
+		components: {
+			'ams-project-attribute-form': ProjectAttributeForm,
 		}
 	}
 </script>

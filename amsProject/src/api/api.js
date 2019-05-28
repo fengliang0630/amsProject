@@ -153,7 +153,10 @@ export const removeProjectAttribute = params => {
 };
 
 // 新增/修改 项目属性
-export const createOrUpdateXmsx = params => { return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, params).then(res => res.data); };
+export const createOrUpdateProjectAttribute = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, p).then(res => res.data); 
+};
 
 // 获取地图区域点
 export const getPoints = params => { return axios.post(`${base}/map/getPoints`, params).then(res => res.data); };

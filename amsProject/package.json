@@ -15,7 +15,9 @@
     "element-ui": "2.5.4",
     "font-awesome": "^4.7.0",
     "vue": "^2.2.2",
-    "vue-router": "^2.3.0"
+    "vue-router": "^2.3.0",
+    "xlsx": "0.14.3",
+    "file-saver": "2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

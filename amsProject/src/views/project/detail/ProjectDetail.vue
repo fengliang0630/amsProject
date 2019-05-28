@@ -46,7 +46,7 @@
 		</el-col>
 
 
-		<!-- 项目基本信息增加/修改 -->
+		<!-- 项目详细信息增加/修改 -->
 		<ams-project-detail-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-detail-form>
 
 	</section>
