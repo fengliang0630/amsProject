@@ -122,6 +122,13 @@ export const createOrUpdateProject = params => {
     return axios.post(`${base}/ams/api/xmjbxx/createOrUpdate`, p).then(res => res.data); 
 };
 
+// 模糊过滤字段接口
+export const queryDataByLike = (params, pageSize, pageNum) => { 
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
+    return axios.post(`${base}/ams/api/mh/queryJbxxLike`, p).then(res => res.data); 
+};
+
+
 // 获取项目明细列表
 export const getProjectDtailListPage = (params, pageSize, pageNum) => { 
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});

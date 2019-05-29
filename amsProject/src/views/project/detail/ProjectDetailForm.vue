@@ -11,22 +11,22 @@
 					<el-input v-model="formData.prjSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
-					<el-input-number v-model="formData.serialNumber" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="建筑功能" prop="serialFunct">
 					<el-input v-model="formData.serialFunct" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上建筑面积（平方米）" prop="aboveGroundArea">
-					<el-input-number v-model="formData.aboveGroundArea" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下建筑面积（平方米）" prop="underGroundArea">
-					<el-input-number v-model="formData.underGroundArea" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.underGroundArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="混合建筑面积（平方米）" prop="blendArea">
-					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上建筑长度（米）" prop="aboveGroundLen">
-					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="分类代码" prop="prjClasfiCode">
 					<el-input v-model="formData.prjClasfiCode" auto-complete="off"></el-input>

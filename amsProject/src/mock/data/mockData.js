@@ -430,7 +430,7 @@ Points = [
   }
 ];
 
-let XmjbxxList = [], XmmxList = [], XmsxList = [];
+let XmjbxxList = [], XmmxList = [], XmsxList = [], PrjSNList = [];
 
 
 for (let j = 0; j < 50; j++) {
@@ -490,6 +490,9 @@ for (let j = 0; j < 50; j++) {
     underGroundHet: 9.2,
     underGroundLev: 7
   });
+
+  PrjSNList.push(`2013规（朝）建字000${j}号`);
 }
 
-export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, XmjbxxList, XmmxList, XmsxList };
+
+export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, XmjbxxList, XmmxList, XmsxList, PrjSNList };

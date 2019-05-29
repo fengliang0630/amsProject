@@ -8,10 +8,11 @@
 					<el-input v-model="formData.id" auto-complete="off" readOnly ></el-input>
 				</el-form-item>
 				<el-form-item label="许可证号" prop="prjSN">
-					<el-input v-model="formData.prjSN" auto-complete="off"></el-input>
+					<el-autocomplete class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
+						placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
-					<el-input-number v-model="formData.serialNumber" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="项目性质" prop="prjNature">
 					<el-input v-model="formData.prjNature" auto-complete="off"></el-input>
@@ -23,22 +24,22 @@
 					<el-input type="textarea" v-model="formData.peacetimeUses" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上层数" prop="aboveGroundLev">
-					<el-input-number v-model="formData.aboveGroundLev" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLev" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下层数" prop="underGroundLev">
-					<el-input-number v-model="formData.underGroundLev" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.underGroundLev" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上高度（米）" prop="aboveGroundHet">
-					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下高度（米）" prop="underGroundHet">
-					<el-input-number v-model="formData.underGroundHet" :precision="2" :step="0.1" :max="10"></el-input-number>
+					<el-input-number v-model="formData.underGroundHet" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="栋数" prop="buildings">
-					<el-input-number v-model="formData.buildings" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.buildings" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="住房套数" prop="housingStockNum">
-					<el-input-number v-model="formData.housingStockNum" :min="1" width="100%"></el-input-number>
+					<el-input-number v-model="formData.housingStockNum" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="结构类型" prop="strucType">
 					<el-input v-model="formData.strucType" auto-complete="off"></el-input>
@@ -47,13 +48,13 @@
 					<el-input v-model="formData.checkDocSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="验线日期" prop="checkDocDate">
-					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期"></el-date-picker>
+					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="验收文号" prop="checkSN">
 					<el-input v-model="formData.checkSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="验收日期" prop="checkDate">
-					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期"></el-date-picker>
+					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="延期文号" prop="delaySN">
 					<el-input v-model="formData.delaySN" auto-complete="off"></el-input>
@@ -71,7 +72,7 @@
 					<el-input v-model="formData.correctionSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="补正日期" prop="correctionDate">
-					<el-date-picker v-model="formData.correctionDate" align="right" type="date" placeholder="选择日期"></el-date-picker>
+					<el-date-picker v-model="formData.correctionDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="影像判读结果" prop="imgJudgeRes">
 					<el-input v-model="formData.imgJudgeRes" auto-complete="off"></el-input>
@@ -93,7 +94,7 @@
 
 <script>
 	import util from '../../../common/js/util';
-	import { createOrUpdateProjectAttribute } from '../../../api/api';
+	import { createOrUpdateProjectAttribute, queryDataByLike } from '../../../api/api';
 
 	export default {
 		data() {
@@ -207,6 +208,18 @@
 			}
 		},
 		methods: {
+			querySearch(queryString, callback) {
+				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: queryString}).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({message: '查询许可证号失败', type: 'error'});
+						return;
+					}
+
+					callback(resp.PrjSNList.map(data => { return {value: data, address: data}; }));
+
+				});
+			},
 			submitHandler: function () {
 				this.$refs.formData.validate((valid) => {
 					if (valid) {
