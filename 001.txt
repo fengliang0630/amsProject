@@ -1,0 +1,78 @@
+localhost:8899/ams/api/view/bb001
+
+所有请求参数用数组的方式传递
+
+页面为复选框
+
+
+请求：
+{
+    "header": {
+        "reqUserId": 99999,
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "prjYear": ["2013","2012"],
+    "prjType": ["新建"],
+    "prjClasfiName5":["商品房","人防工程（DL）"]
+}
+
+
+返回：
+{
+    "viewList": [
+        {
+            "prjType": "新建",
+            "prjYear": "2013",
+            "prjStatus": "",
+            "count": 29,
+            "housingStockNum": 0,
+            "sumArea": 24350.93,
+            "sumLen": 0,
+            "prjUnit": "",
+            "prjAdr": "",
+            "aboveGroundSumArea": 761.43,
+            "underGroundSumArea": 23589.5,
+            "buildings": 28,
+            "prjClasfiName5": "人防工程（DL）",
+            "buldStatus": "",
+            "prjClasfiName1": "",
+            "prjSNType": "",
+            "prjClasfiName2": "",
+            "prjClasfiName3": "",
+            "prjClasfiName4": ""
+        },
+        {
+            "prjType": "新建",
+            "prjYear": "2013",
+            "prjStatus": "",
+            "count": 37,
+            "housingStockNum": 409,
+            "sumArea": 111323.77,
+            "sumLen": 0,
+            "prjUnit": "",
+            "prjAdr": "",
+            "aboveGroundSumArea": 85611.5,
+            "underGroundSumArea": 25712.27,
+            "buildings": 37,
+            "prjClasfiName5": "商品房",
+            "buldStatus": "",
+            "prjClasfiName1": "",
+            "prjSNType": "",
+            "prjClasfiName2": "",
+            "prjClasfiName3": "",
+            "prjClasfiName4": ""
+        }
+    ],
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 2,
+        "rspReturnMsg": "【1133553327024504832】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    }
+}
