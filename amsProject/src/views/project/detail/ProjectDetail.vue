@@ -30,6 +30,11 @@
 			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200px"></el-table-column>
 			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200px"></el-table-column>
 			<el-table-column prop="prjClasfiCode" label="分类代码" ></el-table-column>
+			<el-table-column prop="prjClasfiName1" label="分类名称" ></el-table-column>
+			<el-table-column prop="prjClasfiName2" label="分类名称" ></el-table-column>
+			<el-table-column prop="prjClasfiName3" label="分类名称" ></el-table-column>
+			<el-table-column prop="prjClasfiName4" label="分类名称" ></el-table-column>
+			<el-table-column prop="prjClasfiName5" label="分类名称" ></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>

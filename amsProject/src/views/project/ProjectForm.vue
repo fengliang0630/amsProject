@@ -34,6 +34,24 @@
 				<el-form-item label="有效时间" prop="effectiveTime">
 					<el-input v-model="formData.effectiveTime" auto-complete="off"></el-input>
 				</el-form-item>
+				<el-form-item label="许可证类型" prop="prjSNType">
+					<el-input v-model="formData.prjSNType" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="项目状态" prop="prjStatus">
+					<el-input v-model="formData.prjStatus" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="延期文号" prop="delaySN">
+					<el-input v-model="formData.delaySN" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="延长期" prop="delayCountDay">
+					<el-input v-model="formData.delayCountDay" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="补正证号" prop="correctionSN">
+					<el-input v-model="formData.correctionSN" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="补正日期" prop="correctionDate">
+					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" style="width: 100%;"></el-date-picker>
+				</el-form-item>
 				<el-form-item label="特别告知事项" prop="specialNotifi">
 					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off"></el-input>
 				</el-form-item>
@@ -112,6 +130,34 @@
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 900, message: '最大长度900', trigger: 'blur' }
+					],
+					prjSNType: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjStatus: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					delaySN: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					delayCountDay: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
+					],
+					correctionSN: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					correctionDate: [
+						{ required: true,  message: '不能为空', trigger: 'blur' }
 					]
 				}
 			}

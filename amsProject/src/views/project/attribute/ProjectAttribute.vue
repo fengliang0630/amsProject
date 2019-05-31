@@ -38,14 +38,11 @@
 			<el-table-column prop="checkDocDate" label="验线时间" width="120"></el-table-column>
 			<el-table-column prop="checkSN" label="验收文号" width="120"></el-table-column>
 			<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
-			<el-table-column prop="delaySN" label="延期文号" width="120"></el-table-column>
-			<el-table-column prop="delayCountDay" label="延长期" width="120"></el-table-column>
 			<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
 			<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
-			<el-table-column prop="correctionSN" label="补正证号" width="120"></el-table-column>
-			<el-table-column prop="correctionDate" label="补正日期" width="120"></el-table-column>
 			<el-table-column prop="imgJudgeRes" label="影像判读结果" width="120"></el-table-column>
 			<el-table-column prop="exproprInfo" label="代征用地情况" width="120"></el-table-column>
+			<el-table-column prop="buldStatus" label="工程状态" width="120"></el-table-column>
 			<el-table-column prop="remark" label="备注" width="120"></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">

@@ -56,29 +56,20 @@
 				<el-form-item label="验收日期" prop="checkDate">
 					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
-				<el-form-item label="延期文号" prop="delaySN">
-					<el-input v-model="formData.delaySN" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="延长期" prop="delayCountDay">
-					<el-input v-model="formData.delayCountDay" auto-complete="off"></el-input>
-				</el-form-item>
 				<el-form-item label="撤（注）销证号" prop="cancelSN">
 					<el-input type="textarea" v-model="formData.cancelSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="撤（注）销日期" prop="cancelDate">
 					<el-input v-model="formData.cancelDate" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="补正证号" prop="correctionSN">
-					<el-input v-model="formData.correctionSN" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="补正日期" prop="correctionDate">
-					<el-date-picker v-model="formData.correctionDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
-				</el-form-item>
 				<el-form-item label="影像判读结果" prop="imgJudgeRes">
 					<el-input v-model="formData.imgJudgeRes" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="代征用地情况" prop="exproprInfo">
 					<el-input v-model="formData.exproprInfo" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="工程状态" prop="buldStatus">
+					<el-input v-model="formData.buldStatus" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="备注" prop="remark">
 					<el-input type="textarea" v-model="formData.remark" auto-complete="off"></el-input>
@@ -163,16 +154,6 @@
 					checkDate: [
 						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
-					delaySN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					delayCountDay: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 50, message: '最大长度50', trigger: 'blur' }
-					],
 					cancelSN: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
@@ -181,20 +162,17 @@
 					cancelDate: [
 						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
-					correctionSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					correctionDate: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
 					imgJudgeRes: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 500, message: '最大长度50', trigger: 'blur' }
 					],
 					exproprInfo: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					buldStatus: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }

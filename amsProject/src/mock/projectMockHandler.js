@@ -55,7 +55,8 @@ const ProjectMockHandler = {
 
     // 新增或修改项目基本信息
     mock.onPost('/ams/api/xmjbxx/createOrUpdate').reply(config => {
-      let { prjSN, prjUnit, prjAdr, prjName, prjType, contacts, contactInf, prjTemSN, specialNotifi, noticeTime, effectiveTime, remark } = JSON.parse(config.data);
+      let { prjSN, prjUnit, prjAdr, prjName, prjType, contacts, contactInf, prjTemSN, specialNotifi, 
+        noticeTime, effectiveTime, remark, prjSNType, prjStatus, delaySN, delayCountDay, correctionSN, correctionDate } = JSON.parse(config.data);
       if (typeof prjSN !== 'undefined') {
         _XmjbxxList.some(u => {
           if (u.prjSN === prjSN) {
@@ -69,7 +70,12 @@ const ProjectMockHandler = {
             u.specialNotifi = specialNotifi;
             u.noticeTime = noticeTime;
             u.effectiveTime = effectiveTime;
-            u.remark = remark;
+            u.prjSNType = prjSNType;
+            u.prjStatus = prjStatus;
+            u.delaySN = delaySN;
+            u.delayCountDay = delayCountDay;
+            u.correctionSN = correctionSN;
+            u.correctionDate = correctionDate;
             return true;
           }
         });
@@ -146,8 +152,7 @@ const ProjectMockHandler = {
       let { id, prjSN, serialNumber, prjNature, prjAttr, peacetimeUses, 
         aboveGroundLev, underGroundLev, aboveGroundHet, underGroundHet, 
         buildings, housingStockNum, strucType, checkDocSN, checkDocDate, 
-        checkSN, checkDate, delaySN, delayCountDay, cancelSN, cancelDate, 
-        correctionSN, correctionDate, imgJudgeRes, exproprInfo, remark } = JSON.parse(config.data);
+        checkSN, checkDate, cancelSN, cancelDate, imgJudgeRes, exproprInfo, buldStatus, remark } = JSON.parse(config.data);
       
       if (typeof id !== 'undefined') {
         _XmsxList.some(u => {
@@ -168,14 +173,11 @@ const ProjectMockHandler = {
             u.checkDocDate = checkDocDate;
             u.checkSN = checkSN;
             u.checkDate = checkDate;
-            u.delaySN = delaySN;
-            u.delayCountDay = delayCountDay;
             u.cancelSN = cancelSN;
             u.cancelDate = cancelDate;
-            u.correctionSN = correctionSN;
-            u.correctionDate = correctionDate;
             u.imgJudgeRes = imgJudgeRes;
             u.exproprInfo = exproprInfo;
+            u.buldStatus = buldStatus;
             u.remark = remark;
             return true;
           }
@@ -185,8 +187,7 @@ const ProjectMockHandler = {
         _XmsxList.push({ id, prjSN, serialNumber, prjNature, prjAttr, peacetimeUses, 
           aboveGroundLev, underGroundLev, aboveGroundHet, underGroundHet, 
           buildings, housingStockNum, strucType, checkDocSN, checkDocDate, 
-          checkSN, checkDate, delaySN, delayCountDay, cancelSN, cancelDate, 
-          correctionSN, correctionDate, imgJudgeRes, exproprInfo, remark });
+          checkSN, checkDate, cancelSN, cancelDate, imgJudgeRes, exproprInfo, buldStatus, remark });
       }
      
       return new Promise((resolve, reject) => {
@@ -255,7 +256,8 @@ const ProjectMockHandler = {
 
     // 新增或者修改项目明细
     mock.onPost('/ams/api/xmmx/createOrUpdate').reply(config => {
-      let { id, prjSN, serialNumber, serialFunct, aboveGroundArea, underGroundArea, blendArea, aboveGroundLen, prjClasfiCode } = JSON.parse(config.data);
+      let { id, prjSN, serialNumber, serialFunct, aboveGroundArea, underGroundArea, blendArea, aboveGroundLen,
+        prjClasfiCode, prjClasfiName1, prjClasfiName2, prjClasfiName3, prjClasfiName4, prjClasfiName5 } = JSON.parse(config.data);
       if (typeof id !== 'undefined') {
         _XmmxList.some(u => {
           if (u.id === id) {
@@ -267,6 +269,11 @@ const ProjectMockHandler = {
             u.blendArea = blendArea;
             u.aboveGroundLen = aboveGroundLen;
             u.prjClasfiCode = prjClasfiCode;
+            u.prjClasfiName1 = prjClasfiName1;
+            u.prjClasfiName2 = prjClasfiName2;
+            u.prjClasfiName3 = prjClasfiName3;
+            u.prjClasfiName4 = prjClasfiName4;
+            u.prjClasfiName5 = prjClasfiName5;
             return true;
           }
         });

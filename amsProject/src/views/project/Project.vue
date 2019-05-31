@@ -34,6 +34,12 @@
 			<el-table-column prop="noticeTime" label="发件日期" min-width="180"></el-table-column>
 			<el-table-column prop="effectiveTime" label="有效时间" min-width="180"></el-table-column>
 			<el-table-column prop="remark" label="备注" min-width="180"></el-table-column>
+			<el-table-column prop="prjSNType" label="许可证类型" min-width="180"></el-table-column>
+			<el-table-column prop="prjStatus" label="项目状态" min-width="180"></el-table-column>
+			<el-table-column prop="delaySN" label="延期文号" min-width="180"></el-table-column>
+			<el-table-column prop="delayCountDay" label="延长期" min-width="180"></el-table-column>
+			<el-table-column prop="correctionSN" label="补正证号" min-width="180"></el-table-column>
+			<el-table-column prop="correctionDate" label="补正日期" min-width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>

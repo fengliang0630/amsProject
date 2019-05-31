@@ -31,6 +31,21 @@
 				<el-form-item label="分类代码" prop="prjClasfiCode">
 					<el-input v-model="formData.prjClasfiCode" auto-complete="off"></el-input>
 				</el-form-item>
+				<el-form-item label="分类名称" prop="prjClasfiName1">
+					<el-input v-model="formData.prjClasfiName1" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="分类名称" prop="prjClasfiName2">
+					<el-input v-model="formData.prjClasfiName2" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="分类名称" prop="prjClasfiName3">
+					<el-input v-model="formData.prjClasfiName3" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="分类名称" prop="prjClasfiName4">
+					<el-input v-model="formData.prjClasfiName4" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="分类名称" prop="prjClasfiName5">
+					<el-input v-model="formData.prjClasfiName5" auto-complete="off"></el-input>
+				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click.native="cancelHandle">取消</el-button>
@@ -81,6 +96,31 @@
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 100, message: '最大长度100', trigger: 'blur' }
+					],
+					prjClasfiName1: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjClasfiName2: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjClasfiName3: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjClasfiName4: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
+					],
+					prjClasfiName5: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					]
 				}
 			}
