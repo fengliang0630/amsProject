@@ -156,7 +156,6 @@
 		},
 		methods: {
 			getView001() {
-				this.listLoading = true;
 				const param = {};
 				let isQuery = false;
 				for (let key in this.filters) {
@@ -170,6 +169,7 @@
 					this.$message({ message: '请您先选择过滤条件', type: 'error' });
 					return;
 				}
+				this.listLoading = true;
 
 				getView001(param).then((resp) => {
 					this.listLoading = false;

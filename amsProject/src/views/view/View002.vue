@@ -36,7 +36,7 @@
 					</el-form>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjStatus" label="项目状态" style="color:red;"></el-table-column>
+			<el-table-column prop="prjStatus" label="项目状态"></el-table-column>
 			<el-table-column prop="prjUnit" label="建设单位"></el-table-column>
 			<el-table-column prop="prjAdr" label="建设位置"></el-table-column>
 			<el-table-column  label="工程名称">
@@ -108,6 +108,7 @@
 		},
 		methods: {
 			getView002() {
+				this.listLoading = true;
 				const param = this.filters;
 				getView002(param).then((resp) => {
 					this.listLoading = false;
