@@ -9,6 +9,10 @@ import Project from './views/project/Project.vue';
 import ProjectDetail from './views/project/detail/ProjectDetail.vue';
 import ProjectAttribute from './views/project/attribute/ProjectAttribute.vue';
 import Log from './views/log/log.vue';
+import View001 from './views/view/View001.vue';
+import View002 from './views/view/View002.vue';
+import View003 from './views/view/View003.vue';
+
 
 let routes = [
     {
@@ -44,6 +48,9 @@ let routes = [
             { path: '/ProjectAttribute', component: ProjectAttribute, name: '项目属性信息管理' },
             { path: '/projectDetail', component: ProjectDetail, name: '项目明细信息管理' },
             { path: '/log', component: Log, name: '日志查询' },
+            { path: '/view001', component: View001, name: '复合统计' },
+            { path: '/view002', component: View002, name: '项目信息统计' },
+            { path: '/view003', component: View003, name: '项目详情统计' },
             { path: '/amsMap', component: AmsMap, name: '工程地理图像查询' }
         ]
     },

@@ -171,6 +171,25 @@ export const getLogListPage = (params, pageSize, pageNum) => {
     return axios.post(`${base}/ams/api/userOperation/queryUserOperByDate`, p).then(res => res.data); 
 };
 
+// view001
+export const getView001 = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/view/bb001`, p).then(res => res.data); 
+};
+
+// view002
+export const getView002 = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/view/bb002`, p).then(res => res.data); 
+};
+
+// view003
+export const getView003 = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/view/bb003`, p).then(res => res.data); 
+};
+
+
 // 获取地图区域点
 export const getPointsByprjSN = params => { 
     const p = pckParam(params, {});

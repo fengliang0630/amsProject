@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { LoginUsers, PrjSNList } from './data/mockData.js';
+import { LoginUsers, PrjSNList, view001List, view002List, view003List } from './data/mockData.js';
 import UserMockHandler from './userMockHandler.js';
 import RolesMockHandler from './roleMockHandler.js';
 import MenusMockHandler from './menuMockHandler.js';
@@ -97,7 +97,6 @@ export default {
     mock.onPost('/ams/api/mh/queryJbxxLike').reply(config => {
       let {header, tab, key, val} = JSON.parse(config.data);
       let {reqpageSize, reqpageIndex} = header;
-      debugger;
       const respData = {
         header : {
           reqpageIndex: 1,
@@ -114,6 +113,98 @@ export default {
         respData.PrjSNList = _PrjSNList.filter(d => {
           return (d.indexOf(val) > -1);
         });
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
+    // 模糊过滤
+    mock.onPost('/ams/api/mh/queryJbxxLike').reply(config => {
+      let {header, tab, key, val} = JSON.parse(config.data);
+      let {reqpageSize, reqpageIndex} = header;
+      const respData = {
+        header : {
+          reqpageIndex: 1,
+          reqUserId: 'xxw',
+          rspPageCount: 1,
+          rspReturnMsg: '【1132250761523232768】交易成功',
+          reqpageSize: 20,
+          rspReturnCode: '000000'
+        }
+      }
+
+      if (key === 'prjSN') {
+        const _PrjSNList = PrjSNList;
+        respData.PrjSNList = _PrjSNList.filter(d => {
+          return (d.indexOf(val) > -1);
+        });
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
+    // 查询view001
+    mock.onPost('/ams/api/view/bb001').reply(config => {
+      const respData = {
+        header : {
+          reqpageIndex: 1,
+          reqUserId: 'xxw',
+          rspPageCount: 1,
+          rspReturnMsg: '【1132250761523232768】交易成功',
+          reqpageSize: 20,
+          rspReturnCode: '000000'
+        },
+        viewList: view001List
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
+    // 查询view002
+    mock.onPost('/ams/api/view/bb002').reply(config => {
+      const respData = {
+        header : {
+          reqpageIndex: 1,
+          reqUserId: 'xxw',
+          rspPageCount: 1,
+          rspReturnMsg: '【1132250761523232768】交易成功',
+          reqpageSize: 20,
+          rspReturnCode: '000000'
+        },
+        viewList: view002List
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
+    // 查询view001
+    mock.onPost('/ams/api/view/bb003').reply(config => {
+      const respData = {
+        header : {
+          reqpageIndex: 1,
+          reqUserId: 'xxw',
+          rspPageCount: 1,
+          rspReturnMsg: '【1132250761523232768】交易成功',
+          reqpageSize: 20,
+          rspReturnCode: '000000'
+        },
+        viewList: view003List
       }
 
       return new Promise((resolve, reject) => {

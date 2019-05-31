@@ -1,3 +1,6 @@
+import XLSX from 'xlsx';
+import FileSaver from 'file-saver';
+
 var SIGN_REGEXP = /([yMdhsm])(\1*)/g;
 var DEFAULT_PATTERN = 'yyyy-MM-dd';
 function padding(s, len) {
@@ -95,6 +98,15 @@ export default {
             }
 
         }
+    },
+
+    exportExcel(table, fileName) {
+        const wb = XLSX.utils.table_to_book(table);
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const data = new Blob([excelBuffer], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+        });
+        FileSaver.saveAs(data, `${fileName}.xlsx`);
     },
 
     paginationSize: [10, 20, 50, 100]

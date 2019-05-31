@@ -97,7 +97,10 @@ MenuTree = [
       {id: '2_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
       {id: '2_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'},
       {id: '2_4', menuName: '日志查询', menuLink: '/log'},
-      {id: '2_5', menuName: '工程地理图像查询', menuLink: '/amsMap'}
+      {id: '2_5', menuName: '复合统计', menuLink: '/view001'},
+      {id: '2_6', menuName: '项目信息统计', menuLink: '/view002'},
+      {id: '2_7', menuName: '项目详情统计', menuLink: '/view003'},
+      {id: '2_8', menuName: '工程地理图像查询', menuLink: '/amsMap'}
     ]
   }
 ];
@@ -502,5 +505,109 @@ for (let j = 0; j < 50; j++) {
   PrjSNList.push(`2013规（朝）建字000${j}号`);
 }
 
+let view001List = [], view002List = [], view003List = [];
 
-export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, XmjbxxList, XmmxList, XmsxList, PrjSNList };
+
+view001List = [
+    {
+        prjType: '新建',
+        prjYear: '2013',
+        prjStatus: '',
+        count: 29,
+        housingStockNum: 0,
+        sumArea: 24350.93,
+        sumLen: 0,
+        prjUnit: '',
+        prjAdr: '',
+        aboveGroundSumArea: 761.43,
+        underGroundSumArea: 23589.5,
+        buildings: 28,
+        prjClasfiName5: '人防工程（DL）',
+        buldStatus: '',
+        prjClasfiName1: '',
+        prjSNType: '',
+        prjClasfiName2: '',
+        prjClasfiName3: '',
+        prjClasfiName4: ''
+    },
+    {
+        prjType: '新建',
+        prjYear: '2013',
+        prjStatus: '',
+        count: 37,
+        housingStockNum: 409,
+        sumArea: 111323.77,
+        sumLen: 0,
+        prjUnit: '',
+        prjAdr: '',
+        aboveGroundSumArea: 85611.5,
+        underGroundSumArea: 25712.27,
+        buildings: 37,
+        prjClasfiName5: '商品房',
+        buldStatus: '',
+        prjClasfiName1: '',
+        prjSNType: '',
+        prjClasfiName2: '',
+        prjClasfiName3: '',
+        prjClasfiName4: ''
+    },
+    {
+        prjType: '新建',
+        prjYear: '2013',
+        prjStatus: '',
+        count: 5,
+        housingStockNum: 4,
+        sumArea: 3.77,
+        sumLen: 0,
+        prjUnit: '',
+        prjAdr: '',
+        aboveGroundSumArea: 1.5,
+        underGroundSumArea: 2.27,
+        buildings: 37,
+        prjClasfiName5: '商品房',
+        buldStatus: '',
+        prjClasfiName1: '',
+        prjSNType: '',
+        prjClasfiName2: '',
+        prjClasfiName3: '',
+        prjClasfiName4: ''
+    }
+];
+
+view002List = [
+    {
+        prjAdr: '朝阳区东苇路3号',
+        prjType: '新建',
+        specialNotifi: '1.该项目建设用地内的小区道路、居住公共服务设施等应与一期新星花园业主共同使用',
+        prjTemSN: '',
+        prjXz: '26#配套公建楼等2项',
+        contactInf: '13401171985/84313153-8019',
+        prjStatus: '未申报',
+        remark: '',
+        prjSN: '2013规（朝）建字0001号',
+        prjUnit: '北京诚通华亿房地产有限公司',
+        prjName: '朝阳区新星花园二期、三期',
+        contacts: '赵学东'
+    },
+    {
+        prjAdr: '朝阳区花家地东路3号',
+        prjType: '',
+        specialNotifi: '',
+        prjTemSN: '',
+        prjXz: '',
+        contactInf: '13901145981/58250108',
+        prjStatus: '已申报',
+        remark: '',
+        prjSN: '2013规（朝）建字0080号',
+        prjUnit: '中国民航管理干部学院',
+        prjName: '',
+        contacts: '何秉锐'
+    }
+];
+
+view003List=[
+
+];
+
+export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, 
+    XmjbxxList, XmmxList, XmsxList, PrjSNList, view001List, view002List, view003List };

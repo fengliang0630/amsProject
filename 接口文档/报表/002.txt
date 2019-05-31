@@ -1,0 +1,61 @@
+localhost:8899/ams/api/view/bb002
+
+
+入参：xmjbxx 表字段均支持查询，
+支持模糊查询字段：prjSN|prjUnit|prjAdr|specialNotifi|noticeTime|remark|
+prjXz：项目性质
+
+请求：
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "prjAdr":"3号"
+}
+
+返回：
+{
+    "viewList": [
+        {
+            "prjAdr": "朝阳区东苇路3号",
+            "prjType": "新建",
+            "specialNotifi": "1.该项目建设用地内的小区道路、居住公共服务设施等应与一期新星花园业主共同使用",
+            "prjTemSN": "",
+            "prjXz": "26#配套公建楼等2项",
+            "contactInf": "13401171985/84313153-8019",
+            "prjStatus": "未申报",
+            "remark": "",
+            "prjSN": "2013规（朝）建字0001号",
+            "prjUnit": "北京诚通华亿房地产有限公司",
+            "prjName": "朝阳区新星花园二期、三期",
+            "contacts": "赵学东"
+        },
+        {
+            "prjAdr": "朝阳区花家地东路3号",
+            "prjType": "",
+            "specialNotifi": "",
+            "prjTemSN": "",
+            "prjXz": "",
+            "contactInf": "13901145981/58250108",
+            "prjStatus": "",
+            "remark": "",
+            "prjSN": "2013规（朝）建字0080号",
+            "prjUnit": "中国民航管理干部学院",
+            "prjName": "",
+            "contacts": "何秉锐"
+        }
+    ],
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "99999",
+        "rspPageCount": 2,
+        "rspReturnMsg": "【1132828778062544896】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    }
+}
