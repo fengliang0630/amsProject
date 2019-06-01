@@ -87,14 +87,15 @@
 					prjSN: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 50, message: '最大长度50', trigger: 'blur' }
+						{ max: 50, message: '最大长度50', trigger: 'blur' },
+						{ min: 4, message: '最小长度4', trigger: 'blur' }
 					],
 					prjUnit: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
-					prjAdr: [	// 未处理
+					prjAdr: [
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 800, message: '最大长度800', trigger: 'blur' }
 					],

@@ -22,29 +22,29 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="120"></el-table-column>
-			<el-table-column prop="serialNumber" label="建筑序号" width="120"></el-table-column>
-			<el-table-column prop="prjNature" label="项目性质" width="120"></el-table-column>
-			<el-table-column prop="prjAttr" label="规划项目性质/人防工程情况" width="250"></el-table-column>
-			<el-table-column prop="peacetimeUses" label="平时用途" width="120"></el-table-column>
-			<el-table-column prop="aboveGroundLev" label="地上层数" width="120"></el-table-column>
-			<el-table-column prop="underGroundLev" label="地下层数" width="120"></el-table-column>
-			<el-table-column prop="aboveGroundHet" label="地上高度（米）" width="120"></el-table-column>
-			<el-table-column prop="underGroundHet" label="地下高度（米）" width="120"></el-table-column>
-			<el-table-column prop="buildings" label="栋数" width="120"></el-table-column>
-			<el-table-column prop="housingStockNum" label="住房套数" width="120"></el-table-column>
-			<el-table-column prop="strucType" label="结构类型" width="120"></el-table-column>
-			<el-table-column prop="checkDocSN" label="验线文号" width="120"></el-table-column>
-			<el-table-column prop="checkDocDate" label="验线时间" width="120"></el-table-column>
-			<el-table-column prop="checkSN" label="验收文号" width="120"></el-table-column>
-			<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
-			<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
-			<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
-			<el-table-column prop="imgJudgeRes" label="影像判读结果" width="120"></el-table-column>
-			<el-table-column prop="exproprInfo" label="代征用地情况" width="120"></el-table-column>
-			<el-table-column prop="buldStatus" label="工程状态" width="120"></el-table-column>
-			<el-table-column prop="remark" label="备注" width="120"></el-table-column>
-			<el-table-column label="操作" width="200">
+			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
+			<el-table-column prop="serialNumber" label="建筑序号" width="150"></el-table-column>
+			<el-table-column prop="prjNature" label="项目性质" width="150"></el-table-column>
+			<el-table-column prop="prjAttr" label="规划项目/人防" width="150"></el-table-column>
+			<el-table-column prop="peacetimeUses" label="平时用途" width="150"></el-table-column>
+			<el-table-column prop="aboveGroundLev" label="地上层数" width="150"></el-table-column>
+			<el-table-column prop="underGroundLev" label="地下层数" width="150"></el-table-column>
+			<el-table-column prop="aboveGroundHet" label="地上高度（米）" width="150"></el-table-column>
+			<el-table-column prop="underGroundHet" label="地下高度（米）" width="150"></el-table-column>
+			<el-table-column prop="buildings" label="栋数" width="150"></el-table-column>
+			<el-table-column prop="housingStockNum" label="住房套数" width="150"></el-table-column>
+			<el-table-column prop="strucType" label="结构类型" width="150"></el-table-column>
+			<el-table-column prop="checkDocSN" label="验线文号" width="150"></el-table-column>
+			<el-table-column prop="checkDocDate" label="验线时间" width="150"></el-table-column>
+			<el-table-column prop="checkSN" label="验收文号" width="150"></el-table-column>
+			<el-table-column prop="checkDate" label="验收日期" width="150"></el-table-column>
+			<el-table-column prop="cancelSN" label="撤（注）销证号" width="150"></el-table-column>
+			<el-table-column prop="cancelDate" label="撤（注）销日期" width="150"></el-table-column>
+			<el-table-column prop="imgJudgeRes" label="影像判读结果" width="150"></el-table-column>
+			<el-table-column prop="exproprInfo" label="代征用地情况" width="150"></el-table-column>
+			<el-table-column prop="buldStatus" label="工程状态" width="150"></el-table-column>
+			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
+			<el-table-column label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

@@ -5,7 +5,10 @@
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh">
 			<el-form :model="formData" label-width="200px" :rules="formRules" ref="formData">
 				<el-form-item label="许可证号" prop="prjSN">
-					<el-input v-model="formData.prjSN" auto-complete="off"></el-input>
+					<el-autocomplete v-if="!!formData.id" class="inline-input" v-model="formData.prjSN" style="width:100%"
+						placeholder="请输入内容" :trigger-on-focus="false" readonly></el-autocomplete>
+					<el-autocomplete v-if="!formData.id" class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
+						placeholder="请输入内容" :trigger-on-focus="false"></el-autocomplete>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
 					<el-input-number v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
@@ -28,25 +31,25 @@
 				<el-form-item label="一级分类" prop="prjClasfiName1">
 					<el-select v-model="formData.prjClasfiName1" filterable placeholder="请选择一级分类" 
 						style="width: 100%;" @change="prjClasfiName1Change">
-						<el-option v-for="item in prjClasfiName1Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+						<el-option v-for="item in prjClasfiName1Options" :key="item.id" :label="item.name" :value="item.id"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="二级分类" prop="prjClasfiName2">
 					<el-select v-model="formData.prjClasfiName2" filterable placeholder="请选择二级分类" 
 						style="width: 100%;" @change="prjClasfiName2Change">
-						<el-option v-for="item in prjClasfiName2Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+						<el-option v-for="item in prjClasfiName2Options" :key="item.id" :label="item.name" :value="item.id"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="三级分类" prop="prjClasfiName3">
 					<el-select v-model="formData.prjClasfiName3" filterable placeholder="请选择三级分类" 
 						style="width: 100%;" @change="prjClasfiName3Change">
-						<el-option v-for="item in prjClasfiName3Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+						<el-option v-for="item in prjClasfiName3Options" :key="item.id" :label="item.name" :value="item.id"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="四级分类" prop="prjClasfiName4">
 					<el-select v-model="formData.prjClasfiName4" filterable placeholder="请选择四级分类" style="width: 100%;" 
-						@change="4">
-						<el-option v-for="item in prjClasfiName4Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+						@change="prjClasfiName4Change">
+						<el-option v-for="item in prjClasfiName4Options" :key="item.id" :label="item.name" :value="item.id"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="五级分类" prop="prjClasfiName5">
@@ -65,7 +68,7 @@
 
 <script>
 	import util from '../../../common/js/util';
-	import {createOrUpdateProjectDetail, getPrjClasfiNameByParentId, queryDicByProejctDetailId } from '../../../api/api';
+	import {createOrUpdateProjectDetail, getPrjClasfiNameByParentId, queryDicByProejctDetailId, queryDataByLike } from '../../../api/api';
 
 	export default {
 		data() {
@@ -124,17 +127,39 @@
 			}
 		},
 		methods: {
+			querySearch(queryString, callback) {
+				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: queryString}).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({message: '查询许可证号失败', type: 'error'});
+						return;
+					}
+
+					callback(resp.list.map(data => { return {value: data, address: data}; }));
+
+				});
+			},
 			prjClasfiName1Change(value) {
 				this.getPrjClasfiNameByParentId(value, '2');
+				this.formData.prjClasfiName2 = '';
+				this.formData.prjClasfiName3 = '';
+				this.formData.prjClasfiName4 = '';
+				this.formData.prjClasfiName5 = '';
 			},
 			prjClasfiName2Change(value) {
 				this.getPrjClasfiNameByParentId(value, '3');
+				this.formData.prjClasfiName3 = '';
+				this.formData.prjClasfiName4 = '';
+				this.formData.prjClasfiName5 = '';
 			},
 			prjClasfiName3Change(value) {
 				this.getPrjClasfiNameByParentId(value, '4');
+				this.formData.prjClasfiName4 = '';
+				this.formData.prjClasfiName5 = '';
 			},
 			prjClasfiName4Change(value) {
 				this.getPrjClasfiNameByParentId(value, '5');
+				this.formData.prjClasfiName5 = '';
 			},
 			getPrjClasfiNameByParentId(pId, type) {
 
@@ -197,17 +222,7 @@
 		mounted() {
 			if (this.formTemData && !!this.formTemData.id) {
 				this.title = '修改项目明细信息';
-				this.formData = {
-					id: this.formTemData.id,
-					prjSN: this.formTemData.prjSN,
-					serialNumber: this.formTemData.serialNumber,
-					serialFunct: this.formTemData.serialFunct,
-					aboveGroundArea: this.formTemData.aboveGroundArea,
-					underGroundArea: this.formTemData.underGroundArea,
-					blendArea: this.formTemData.blendArea,
-					aboveGroundLen: this.formTemData.aboveGroundLen
-				};
-				queryDicByProejctDetailId(this.formTemData.id).then(resp => {
+				queryDicByProejctDetailId({id: this.formTemData.id}).then(resp => {
 
 					if (resp.header.rspReturnCode !== '000000') {
 						respMsg.type = 'error';
@@ -216,15 +231,29 @@
 						return;
 					}
 
+					this.formData = {
+						id: this.formTemData.id,
+						prjSN: this.formTemData.prjSN,
+						serialNumber: this.formTemData.serialNumber,
+						serialFunct: this.formTemData.serialFunct,
+						aboveGroundArea: this.formTemData.aboveGroundArea,
+						underGroundArea: this.formTemData.underGroundArea,
+						blendArea: this.formTemData.blendArea,
+						aboveGroundLen: this.formTemData.aboveGroundLen
+					};
+
 					for (let i = 1; i < 6; i++) {
 						this[`prjClasfiName${i}Options`] = resp.viewObj[`prjClasfiName${i}List`] || [];
 						const obj = resp.viewObj[`prjClasfiName${i}Obj`];
 						if (obj) {
-							this.formData[`prjClasfiName${i}`] = obj.code;
+							if (i === 5) {
+								this.formData[`prjClasfiName${i}`] = obj.code;
+							} else {
+								this.formData[`prjClasfiName${i}`] = obj.id;
+							}
+							
 						}
 					}
-
-					this.prjClasfiName1Options = resp
 
 				});
 			} else {

@@ -1,5 +1,5 @@
 <template>
-	<section id="userPage">
+	<section id="projectPage">
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
@@ -17,30 +17,30 @@
 
 		<!--列表-->
 		<el-table :data="jbxxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
-			<el-table-column fixed="left"  width="60">
+			<el-table-column label="序号" width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="120"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位" width="100"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
+			<el-table-column prop="prjUnit" label="建设单位" width="150"></el-table-column>
 			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
-			<el-table-column prop="prjName" label="工程名称" width="120"></el-table-column>
-			<el-table-column prop="prjType" label="建设类型" min-width="100"></el-table-column>
-			<el-table-column prop="contacts" label="联系人" min-width="80"></el-table-column>
-			<el-table-column prop="contactInf" label="联系方式" min-width="180"></el-table-column>
-			<el-table-column prop="prjTemSN" label="附带临建批号" min-width="180"></el-table-column>
-			<el-table-column prop="specialNotifi" label="特别告知事项" min-width="180"></el-table-column>
-			<el-table-column prop="noticeTime" label="发件日期" min-width="180"></el-table-column>
-			<el-table-column prop="effectiveTime" label="有效时间" min-width="180"></el-table-column>
-			<el-table-column prop="remark" label="备注" min-width="180"></el-table-column>
-			<el-table-column prop="prjSNType" label="许可证类型" min-width="180"></el-table-column>
-			<el-table-column prop="prjStatus" label="项目状态" min-width="180"></el-table-column>
-			<el-table-column prop="delaySN" label="延期文号" min-width="180"></el-table-column>
-			<el-table-column prop="delayCountDay" label="延长期" min-width="180"></el-table-column>
-			<el-table-column prop="correctionSN" label="补正证号" min-width="180"></el-table-column>
-			<el-table-column prop="correctionDate" label="补正日期" min-width="180"></el-table-column>
-			<el-table-column label="操作" fixed="right" width="200">
+			<el-table-column prop="prjName" label="工程名称" width="150"></el-table-column>
+			<el-table-column prop="prjType" label="建设类型" width="150"></el-table-column>
+			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
+			<el-table-column prop="contactInf" label="联系方式" width="150"></el-table-column>
+			<el-table-column prop="prjTemSN" label="附带临建批号" width="150"></el-table-column>
+			<el-table-column prop="specialNotifi" label="特别告知事项" width="150"></el-table-column>
+			<el-table-column prop="noticeTime" label="发件日期" width="150"></el-table-column>
+			<el-table-column prop="effectiveTime" label="有效时间" width="150"></el-table-column>
+			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
+			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
+			<el-table-column prop="prjStatus" label="项目状态" width="150"></el-table-column>
+			<el-table-column prop="delaySN" label="延期文号" width="150"></el-table-column>
+			<el-table-column prop="delayCountDay" label="延长期" width="150"></el-table-column>
+			<el-table-column prop="correctionSN" label="补正证号" width="150"></el-table-column>
+			<el-table-column prop="correctionDate" label="补正日期" width="150"></el-table-column>
+			<el-table-column label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

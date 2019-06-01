@@ -104,9 +104,6 @@
 					
 				});
 			}
-		},
-		mounted() {
-			this.getLogListPage();
 		}
 	}
 

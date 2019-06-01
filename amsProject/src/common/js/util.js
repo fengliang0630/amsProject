@@ -84,6 +84,10 @@ export default {
             }
         },
         checkMobile(rule, value, callback) {
+            if (!value) {
+                return callback();
+            }
+
             var reg = /(^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$)|(^((\(\d{3}\))|(\d{3}\-))?(1[3578]\d{9})$)|(^(400)-(\d{3})-(\d{4})(.)(\d{1,4})$)|(^(400)-(\d{3})-(\d{4}$))/;
             if ( reg.test(value) ){
                 return callback();

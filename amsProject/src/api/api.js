@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 let base = '';
+// let base = 'http://5123ba82.ngrok.io';
 
 // 登录接口
 export const login = params => { 
@@ -212,7 +213,8 @@ const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));
     const p = Object.assign({}, params);
     let header = {
-        reqUserId: '1' || userInfo['id'],
+        // reqUserId: '1' || userInfo['id'],
+        reqUserId: '99999',
 		rspReturnCode: "",
 		rspReturnMsg:"",
 		reqpageSize: "",

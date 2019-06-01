@@ -5,7 +5,7 @@
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh" >
 			<el-form :model="formData" label-width="200px" :rules="formRules" ref="formData">
 				<el-form-item label="许可证号" prop="prjSN">
-					<el-autocomplete v-if="!!formData.id" class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
+					<el-autocomplete v-if="!!formData.id" class="inline-input" v-model="formData.prjSN" style="width:100%"
 						placeholder="请输入内容" :trigger-on-focus="false" readonly></el-autocomplete>
 					<el-autocomplete v-if="!formData.id" class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
 						placeholder="请输入内容" :trigger-on-focus="false"></el-autocomplete>
@@ -179,7 +179,7 @@
 						return;
 					}
 
-					callback(resp.PrjSNList.map(data => { return {value: data, address: data}; }));
+					callback(resp.list.map(data => { return {value: data, address: data}; }));
 
 				});
 			},

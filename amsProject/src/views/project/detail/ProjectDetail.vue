@@ -22,19 +22,19 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" ></el-table-column>
-			<el-table-column prop="serialNumber" label="建筑序号" ></el-table-column>
-			<el-table-column prop="serialFunct" label="建筑功能" ></el-table-column>
-			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="200px"></el-table-column>
-			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="200px"></el-table-column>
-			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200px"></el-table-column>
-			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200px"></el-table-column>
-			<el-table-column prop="prjClasfiName1" label="一级分类" ></el-table-column>
-			<el-table-column prop="prjClasfiName2" label="二级分类" ></el-table-column>
-			<el-table-column prop="prjClasfiName3" label="三级分类" ></el-table-column>
-			<el-table-column prop="prjClasfiName4" label="四级分类" ></el-table-column>
-			<el-table-column prop="prjClasfiName5" label="五级分类" ></el-table-column>
-			<el-table-column label="操作" width="200">
+			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
+			<el-table-column prop="serialNumber" label="建筑序号" width="150"></el-table-column>
+			<el-table-column prop="serialFunct" label="建筑功能" width="150"></el-table-column>
+			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="150"></el-table-column>
+			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="150"></el-table-column>
+			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="150"></el-table-column>
+			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="150"></el-table-column>
+			<el-table-column prop="prjClasfiName1" label="一级分类" width="150"></el-table-column>
+			<el-table-column prop="prjClasfiName2" label="二级分类" width="150"></el-table-column>
+			<el-table-column prop="prjClasfiName3" label="三级分类" width="150"></el-table-column>
+			<el-table-column prop="prjClasfiName4" label="四级分类" width="150"></el-table-column>
+			<el-table-column prop="prjClasfiName5" label="五级分类" width="150"></el-table-column>
+			<el-table-column label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
