@@ -4,8 +4,9 @@
 		<!--编辑界面-->
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh">
 			<el-form :model="formData" label-width="150px" :rules="formRules" ref="formData" size="medium">
-				<el-form-item v-if="typeof formData.prjSN !== 'undefined'" label="许可证号" prop="prjSN">
-					<el-input v-model="formData.prjSN" auto-complete="off" readOnly></el-input>
+				<el-form-item label="许可证号" prop="prjSN">
+					<el-input v-if="!!formData.id" v-model="formData.prjSN" auto-complete="off" readOnly></el-input>
+					<el-input v-if="!formData.id" v-model="formData.prjSN" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="建设单位" prop="prjUnit">
 					<el-input v-model="formData.prjUnit" auto-complete="off"></el-input>
@@ -17,7 +18,9 @@
 					<el-input v-model="formData.prjName" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="建设类型" prop="prjType">
-					<el-input v-model="formData.prjType" auto-complete="off"></el-input>
+					<el-select v-model="formData.prjType" multiple placeholder="请选择建设类型" style="width: 100%;">
+						<el-option v-for="item in prjTypeOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
 				</el-form-item>
 				<el-form-item label="联系人" prop="contacts">
 					<el-input v-model="formData.contacts" auto-complete="off"></el-input>
@@ -77,36 +80,36 @@
 				show: true,
 				formLoading: false,
 				title: '',
+				prjTypeOptions: ['新建', '改扩建'],
 				formRules: {
+					prjSN: [
+						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
+					],
 					prjUnit: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 800, message: '最大长度800', trigger: 'blur' }
+						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
-					prjAdr: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
+					prjAdr: [	// 未处理
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 800, message: '最大长度800', trigger: 'blur' }
 					],
 					prjName: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 800, message: '最大长度800', trigger: 'blur' }
+						{ max: 500, message: '最大长度500', trigger: 'blur' }
 					],
 					prjType: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					contacts: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ max: 10, message: '最大长度10', trigger: 'blur' }
 					],
 					contactInf: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					prjTemSN: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
@@ -176,14 +179,14 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									respMsg.type = 'error';
-									respMsg.message = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目基本信息失败' : '新增项目基本信息失败';
+									respMsg.message = (!!this.formData.id) ? '修改项目基本信息失败' : '新增项目基本信息失败';
 									this.$message(respMsg);
 									return;
 								}
 
 								this.$refs['formData'].resetFields();
 								respMsg.type = 'success';
-								respMsg.message = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目基本信息成功' : '新增项目基本信息成功';
+								respMsg.message = (!!this.formData.id) ? '修改项目基本信息成功' : '新增项目基本信息成功';
 								this.callback(respMsg);
 							});
 						});
@@ -195,7 +198,7 @@
             }
 		},
 		mounted() {
-			this.title = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目基本信息' : '新增项目基本信息';
+			this.title = (!!this.formData.id) ? '修改项目基本信息' : '新增项目基本信息';
 		},
         props: ['formData', 'callback']
 	}
