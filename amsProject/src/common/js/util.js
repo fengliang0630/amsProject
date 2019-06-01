@@ -62,8 +62,8 @@ export default {
 
     validatorUtils: {
         checkSpecialChar(rule, value, callback) {
-            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\-+\'';
-            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\-+\']');
+            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\+\'';
+            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\+\']');
             if (reg.test(value)) {
                 return callback(new Error());
             } else {
@@ -83,20 +83,27 @@ export default {
                 return callback(new Error('email格式不正确'));
             }
         },
-
         checkMobile(rule, value, callback) {
-            const reg = new RegExp('^1[3|4|5|7|8][0-9]{9}$');
-
-            if (!value) {
-                return callback(new Error('联系电话不能为空'));
-            }
-
-            if (reg.test(value)) {
+            var reg = /(^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$)|(^((\(\d{3}\))|(\d{3}\-))?(1[3578]\d{9})$)|(^(400)-(\d{3})-(\d{4})(.)(\d{1,4})$)|(^(400)-(\d{3})-(\d{4}$))/;
+            if ( reg.test(value) ){
                 return callback();
-            } else {
-                return callback(new Error('联系电话格式不正确'));
+            }else{
+                return callback(new Error('联系方式格式不正确'));
             }
+        },
+        checkContaintStr(strTem, errorMsg) {
+            return (rule, value, callback) => {
 
+                if (!value) {
+                    return callback();
+                }
+
+                if (value.indexOf(strTem) > -1) {
+                    return callback();
+                } else {
+                    return callback(new Error(errorMsg));
+                }
+            }
         }
     },
 

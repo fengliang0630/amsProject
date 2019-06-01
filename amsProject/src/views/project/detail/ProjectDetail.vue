@@ -29,13 +29,12 @@
 			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="200px"></el-table-column>
 			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200px"></el-table-column>
 			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200px"></el-table-column>
-			<el-table-column prop="prjClasfiCode" label="分类代码" ></el-table-column>
-			<el-table-column prop="prjClasfiName1" label="分类名称" ></el-table-column>
-			<el-table-column prop="prjClasfiName2" label="分类名称" ></el-table-column>
-			<el-table-column prop="prjClasfiName3" label="分类名称" ></el-table-column>
-			<el-table-column prop="prjClasfiName4" label="分类名称" ></el-table-column>
-			<el-table-column prop="prjClasfiName5" label="分类名称" ></el-table-column>
-			<el-table-column label="操作" fixed="right" width="200">
+			<el-table-column prop="prjClasfiName1" label="一级分类" ></el-table-column>
+			<el-table-column prop="prjClasfiName2" label="二级分类" ></el-table-column>
+			<el-table-column prop="prjClasfiName3" label="三级分类" ></el-table-column>
+			<el-table-column prop="prjClasfiName4" label="四级分类" ></el-table-column>
+			<el-table-column prop="prjClasfiName5" label="五级分类" ></el-table-column>
+			<el-table-column label="操作" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -52,7 +51,7 @@
 
 
 		<!-- 项目详细信息增加/修改 -->
-		<ams-project-detail-form v-if="formParams.show" :formData="this.formParams.data" :callback="callback"></ams-project-detail-form>
+		<ams-project-detail-form v-if="formParams.show" :formTemData="this.formParams.data" :callback="callback"></ams-project-detail-form>
 
 	</section>
 </template>
@@ -137,11 +136,23 @@
 			},
 			// 新增 修改表单显示
 			showFormHandler(index, row) {
-				this.formParams.data = Object.assign({}, row);
+				if (row && row.id) {
+					this.formParams.data = {
+						id: row.id,
+						prjSN: row.prjSN,
+						serialNumber: row.serialNumber,
+						serialFunct: row.serialFunct,
+						aboveGroundArea: row.aboveGroundArea,
+						underGroundArea: row.underGroundArea,
+						blendArea: row.blendArea,
+						aboveGroundLen: row.aboveGroundLen
+					};
+				}
 				this.formParams.show = true;
 			},
 			callback(respData) {
 				this.formParams.show = false;
+				this.formParams.data = null;
 				if (respData) {
 					this.$message(respData);
 					this.getProjectDtailListPage();

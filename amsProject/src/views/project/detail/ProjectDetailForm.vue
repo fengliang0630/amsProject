@@ -4,9 +4,6 @@
 		<!--编辑界面-->
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh">
 			<el-form :model="formData" label-width="200px" :rules="formRules" ref="formData">
-				<el-form-item v-if="typeof formData.id !== 'undefined'" label="id" prop="id">
-					<el-input v-model="formData.id" auto-complete="off" readOnly ></el-input>
-				</el-form-item>
 				<el-form-item label="许可证号" prop="prjSN">
 					<el-input v-model="formData.prjSN" auto-complete="off"></el-input>
 				</el-form-item>
@@ -28,23 +25,34 @@
 				<el-form-item label="地上建筑长度（米）" prop="aboveGroundLen">
 					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
 				</el-form-item>
-				<el-form-item label="分类代码" prop="prjClasfiCode">
-					<el-input v-model="formData.prjClasfiCode" auto-complete="off"></el-input>
+				<el-form-item label="一级分类" prop="prjClasfiName1">
+					<el-select v-model="formData.prjClasfiName1" filterable placeholder="请选择一级分类" 
+						style="width: 100%;" @change="prjClasfiName1Change">
+						<el-option v-for="item in prjClasfiName1Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+					</el-select>
 				</el-form-item>
-				<el-form-item label="分类名称" prop="prjClasfiName1">
-					<el-input v-model="formData.prjClasfiName1" auto-complete="off"></el-input>
+				<el-form-item label="二级分类" prop="prjClasfiName2">
+					<el-select v-model="formData.prjClasfiName2" filterable placeholder="请选择二级分类" 
+						style="width: 100%;" @change="prjClasfiName2Change">
+						<el-option v-for="item in prjClasfiName2Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+					</el-select>
 				</el-form-item>
-				<el-form-item label="分类名称" prop="prjClasfiName2">
-					<el-input v-model="formData.prjClasfiName2" auto-complete="off"></el-input>
+				<el-form-item label="三级分类" prop="prjClasfiName3">
+					<el-select v-model="formData.prjClasfiName3" filterable placeholder="请选择三级分类" 
+						style="width: 100%;" @change="prjClasfiName3Change">
+						<el-option v-for="item in prjClasfiName3Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+					</el-select>
 				</el-form-item>
-				<el-form-item label="分类名称" prop="prjClasfiName3">
-					<el-input v-model="formData.prjClasfiName3" auto-complete="off"></el-input>
+				<el-form-item label="四级分类" prop="prjClasfiName4">
+					<el-select v-model="formData.prjClasfiName4" filterable placeholder="请选择四级分类" style="width: 100%;" 
+						@change="4">
+						<el-option v-for="item in prjClasfiName4Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+					</el-select>
 				</el-form-item>
-				<el-form-item label="分类名称" prop="prjClasfiName4">
-					<el-input v-model="formData.prjClasfiName4" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="分类名称" prop="prjClasfiName5">
-					<el-input v-model="formData.prjClasfiName5" auto-complete="off"></el-input>
+				<el-form-item label="五级分类" prop="prjClasfiName5">
+					<el-select v-model="formData.prjClasfiName5" filterable placeholder="请选择五级分类" style="width: 100%;">
+						<el-option v-for="item in prjClasfiName5Options" :key="item.id" :label="item.name" :value="item.code"></el-option>
+					</el-select>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -57,14 +65,19 @@
 
 <script>
 	import util from '../../../common/js/util';
-	import {createOrUpdateProjectDetail} from '../../../api/api';
+	import {createOrUpdateProjectDetail, getPrjClasfiNameByParentId, queryDicByProejctDetailId } from '../../../api/api';
 
 	export default {
 		data() {
 			return {
 				show: true,
 				formLoading: false,
-				title: 'aaaa',
+				title: '',
+				prjClasfiName1Options: [],
+				prjClasfiName2Options: [],
+				prjClasfiName3Options: [],
+				prjClasfiName4Options: [],
+				prjClasfiName5Options: [],
 				formRules: {
 					prjSN: [
 						{ required: true,  message: '不能为空', trigger: 'blur' }
@@ -75,63 +88,87 @@
 					serialFunct: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					serialFunct: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					aboveGroundArea: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					underGroundArea: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					blendArea: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					aboveGroundLen: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					prjClasfiCode: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					prjClasfiName1: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					prjClasfiName2: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					prjClasfiName3: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					prjClasfiName4: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					prjClasfiName5: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					]
+				},
+				formData: {
+					prjSN: '',
+					serialNumber: '',
+					serialFunct: '',
+					aboveGroundArea: '',
+					underGroundArea: '',
+					blendArea: '',	
+					aboveGroundLen: '',
+					prjClasfiName1: '',
+					prjClasfiName2: '',
+					prjClasfiName3: '',
+					prjClasfiName4: '',
+					prjClasfiName5: ''
+
 				}
 			}
 		},
 		methods: {
+			prjClasfiName1Change(value) {
+				this.getPrjClasfiNameByParentId(value, '2');
+			},
+			prjClasfiName2Change(value) {
+				this.getPrjClasfiNameByParentId(value, '3');
+			},
+			prjClasfiName3Change(value) {
+				this.getPrjClasfiNameByParentId(value, '4');
+			},
+			prjClasfiName4Change(value) {
+				this.getPrjClasfiNameByParentId(value, '5');
+			},
+			getPrjClasfiNameByParentId(pId, type) {
+
+				getPrjClasfiNameByParentId({type: 'FJ', parentID: pId}).then(resp => {
+					
+					if (resp.header.rspReturnCode !== '000000') {
+						respMsg.type = 'error';
+						respMsg.message = '查询五级分类接口调用失败';
+						this.$message(respMsg);
+						return;
+					}
+
+					this[`prjClasfiName${type}Options`] = resp.classifiDicList;
+
+				});
+			},
 			submitHandler: function () {
 				this.$refs.formData.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.formLoading = true;
-							let para = Object.assign({}, this.formData);
+							let para = {
+								prjSN: this.formData.prjSN,
+								serialNumber: this.formData.serialNumber,
+								serialFunct: this.formData.serialFunct,
+								aboveGroundArea: this.formData.aboveGroundArea,
+								underGroundArea: this.formData.underGroundArea,
+								blendArea: this.formData.blendArea,	
+								aboveGroundLen: this.formData.aboveGroundLen,
+								prjClasfiCode: this.formData.prjClasfiName5
+							};
+							if (!!this.formData.id) {
+								para.id = this.formData.id;
+							}
 							createOrUpdateProjectDetail(para).then((resp) => {
 								this.formLoading = false;
 								const respMsg= {message: '', type: ''}
@@ -158,9 +195,44 @@
             }
 		},
 		mounted() {
-			this.title = (typeof(this.formData.id) !== 'undefined') ? '修改项目明细信息' : '新增项目明细信息';
+			if (this.formTemData && !!this.formTemData.id) {
+				this.title = '修改项目明细信息';
+				this.formData = {
+					id: this.formTemData.id,
+					prjSN: this.formTemData.prjSN,
+					serialNumber: this.formTemData.serialNumber,
+					serialFunct: this.formTemData.serialFunct,
+					aboveGroundArea: this.formTemData.aboveGroundArea,
+					underGroundArea: this.formTemData.underGroundArea,
+					blendArea: this.formTemData.blendArea,
+					aboveGroundLen: this.formTemData.aboveGroundLen
+				};
+				queryDicByProejctDetailId(this.formTemData.id).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						respMsg.type = 'error';
+						respMsg.message = '根据明细id查询五级分类信息出错';
+						this.$message(respMsg);
+						return;
+					}
+
+					for (let i = 1; i < 6; i++) {
+						this[`prjClasfiName${i}Options`] = resp.viewObj[`prjClasfiName${i}List`] || [];
+						const obj = resp.viewObj[`prjClasfiName${i}Obj`];
+						if (obj) {
+							this.formData[`prjClasfiName${i}`] = obj.code;
+						}
+					}
+
+					this.prjClasfiName1Options = resp
+
+				});
+			} else {
+				this.title = '新增项目明细信息';
+				this.getPrjClasfiNameByParentId('', '1');
+			}			
 		},
-        props: ['formData', 'callback']
+        props: ['formTemData', 'callback']
 	}
 
 </script>

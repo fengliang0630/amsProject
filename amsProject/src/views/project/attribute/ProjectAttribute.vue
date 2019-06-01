@@ -44,7 +44,7 @@
 			<el-table-column prop="exproprInfo" label="代征用地情况" width="120"></el-table-column>
 			<el-table-column prop="buldStatus" label="工程状态" width="120"></el-table-column>
 			<el-table-column prop="remark" label="备注" width="120"></el-table-column>
-			<el-table-column label="操作" fixed="right" width="200">
+			<el-table-column label="操作" width="200">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

@@ -6,7 +6,7 @@
 			<el-form :model="formData" label-width="150px" :rules="formRules" ref="formData" size="medium">
 				<el-form-item label="许可证号" prop="prjSN">
 					<el-input v-if="!!formData.id" v-model="formData.prjSN" auto-complete="off" readOnly></el-input>
-					<el-input v-if="!formData.id" v-model="formData.prjSN" auto-complete="off"></el-input>
+					<el-input v-if="!formData.id" v-model="formData.prjSN" auto-complete="off" @change="prjSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="建设单位" prop="prjUnit">
 					<el-input v-model="formData.prjUnit" auto-complete="off"></el-input>
@@ -18,7 +18,7 @@
 					<el-input v-model="formData.prjName" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="建设类型" prop="prjType">
-					<el-select v-model="formData.prjType" multiple placeholder="请选择建设类型" style="width: 100%;">
+					<el-select v-model="formData.prjType" placeholder="请选择建设类型" style="width: 100%;">
 						<el-option v-for="item in prjTypeOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
@@ -29,28 +29,28 @@
 					<el-input v-model="formData.contactInf" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="附带临建批号" prop="prjTemSN">
-					<el-input v-model="formData.prjTemSN" auto-complete="off"></el-input>
+					<el-input v-if="!!formData.id" v-model="formData.prjTemSN" auto-complete="off" readOnly></el-input>
+					<el-input v-if="!formData.id" v-model="formData.prjTemSN" auto-complete="off" @change="prjSNChange"></el-input>
+				</el-form-item>
+				<el-form-item label="许可证类型" prop="prjSNType">
+					<el-select v-model="formData.prjSNType" placeholder="请选择许可证类型" style="width: 100%;" @change="prjSNTypeChange">
+						<el-option v-for="item in prjSNTypeOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
 				</el-form-item>
 				<el-form-item label="发件日期" prop="noticeTime">
 					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" style="width: 100%;"></el-date-picker>
 				</el-form-item>
-				<el-form-item label="有效时间" prop="effectiveTime">
-					<el-input v-model="formData.effectiveTime" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="许可证类型" prop="prjSNType">
-					<el-input v-model="formData.prjSNType" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="项目状态" prop="prjStatus">
-					<el-input v-model="formData.prjStatus" auto-complete="off"></el-input>
+				<el-form-item label="有效期" prop="effectiveTime">
+					<el-input-number v-model="formData.effectiveTime" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="延期文号" prop="delaySN">
-					<el-input v-model="formData.delaySN" auto-complete="off"></el-input>
+					<el-input v-model="formData.delaySN" auto-complete="off" @change="delaySNChange"></el-input>
 				</el-form-item>
-				<el-form-item label="延长期" prop="delayCountDay">
-					<el-input v-model="formData.delayCountDay" auto-complete="off"></el-input>
+				<el-form-item label="延长期(月)" prop="delayCountDay">
+					<el-input-number v-model="formData.delayCountDay" :min="1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="补正证号" prop="correctionSN">
-					<el-input v-model="formData.correctionSN" auto-complete="off"></el-input>
+					<el-input v-model="formData.correctionSN" auto-complete="off" @change="correctionSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="补正日期" prop="correctionDate">
 					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" style="width: 100%;"></el-date-picker>
@@ -81,6 +81,8 @@
 				formLoading: false,
 				title: '',
 				prjTypeOptions: ['新建', '改扩建'],
+				prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目'],
+				remarkRequired: { required: true, message: '不能为空', trigger: 'blur' },
 				formRules: {
 					prjSN: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
@@ -108,64 +110,79 @@
 						{ max: 10, message: '最大长度10', trigger: 'blur' }
 					],
 					contactInf: [
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ validator: util.validatorUtils.checkMobile, trigger: 'blur' },
 						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					prjTemSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ validator: util.validatorUtils.checkContaintStr('临', '输入有效临建证号！'), trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
 					specialNotifi: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 1500, message: '最大长度1500', trigger: 'blur' }
-					],
-					noticeTime: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
-					],
-					effectiveTime: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					remark: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 900, message: '最大长度900', trigger: 'blur' }
 					],
 					prjSNType: [
 						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
-					prjStatus: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
+					noticeTime: [],
+					effectiveTime: [],
 					delaySN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					delayCountDay: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 50, message: '最大长度50', trigger: 'blur' }
 					],
+					delayCountDay: [],
 					correctionSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
 					],
-					correctionDate: [
-						{ required: true,  message: '不能为空', trigger: 'blur' }
+					correctionDate: [],
+					remark: [
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 900, message: '最大长度900', trigger: 'blur' }
 					]
 				}
 			}
 		},
 		methods: {
+			prjSNChange(val) {
+				const remarkRule = this.$refs.formData.rules.remark;
+				const index = remarkRule.indexOf(this.remarkRequired);
+				if (val && val.indexOf('补正') > -1) {
+					if (index === -1) {
+						remarkRule.push(this.remarkRequired);
+					}
+				} else {
+					if (index !== -1) {
+						remarkRule.pop();
+					}
+				}
+				
+			},
+			prjSNTypeChange(value) {
+				if (value === '临时建设项目') {
+					this.$refs.formData.rules.noticeTime = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+					this.$refs.formData.rules.effectiveTime = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.noticeTime = [];
+					this.$refs.formData.rules.effectiveTime = [];
+				}
+			},
+			delaySNChange(value) {
+				if (!!value) {
+					this.$refs.formData.rules.delayCountDay = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.delayCountDay = [];
+				}
+			},
+			correctionSNChange(value) {
+				if (!!value) {
+					this.$refs.formData.rules.correctionDate = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.correctionDate = [];
+				}
+			},
 			submitHandler: function () {
 				this.$refs.formData.validate((valid) => {
 					if (valid) {
@@ -199,6 +216,14 @@
 		},
 		mounted() {
 			this.title = (!!this.formData.id) ? '修改项目基本信息' : '新增项目基本信息';
+		},
+		updated() {
+			if (!!this.formData.id) {
+				this.prjSNChange(this.formData.prjSN);
+				this.prjSNTypeChange(this.formData.prjSNType);
+				this.delaySNChange(this.formData.delaySN);
+				this.correctionSNChange(this.formData.correctionSN);
+			}
 		},
         props: ['formData', 'callback']
 	}

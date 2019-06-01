@@ -4,36 +4,38 @@
 		<!--编辑界面-->
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh" >
 			<el-form :model="formData" label-width="200px" :rules="formRules" ref="formData">
-				<el-form-item v-if="typeof formData.id !== 'undefined'" label="id" prop="id">
-					<el-input v-model="formData.id" auto-complete="off" readOnly ></el-input>
-				</el-form-item>
 				<el-form-item label="许可证号" prop="prjSN">
-					<el-autocomplete class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
-						placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+					<el-autocomplete v-if="!!formData.id" class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
+						placeholder="请输入内容" :trigger-on-focus="false" readonly></el-autocomplete>
+					<el-autocomplete v-if="!formData.id" class="inline-input" v-model="formData.prjSN" :fetch-suggestions="querySearch" style="width:100%"
+						placeholder="请输入内容" :trigger-on-focus="false"></el-autocomplete>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
-					<el-input-number v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-if="!formData.id" v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
+					<el-input v-if="!!formData.id" v-model="formData.serialNumber" auto-complete="off" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="项目性质" prop="prjNature">
 					<el-input v-model="formData.prjNature" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="规划项目性质/人防工程情况" prop="prjAttr">
-					<el-input v-model="formData.prjAttr" auto-complete="off"></el-input>
+				<el-form-item label="规划项目/人防" prop="prjAttr">
+					<el-select v-model="formData.prjAttr" placeholder="请选择规划项目/人防" style="width: 100%;">
+						<el-option v-for="item in prjAttrOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
 				</el-form-item>
 				<el-form-item label="平时用途" prop="peacetimeUses">
-					<el-input type="textarea" v-model="formData.peacetimeUses" auto-complete="off"></el-input>
+					<el-input v-model="formData.peacetimeUses" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上层数" prop="aboveGroundLev">
-					<el-input-number v-model="formData.aboveGroundLev" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLev" :min="1" :max="200" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下层数" prop="underGroundLev">
-					<el-input-number v-model="formData.underGroundLev" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.underGroundLev" :min="1" :max="200" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上高度（米）" prop="aboveGroundHet">
-					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下高度（米）" prop="underGroundHet">
-					<el-input-number v-model="formData.underGroundHet" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.underGroundHet" :precision="2" :step="0.1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="栋数" prop="buildings">
 					<el-input-number v-model="formData.buildings" :min="1" style="width:100%"></el-input-number>
@@ -45,19 +47,22 @@
 					<el-input v-model="formData.strucType" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="验线文号" prop="checkDocSN">
-					<el-input v-model="formData.checkDocSN" auto-complete="off"></el-input>
+					<el-input v-if="!!formData.id" v-model="formData.checkDocSN" auto-complete="off" readonly></el-input>
+					<el-input v-if="!formData.id" v-model="formData.checkDocSN" auto-complete="off" @change="checkDocSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验线日期" prop="checkDocDate">
 					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="验收文号" prop="checkSN">
-					<el-input v-model="formData.checkSN" auto-complete="off"></el-input>
+					<el-input v-if="!!formData.id" v-model="formData.checkSN" auto-complete="off" readonly></el-input>
+					<el-input v-if="!formData.id" v-model="formData.checkSN" auto-complete="off" @change="checkSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验收日期" prop="checkDate">
 					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="撤（注）销证号" prop="cancelSN">
-					<el-input type="textarea" v-model="formData.cancelSN" auto-complete="off"></el-input>
+					<el-input v-if="!!formData.id" v-model="formData.cancelSN" auto-complete="off" readonly></el-input>
+					<el-input v-if="!formData.id" v-model="formData.cancelSN" auto-complete="off" @change="cancelSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="撤（注）销日期" prop="cancelDate">
 					<el-input v-model="formData.cancelDate" auto-complete="off"></el-input>
@@ -67,9 +72,6 @@
 				</el-form-item>
 				<el-form-item label="代征用地情况" prop="exproprInfo">
 					<el-input v-model="formData.exproprInfo" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="工程状态" prop="buldStatus">
-					<el-input v-model="formData.buldStatus" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="备注" prop="remark">
 					<el-input type="textarea" v-model="formData.remark" auto-complete="off"></el-input>
@@ -92,7 +94,8 @@
 			return {
 				show: true,
 				formLoading: false,
-				title: 'aaaa',
+				title: '',
+				prjAttrOptions: ['规划项目性质', '人防工程情况'],
 				formRules: {
 					prjSN: [
 						{ required: true,  message: '不能为空', trigger: 'blur' }
@@ -106,86 +109,68 @@
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
 					prjAttr: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ required: true, message: '不能为空', trigger: 'blur' }
 					],
 					peacetimeUses: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 2000, message: '最大长度2000', trigger: 'blur' }
-					],
-					aboveGroundLev: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					underGroundLev: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					aboveGroundHet: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					underGroundHet: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					buildings: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					housingStockNum: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
+						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					strucType: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					checkDocSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
 					],
-					checkDocDate: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
+					checkDocDate: [],
 					checkSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
+					],
+					checkDate: [],
+					cancelSN: [
+						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
+					],
+					cancelDate: [],
+					imgJudgeRes: [
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					checkDate: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					cancelSN: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 2000, message: '最大长度2000', trigger: 'blur' }
-					],
-					cancelDate: [
-						{ required: true, message: '不能为空', trigger: 'blur' }
-					],
-					imgJudgeRes: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 500, message: '最大长度50', trigger: 'blur' }
 					],
 					exproprInfo: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
-						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 200, message: '最大长度200', trigger: 'blur' }
-					],
-					buldStatus: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
 					remark: [
-						{ required: true, message: '不能为空', trigger: 'blur' },
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 2000, message: '最大长度2000', trigger: 'blur' }
+						{ max: 1000, message: '最大长度1000', trigger: 'blur' }
 					]
 				}
 			}
 		},
 		methods: {
+			checkDocSNChange(value) {
+				if (!!value) {
+					this.$refs.formData.rules.checkDocDate = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.checkDocDate = [];
+				}
+			},
+			checkSNChange(value) {
+				if (!!value) {
+					this.$refs.formData.rules.checkDate = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.checkDate = [];
+				}
+			},
+			cancelSNChange(value) {
+				if (!!value) {
+					this.$refs.formData.rules.cancelDate = [{ required: true,  message: '不能为空', trigger: 'blur' }];
+				} else {
+					this.$refs.formData.rules.cancelDate = [];
+				}
+			},
 			querySearch(queryString, callback) {
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: queryString}).then(resp => {
 
@@ -230,7 +215,12 @@
             }
 		},
 		mounted() {
-			this.title = (typeof(this.formData.prjSN) !== 'undefined') ? '修改项目属性信息' : '新增项目属性信息';
+			this.title = (!!this.formData.id) ? '修改项目属性信息' : '新增项目属性信息';
+		},
+		updated() {
+			this.checkDocSNChange(this.formData.checkDocSN);
+			this.checkSNChange(this.formData.checkSN);
+			this.cancelSNChange(this.formData.cancelSN);
 		},
         props: ['formData', 'callback']
 	}

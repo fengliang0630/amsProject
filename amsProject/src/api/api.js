@@ -165,6 +165,18 @@ export const createOrUpdateProjectAttribute = params => {
     return axios.post(`${base}/ams/api/xmsx/createOrUpdate`, p).then(res => res.data); 
 };
 
+// 级联查询五级分类
+export const getPrjClasfiNameByParentId = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/dic/queryJL`, p).then(res => res.data); 
+};
+
+// 根据项目明细信息 查询五级分类值域以及选中五级分类信息
+export const queryDicByProejctDetailId = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/xmmx/queryDicByID`, p).then(res => res.data); 
+};
+
 // 查询操作日志列表
 export const getLogListPage = (params, pageSize, pageNum) => {
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});

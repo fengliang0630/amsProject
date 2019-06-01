@@ -439,19 +439,19 @@ let XmjbxxList = [], XmmxList = [], XmsxList = [], PrjSNList = [];
 for (let j = 0; j < 50; j++) {
   XmjbxxList.push({
     id: `${j}_id`,
-    prjSN: `2013规（朝）建字000${j}号`,
+    prjSN: `2013规（朝）建字000${j}号补正`,
     prjUnit: `建设单位${j}`,
     prjAdr: `建设位置${j}`,
     prjName: `a${j}`,
-    prjType: `新建${j}`,
+    prjType: `新建`,
     contacts: `c${j}`,
-    contactInf: `b${j}`,
+    contactInf: `187878787878`,
     prjTemSN: `d${j}`,
     specialNotifi: `d${j}`,
     noticeTime: `2019-12-01`,
     effectiveTime: `d${j}`,
     remark: `d${j}`,
-    prjSNType: `haksjdhgkjsad`,
+    prjSNType: `临时建设项目`,
     prjStatus: `haksjdhgkjsad`,
     delaySN: `haksjdhgkjsad`,
     delayCountDay: `haksjdhgkjsad`,
@@ -504,6 +504,194 @@ for (let j = 0; j < 50; j++) {
 
   PrjSNList.push(`2013规（朝）建字000${j}号`);
 }
+
+let PrjClasfiName1 = [{id: '001', code: '001', name: '一级分类' }];
+let PrjClasfiName2 = [{id: '002', code: '002', name: '二级分类' }];
+let PrjClasfiName3 = [{id: '003', code: '003', name: '三级分类' }];
+let PrjClasfiName4 = [{id: '004', code: '004', name: '四级分类' }];
+let PrjClasfiName5 = [{id: '005', code: '005', name: '五级分类' }];
+
+let DicByProejctDetailId = {
+    "prjClasfiName5Obj": {
+        "code": "0101R00301",
+        "id": "c1a60bd2cd2c4e0bb0824e28b577dd26",
+        "name": "经济适用房",
+        "other": "5",
+        "parentID": "77a91c3d9e40499da2107a440aee57bf",
+        "type": "FJ"
+    },
+    "prjClasfiName2List": [
+        {
+            "code": "0102",
+            "id": "05bd4a4147b74a38aaa1b38b8b021704",
+            "name": "配套公共服务设施",
+            "other": "2",
+            "parentID": "1b3d3624f2754e949a1bfd2ae13e5735",
+            "type": "FJ"
+        },
+        {
+            "code": "0101",
+            "id": "a6e53bf7d90b40d98010c8d0f3ccbdb6",
+            "name": "住房项目",
+            "other": "2",
+            "parentID": "1b3d3624f2754e949a1bfd2ae13e5735",
+            "type": "FJ"
+        },
+        {
+            "code": "0120",
+            "id": "d2a824e174a4467b9c2c19e3bfc4fdaf",
+            "name": "围墙和外立面装修等",
+            "other": "2",
+            "parentID": "1b3d3624f2754e949a1bfd2ae13e5735",
+            "type": "FJ"
+        }
+    ],
+    "prjClasfiName2Obj": {
+        "code": "0101",
+        "id": "a6e53bf7d90b40d98010c8d0f3ccbdb6",
+        "name": "住房项目",
+        "other": "2",
+        "parentID": "1b3d3624f2754e949a1bfd2ae13e5735",
+        "type": "FJ"
+    },
+    "prjClasfiName1Obj": {
+        "code": "01",
+        "id": "1b3d3624f2754e949a1bfd2ae13e5735",
+        "name": "居住类项目",
+        "other": "1",
+        "parentID": "",
+        "type": "FJ"
+    },
+    "prjClasfiName3Obj": {
+        "code": "0101R",
+        "id": "35df5ed59a62451fbf1878947fdc34ab",
+        "name": "城镇住房项目",
+        "other": "3",
+        "parentID": "a6e53bf7d90b40d98010c8d0f3ccbdb6",
+        "type": "FJ"
+    },
+    "prjClasfiName4Obj": {
+        "code": "0101R003",
+        "id": "77a91c3d9e40499da2107a440aee57bf",
+        "name": "经济适用房",
+        "other": "4",
+        "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+        "type": "FJ"
+    },
+    "prjClasfiName5List": [
+        {
+            "code": "0101R00301",
+            "id": "c1a60bd2cd2c4e0bb0824e28b577dd26",
+            "name": "经济适用房",
+            "other": "5",
+            "parentID": "77a91c3d9e40499da2107a440aee57bf",
+            "type": "FJ"
+        }
+    ],
+    "prjClasfiName4List": [
+        {
+            "code": "0101R001",
+            "id": "0596f7a5b8304effb0fe20c9665924d4",
+            "name": "商品房",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R141",
+            "id": "3339782a75a34483adfedeb9e00312de",
+            "name": "人防工程",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R006",
+            "id": "3e7a2e6fee0845d3aa383bf91a66be3b",
+            "name": "低密度住宅",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R002",
+            "id": "6f83d059776e47ad9402e9c90ea58790",
+            "name": "定向安置房",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R003",
+            "id": "77a91c3d9e40499da2107a440aee57bf",
+            "name": "经济适用房",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R004",
+            "id": "e219a93b4a0241738b3de6424a037fea",
+            "name": "限价商品房",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R005",
+            "id": "f0d443434bd44b4da6a6a1a8e59fc1fb",
+            "name": "自住型商品房",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        },
+        {
+            "code": "0101R007",
+            "id": "f9fa0aa846704632af459d1d004779db",
+            "name": "危房改造",
+            "other": "4",
+            "parentID": "35df5ed59a62451fbf1878947fdc34ab",
+            "type": "FJ"
+        }
+    ],
+    "prjClasfiName3List": [
+        {
+            "code": "0101R",
+            "id": "35df5ed59a62451fbf1878947fdc34ab",
+            "name": "城镇住房项目",
+            "other": "3",
+            "parentID": "a6e53bf7d90b40d98010c8d0f3ccbdb6",
+            "type": "FJ"
+        },
+        {
+            "code": "0101X",
+            "id": "7132d534bf814098b4c8cf2eb9ed5d18",
+            "name": "乡村住房项目",
+            "other": "3",
+            "parentID": "a6e53bf7d90b40d98010c8d0f3ccbdb6",
+            "type": "FJ"
+        }
+    ],
+    "prjClasfiName1List": [
+        {
+            "code": "01",
+            "id": "1b3d3624f2754e949a1bfd2ae13e5735",
+            "name": "居住类项目",
+            "other": "1",
+            "parentID": "",
+            "type": "FJ"
+        },
+        {
+            "code": "02",
+            "id": "6097868e90a94fa9a413a1a04f930f53",
+            "name": "非居住类项目",
+            "other": "1",
+            "parentID": "",
+            "type": "FJ"
+        }
+    ]
+};
+
 
 let view001List = [], view002List = [], view003List = [];
 
@@ -610,4 +798,5 @@ view003List=[
 ];
 
 export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, 
-    XmjbxxList, XmmxList, XmsxList, PrjSNList, view001List, view002List, view003List };
+    XmjbxxList, XmmxList, XmsxList, PrjSNList, view001List, view002List, view003List,
+    PrjClasfiName1, PrjClasfiName2, PrjClasfiName3, PrjClasfiName4, PrjClasfiName5, DicByProejctDetailId };
