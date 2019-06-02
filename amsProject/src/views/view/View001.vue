@@ -4,7 +4,7 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:100%"
+					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:80%"
 						collapse-tags :title="filters.prjYear">
 						<el-option v-for="item in yearOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
@@ -50,16 +50,20 @@
 					<el-button type="primary" v-on:click="getView001">查询</el-button>
 					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
 				</el-form-item>
+				<el-form-item style="width:100%;">
+					<label>选择显示列信息：</label>
+					<el-select v-model="showCol" multiple placeholder="请选择显示列"  style="width:80%">
+						<el-option v-for="item in showColOption" :key="item.value" :label="item.label" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
 		<!--列表-->
 		<el-table :data="viewList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
-			<el-table-column width="60" label="序号">
-				<template slot-scope="scope">
-					<span>{{scope.$index + 1}}</span>
-				</template>
-			</el-table-column>
+			<template v-for="colObj in showCol">
+				<el-table-column  :prop="colObj.value" :label="colObj.label" width="150"></el-table-column>
+			</template>	
 			<el-table-column prop="count" label="项目个数" width="120"></el-table-column>
 			<el-table-column prop="sumArea" label="总建筑面积(平方米)" width="180"></el-table-column>
 			<el-table-column prop="sumLen" label="总建筑长度(米)" width="180"></el-table-column>
@@ -67,13 +71,6 @@
 			<el-table-column prop="underGroundSumArea" label="地下建筑面积(平方米)" width="180"></el-table-column>
 			<el-table-column prop="buildings" label="栋数" width="80"></el-table-column>
 			<el-table-column prop="housingStockNum" label="住房套数" width="120"></el-table-column>
-			<el-table-column v-if="tableColShow.prjYear" prop="prjYear" label="年份" width="100"></el-table-column>
-			<el-table-column v-if="tableColShow.prjAdr" prop="prjAdr" label="建设位置" width="150"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName1" prop="prjClasfiName1" label="一级分类" width="150"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName2" prop="prjClasfiName2" label="二级分类" width="150"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName3" prop="prjClasfiName3" label="三级分类" width="150"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName4" prop="prjClasfiName4" label="四级分类" width="150"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName5" prop="prjClasfiName5" label="五级分类" width="150"></el-table-column>
 		</el-table>
 
 		<!--工具条-->
@@ -85,6 +82,9 @@
 
 		<table id="exportTable">
 			<tr>
+				<template v-for="colObj in showCol">
+					<td>{{colObj.label}}</td>
+				</template>
 				<td>项目个数</td>
 				<td>总建筑面积(平方米)</td>
 				<td>总建筑长度(米)</td>
@@ -92,15 +92,11 @@
 				<td>地下建筑面积(平方米)</td>
 				<td>栋数</td>
 				<td>住房套数</td>
-				<td v-if="tableColShow.prjYear">年份</td>
-				<td v-if="tableColShow.prjAdr">建设位置</td>
-				<td v-if="tableColShow.prjClasfiName1">一级分类</td>
-				<td v-if="tableColShow.prjClasfiName2">二级分类</td>
-				<td v-if="tableColShow.prjClasfiName3">三级分类</td>
-				<td v-if="tableColShow.prjClasfiName4">四级分类</td>
-				<td v-if="tableColShow.prjClasfiName5">五级分类</td>
 			</tr>
 			<tr v-for="item in viewList">
+				<template v-for="colObj in showCol">
+					<td>{{item[colObj.value]}}</td>
+				</template>
 				<td>{{item.count}}</td>
 				<td>{{item.sumArea}}</td>
 				<td>{{item.sumLen}}</td>
@@ -108,13 +104,6 @@
 				<td>{{item.underGroundSumArea}}</td>
 				<td>{{item.buildings}}</td>
 				<td>{{item.housingStockNum}}</td>
-				<td v-if="tableColShow.prjYear">{{item.prjYear}}</td>
-				<td v-if="tableColShow.prjAdr">{{item.prjAdr}}</td>
-				<td v-if="tableColShow.prjClasfiName1">{{item.prjClasfiName1}}</td>
-				<td v-if="tableColShow.prjClasfiName2">{{item.prjClasfiName2}}</td>
-				<td v-if="tableColShow.prjClasfiName3">{{item.prjClasfiName3}}</td>
-				<td v-if="tableColShow.prjClasfiName4">{{item.prjClasfiName4}}</td>
-				<td v-if="tableColShow.prjClasfiName5">{{item.prjClasfiName5}}</td>
 			</tr>
 		</table>
 
@@ -128,6 +117,16 @@
 	export default {
 		data() {
 			return {
+				showColOption: [
+					{ label: '年份', value: 'prjYear'},
+					{ label: '建设位置', value: 'prjAdr'},
+					{ label: '一级分类', value: 'prjClasfiName1'},
+					{ label: '二级分类', value: 'prjClasfiName2'},
+					{ label: '三级分类', value: 'prjClasfiName3'},
+					{ label: '四级分类', value: 'prjClasfiName4'},
+					{ label: '五级分类', value: 'prjClasfiName5'}
+				],
+				showCol: [],
 				filters: {
 					prjYear: [],
 					prjAdr: [],
@@ -136,15 +135,6 @@
 					prjClasfiName3: [],
 					prjClasfiName4: [],
 					prjClasfiName5: []
-				},
-				tableColShow: {
-					prjYear: false,
-					prjAdr: false,
-					prjClasfiName1: false,
-					prjClasfiName2: false,
-					prjClasfiName3: false,
-					prjClasfiName4: false,
-					prjClasfiName5: false
 				},
 				yearOptions: [],
 				prjAdrOptions: [],
@@ -195,21 +185,10 @@
 						});
 						return;
 					}
-					
-					this.showColumn();
 
 					this.total = resp.header.rspPageCount;
 					this.viewList = resp.viewList;
 				});
-			},
-
-			showColumn() {
-				for (let key in this.filters) {
-					this.tableColShow[key] = false;
-					if (this.filters[key].length) {
-						this.tableColShow[key] = true;
-					}
-				}
 			},
 
 			filterPrjAdrMethod(query) {

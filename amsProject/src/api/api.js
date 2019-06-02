@@ -191,14 +191,14 @@ export const getLogListPage = (params, pageSize, pageNum) => {
 };
 
 // view001
-export const getView001 = params => {
-    const p = pckParam(params, {});
+export const getView001 = (params, pageSize, pageNum) => {
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
     return axios.post(`${base}/ams/api/view/bb001`, p).then(res => res.data); 
 };
 
 // view002
-export const getView002 = params => {
-    const p = pckParam(params, {});
+export const getView002 = (params, pageSize, pageNum) => {
+    const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
     return axios.post(`${base}/ams/api/view/bb002`, p).then(res => res.data); 
 };
 
