@@ -793,9 +793,583 @@ view002List = [
     }
 ];
 
-view003List=[
-
-];
+view003List = {
+    "居住类项目": {
+        "配套公共服务设施": {
+            "1": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 1498,
+                    "remark": "地下一层为设备夹层，层高1.9米；地下二层功能为变配电室，层高3.6米；地下三层为电缆夹层，层高2.1米。",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 499,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "B-1S#配套公建",
+                    "checkSN": "",
+                    "aboveGroundHet": 9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 3,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 2,
+                    "underGroundHet": -7.95,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 999,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                }
+            },
+            "2": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "地下一层为储藏间和设备用房，层高4.4米；局部为电缆夹层，层高2.1米。",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 0,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "B-2S#配套公建",
+                    "checkSN": "",
+                    "aboveGroundHet": 12.6,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 2,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 3,
+                    "underGroundHet": -7.2,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 2753,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "规划项目性质：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 0,
+                            "aboveGroundLen": 0,
+                            "buldType": "社区综合管理服务/机构养老设施",
+                            "aboveGroundArea": 2211,
+                            "serialFunct": "养老院"
+                        },
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 0,
+                            "aboveGroundLen": 0,
+                            "buldType": "社区综合管理服务/老年活动场站",
+                            "aboveGroundArea": 492,
+                            "serialFunct": "老年活动站"
+                        },
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 0,
+                            "aboveGroundLen": 0,
+                            "buldType": "市政公用/公共厕所",
+                            "aboveGroundArea": 50,
+                            "serialFunct": "公厕"
+                        }
+                    ]
+                }
+            },
+            "3": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 28,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "1#人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 25,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 28,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 25,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "4": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 63,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "2#/2#反人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 44,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 63,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 44,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "5": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 56,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "3#/3#反人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 50,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 56,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 50,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "6": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 24,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "4#人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 21,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 24,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 21,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "7": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 24,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "4#反人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 21,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 24,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 21,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "8": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 28,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "5#人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 25,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 28,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 25,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "9": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 28,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "5#反人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 25,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 28,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 25,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "10": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 63,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "6#/6#反人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 44,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 63,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 44,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "11": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 28,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "7#人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 25,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 28,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 25,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "12": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 32,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "8#人防出入口",
+                    "checkSN": "",
+                    "aboveGroundHet": 3.9,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 1,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 1,
+                    "underGroundHet": -7.3,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 20,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 32,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 20,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            },
+            "13": {
+                "tongj": {
+                    "peacetimeUses": "",
+                    "cancelDate": "",
+                    "imgJudgeRes": "",
+                    "housingStockNum": 0,
+                    "sumArea": 0,
+                    "remark": "",
+                    "checkDocDate": "",
+                    "exproprInfo": "",
+                    "underGroundSumArea": 14918,
+                    "strucType": "",
+                    "buldStatus": "未申报",
+                    "prjNature": "B区地下车库",
+                    "checkSN": "",
+                    "aboveGroundHet": 0,
+                    "delayCountDay": "",
+                    "sumLen": 0,
+                    "underGroundLev": 2,
+                    "correctionDate": "",
+                    "checkDate": "",
+                    "aboveGroundLev": 0,
+                    "underGroundHet": -7.2,
+                    "correctionSN": "",
+                    "aboveGroundSumArea": 0,
+                    "delaySN": "",
+                    "buildings": 1,
+                    "checkDocSN": "",
+                    "cancelSN": ""
+                },
+                "detail": {
+                    "人防工程情况：": [
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 14804,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 0,
+                            "serialFunct": "人防工程"
+                        },
+                        {
+                            "blendArea": 0,
+                            "underGroundArea": 114,
+                            "aboveGroundLen": 0,
+                            "buldType": "人防工程/人防工程（DL）",
+                            "aboveGroundArea": 0,
+                            "serialFunct": "人防室外口及通道面积"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+};
 
 export { LoginUsers, Users, Roles, Menus, HasRoles, MenuTree, SelectMenuIds, Points, 
     XmjbxxList, XmmxList, XmsxList, PrjSNList, view001List, view002List, view003List,

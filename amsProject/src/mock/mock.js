@@ -164,7 +164,7 @@ export default {
       });
     });
 
-    // 查询view001
+    // 查询view003
     mock.onPost('/ams/api/view/bb003').reply(config => {
       const respData = {
         header : {
