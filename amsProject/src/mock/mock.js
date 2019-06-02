@@ -122,42 +122,13 @@ export default {
       });
     });
 
-    // 模糊过滤
-    mock.onPost('/ams/api/mh/queryJbxxLike').reply(config => {
-      let {header, tab, key, val} = JSON.parse(config.data);
-      let {reqpageSize, reqpageIndex} = header;
-      const respData = {
-        header : {
-          reqpageIndex: 1,
-          reqUserId: 'xxw',
-          rspPageCount: 1,
-          rspReturnMsg: '【1132250761523232768】交易成功',
-          reqpageSize: 20,
-          rspReturnCode: '000000'
-        }
-      }
-
-      if (key === 'prjSN') {
-        const _PrjSNList = PrjSNList;
-        respData.PrjSNList = _PrjSNList.filter(d => {
-          return (d.indexOf(val) > -1);
-        });
-      }
-
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve([200, respData]);
-        }, 1000);
-      });
-    });
-
     // 查询view001
     mock.onPost('/ams/api/view/bb001').reply(config => {
       const respData = {
         header : {
           reqpageIndex: 1,
           reqUserId: 'xxw',
-          rspPageCount: 1,
+          rspPageCount: view001List.length,
           rspReturnMsg: '【1132250761523232768】交易成功',
           reqpageSize: 20,
           rspReturnCode: '000000'
@@ -178,7 +149,7 @@ export default {
         header : {
           reqpageIndex: 1,
           reqUserId: 'xxw',
-          rspPageCount: 1,
+          rspPageCount: view002List.length,
           rspReturnMsg: '【1132250761523232768】交易成功',
           reqpageSize: 20,
           rspReturnCode: '000000'

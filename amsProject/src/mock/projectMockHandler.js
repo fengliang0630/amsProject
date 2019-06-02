@@ -370,7 +370,42 @@ const ProjectMockHandler = {
       });
     });
 
-    
+    // 查询五级分类值域
+    mock.onPost('/ams/api/dic/queryJL').reply(config => {
+      let {header, type, parentID} = JSON.parse(config.data);
+      let classifiDicList;
+      if (parentID === '001') {
+        classifiDicList = _PrjClasfiName2;
+      } else if (parentID === '002') {
+        classifiDicList = _PrjClasfiName3;
+      } else if (parentID === '003') {
+        classifiDicList = _PrjClasfiName4;
+      } else if (parentID === '004') {
+        classifiDicList = _PrjClasfiName5;
+      } else {
+        classifiDicList = _PrjClasfiName1;
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            classifiDicList: [
+              "商品房",
+              "限价商品房",
+              "自住型商品房"
+            ],
+            header: {
+              reqpageIndex: 1,
+              reqUserId: "xxw",
+              rspPageCount: 1,
+              rspReturnMsg: "【1130134024585609216】交易成功",
+              reqpageSize: 20,
+              rspReturnCode: "000000"
+            }
+          }]);
+        }, 1000);
+      });
+    });
 
   }
 };

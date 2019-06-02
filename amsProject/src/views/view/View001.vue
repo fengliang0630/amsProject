@@ -3,48 +3,50 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
-				<el-form-item style="width:23%;">
-					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份">
+				<el-form-item style="width:31%;">
+					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:100%"
+						collapse-tags :title="filters.prjYear">
 						<el-option v-for="item in yearOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请选择建设位置" 
-						:remote-method="filterPrjAdrMethod">
+						:remote-method="filterPrjAdrMethod" collapse-tags :title="filters.prjAdr" style="width:100%">
 						<el-option v-for="item in prjAdrOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请选择一级分类" 
-						:remote-method="filterPrjClasfiName1Method">
+						:remote-method="filterPrjClasfiName1Method" collapse-tags :title="filters.prjClasfiName1"  style="width:100%">
 						<el-option v-for="item in prjClasfiName1Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请选择二级分类" 
-						:remote-method="filterPrjClasfiName2Method">
+						:remote-method="filterPrjClasfiName2Method" collapse-tags :title="filters.prjClasfiName2"  style="width:100%">
 						<el-option v-for="item in prjClasfiName2Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请选择三级分类" 
-						:remote-method="filterPrjClasfiName3Method">
+						:remote-method="filterPrjClasfiName3Method" collapse-tags :title="filters.prjClasfiName3"  style="width:100%">
 						<el-option v-for="item in prjClasfiName3Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请选择四级分类" 
-						:remote-method="filterPrjClasfiName4Method">
+						:remote-method="filterPrjClasfiName4Method" collapse-tags :title="filters.prjClasfiName4"  style="width:100%">
 						<el-option v-for="item in prjClasfiName4Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">
 					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请选择五级分类" 
-						:remote-method="filterPrjClasfiName5Method">
+						:remote-method="filterPrjClasfiName5Method" collapse-tags :title="filters.prjClasfiName5"  style="width:100%">
 						<el-option v-for="item in prjClasfiName5Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:23%;">
+				<el-form-item style="width:31%;">&nbsp;</el-form-item>
+				<el-form-item style="width:31%;">
 					<el-button type="primary" v-on:click="getView001">查询</el-button>
 					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
 				</el-form-item>
@@ -58,21 +60,28 @@
 					<span>{{scope.$index + 1}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="count" label="项目个数"></el-table-column>
-			<el-table-column prop="sumArea" label="总建筑面积(平方米)"></el-table-column>
-			<el-table-column prop="sumLen" label="总建筑长度(米)"></el-table-column>
-			<el-table-column prop="aboveGroundSumArea" label="地上建筑面积(平方米)"></el-table-column>
-			<el-table-column prop="underGroundSumArea" label="地下建筑面积(平方米)"></el-table-column>
-			<el-table-column prop="buildings" label="栋数"></el-table-column>
-			<el-table-column prop="buildings" label="住房套数(返回字段没有)"></el-table-column>
-			<el-table-column v-if="tableColShow.prjYear" prop="prjYear" label="年份"></el-table-column>
-			<el-table-column v-if="tableColShow.prjAdr" prop="prjAdr" label="建设位置"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName1" prop="prjClasfiName1" label="一级分类"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName2" prop="prjClasfiName2" label="二级分类"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName3" prop="prjClasfiName3" label="三级分类"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName4" prop="prjClasfiName4" label="四级分类"></el-table-column>
-			<el-table-column v-if="tableColShow.prjClasfiName5" prop="prjClasfiName5" label="五级分类"></el-table-column>
+			<el-table-column prop="count" label="项目个数" width="120"></el-table-column>
+			<el-table-column prop="sumArea" label="总建筑面积(平方米)" width="180"></el-table-column>
+			<el-table-column prop="sumLen" label="总建筑长度(米)" width="180"></el-table-column>
+			<el-table-column prop="aboveGroundSumArea" label="地上建筑面积(平方米)" width="180"></el-table-column>
+			<el-table-column prop="underGroundSumArea" label="地下建筑面积(平方米)" width="180"></el-table-column>
+			<el-table-column prop="buildings" label="栋数" width="80"></el-table-column>
+			<el-table-column prop="housingStockNum" label="住房套数" width="120"></el-table-column>
+			<el-table-column v-if="tableColShow.prjYear" prop="prjYear" label="年份" width="100"></el-table-column>
+			<el-table-column v-if="tableColShow.prjAdr" prop="prjAdr" label="建设位置" width="150"></el-table-column>
+			<el-table-column v-if="tableColShow.prjClasfiName1" prop="prjClasfiName1" label="一级分类" width="150"></el-table-column>
+			<el-table-column v-if="tableColShow.prjClasfiName2" prop="prjClasfiName2" label="二级分类" width="150"></el-table-column>
+			<el-table-column v-if="tableColShow.prjClasfiName3" prop="prjClasfiName3" label="三级分类" width="150"></el-table-column>
+			<el-table-column v-if="tableColShow.prjClasfiName4" prop="prjClasfiName4" label="四级分类" width="150"></el-table-column>
+			<el-table-column v-if="tableColShow.prjClasfiName5" prop="prjClasfiName5" label="五级分类" width="150"></el-table-column>
 		</el-table>
+
+		<!--工具条-->
+		<el-col :span="24" class="toolbar">
+			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
+				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
+			</el-pagination>
+		</el-col>
 
 		<table id="exportTable">
 			<tr>
@@ -82,7 +91,7 @@
 				<td>地上建筑面积(平方米)</td>
 				<td>地下建筑面积(平方米)</td>
 				<td>栋数</td>
-				<td>住房套数(返回字段没有)</td>
+				<td>住房套数</td>
 				<td v-if="tableColShow.prjYear">年份</td>
 				<td v-if="tableColShow.prjAdr">建设位置</td>
 				<td v-if="tableColShow.prjClasfiName1">一级分类</td>
@@ -98,7 +107,7 @@
 				<td>{{item.aboveGroundSumArea}}</td>
 				<td>{{item.underGroundSumArea}}</td>
 				<td>{{item.buildings}}</td>
-				<td>{{item.buildings}}</td>
+				<td>{{item.housingStockNum}}</td>
 				<td v-if="tableColShow.prjYear">{{item.prjYear}}</td>
 				<td v-if="tableColShow.prjAdr">{{item.prjAdr}}</td>
 				<td v-if="tableColShow.prjClasfiName1">{{item.prjClasfiName1}}</td>
@@ -113,7 +122,7 @@
 </template>
 
 <script>
-	import { getView001 } from '../../api/api';
+	import { getView001, getPrjClasfiNames, queryDataByLike } from '../../api/api';
 	import util from '../../common/js/util';
 
 	export default {
@@ -139,22 +148,28 @@
 				},
 				yearOptions: [],
 				prjAdrOptions: [],
-				prjAdrAllOptions: [],
 				prjClasfiName1Options: [],
 				prjClasfiName2Options: [],
 				prjClasfiName3Options: [],
 				prjClasfiName4Options: [],
 				prjClasfiName5Options: [],
-				prjClasfiName1AllOptions: [],
-				prjClasfiName2AllOptions: [],
-				prjClasfiName3AllOptions: [],
-				prjClasfiName4AllOptions: [],
-				prjClasfiName5AllOptions: [],
 				viewList: [],
-				listLoading: false
+				listLoading: false,
+				total: 0,
+				pageNum: 1,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize
 			}
 		},
 		methods: {
+			handleSizeChange(pageSize) {
+				this.pageSize = pageSize;
+				this.getView001();
+			},
+			handleCurrentChange(pageNum) {
+				this.pageNum = pageNum;
+				this.getView001();
+			},
 			getView001() {
 				const param = {};
 				let isQuery = false;
@@ -171,7 +186,7 @@
 				}
 				this.listLoading = true;
 
-				getView001(param).then((resp) => {
+				getView001(param, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
@@ -183,6 +198,7 @@
 					
 					this.showColumn();
 
+					this.total = resp.header.rspPageCount;
 					this.viewList = resp.viewList;
 				});
 			},
@@ -197,58 +213,59 @@
 			},
 
 			filterPrjAdrMethod(query) {
-				this.prjAdrOptions = this.prjAdrAllOptions.filter(item => {
-						return item.indexOf(query) > -1;
-					});
+				queryDataByLike({tab: 'xmjbxx', key: 'prjAdr', val: query}).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({message: '查询项目地址失败', type: 'error'});
+						return;
+					}
+					this.prjAdrOptions = resp.list;
+				});
 				
 			},
 
-			filterPrjClasfiName1Method(query) {
-				this.prjClasfiName1Options = this.prjClasfiName1AllOptions.filter(item => {
-					return item.indexOf(query) > -1;
+			queryPrjClasfiName(query, type) {
+				if (!query) {
+					this[`prjClasfiName${type}Options`] = [];
+					return;
+				}
+				const param = {
+					name: query,
+					type: 'FJ',
+					other: type
+				};
+
+				getPrjClasfiNames(param).then(resp => {
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: '查询一级分类失败',
+							type: 'error'
+						});
+						return;
+					}
+
+					this[`prjClasfiName${type}Options`] = resp.classifiDicList;
 				});
+			},
+			filterPrjClasfiName1Method(query) {
+				this.queryPrjClasfiName(query, '1');
 			},
 
 			filterPrjClasfiName2Method(query) {
-				this.prjClasfiName2Options = this.prjClasfiName2AllOptions.filter(item => {
-					return item.indexOf(query) > -1;
-				});
+				this.queryPrjClasfiName(query, '2');
 			},
 
 			filterPrjClasfiName3Method(query) {
-				this.prjClasfiName3Options = this.prjClasfiName3AllOptions.filter(item => {
-					return item.indexOf(query) > -1;
-				});
+				this.queryPrjClasfiName(query, '3');
 			},
 
 			filterPrjClasfiName4Method(query) {
-				this.prjClasfiName4Options = this.prjClasfiName4AllOptions.filter(item => {
-					return item.indexOf(query) > -1;
-				});
+				this.queryPrjClasfiName(query, '4');
 			},
 
 			filterPrjClasfiName5Method(query) {
-				this.prjClasfiName5Options = this.prjClasfiName5AllOptions.filter(item => {
-					return item.indexOf(query) > -1;
-				});
+				this.queryPrjClasfiName(query, '5');
 			},
-
-			queryAllOptionsValue() {
-				this.yearOptions = ['2001', '2002', '2003', '2004', '2005', '2006'];
-				this.prjAdrOptions = ['和平街街道', '黑庄户乡', '香河园街道', '小关街道'];
-				this.prjAdrAllOptions = ['和平街街道', '黑庄户乡', '香河园街道', '小关街道'];
-				this.prjClasfiName1AllOptions = ['居住类项目', '非居住类项目'];
-				this.prjClasfiName1Options = ['居住类项目', '非居住类项目'];
-				this.prjClasfiName2AllOptions = ['住房项目', '配套公共服务设施', '城乡建设项目'];
-				this.prjClasfiName2Options = ['住房项目', '配套公共服务设施', '城乡建设项目'];
-				this.prjClasfiName3AllOptions = ['城镇住房项目', '乡村住房项目', '配套公共服务设施'];
-				this.prjClasfiName3Options = ['城镇住房项目', '乡村住房项目', '配套公共服务设施'];
-				this.prjClasfiName4AllOptions = ['商品房', '定向安置房', '经济适用房', '限价商品房'];
-				this.prjClasfiName4Options = ['商品房', '定向安置房', '经济适用房', '限价商品房'];
-				this.prjClasfiName5AllOptions = ['商品房', '定向安置房', '经济适用房', '限价商品房'];
-				this.prjClasfiName5Options = ['商品房', '定向安置房', '经济适用房', '限价商品房'];
-			},
-
 			exportExcel() {
 				const table = document.getElementById('exportTable');
 				util.exportExcel(table, '符合统计数据');
@@ -256,11 +273,15 @@
 
 		},
 		mounted() {
-			this.queryAllOptionsValue();
+			const y = new Date().getFullYear();
+			for (let i = 0; i < 20; i++) {
+				this.yearOptions.push(y - i);
+			}
 		}
 	}
 </script>
 
 <style scope>
 	#exportTable {display: none;}
+	#view001 .el-form-item__content {width: 100%;}
 </style>

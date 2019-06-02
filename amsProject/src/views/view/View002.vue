@@ -36,26 +36,47 @@
 					</el-form>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjStatus" label="项目状态"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位"></el-table-column>
-			<el-table-column prop="prjAdr" label="建设位置"></el-table-column>
-			<el-table-column  label="工程名称">
-				 <template slot-scope="scope">
+			<el-table-column prop="prjStatus" label="项目状态" width="100"></el-table-column>
+			<el-table-column prop="prjUnit" label="建设单位" width="150"></el-table-column>
+			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
+			<el-table-column  label="工程名称" width="150">
+				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
 						<p>{{ scope.row.prjName }}</p>
 						<div slot="reference" class="name-wrapper">{{ scope.row.prjName }}</div>
 					</el-popover>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjType" label="项目类型"></el-table-column>
-			<el-table-column prop="prjXz" label="项目性质"></el-table-column>
-			<el-table-column prop="contacts" label="联系人"></el-table-column>
-			<el-table-column prop="contactInf" label="联系方式"></el-table-column>
-			<el-table-column prop="specialNotifi" label="特别告知事项"></el-table-column>
-			<el-table-column prop="prjTemSN" label="附带临建批号"></el-table-column>
-			<el-table-column prop="prjXz" label="影像"></el-table-column>
-			<el-table-column prop="remark" label="备注"></el-table-column>
+			<el-table-column prop="prjType" label="项目类型" width="150"></el-table-column>
+			<el-table-column prop="prjXz" label="项目性质" width="150"></el-table-column>
+			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
+			<el-table-column prop="contactInf" label="联系方式" width="150"></el-table-column>
+			<el-table-column label="特别告知事项" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p>{{ scope.row.specialNotifi }}</p>
+						<div slot="reference" class="name-wrapper">{{ scope.row.specialNotifi }}</div>
+					</el-popover>
+				</template>
+			</el-table-column>
+			<el-table-column prop="prjTemSN" label="附带临建批号" width="150"></el-table-column>
+			<el-table-column prop="prjXz" label="影像" width="150"></el-table-column>
+			<el-table-column prop="remark" label="备注" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p>{{ scope.row.remark }}</p>
+						<div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 		</el-table>
+
+		<!--工具条-->
+		<el-col :span="24" class="toolbar">
+			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
+				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
+			</el-pagination>
+		</el-col>
 
 		<table id="exportTable">
 			<tr>
@@ -103,14 +124,26 @@
 					prjUnit: ''
 				},
 				viewList: [],
-				listLoading: false
+				listLoading: false,
+				total: 0,
+				pageNum: 1,
+				pageSize: util.paginationSize[0],
+				paginationSize: util.paginationSize
 			}
 		},
 		methods: {
+			handleSizeChange(pageSize) {
+				this.pageSize = pageSize;
+				this.getView002();
+			},
+			handleCurrentChange(pageNum) {
+				this.pageNum = pageNum;
+				this.getView002();
+			},
 			getView002() {
 				this.listLoading = true;
 				const param = this.filters;
-				getView002(param).then((resp) => {
+				getView002(param, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
