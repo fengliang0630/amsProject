@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let base = '';
-// let base = 'http://5123ba82.ngrok.io';
+// let base = ' http://44949b8c.ngrok.io';
 
 // 登录接口
 export const login = params => { 
@@ -170,6 +170,12 @@ export const createOrUpdateProjectAttribute = params => {
 export const getPrjClasfiNameByParentId = params => {
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/dic/queryJL`, p).then(res => res.data); 
+};
+
+// 级联查询五级分类
+export const getPrjClasfiNames = params => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/dic/queryDL`, p).then(res => res.data); 
 };
 
 // 根据项目明细信息 查询五级分类值域以及选中五级分类信息

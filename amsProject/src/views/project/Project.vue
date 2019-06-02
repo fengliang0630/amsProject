@@ -7,6 +7,9 @@
 					<el-input v-model="filters.prjName" placeholder="项目名称"></el-input>
 				</el-form-item>
 				<el-form-item>
+					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
+				</el-form-item>
+				<el-form-item>
 					<el-button type="primary" v-on:click="getProjectListPage">查询</el-button>
 				</el-form-item>
 				<el-form-item>
@@ -71,7 +74,8 @@
 		data() {
 			return {
 				filters: {
-					prjName: ''
+					prjName: '',
+					prjSN: ''
 				},
 				jbxxList: [],
 				total: 0,
@@ -98,7 +102,8 @@
 			// 获取项目基本信息列表
 			getProjectListPage() {
 				let para = {
-					prjName: this.filters.prjName
+					prjName: this.filters.prjName,
+					prjSN: this.filters.prjSN
 				};
 				this.listLoading = true;
 				getProjectListPage(para, this.pageSize, this.pageNum).then((resp) => {

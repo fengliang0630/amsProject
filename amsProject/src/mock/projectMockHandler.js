@@ -25,11 +25,11 @@ const ProjectMockHandler = {
             xmjbxxList: mockJbxx,
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: total,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
@@ -45,11 +45,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】项目删除成功",
+              rspReturnMsg: '【1130130350522105856】项目删除成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -93,11 +93,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】保存成功",
+              rspReturnMsg: '【1130130350522105856】保存成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -120,11 +120,11 @@ const ProjectMockHandler = {
             xmsxList: mockXmsx,
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: total,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
@@ -140,11 +140,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】项目属性删除成功",
+              rspReturnMsg: '【1130130350522105856】项目属性删除成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -199,11 +199,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】保存成功",
+              rspReturnMsg: '【1130130350522105856】保存成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -227,11 +227,11 @@ const ProjectMockHandler = {
             xmmxList: mockXmmx,
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: total,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
@@ -247,11 +247,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】项目明细删除成功",
+              rspReturnMsg: '【1130130350522105856】项目明细删除成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -304,11 +304,11 @@ const ProjectMockHandler = {
           resolve([200, {
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 86,
-              rspReturnMsg: "【1130130350522105856】保存成功",
+              rspReturnMsg: '【1130130350522105856】保存成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 500);
@@ -337,11 +337,31 @@ const ProjectMockHandler = {
             classifiDicList: classifiDicList,
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 1,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
+            }
+          }]);
+        }, 1000);
+      });
+    });
+
+    // 查询五级分类某一级的全部值
+    mock.onPost('/ams/api/dic/queryDL').reply(config => {
+      let {header, type, name, other} = JSON.parse(config.data);
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            classifiDicList: ['商品房', '限价商品房', '自住型商品房'],
+            header: {
+              reqpageIndex: 1,
+              reqUserId: 'xxw',
+              rspPageCount: 1,
+              rspReturnMsg: '【1130134024585609216】交易成功',
+              reqpageSize: 20,
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
@@ -359,11 +379,11 @@ const ProjectMockHandler = {
             viewObj: l,
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 1,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
@@ -390,17 +410,17 @@ const ProjectMockHandler = {
         setTimeout(() => {
           resolve([200, {
             classifiDicList: [
-              "商品房",
-              "限价商品房",
-              "自住型商品房"
+              '商品房',
+              '限价商品房',
+              '自住型商品房'
             ],
             header: {
               reqpageIndex: 1,
-              reqUserId: "xxw",
+              reqUserId: 'xxw',
               rspPageCount: 1,
-              rspReturnMsg: "【1130134024585609216】交易成功",
+              rspReturnMsg: '【1130134024585609216】交易成功',
               reqpageSize: 20,
-              rspReturnCode: "000000"
+              rspReturnCode: '000000'
             }
           }]);
         }, 1000);
