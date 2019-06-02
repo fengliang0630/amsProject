@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let base = '';
-// let base = ' http://44949b8c.ngrok.io';
+// let base = 'http://52b869c0.ngrok.io';
 
 // 登录接口
 export const login = params => { 
@@ -190,6 +190,11 @@ export const getLogListPage = (params, pageSize, pageNum) => {
     return axios.post(`${base}/ams/api/userOperation/queryUserOperByDate`, p).then(res => res.data); 
 };
 
+export const queryDicByType = (params) => {
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/dic/queryByType`, p).then(res => res.data); 
+}
+
 // view001
 export const getView001 = (params, pageSize, pageNum) => {
     const p = pckParam(params, {reqpageSize: pageSize, reqpageIndex: pageNum});
@@ -214,6 +219,14 @@ export const getPointsByprjSN = params => {
     const p = pckParam(params, {});
     return axios.post(`${base}/ams/api/dxf/query`, p).then(res => res.data); 
 };
+
+// 根据大地坐标转换经纬度
+export const convertZB = params => { 
+    const p = pckParam(params, {});
+    return axios.post(`${base}/ams/api/dxf/convertZB`, p).then(res => res.data); 
+};
+
+
 
 const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));

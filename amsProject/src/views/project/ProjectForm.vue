@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section id="projectPage">
 
 		<!--编辑界面-->
 		<el-dialog :title="title" :visible.sync="show" :close-on-click-modal="false" :show-close="false" top="3vh">
@@ -11,8 +11,15 @@
 				<el-form-item label="建设单位" prop="prjUnit">
 					<el-input v-model="formData.prjUnit" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="建设位置" prop="prjAdr">
-					<el-input v-model="formData.prjAdr" auto-complete="off"></el-input>
+				<el-form-item label="建设位置" prop="prjAdrDetail">
+					<el-input placeholder="请输入内容" v-model="formData.prjAdrDetail" class="input-with-select">
+						<el-select v-model="formData.prjAdrCode" filterable slot="prepend" placeholder="请选择">
+							<el-option v-for="item in prjAdrCodeOptons" :key="item.id" :label="item.name" :value="item.code"></el-option>
+						</el-select>
+					</el-input>
+				</el-form-item>
+				<el-form-item label="旧建设位置">
+					{{formData.prjAdr}}
 				</el-form-item>
 				<el-form-item label="工程名称" prop="prjName">
 					<el-input v-model="formData.prjName" auto-complete="off"></el-input>
@@ -72,7 +79,7 @@
 
 <script>
 	import util from '../../common/js/util';
-	import {createOrUpdateProject} from '../../api/api';
+	import { createOrUpdateProject, queryDicByType } from '../../api/api';
 
 	export default {
 		data() {
@@ -82,6 +89,7 @@
 				title: '',
 				prjTypeOptions: ['新建', '改扩建'],
 				prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目'],
+				prjAdrCodeOptons: [],
 				remarkRequired: { required: true, message: '不能为空', trigger: 'blur' },
 				formRules: {
 					prjSN: [
@@ -95,9 +103,12 @@
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
 						{ max: 200, message: '最大长度200', trigger: 'blur' }
 					],
-					prjAdr: [
+					prjAdrCode: [
+						{ max: 50, message: '最大长度50', trigger: 'blur' }
+					],
+					prjAdrDetail: [
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
-						{ max: 800, message: '最大长度800', trigger: 'blur' }
+						{ max: 1000, message: '最大长度1000', trigger: 'blur' }
 					],
 					prjName: [
 						{ validator: util.validatorUtils.checkSpecialChar, trigger: 'blur' },
@@ -190,6 +201,7 @@
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.formLoading = true;
 							let para = Object.assign({}, this.formData);
+							delete para.prjAdr;
 							createOrUpdateProject(para).then((resp) => {
 								this.formLoading = false;
 								const respMsg= {message: '', type: ''}
@@ -213,10 +225,26 @@
 			},
             cancelHandle() {
                 this.callback();
-            }
+			},
+			queryPrjAdrCodeOptons() {
+				const param = {
+					type: 'CYXZGHB'
+				};
+				queryDicByType(param).then(resp => {
+					if (resp.header.rspReturnCode !== '000000') {
+						respMsg.type = 'error';
+						respMsg.message = '查询建设位置报错';
+						this.$message(respMsg);
+						return;
+					}
+
+					this.prjAdrCodeOptons = resp.classifiDicList;
+				});
+			}
 		},
 		mounted() {
 			this.title = (!!this.formData.id) ? '修改项目基本信息' : '新增项目基本信息';
+			this.queryPrjAdrCodeOptons();
 		},
 		updated() {
 			if (!!this.formData.id) {
@@ -231,4 +259,11 @@
 
 </script>
 
-<style scoped></style>
+<style>
+	#projectPage .input-with-select .el-select .el-input {
+		width: 130px;
+	}
+	.input-with-select .el-input-group__prepend {
+		background-color: #fff;
+	}
+  </style>

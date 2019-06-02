@@ -1,6 +1,24 @@
 <template>
     <div id="map-root-div">
-        <div id="map-filter-div"></div>
+        <div id="map-filter-div">
+            <!--工具条-->
+            <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+                <el-form :inline="true" :model="filters">
+                    <el-form-item>
+                        <el-input v-model="filters.jd"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="filters.wd"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" v-on:click="makePoint">查询</el-button>
+                    </el-form-item>
+                    <el-form-item v-if="res.length">
+                        <span>转换后,经度：{{res[0]}},维度：{{res[1]}}</span>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+        </div>
 
         <div id="map-containt-div"></div>
     </div>
@@ -8,11 +26,16 @@
 
 <script>
 
-    import { getPointsByprjSN } from '../api/api';
+    import { getPointsByprjSN, convertZB } from '../api/api';
 
     export default {
 		data() {
 			return {
+                filters: {
+                    jd: '',
+                    wd: ''
+                },
+                res: [],
 				map: {}
 			}
 		},
@@ -20,12 +43,20 @@
             init() {
                 this.map = new BMap.Map("map-containt-div");
                 this.map.enableScrollWheelZoom();
+                // 添加带有定位的导航控件
+                var navigationControl = new BMap.NavigationControl({
+                    // 靠左上角位置
+                    anchor: BMAP_ANCHOR_TOP_LEFT,
+                    // LARGE类型
+                    type: BMAP_NAVIGATION_CONTROL_LARGE,
+                    // 启用显示定位
+                    enableGeolocation: true
+                });
+                this.map.addControl(navigationControl);
                 // this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
             },
             drowBlock() {
                 getPointsByprjSN({prjSN: this.prjSN}).then(resp => {
-
-
                     if (resp.header.rspReturnCode !== '000000') {
 						this.$message({ message: '查询经纬度失败', type: 'error' });
 						return;
@@ -42,18 +73,47 @@
                             var mp = new BMap.Point(p[0], p[1]);
                             // 如果没有设置中心点 设置一个中心点
                             if (i === 0 && j === 0) {
-                                this.map.centerAndZoom(mp, 16);
+                                this.map.centerAndZoom(mp, 14);
                             }
                             psT.push(mp);
                         }
 
-                        this.map.addOverlay(new BMap.Polyline(psT, {
-                            strokeColor : "red",  
-                            strokeWeight : 3,  
-                            strokeOpacity : 0.5  
-                        })); // 画线 
+                        this.map.addOverlay(new BMap.Polyline(psT)); // 画线 
                     }
                 });
+            },
+            addMarker(point) {
+                var marker = new BMap.Marker(point);
+                marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+                this.map.addOverlay(marker);
+                this.map.centerAndZoom(point, 14);
+                
+            },
+            makePoint() {
+                const param = {
+                    jd: this.filters.jd,
+                    wd: this.filters.wd
+                };
+
+                if (!param.jd || !param.wd) {
+					this.$message({ message: '先输入大地坐标', type: 'error' });
+					return;
+				}
+
+                convertZB(param).then(resp => {
+
+                    if (resp.header.rspReturnCode !== '000000') {
+						this.$message({ message: '查询经纬度失败', type: 'error' });
+						return;
+                    }
+                    
+                    this.res = resp.longlatV.split(',');
+                    
+                    const mp = new BMap.Point(this.res[0], this.res[1]);
+                    this.addMarker(mp);
+                });
+
+                
             }
         },
         mounted() {
