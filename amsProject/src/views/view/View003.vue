@@ -11,10 +11,10 @@
 			</el-form>
 		</el-col>
 
-		<h3>{{prjClasfiName1}}:</h3>
+		<h3>{{prjClasfiName1}}</h3>
 		<div v-for="prjClasfiName2Obj in prjClasfiName2List">
 
-			<p>{{prjClasfiName2Obj.title}}:</p>
+			<p>{{prjClasfiName2Obj.title}}</p>
 
 			<el-table :data="prjClasfiName2Obj.list" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
 				<el-table-column type="expand">
@@ -106,17 +106,6 @@
 				},
 				prjClasfiName1: '',
 				prjClasfiName2List: [],
-				viewList: [{}],
-				detailList: [
-					{
-						title: '经济适用房',
-						aboveGroundSumArea: 100,
-						underGroundSumArea: 200,
-						sumArea: 20,
-						sumLength: 50,
-						buildType: 'asd'
-					}
-				],
 				listLoading: false
 			}
 		},
@@ -138,7 +127,7 @@
 
 					if (resp.viewList) {
 						for (let prjClasfiName1 in resp.viewList) {
-							this.prjClasfiName1 = prjClasfiName1;
+							this.prjClasfiName1 = prjClasfiName1 + ':';
 							for (let prjClasfiName2Title in resp.viewList[prjClasfiName1]) {
 
 								const prjClasfiName2List = [];
@@ -162,7 +151,7 @@
 
 								this.prjClasfiName2List.push(
 									{
-										title: prjClasfiName2Title,
+										title: prjClasfiName2Title + ':',
 										list: prjClasfiName2List
 									}
 								);

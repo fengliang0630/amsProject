@@ -60,7 +60,11 @@
 				</template>
 			</el-table-column>
 			<el-table-column prop="prjTemSN" label="附带临建批号" width="150"></el-table-column>
-			<el-table-column prop="prjXz" label="影像" width="150"></el-table-column>
+			<el-table-column prop="prjXz" label="影像" width="150">
+				<template slot-scope="scope">
+					<el-button size="small" @click="viewMapHandler(scope.row.prjSN)">查看地图</el-button>
+				</template>
+			</el-table-column>
 			<el-table-column prop="remark" label="备注" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
@@ -109,16 +113,23 @@
 			</tr>
 		</table>
 
+		<el-dialog :visible.sync="isShowMap" :fullscreen=true>
+			<ams-map v-if="isShowMap" :prjSN="prjSNToMap"></ams-map>
+		</el-dialog>
+		
 	</section>
 </template>
 
 <script>
 	import { getView002 } from '../../api/api';
 	import util from '../../common/js/util';
+	import AmsMapVue from '../AmsMap.vue';
 
 	export default {
 		data() {
 			return {
+				prjSNToMap: '',
+				isShowMap: false,
 				filters: {
 					prjSN: '',
 					prjUnit: ''
@@ -132,6 +143,10 @@
 			}
 		},
 		methods: {
+			viewMapHandler(prjSN) {
+				this.prjSNToMap = prjSN;
+				this.isShowMap = true;
+			},
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
 				this.getView002();
@@ -163,6 +178,9 @@
 		},
 		mounted() {
 			this.getView002();
+		},
+		components: {
+			'ams-map': AmsMapVue
 		}
 	}
 </script>

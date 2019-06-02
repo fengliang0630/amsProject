@@ -23,14 +23,11 @@
                 // this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
             },
             drowBlock() {
-                getPointsByprjSN({prjSN: '100'}).then(resp => {
+                getPointsByprjSN({prjSN: this.prjSN}).then(resp => {
 
 
                     if (resp.header.rspReturnCode !== '000000') {
-						this.$message({
-							message: '查询经纬度失败',
-							type: 'error'
-						});
+						this.$message({ message: '查询经纬度失败', type: 'error' });
 						return;
 					}
 
@@ -44,11 +41,9 @@
                             
                             var mp = new BMap.Point(p[0], p[1]);
                             // 如果没有设置中心点 设置一个中心点
-                            if (this.map.centerPoint.lat === 0 && this.map.centerPoint.lng === 0) {
-                                this.map.centerAndZoom(mp, 15);
+                            if (i === 0 && j === 0) {
+                                this.map.centerAndZoom(mp, 16);
                             }
-                            mp.lat = mp.lat;
-                            mp.lng = mp.lng;
                             psT.push(mp);
                         }
 
@@ -64,13 +59,15 @@
         mounted() {
             this.init();
             this.drowBlock();
+            
         },
+        props: ['prjSN']
 	}
 </script>
 
 <style scoped lang="scss">
     #map-containt-div {
         width: 100%;
-        height: 800px;
+        height: 728px;
     }
 </style>
