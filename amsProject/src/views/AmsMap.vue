@@ -84,19 +84,41 @@
             },
             addMarker(point) {
                 var marker = new BMap.Marker(point);
-                // marker.setAnimation(BMAP_ANIMATION_BOUNCE);
                 
                 let label = new BMap.Label();
-                label.setContent('ddddd');
+                
                 label.setPosition(point);
                 label.setOffset(new BMap.Size(10, -40));
-                label.setStyle({fontSize: '16px', padding: '10px', border: '1px solid #000'});
+                label.setStyle({fontSize: '16px', padding: '10px', border: '1px solid #fff', boxShadow: '0px 0px 30px 10px #abcdef', display: 'none'});
                 marker.setLabel(label);
+
+                marker.addEventListener('mouseover', () => {
+                    marker.getLabel().setStyle({display: 'inline-block'});
+                });
+
+                marker.addEventListener('mouseout', () => {
+                    marker.getLabel().setStyle({display: 'none'});
+                });
 
                 const menu = new BMap.ContextMenu();
                 menu.addItem(new BMap.MenuItem('删除', (point, pixel, markerT) => {
                     this.map.removeOverlay(markerT);
-                },100));
+                }, 100));
+                menu.addItem(new BMap.MenuItem('维护名称', (pointT, pixel, markerT) => {
+                    var opts = {
+                        width : 200,
+                        height: 100,
+                        title : "维护节点名称"
+                    }
+                    const dd = document.createElement('input');
+                    var infoWindow = new BMap.InfoWindow(dd, opts);  // 创建信息窗口对象 
+                    this.map.openInfoWindow(infoWindow, pointT);
+
+                    dd.addEventListener('keyup', () => {
+                        markerT.getLabel().setContent(infoWindow.getContent().value);
+                    });
+
+                }, 100));
                 marker.addContextMenu(menu);
                 this.map.addOverlay(marker);
                 this.map.centerAndZoom(point, 14);
