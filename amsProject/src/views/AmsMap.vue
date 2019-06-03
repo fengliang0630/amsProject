@@ -84,7 +84,20 @@
             },
             addMarker(point) {
                 var marker = new BMap.Marker(point);
-                marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+                // marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+                
+                let label = new BMap.Label();
+                label.setContent('ddddd');
+                label.setPosition(point);
+                label.setOffset(new BMap.Size(10, -40));
+                label.setStyle({fontSize: '16px', padding: '10px', border: '1px solid #000'});
+                marker.setLabel(label);
+
+                const menu = new BMap.ContextMenu();
+                menu.addItem(new BMap.MenuItem('删除', (point, pixel, markerT) => {
+                    this.map.removeOverlay(markerT);
+                },100));
+                marker.addContextMenu(menu);
                 this.map.addOverlay(marker);
                 this.map.centerAndZoom(point, 14);
                 
