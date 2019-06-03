@@ -80,12 +80,13 @@ for (let i = 0; i < 86; i++) {
 MenuTree = [
   {
     id: '1',
-    menuName: '系统功能',
+    menuName: '基础功能',
     iconCls: 'el-icon-message',
     children: [
       {id: '1_1', menuName: '菜单管理', menuLink: '/menu'},
       {id: '1_2', menuName: '用户管理', menuLink: '/user'},
-      {id: '1_3', menuName: '角色管理', menuLink: '/role'}
+      {id: '1_3', menuName: '角色管理', menuLink: '/role'},
+      {id: '1_4', menuName: '日志查询', menuLink: '/log'}
     ]
   },
   {
@@ -95,12 +96,28 @@ MenuTree = [
     children: [
       {id: '2_1', menuName: '项目基本信息管理', menuLink: '/project'},
       {id: '2_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
-      {id: '2_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'},
-      {id: '2_4', menuName: '日志查询', menuLink: '/log'},
-      {id: '2_5', menuName: '复合统计', menuLink: '/view001'},
-      {id: '2_6', menuName: '项目信息统计', menuLink: '/view002'},
-      {id: '2_7', menuName: '项目详情统计', menuLink: '/view003'},
-      {id: '2_8', menuName: '工程地理图像查询', menuLink: '/amsMap'}
+      {id: '2_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'}
+    ]
+  },
+  {
+    id: '3',
+    menuName: '报表功能',
+    iconCls: 'el-icon-message',
+    children: [      
+      {id: '3_1', menuName: '复合统计', menuLink: '/view001'},
+      {id: '3_2', menuName: '项目信息统计', menuLink: '/view002'},
+      {id: '3_3', menuName: '项目详情统计', menuLink: '/view003'}
+    ]
+  },
+  {
+    id: '4',
+    menuName: '快速导航',
+    iconCls: 'el-icon-message',
+    children: [      
+      {id: '4_1', menuName: '城镇建设项目', menuLink: '/view0011'},
+      {id: '4_2', menuName: '乡村建设项目', menuLink: '/view0021'},
+      {id: '4_3', menuName: '临时建设项目', menuLink: '/view0031'},
+      {id: '4_4', menuName: '补正项目', menuLink: '/view0031'},
     ]
   }
 ];

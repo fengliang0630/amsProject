@@ -8,6 +8,9 @@
 				<el-form-item>
 					<el-button type="primary" v-on:click="getView003">查询</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" v-on:click="exportView003">导出</el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
@@ -90,13 +93,127 @@
 				</el-table-column>
 			</el-table>
 		</div>
-		
-		
+
+		<div style="height:0;width:0;overflow:hidden;">
+			<div id="exportTable1" style="width: 5000px;">
+				<h2>{{prjClasfiName1}}</h2>
+				<div v-for="prjClasfiName2Obj in prjClasfiName2List">
+					<h1>{{prjClasfiName2Obj.title}}</h1>
+					<table>
+						<thead>
+							<tr>
+								<th rowspan="2" style="width:180px;">项目性质</th>
+								<th rowspan="2" style="width:180px;">总建筑面积(平方米)</th>
+								<th colspan="2" style="width:180px;">总建筑面积(平方米)</th>
+								<th rowspan="2" style="width:180px;">总建筑长度(米)</th>
+								<th colspan="2" style="width:180px;">层数</th>
+								<th colspan="2" style="width:180px;">高度</th>
+								<th rowspan="2" style="width:180px;">栋数</th>
+								<th rowspan="2" style="width:180px;">住房套数</th>
+								<th rowspan="2" style="width:180px;">工程状态</th>
+								<th rowspan="2" style="width:180px;">平时用途</th>
+								<th rowspan="2" style="width:180px;">结构类型</th>
+								<th rowspan="2" style="width:180px;">验线文号</th>
+								<th rowspan="2" style="width:180px;">验线时间</th>
+								<th rowspan="2" style="width:180px;">验收文号</th>
+								<th rowspan="2" style="width:180px;">验收时间</th>
+								<th rowspan="2" style="width:180px;">延期文号</th>
+								<th rowspan="2" style="width:180px;">延长期</th>
+								<th rowspan="2" style="width:180px;">撤（注）销证号</th>
+								<th rowspan="2" style="width:180px;">撤（注）销日期</th>
+								<th rowspan="2" style="width:180px;">补正证号</th>
+								<th rowspan="2" style="width:180px;">补正日期</th>
+								<th rowspan="2" style="width:180px;">影像判读结果</th>
+								<th rowspan="2" style="width:180px;">代征用地情况</th>
+								<th rowspan="2" style="width:180px;">备注</th>
+							</tr>
+							<tr>
+								<th>地上</th>
+								<th>地下</th>
+								<th>地上</th>
+								<th>地下</th>
+								<th>地上</th>
+								<th>地下</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<template v-for="item in prjClasfiName2Obj.list">
+								<tr>
+									<td>{{item.prjNature}}</td>
+									<td>{{item.sumArea}}</td>
+									<td>{{item.aboveGroundSumArea}}</td>
+									<td>{{item.underGroundSumArea}}</td>
+									<td>{{item.sumLen}}</td>
+									<td>{{item.aboveGroundLev}}</td>
+									<td>{{item.underGroundLev}}</td>
+									<td>{{item.aboveGroundHet}}</td>
+									<td>{{item.underGroundHet}}</td>
+									<td>{{item.buildings}}</td>
+									<td>{{item.housingStockNum}}</td>
+									<td>{{item.buldStatus}}</td>
+									<td>{{item.peacetimeUses}}</td>
+									<td>{{item.strucType}}</td>
+									<td>{{item.checkDocSN}}</td>
+									<td>{{item.checkDocDate}}</td>
+									<td>{{item.checkSN}}</td>
+									<td>{{item.checkDate}}</td>
+									<td>{{item.delaySN}}</td>
+									<td>{{item.delayCountDay}}</td>
+									<td>{{item.cancelSN}}</td>
+									<td>{{item.cancelDate}}</td>
+									<td>{{item.correctionSN}}</td>
+									<td>{{item.correctionDate}}</td>
+									<td>{{item.imgJudgeRes}}</td>
+									<td>{{item.exproprInfo}}</td>
+									<td>{{item.remark}}</td>
+								</tr>
+								<tr>
+									<td colspan="27">
+										<table>
+											<thead>
+												<tr>
+													<th rowspan="2" style="width: 150px;">&nbsp;</th>
+													<th colspan="2" style="width: 150px;">总建筑面积（平方米）</th>
+													<th rowspan="2" style="width: 150px;">混合建筑面积</th>
+													<th rowspan="2" style="width: 150px;">地上建筑长度</th>
+													<th rowspan="2" style="width: 150px;">建筑类型</th>
+												</tr>
+												<tr>
+													<th>地上</th>
+													<th>地下</th>
+												</tr>
+											</thead>
+											<tbody>
+												<template v-for="item1 in item.detailList">
+													<tr v-if="item1.detailName">
+														<td colspan="6" style="text-align: left;">{{item1.detailName}}</td>
+													</tr>
+													<tr v-if="!item1.detailName">
+														<td>{{item1.serialFunct}}</td>
+														<td>{{item1.aboveGroundArea}}</td>
+														<td>{{item1.underGroundArea}}</td>
+														<td>{{item1.aboveGroundArea}}</td>
+														<td>{{item1.aboveGroundLen}}</td>
+														<td>{{item1.buldType}}</td>
+													</tr>
+												</template>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</section>
 </template>
 
 <script>
 	import { getView003 } from '../../api/api';
+	import FileSaver from 'file-saver';
 
 	export default {
 		data() {
@@ -110,6 +227,12 @@
 			}
 		},
 		methods: {
+			exportView003() {
+				const a = document.getElementById('exportTable1');
+				html2canvas(a).then(canvas => {
+					FileSaver.saveAs(canvas.toDataURL(), `项目详情统计.png`);
+				});
+			},
 			getView003() {
 				if (!this.filters.prjSN) {
 					this.$message({ message: '请您先选择过滤条件', type: 'error' });
@@ -168,6 +291,12 @@
 
 
 <style scope>
+	#exportTable1 th {
+		background-color: #b7b5b5;
+	}
+	#exportTable1 th, #exportTable1 td {
+		text-align: center;
+	}
 	#view003Page .el-table div.cell, #view003Page .el-table div.cell .name-wrapper {
 		overflow: hidden;
 		text-overflow: ellipsis;
