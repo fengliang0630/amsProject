@@ -84,6 +84,7 @@
             },
             addMarker(point) {
                 var marker = new BMap.Marker(point);
+                marker.enableDragging();
                 
                 let label = new BMap.Label();
                 
@@ -91,9 +92,12 @@
                 label.setOffset(new BMap.Size(10, -40));
                 label.setStyle({fontSize: '16px', padding: '10px', border: '1px solid #fff', boxShadow: '0px 0px 30px 10px #abcdef', display: 'none'});
                 marker.setLabel(label);
-
+                
                 marker.addEventListener('mouseover', () => {
-                    marker.getLabel().setStyle({display: 'inline-block'});
+                    const d = marker.getLabel();
+                    if (!!d.content) {
+                        marker.getLabel().setStyle({display: 'inline-block'});
+                    }
                 });
 
                 marker.addEventListener('mouseout', () => {
@@ -107,10 +111,12 @@
                 menu.addItem(new BMap.MenuItem('维护名称', (pointT, pixel, markerT) => {
                     var opts = {
                         width : 200,
-                        height: 100,
-                        title : "维护节点名称"
+                        height: 60,
+                        title : "维护节点名称",
+                        enableMessage: false
                     }
                     const dd = document.createElement('input');
+                    dd.value = markerT.getLabel().content || '';
                     var infoWindow = new BMap.InfoWindow(dd, opts);  // 创建信息窗口对象 
                     this.map.openInfoWindow(infoWindow, pointT);
 
