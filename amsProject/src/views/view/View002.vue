@@ -9,6 +9,11 @@
 				<el-form-item>
 					<el-input v-model="filters.prjUnit" placeholder="建设位置"></el-input>
 				</el-form-item>
+				<el-form-item>
+					<el-select v-model="filters.prjSNType" placeholder="请选择许可证类型" style="width: 100%;">
+						<el-option v-for="item in prjSNTypeOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
 				<el-form-item style="width:23%;">
 					<el-button type="primary" v-on:click="getView002">查询</el-button>
 					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
@@ -132,14 +137,16 @@
 				isShowMap: false,
 				filters: {
 					prjSN: '',
-					prjUnit: ''
+					prjUnit: '',
+					prjSNType: ''
 				},
 				viewList: [],
 				listLoading: false,
 				total: 0,
 				pageNum: 1,
 				pageSize: util.paginationSize[0],
-				paginationSize: util.paginationSize
+				paginationSize: util.paginationSize,
+				prjSNTypeOptions: util.prjSNTypeOptions
 			}
 		},
 		methods: {
@@ -177,10 +184,27 @@
 			}
 		},
 		mounted() {
+			const index = this.$route.params.prjSNType;
+			if (!isNaN(index)) {
+				this.filters.prjSNType = this.prjSNTypeOptions[Number(index)];
+			} else {
+				this.filters.prjSNType = '';
+			}
 			this.getView002();
 		},
 		components: {
 			'ams-map': AmsMapVue
+		},
+		watch: {
+			'$route' (to, from) {
+				const index = to.params.prjSNType;
+				if (!isNaN(index)) {
+					this.filters.prjSNType = this.prjSNTypeOptions[Number(index)];
+				} else {
+					this.filters.prjSNType = '';
+				}
+				this.getView002();
+			}
 		}
 	}
 </script>

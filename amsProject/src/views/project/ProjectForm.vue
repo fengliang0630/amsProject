@@ -88,7 +88,7 @@
 				formLoading: false,
 				title: '',
 				prjTypeOptions: ['新建', '改扩建'],
-				prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目'],
+				prjSNTypeOptions: util.prjSNTypeOptions,
 				prjAdrCodeOptons: [],
 				remarkRequired: { required: true, message: '不能为空', trigger: 'blur' },
 				formRules: {

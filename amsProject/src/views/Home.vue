@@ -23,13 +23,11 @@
 		<el-col :span="24" class="main">
 			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
 				<!--导航菜单-->
-				<el-menu :default-active="$route.path" unique-opened router v-show="!collapsed" >
-					<template v-for="item in menuTree">
-						<el-submenu :index="item.id">
-							<template slot="title"><i :class="item.iconCls"></i>{{item.menuName}}</template>
-							<el-menu-item v-for="child in item.children" :index="child.menuLink" :key="child.id">{{child.menuName}}</el-menu-item>
-						</el-submenu>
-					</template>
+				<el-menu :default-active="activeMenuId" unique-opened v-show="!collapsed" @select="handleSelect">
+					<el-submenu v-for="item in menuTree" :index="item.id" :key="item.id">
+						<template slot="title"><i :class="item.iconCls"></i>{{item.menuName}}</template>
+						<el-menu-item v-for="child in item.children" :index="child.id" :key="child.id">{{child.menuName}}</el-menu-item>
+					</el-submenu>
 				</el-menu>
 				<!--导航菜单-折叠后-->
 				<ul class="el-menu collapsed" v-show="collapsed" ref="menuCollapsed">
@@ -72,6 +70,7 @@
 	export default {
 		data() {
 			return {
+				activeMenuId: '',
 				sysName:'ams 系统',
 				collapsed:false,
 				sysUserName: '',
@@ -90,8 +89,25 @@
 			}
 		},
 		methods: {
-			onSubmit() {
+			handleSelect(key, keyPath) {
+
+				let menuItem;
+				for(let i = 0; i < this.menuTree.length; i++) {
+					if (this.menuTree[i].id === keyPath[0]) {
+						menuItem = this.menuTree[i];
+						break;
+					}
+				}
+
+				for(let j = 0; j < menuItem.children.length; j++) {
+					if (menuItem.children[j].id === keyPath[1]) {
+						menuItem = menuItem.children[j];
+						break;
+					}
+				}
 				
+				this.activeMenuId = menuItem.id;
+				this.$router.push(menuItem.menuLink);	
 			},
 			//退出登录
 			logout: function () {
@@ -123,6 +139,15 @@
 			getMenuTree(userId) {
 				getMenuTree({userId: userId}).then(resp => {
 					this.menuTree = resp.menuTree;
+
+					const a = this.$route.fullPath;
+					resp.menuTree.forEach(parentMenu => {
+						parentMenu.children.forEach(menuItem => {
+							if (menuItem.menuLink === a) {
+								this.activeMenuId = menuItem.id;
+							}
+						})
+					});
 				});
 			}
 		},

@@ -120,7 +120,9 @@ export default {
         FileSaver.saveAs(data, `${fileName}.xlsx`);
     },
 
-    paginationSize: [10, 20, 50, 100]
+    paginationSize: [10, 20, 50, 100],
+
+    prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目']
 
 
 };
