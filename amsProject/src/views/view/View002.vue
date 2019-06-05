@@ -118,7 +118,7 @@
 			</tr>
 		</table>
 
-		<el-dialog :visible.sync="isShowMap" :fullscreen=true>
+		<el-dialog :visible.sync="isShowMap" :fullscreen=true title="查看地图">
 			<ams-map v-if="isShowMap" :prjSN="prjSNToMap"></ams-map>
 		</el-dialog>
 		
@@ -209,11 +209,12 @@
 	}
 </script>
 
-<style scope>
+<style srope>
 	#exportTable {display: none;}
 	#view002 .el-table div.cell, #view002 .el-table div.cell .name-wrapper {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	#view002 .el-dialog__body {padding-top: 0;}
 </style>
