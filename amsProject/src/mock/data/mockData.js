@@ -792,7 +792,9 @@ view002List = [
         prjSN: '2013规（朝）建字0001号',
         prjUnit: '北京诚通华亿房地产有限公司',
         prjName: '朝阳区新星花园二期、三期',
-        contacts: '赵学东'
+        contacts: '赵学东',
+        prjMark: '1',
+        prjSNType: '城镇建设项目'
     },
     {
         prjAdr: '朝阳区花家地东路3号',
@@ -806,7 +808,9 @@ view002List = [
         prjSN: '2013规（朝）建字0080号',
         prjUnit: '中国民航管理干部学院',
         prjName: '',
-        contacts: '何秉锐'
+        contacts: '何秉锐',
+        prjMark: '1',
+        prjSNType: '城镇建设项目'
     }
 ];
 

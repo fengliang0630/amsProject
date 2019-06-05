@@ -56,6 +56,8 @@
 			<el-table-column prop="prjXz" label="项目性质" width="150"></el-table-column>
 			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
 			<el-table-column prop="contactInf" label="联系方式" width="150"></el-table-column>
+			<el-table-column prop="prjMark" label="项目标识" width="150"></el-table-column>
+			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
 			<el-table-column label="特别告知事项" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
@@ -97,6 +99,8 @@
 				<td>项目性质</td>
 				<td>联系人</td>
 				<td>联系方式</td>
+				<td>项目标识</td>
+				<td>许可证类型</td>
 				<td>特别告知事项</td>
 				<td>附带临建批号</td>
 				<td>影像</td>
@@ -111,6 +115,8 @@
 				<td>{{item.prjXz}}</td>
 				<td>{{item.contacts}}</td>
 				<td>{{item.contactInf}}</td>
+				<td>{{item.prjMark}}</td>
+				<td>{{item.prjSNType}}</td>
 				<td>{{item.specialNotifi}}</td>
 				<td>{{item.prjTemSN}}</td>
 				<td>{{item.prjXz}}</td>
