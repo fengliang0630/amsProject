@@ -226,6 +226,17 @@ export const convertZB = params => {
     return axios.post(`${base}/ams/api/dxf/convertZB`, p).then(res => res.data); 
 };
 
+// 上传文件
+export const uploadFiles = params => { 
+    let config = {
+        //添加请求头
+        headers: { "Content-Type": "multipart/form-data" }
+    };
+    const p = pckParam({}, {});
+    params.append('header', JSON.stringify(p.header));
+
+    return axios.post(`${base}/ams/api/upload`, params, config).then(res => res.data); 
+};
 
 
 const pckParam = (params, headerParam) => {

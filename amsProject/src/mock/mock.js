@@ -185,6 +185,31 @@ export default {
       });
     });
 
+    // 上传文件
+    mock.onPost('/ams/api/upload').reply(config => {
+      let prjSN = config.data.get('prjSN');
+      let files = config.data.get('files');
+      let upLoadType = config.data.get('upLoadType');
+      let header = config.data.get('header');
+      debugger;
+      const respData = {
+        header : {
+          reqpageIndex: 1,
+          reqUserId: 'xxw',
+          rspPageCount: 1,
+          rspReturnMsg: '【1132250761523232768】上传成功',
+          reqpageSize: 20,
+          rspReturnCode: '000000'
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, respData]);
+        }, 1000);
+      });
+    });
+
     // 用户mock方法处理
     UserMockHandler.init(mock);
 
