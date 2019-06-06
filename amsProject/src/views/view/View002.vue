@@ -231,9 +231,6 @@
 			}
 			this.getView002();
 		},
-		components: {
-			'ams-map': AmsMapVue
-		},
 		watch: {
 			'$route' (to, from) {
 				const index = to.params.prjSNType;
@@ -258,6 +255,7 @@
 			}
 		},
 		components: {
+			'ams-map': AmsMapVue,
 			'ams-project-view': ProjectViewVue
 		}
 	}
