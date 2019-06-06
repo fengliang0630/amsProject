@@ -21,7 +21,7 @@
 					<el-upload ref="uploadComponent" class="upload-demo" action="" :auto-upload="false" multiple  :on-change="fileChange" >
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-						<div slot="tip" class="el-upload__tip">只能上传excel文件</div>
+						<div slot="tip" class="el-upload__tip">支持excel,dxf文档上传</div>
 					</el-upload>
 				</div>
 			</div>
@@ -45,6 +45,20 @@
 		},
 		methods: {
 			submitUpload() {
+
+				if (!this.uploadData.files.length) {
+					this.$message({ message: '请您先选择需要上传的文件', type: 'error' });
+					return;
+				}
+
+				for (let i = 0; i < this.uploadData.files.length; i++) {
+					const fileName = this.uploadData.files[i].name;
+					if (!fileName.endsWith('.dxf') && !fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
+						this.$message({ message: '支持excel,dxf文档上传', type: 'error' });
+						return;
+					}
+				}
+
 				var formData = new FormData();	
 				formData.append("files", this.uploadData.files);
 				formData.append('upLoadType', this.uploadData.upLoadType);
@@ -56,9 +70,6 @@
 
 					formData.append('prjSN', this.uploadData.prjSN);
 				}
-
-				console.log(formData.get('files'));
-				console.log(formData.get('upLoadType'));
 
 				uploadFiles(formData).then(resp => {
 					
