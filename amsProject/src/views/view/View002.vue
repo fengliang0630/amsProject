@@ -26,18 +26,24 @@
 			<el-table-column type="expand">
 				<template slot-scope="props">
 					<el-form label-position="left" class="demo-table-expand">
-					<el-form-item label="项目状态"><span>{{ props.row.prjStatus }}</span></el-form-item>
-					<el-form-item label="建设单位"><span>{{ props.row.prjUnit }}</span></el-form-item>
-					<el-form-item label="建设位置"><span>{{ props.row.prjAdr }}</span></el-form-item>
-					<el-form-item label="工程名称"><span>{{ props.row.prjName }}</span></el-form-item>
-					<el-form-item label="项目类型"><span>{{ props.row.prjType }}</span></el-form-item>
-					<el-form-item label="项目性质"><span>{{ props.row.prjXz }}</span></el-form-item>
-					<el-form-item label="联系人"><span>{{ props.row.contacts }}</span></el-form-item>
-					<el-form-item label="联系方式"><span>{{ props.row.contactInf }}</span></el-form-item>
-					<el-form-item label="特别告知事项"><span>{{ props.row.specialNotifi }}</span></el-form-item>
-					<el-form-item label="附带临建批号"><span>{{ props.row.prjTemSN }}</span></el-form-item>
-					<el-form-item label="影像"><span>{{ props.row.prjXz }}</span></el-form-item>
-					<el-form-item label="备注"><span>{{ props.row.remark }}</span></el-form-item>
+						<el-form-item label="项目状态"><span>{{ props.row.prjStatus }}</span></el-form-item>
+						<el-form-item label="建设单位"><span>{{ props.row.prjUnit }}</span></el-form-item>
+						<el-form-item label="建设位置"><span>{{ props.row.prjAdr }}</span></el-form-item>
+						<el-form-item label="工程名称"><span>{{ props.row.prjName }}</span></el-form-item>
+						<el-form-item label="项目类型"><span>{{ props.row.prjType }}</span></el-form-item>
+						<el-form-item label="项目性质"><span>{{ props.row.prjXz }}</span></el-form-item>
+						<el-form-item label="联系人"><span>{{ props.row.contacts }}</span></el-form-item>
+						<el-form-item label="联系方式"><span>{{ props.row.contactInf }}</span></el-form-item>
+						<el-form-item label="特别告知事项"><span>{{ props.row.specialNotifi }}</span></el-form-item>
+						<el-form-item label="附带临建批号">
+							<el-button size="small" @click="goProject(props.row.prjTemSN)">{{props.row.prjTemSN}}</el-button>
+						</el-form-item>
+						<el-form-item label="备注">
+							<template v-for="remarkItem in remarkAddClickTag(props.row.remark)">
+								<span v-if="!remarkItem.isHref">{{remarkItem.val}}</span>
+								<el-button v-if="remarkItem.isHref" size="small" @click="goProject(remarkItem.val)">{{remarkItem.val}}</el-button>
+							</template>
+						</el-form-item>
 					</el-form>
 				</template>
 			</el-table-column>
@@ -66,7 +72,11 @@
 					</el-popover>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjTemSN" label="附带临建批号" width="150"></el-table-column>
+			<el-table-column label="附带临建批号" width="250">
+				<template slot-scope="scope">
+					<el-button size="small" @click="goProject(scope.row.prjTemSN)">{{scope.row.prjTemSN}}</el-button>
+				</template>
+			</el-table-column>
 			<el-table-column prop="prjXz" label="影像" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="viewMapHandler(scope.row.prjSN)">查看地图</el-button>
@@ -75,8 +85,18 @@
 			<el-table-column prop="remark" label="备注" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
-						<p>{{ scope.row.remark }}</p>
-						<div slot="reference" class="name-wrapper">{{ scope.row.remark }}</div>
+						<p>
+							<template v-for="remarkItem in remarkAddClickTag(scope.row.remark)">
+								<span v-if="!remarkItem.isHref">{{remarkItem.val}}</span>
+								<el-button v-if="remarkItem.isHref" size="small" @click="goProject(remarkItem.val)">{{remarkItem.val}}</el-button>
+							</template>
+						</p>
+						<div slot="reference" class="name-wrapper">
+							<template v-for="remarkItem in remarkAddClickTag(scope.row.remark)">
+								<span v-if="!remarkItem.isHref">{{remarkItem.val}}</span>
+								<el-button v-if="remarkItem.isHref" size="small" @click="goProject(remarkItem.val)">{{remarkItem.val}}</el-button>
+							</template>
+						</div>
 					</el-popover>
 				</template>
 			</el-table-column>
@@ -127,7 +147,11 @@
 		<el-dialog :visible.sync="isShowMap" :fullscreen=true title="查看地图">
 			<ams-map v-if="isShowMap" :prjSN="prjSNToMap"></ams-map>
 		</el-dialog>
-		
+
+		<el-dialog :visible.sync="projectViewParam.show" title="查询项目基本信息" top="3vh">
+			<ams-project-view v-if="projectViewParam.show" :prjSN="projectViewParam.prjSN"></ams-project-view>
+		</el-dialog>
+
 	</section>
 </template>
 
@@ -135,6 +159,7 @@
 	import { getView002 } from '../../api/api';
 	import util from '../../common/js/util';
 	import AmsMapVue from '../AmsMap.vue';
+	import ProjectViewVue from '../project/ProjectView.vue';
 
 	export default {
 		data() {
@@ -152,10 +177,18 @@
 				pageNum: 1,
 				pageSize: util.paginationSize[0],
 				paginationSize: util.paginationSize,
-				prjSNTypeOptions: util.prjSNTypeOptions
+				prjSNTypeOptions: util.prjSNTypeOptions,
+				projectViewParam: {
+					prjSNTem: '',
+					show: false
+				}
 			}
 		},
 		methods: {
+			goProject(prjSN) {
+				this.projectViewParam.prjSN = prjSN;
+				this.projectViewParam.show = true;
+			},
 			viewMapHandler(prjSN) {
 				this.prjSNToMap = prjSN;
 				this.isShowMap = true;
@@ -211,16 +244,51 @@
 				}
 				this.getView002();
 			}
+		},
+		filters: {
+			remarkFilter(value) {
+				const valueArray = [];
+				valueArray.push(
+					{val: '111', isHref: false},
+					{val: '222', isHref: true},
+					{val: '333', isHref: false},
+					{val: '444', isHref: false}
+				);
+				return valueArray;
+			}
+		},
+		components: {
+			'ams-project-view': ProjectViewVue
 		}
 	}
 </script>
 
-<style srope>
-	#exportTable {display: none;}
-	#view002 .el-table div.cell, #view002 .el-table div.cell .name-wrapper {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+<style lang="scss" scoped>
+	#view002 {
+		.el-table {
+			div.cell {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				.name-wrapper {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+			}
+		}
+
+		.el-dialog__body {padding-top: 0;}
+
+		#exportTable { display: none; }
 	}
-	#view002 .el-dialog__body {padding-top: 0;}
+
+	a.remark-a {
+		color: red;
+		cursor: pointer;
+		&:hover {
+			color: blue;
+		}
+	}
+
 </style>

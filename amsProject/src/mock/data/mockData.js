@@ -125,7 +125,6 @@ MenuTree = [
 
 SelectMenuIds = ['1_1', '1_3', '2_1'];
 
-
 Points = [
   {
     constrID: 0,
@@ -785,11 +784,11 @@ view002List = [
         prjAdr: '朝阳区东苇路3号',
         prjType: '新建',
         specialNotifi: '1.该项目建设用地内的小区道路、居住公共服务设施等应与一期新星花园业主共同使用',
-        prjTemSN: '',
+        prjTemSN: '2013规（朝）建字0001号补正',
         prjXz: '26#配套公建楼等2项',
         contactInf: '13401171985/84313153-8019',
         prjStatus: '未申报',
-        remark: '',
+        remark: '安徽省开《2013规（朝）建字0003号补正》发的哈萨克九分《2013规（朝）建字0000号补正》安徽省开发的哈萨克九分',
         prjSN: '2013规（朝）建字0001号',
         prjUnit: '北京诚通华亿房地产有限公司',
         prjName: '朝阳区新星花园二期、三期',
@@ -801,11 +800,11 @@ view002List = [
         prjAdr: '朝阳区花家地东路3号',
         prjType: '',
         specialNotifi: '',
-        prjTemSN: '',
+        prjTemSN: '2013规（朝）建字0001号补正',
         prjXz: '',
         contactInf: '13901145981/58250108',
         prjStatus: '已申报',
-        remark: '',
+        remark: '安徽省开发的哈萨克九分《2013规（朝）建字0001号补正》安徽省开发的哈萨克九分',
         prjSN: '2013规（朝）建字0080号',
         prjUnit: '中国民航管理干部学院',
         prjName: '',

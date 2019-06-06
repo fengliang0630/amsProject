@@ -11,10 +11,11 @@ const ProjectMockHandler = {
       
     // 查询项目基本信息列表
     mock.onPost('/ams/api/xmjbxx/query').reply(config => {
-      let {header, prjName} = JSON.parse(config.data);
+      let {header, prjName, prjSN} = JSON.parse(config.data);
       let {reqpageSize, reqpageIndex} = header;
       let mockJbxx = _XmjbxxList.filter(user => {
         if (prjName && user.prjName.indexOf(prjName) == -1) return false;
+        if (prjSN && user.prjSN.indexOf(prjSN) == -1) return false;
         return true;
       });
       let total = mockJbxx.length;
