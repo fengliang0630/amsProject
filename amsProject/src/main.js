@@ -5,8 +5,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 // import './assets/theme/theme-green/index.css'
 import VueRouter from 'vue-router'
 import routes from './routes'
-import Mock from './mock'
-Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)

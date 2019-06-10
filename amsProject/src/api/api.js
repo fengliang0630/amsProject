@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-let base = '';
-// let base = 'http://52b869c0.ngrok.io';
+// let base = '';
+let base = 'http://localhost:8899';
 
 // 登录接口
 export const login = params => { 

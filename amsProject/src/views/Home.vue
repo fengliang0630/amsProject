@@ -66,6 +66,7 @@
 <script>
 
 	import { getMenuTree, logout } from '../api/api';
+	import util from '../common/js/util';
 
 	export default {
 		data() {
@@ -74,7 +75,7 @@
 				sysName:'ams 系统',
 				collapsed:false,
 				sysUserName: '',
-				sysUserAvatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png',
+				sysUserAvatar: '../../static/user.png',
 				menuTree: [],
 				form: {
 					name: '',
@@ -137,17 +138,16 @@
 				this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-'+i)[0].style.display=status?'block':'none';
 			},
 			getMenuTree(userId) {
-				getMenuTree({userId: userId}).then(resp => {
-					this.menuTree = resp.menuTree;
 
-					const a = this.$route.fullPath;
-					resp.menuTree.forEach(parentMenu => {
-						parentMenu.children.forEach(menuItem => {
-							if (menuItem.menuLink === a) {
-								this.activeMenuId = menuItem.id;
-							}
-						})
-					});
+				this.menuTree = util.menuTree;
+
+				const a = this.$route.fullPath;
+				util.menuTree.forEach(parentMenu => {
+					parentMenu.children.forEach(menuItem => {
+						if (menuItem.menuLink === a) {
+							this.activeMenuId = menuItem.id;
+						}
+					})
 				});
 			}
 		},

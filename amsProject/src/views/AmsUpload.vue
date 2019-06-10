@@ -59,8 +59,8 @@
 					}
 				}
 
-				var formData = new FormData();	
-				formData.append("files", this.uploadData.files);
+				var formData = new FormData();
+				formData.append("files", this.uploadData.files[0].raw);
 				formData.append('upLoadType', this.uploadData.upLoadType);
 
 				if (this.uploadData.upLoadType === 'SAVE') {

@@ -51,10 +51,11 @@
                   type: 'error'
                 });
               } else {
+                debugger;
                 let user = resp;
                 delete user.header;
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/user' });
+                this.$router.push({ path: '/project' });
               }
             });
           } 
