@@ -115,7 +115,7 @@
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询用户数据失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;
@@ -137,7 +137,7 @@
 
 						if (resp.header.rspReturnCode !== '000000') {
 							this.$message({
-								message: '删除用户失败',
+								message: resp.header.rspReturnMsg,
 								type: 'error'
 							});
 							return;

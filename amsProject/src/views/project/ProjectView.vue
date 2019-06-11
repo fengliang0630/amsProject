@@ -42,7 +42,7 @@
 				getProjectListPage(param, 10, 1).then(resp => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({ message: '查询项目基本信息失败', type: 'error' });
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
 

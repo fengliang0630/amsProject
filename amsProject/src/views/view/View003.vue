@@ -242,7 +242,7 @@
 				getView003({prjSN: this.filters.prjSN}).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询view003失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;

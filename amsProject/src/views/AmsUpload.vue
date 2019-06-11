@@ -74,7 +74,7 @@
 				uploadFiles(formData).then(resp => {
 					
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({ message: '上传文件失败', type: 'error' });
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					} 
 

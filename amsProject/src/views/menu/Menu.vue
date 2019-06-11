@@ -139,10 +139,7 @@
 						this.listLoading = false;
 
 						if (resp.header.rspReturnCode !== '000000') {
-							this.$message({
-								message: '删除菜单失败',
-								type: 'error'
-							});
+							this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 							return;
 						}
 

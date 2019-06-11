@@ -119,7 +119,7 @@
 					logout({}).then(resp => {
 						if (resp.header.rspReturnCode !== '000000') {
 							this.$message({
-								message: '退出系统失败',
+								message: resp.header.rspReturnMsg,
 								type: 'error'
 							});
 						} else {

@@ -107,10 +107,7 @@
 				getRoleListPage(para, this.pageSize, this.pageNum).then((resp) => {					
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({
-							message: '查询角色数据失败',
-							type: 'error'
-						});
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
 
@@ -129,7 +126,7 @@
 						this.listLoading = false;
 						if (resp.header.rspReturnCode !== '000000') {
 							this.$message({
-								message: '删除角色失败',
+								message: resp.header.rspReturnMsg,
 								type: 'error'
 							});
 							return;

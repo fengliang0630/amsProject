@@ -30,7 +30,7 @@
 				getHasRoleIdsByUserId({id: this.currentUserId}).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询用户列表失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;
@@ -67,7 +67,7 @@
 			getRoleList().then(resp => {
 				if (resp.header.rspReturnCode !== '000000') {
 					this.$message({
-						message: '查询用户列表失败',
+						message: resp.header.rspReturnMsg,
 						type: 'error'
 					});
 					return;

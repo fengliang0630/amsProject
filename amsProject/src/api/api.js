@@ -243,8 +243,7 @@ const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));
     const p = Object.assign({}, params);
     let header = {
-        // reqUserId: '1' || userInfo['id'],
-        reqUserId: '99999',
+        reqUserId: userInfo ? userInfo['id'] : '1',
 		rspReturnCode: "",
 		rspReturnMsg:"",
 		reqpageSize: "",

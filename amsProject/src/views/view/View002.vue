@@ -208,7 +208,7 @@
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询view002失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;

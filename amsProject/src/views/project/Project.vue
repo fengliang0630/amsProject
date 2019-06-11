@@ -43,10 +43,46 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="200"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位" width="250"></el-table-column>
-			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
-			<el-table-column prop="prjName" label="工程名称" width="250"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="200">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjSN}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjSN}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
+			<el-table-column prop="prjUnit" label="建设单位" width="250">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjUnit}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjUnit}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
+			<el-table-column prop="prjAdr" label="建设位置" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjAdr}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjAdr}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
+			<el-table-column prop="prjName" label="工程名称" width="250">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjName}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjName}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column prop="prjType" label="建设类型" width="150"></el-table-column>
 			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
 			<el-table-column prop="contactInf" label="联系方式" width="250"></el-table-column>
@@ -157,10 +193,7 @@
 				getProjectListPage(para, this.pageSize, this.pageNum).then((resp) => {
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({
-							message: '查询项目基本信息失败',
-							type: 'error'
-						});
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
 
@@ -180,7 +213,7 @@
 
 						if (resp.header.rspReturnCode !== '000000') {
 							this.$message({
-								message: '删除项目基本信息失败',
+								message: resp.header.rspReturnMsg,
 								type: 'error'
 							});
 							return;

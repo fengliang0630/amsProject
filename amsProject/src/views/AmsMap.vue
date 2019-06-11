@@ -58,7 +58,7 @@
             drowBlock() {
                 getPointsByprjSN({prjSN: this.prjSN}).then(resp => {
                     if (resp.header.rspReturnCode !== '000000') {
-						this.$message({ message: '查询经纬度失败', type: 'error' });
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
 
@@ -144,7 +144,7 @@
                 convertZB(param).then(resp => {
 
                     if (resp.header.rspReturnCode !== '000000') {
-						this.$message({ message: '查询经纬度失败', type: 'error' });
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
                     }
                     

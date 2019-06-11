@@ -180,7 +180,7 @@
 					this.listLoading = false;
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询view001失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;
@@ -195,7 +195,7 @@
 				queryDataByLike({tab: 'xmjbxx', key: 'prjAdr', val: query}).then(resp => {
 
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({message: '查询项目地址失败', type: 'error'});
+						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
 						return;
 					}
 					this.prjAdrOptions = resp.list;
@@ -217,7 +217,7 @@
 				getPrjClasfiNames(param).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询一级分类失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;

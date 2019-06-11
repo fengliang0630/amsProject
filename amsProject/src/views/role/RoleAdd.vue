@@ -64,7 +64,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									this.$message({
-										message: '角色添加失败',
+										message: resp.header.rspReturnMsg,
 										type: 'error'
 									});
 									return;

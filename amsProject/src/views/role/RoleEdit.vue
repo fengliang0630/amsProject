@@ -61,7 +61,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									this.$message({
-										message: '修改角色失败',
+										message: resp.header.rspReturnMsg,
 										type: 'error'
 									});
 									return;

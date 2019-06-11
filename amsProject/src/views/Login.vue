@@ -47,11 +47,10 @@
 
               if (resp.header.rspReturnCode !== '000000') {
                 this.$message({
-                  message: '登录失败',
+                  message: resp.header.rspReturnMsg,
                   type: 'error'
                 });
               } else {
-                debugger;
                 let user = resp;
                 delete user.header;
                 sessionStorage.setItem('user', JSON.stringify(user));

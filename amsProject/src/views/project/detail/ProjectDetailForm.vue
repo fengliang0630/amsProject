@@ -131,7 +131,7 @@
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: queryString}).then(resp => {
 
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({message: '查询许可证号失败', type: 'error'});
+						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
 						return;
 					}
 
@@ -167,7 +167,7 @@
 					
 					if (resp.header.rspReturnCode !== '000000') {
 						respMsg.type = 'error';
-						respMsg.message = '查询五级分类接口调用失败';
+						respMsg.message = resp.header.rspReturnMsg;
 						this.$message(respMsg);
 						return;
 					}
@@ -201,7 +201,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									respMsg.type = 'error';
-									respMsg.message = (typeof(this.formData.id) !== 'undefined') ? '修改项目明细信息失败' : '新增项目明细信息失败';
+									respMsg.message = resp.header.rspReturnMsg;
 									this.$message(respMsg);
 									return;
 								}
@@ -226,7 +226,7 @@
 
 					if (resp.header.rspReturnCode !== '000000') {
 						respMsg.type = 'error';
-						respMsg.message = '根据明细id查询五级分类信息出错';
+						respMsg.message = resp.header.rspReturnMsg;
 						this.$message(respMsg);
 						return;
 					}

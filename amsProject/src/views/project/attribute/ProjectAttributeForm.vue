@@ -96,7 +96,7 @@
 				show: true,
 				formLoading: false,
 				title: '',
-				prjAttrOptions: ['规划项目性质', '人防工程情况'],
+				prjAttrOptions: ['规划项目性质:', '人防工程情况:'],
 				formRules: {
 					prjSN: [
 						{ required: true,  message: '不能为空', trigger: 'blur' }
@@ -176,7 +176,7 @@
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: queryString}).then(resp => {
 
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({message: '查询许可证号失败', type: 'error'});
+						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
 						return;
 					}
 
@@ -198,7 +198,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									respMsg.type = 'error';
-									respMsg.message = (typeof(this.formData.id) !== 'undefined') ? '修改项目属性信息失败' : '新增项目属性信息失败';
+									respMsg.message = resp.header.rspReturnMsg;
 									this.$message(respMsg);
 									return;
 								}

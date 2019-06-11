@@ -208,7 +208,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									respMsg.type = 'error';
-									respMsg.message = (!!this.formData.id) ? '修改项目基本信息失败' : '新增项目基本信息失败';
+									respMsg.message = resp.header.rspReturnMsg;
 									this.$message(respMsg);
 									return;
 								}
@@ -232,7 +232,7 @@
 				queryDicByType(param).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						respMsg.type = 'error';
-						respMsg.message = '查询建设位置报错';
+						respMsg.message = resp.header.rspReturnMsg;
 						this.$message(respMsg);
 						return;
 					}

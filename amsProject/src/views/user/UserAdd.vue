@@ -83,7 +83,7 @@
 
 								if (resp.header.rspReturnCode !== '000000') {
 									this.$message({
-										message: '添加用户失败',
+										message: resp.header.rspReturnMsg,
 										type: 'error'
 									});
 									return;

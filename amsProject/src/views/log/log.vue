@@ -95,7 +95,7 @@
 
                     if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
-							message: '查询操作日志失败',
+							message: resp.header.rspReturnMsg,
 							type: 'error'
 						});
 						return;
