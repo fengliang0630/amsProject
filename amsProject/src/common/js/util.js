@@ -127,7 +127,7 @@ export default {
     paginationSize: [10, 20, 50, 100],
 
     prjSNTypeOptions: [
-        {id: '1', label: '请选择', value: ''},
+        {id: '1', label: '请选择许可证类型', value: ''},
         {id: '2', label: '城镇建设项目', value: '城镇建设项目'},
         {id: '3', label: '乡村建设项目', value: '乡村建设项目'},
         {id: '4', label: '临时建设项目', value: '临时建设项目'},
@@ -135,13 +135,13 @@ export default {
     ],
     
     prjTypeOptions: [
-        { id: '1', label: '请选择', value: ''},
+        { id: '1', label: '请选择项目类型', value: ''},
         { id: '2', label: '新建', value: '新建'},
         { id: '3', label: '改扩建', value: '改扩建'}
     ],
 
     prjStatusOptions: [
-        { id: '1', label: '请选择', value: ''},
+        { id: '1', label: '请选择项目状态', value: ''},
         { id: '2', label: '未申报', value: '未申报'},
         { id: '3', label: '已撤（注）销', value: '已撤（注）销'},
         { id: '4', label: '已验收', value: '已验收'},
@@ -152,7 +152,7 @@ export default {
     ],
 
     prjMarkOptions: [
-        { id: '1', label: '请选择', value: ''},
+        { id: '1', label: '请选择项目标识', value: ''},
         { id: '2', label: '正常', value: '正常'},
         { id: '3', label: '超期', value: '超期'},
         { id: '4', label: '延期', value: '延期'},

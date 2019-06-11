@@ -30,6 +30,11 @@
 						<el-option v-for="item in prjSNTypeOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</el-form-item>
+				<el-form-item>
+					<el-select v-model="filters.prjMark" placeholder="请选择许可证类型" style="width: 100%;">
+						<el-option v-for="item in prjMarkOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
+					</el-select>
+				</el-form-item>
 				<el-form-item style="width:23%;">
 					<el-button type="primary" v-on:click="getView002">查询</el-button>
 					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
@@ -220,7 +225,8 @@
 					prjStatus: '',
 					prjAdr: '',
 					prjName: '',
-					prjType: ''
+					prjType: '',
+					prjMark: ''
 				},
 				viewList: [],
 				listLoading: false,
@@ -231,6 +237,7 @@
 				prjSNTypeOptions: util.prjSNTypeOptions,
 				prjStatusOptions: util.prjStatusOptions,
 				prjTypeOptions: util.prjTypeOptions,
+				prjMarkOptions: util.prjMarkOptions,
 				projectViewParam: {
 					prjSNTem: '',
 					show: false
