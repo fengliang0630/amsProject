@@ -9,14 +9,16 @@
 				</el-form-item>
                 <el-form-item>
 					<el-select v-model="filters.operAction" placeholder="请选择操作类型">
-                        <el-option label="新增" value="新增"></el-option>
+                        <el-option label="请选择" value=""></el-option>
+						<el-option label="新增" value="新增"></el-option>
                         <el-option label="删除" value="删除"></el-option>
                         <el-option label="修改" value="修改"></el-option>
                     </el-select>
 				</el-form-item>
                 <el-form-item>
 					<el-select v-model="filters.operDesc" placeholder="请选择操作信息">
-                        <el-option label="项目基本信息" value="项目基本信息"></el-option>
+                        <el-option label="请选择" value=""></el-option>
+						<el-option label="项目基本信息" value="项目基本信息"></el-option>
                         <el-option label="项目属性信息" value="项目属性信息"></el-option>
                         <el-option label="项目明细信息" value="项目明细信息"></el-option>
                     </el-select>

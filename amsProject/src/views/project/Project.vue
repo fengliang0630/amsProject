@@ -14,7 +14,7 @@
 				</el-form-item>
 				<el-form-item>
 					<el-select v-model="filters.prjType" placeholder="请选择建设类型" style="width: 100%;">
-						<el-option v-for="item in prjTypeOptions" :key="item" :label="item" :value="item"></el-option>
+						<el-option v-for="item in prjTypeOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item>

@@ -122,9 +122,19 @@ export default {
 
     paginationSize: [10, 20, 50, 100],
 
-    prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目'],
+    prjSNTypeOptions: [
+        {id: '1', label: '请选择', value: ''},
+        {id: '2', label: '城镇建设项目', value: '城镇建设项目'},
+        {id: '3', label: '乡村建设项目', value: '乡村建设项目'},
+        {id: '4', label: '临时建设项目', value: '临时建设项目'},
+        {id: '5', label: '补正项目', value: '补正项目'}
+    ],
 
-    prjTypeOptions: ['', '新建', '改扩建'],
+    prjTypeOptions: [
+        { id: '1', label: '请选择', value: ''},
+        { id: '2', label: '新建', value: '新建'},
+        { id: '3', label: '改扩建', value: '改扩建'}
+    ],
 
     menuTree : [
         {

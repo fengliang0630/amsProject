@@ -18,7 +18,7 @@
 			<div class="filter-item" v-if="!!uploadData.upLoadType">
 				<label>选择上传文件</label>
 				<div>
-					<el-upload ref="uploadComponent" class="upload-demo" action="" :auto-upload="false" multiple  :on-change="fileChange" >
+					<el-upload ref="uploadComponent" class="upload-demo" action="" :auto-upload="false" :on-change="fileChange" >
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
 						<div slot="tip" class="el-upload__tip">支持excel,dxf文档上传</div>

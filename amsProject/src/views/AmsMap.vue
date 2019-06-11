@@ -53,7 +53,7 @@
                     enableGeolocation: true
                 });
                 this.map.addControl(navigationControl);
-                // this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
+                this.map.setMapType(BMAP_HYBRID_MAP);//卫星&路网
             },
             drowBlock() {
                 getPointsByprjSN({prjSN: this.prjSN}).then(resp => {
