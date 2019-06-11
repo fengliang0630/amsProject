@@ -63,7 +63,7 @@ export default {
     validatorUtils: {
         checkSpecialChar(rule, value, callback) {
             rule.message = '不能包含特殊字符:\\<>"\'';
-            if (value.indexOf('\\') > -1) {
+            if (value && value.indexOf('\\') > -1) {
                 return callback(new Error());
             }
 
@@ -133,11 +133,31 @@ export default {
         {id: '4', label: '临时建设项目', value: '临时建设项目'},
         {id: '5', label: '补正项目', value: '补正项目'}
     ],
-
+    
     prjTypeOptions: [
         { id: '1', label: '请选择', value: ''},
         { id: '2', label: '新建', value: '新建'},
         { id: '3', label: '改扩建', value: '改扩建'}
+    ],
+
+    prjStatusOptions: [
+        { id: '1', label: '请选择', value: ''},
+        { id: '2', label: '未申报', value: '未申报'},
+        { id: '3', label: '已撤（注）销', value: '已撤（注）销'},
+        { id: '4', label: '已验收', value: '已验收'},
+        { id: '5', label: '已完结', value: '已完结'},
+        { id: '6', label: '部分撤（注）销', value: '部分撤（注）销'},
+        { id: '7', label: '部分验收', value: '部分验收'},
+        { id: '8', label: '未撤（注）销部分部分验收', value: '未撤（注）销部分部分验收'}
+    ],
+
+    prjMarkOptions: [
+        { id: '1', label: '请选择', value: ''},
+        { id: '2', label: '正常', value: '正常'},
+        { id: '3', label: '超期', value: '超期'},
+        { id: '4', label: '延期', value: '延期'},
+        { id: '5', label: '补正', value: '补正'}
+
     ],
 
     menuTree : [

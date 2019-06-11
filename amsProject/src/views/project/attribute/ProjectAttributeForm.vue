@@ -33,7 +33,7 @@
 					<el-input-number v-model="formData.underGroundLev" :max="-1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上高度（米）" prop="aboveGroundHet">
-					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundHet" :min="0" :precision="2" :step="0.1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下高度（米）" prop="underGroundHet">
 					<el-input-number v-model="formData.underGroundHet" :max="0" :precision="2" :step="0.1" style="width:100%"></el-input-number>
@@ -48,22 +48,19 @@
 					<el-input v-model="formData.strucType" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="验线文号" prop="checkDocSN">
-					<el-input v-if="!!formData.id" v-model="formData.checkDocSN" auto-complete="off" readonly></el-input>
-					<el-input v-if="!formData.id" v-model="formData.checkDocSN" auto-complete="off" @change="checkDocSNChange"></el-input>
+					<el-input v-model="formData.checkDocSN" auto-complete="off" @change="checkDocSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验线日期" prop="checkDocDate">
 					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="验收文号" prop="checkSN">
-					<el-input v-if="!!formData.id" v-model="formData.checkSN" auto-complete="off" readonly></el-input>
-					<el-input v-if="!formData.id" v-model="formData.checkSN" auto-complete="off" @change="checkSNChange"></el-input>
+					<el-input v-model="formData.checkSN" auto-complete="off" @change="checkSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验收日期" prop="checkDate">
 					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="撤（注）销证号" prop="cancelSN">
-					<el-input v-if="!!formData.id" v-model="formData.cancelSN" auto-complete="off" readonly></el-input>
-					<el-input v-if="!formData.id" v-model="formData.cancelSN" auto-complete="off" @change="cancelSNChange"></el-input>
+					<el-input v-model="formData.cancelSN" auto-complete="off" @change="cancelSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="撤（注）销日期" prop="cancelDate">
 					<el-date-picker v-model="formData.cancelDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>

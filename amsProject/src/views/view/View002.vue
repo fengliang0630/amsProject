@@ -7,7 +7,23 @@
 					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-input v-model="filters.prjUnit" placeholder="建设位置"></el-input>
+					<el-input v-model="filters.prjUnit" placeholder="建设单位"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-input v-model="filters.prjAdr" placeholder="建设位置"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-input v-model="filters.prjName" placeholder="工程名称"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-select v-model="filters.prjType" placeholder="请选择项目类型" style="width: 100%;">
+						<el-option v-for="item in prjTypeOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					<el-select v-model="filters.prjStatus" placeholder="请选择项目状态" style="width: 100%;">
+						<el-option v-for="item in prjStatusOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
+					</el-select>
 				</el-form-item>
 				<el-form-item>
 					<el-select v-model="filters.prjSNType" placeholder="请选择许可证类型" style="width: 100%;">
@@ -200,7 +216,11 @@
 				filters: {
 					prjSN: '',
 					prjUnit: '',
-					prjSNType: ''
+					prjSNType: '',
+					prjStatus: '',
+					prjAdr: '',
+					prjName: '',
+					prjType: ''
 				},
 				viewList: [],
 				listLoading: false,
@@ -209,6 +229,8 @@
 				pageSize: util.paginationSize[0],
 				paginationSize: util.paginationSize,
 				prjSNTypeOptions: util.prjSNTypeOptions,
+				prjStatusOptions: util.prjStatusOptions,
+				prjTypeOptions: util.prjTypeOptions,
 				projectViewParam: {
 					prjSNTem: '',
 					show: false
