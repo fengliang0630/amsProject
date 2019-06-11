@@ -256,7 +256,7 @@
 		mounted() {
 			const index = this.$route.params.prjSNType;
 			if (!isNaN(index)) {
-				this.filters.prjSNType = this.prjSNTypeOptions[Number(index)];
+				this.filters.prjSNType = this.prjSNTypeOptions[Number(index)].value;
 			} else {
 				this.filters.prjSNType = '';
 			}
@@ -266,7 +266,7 @@
 			'$route' (to, from) {
 				const index = to.params.prjSNType;
 				if (!isNaN(index)) {
-					this.filters.prjSNType = this.prjSNTypeOptions[Number(index)];
+					this.filters.prjSNType = this.prjSNTypeOptions[Number(index)].value;
 				} else {
 					this.filters.prjSNType = '';
 				}

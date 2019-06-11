@@ -63,6 +63,10 @@ export default {
     validatorUtils: {
         checkSpecialChar(rule, value, callback) {
             rule.message = '不能包含特殊字符:\\<>"\'';
+            if (value.indexOf('\\') > -1) {
+                return callback(new Error());
+            }
+
             const reg = new RegExp('[\\<>"\']');
             if (reg.test(value)) {
                 return callback(new Error());
@@ -171,10 +175,10 @@ export default {
           menuName: '快速导航',
           iconCls: 'el-icon-message',
           children: [      
-            {id: '4_1', menuName: '城镇建设项目', menuLink: '/view002/0'},
-            {id: '4_2', menuName: '乡村建设项目', menuLink: '/view002/1'},
-            {id: '4_3', menuName: '临时建设项目', menuLink: '/view002/2'},
-            {id: '4_4', menuName: '补正项目', menuLink: '/view002/3'},
+            {id: '4_1', menuName: '城镇建设项目', menuLink: '/view002/1'},
+            {id: '4_2', menuName: '乡村建设项目', menuLink: '/view002/2'},
+            {id: '4_3', menuName: '临时建设项目', menuLink: '/view002/3'},
+            {id: '4_4', menuName: '补正项目', menuLink: '/view002/4'},
           ]
         }
       ]
