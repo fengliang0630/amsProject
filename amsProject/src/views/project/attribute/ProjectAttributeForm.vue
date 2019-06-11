@@ -30,7 +30,7 @@
 					<el-input-number v-model="formData.aboveGroundLev" :min="1" :max="200" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下层数" prop="underGroundLev">
-					<el-input-number v-model="formData.underGroundLev" :max="-1" style="width:100%" :step="1" :precision="0"></el-input-number>
+					<el-input-number v-model="formData.underGroundLev" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上高度（米）" prop="aboveGroundHet">
 					<el-input-number v-model="formData.aboveGroundHet" :min="0" :precision="2" :step="0.1" style="width:100%"></el-input-number>

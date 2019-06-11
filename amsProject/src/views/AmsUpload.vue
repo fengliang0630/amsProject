@@ -1,6 +1,6 @@
 <template>
 	<el-row id="uploadPage" class="container">
-		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+		<el-col :span="12" class="toolbar" style="padding-bottom: 0px;">
 			<div class="filter-item">
 				<label>上传类型</label>
 				<div>
@@ -26,6 +26,10 @@
 				</div>
 			</div>
 		</el-col>
+		<el-col v-if="isShow" :span="12" class="toolbar" style="padding-bottom: 0px;">
+			<el-progress type="circle" :percentage="percentage" :status="progressStatus"></el-progress>
+			<p>{{errorMsg}}</p>
+		</el-col>
 	</el-row>
 </template>
 
@@ -36,14 +40,30 @@
 		data() {
 			return {
 				uploadTypeOptions: ['ANALYSIS', 'SAVE', 'DIC'],
+				progressStatus: '',
+				percentage: 0,
+				errorMsg: '',
+				isShow: false,
+				isEnd: false,
 				uploadData: {
 					upLoadType: '',
 					prjSN: '',
 					files: []
-				}
+				},
+				time: null
 			}
 		},
 		methods: {
+			startPercentage() {
+				window.setTimeout(() => {
+					this.percentage += Math.ceil(Math.random()*10);
+					if (this.percentage >= 100) {
+						this.percentage = 100;
+					} else {
+						this.startPercentage();
+					}
+				}, 2000);
+			},
 			submitUpload() {
 
 				if (!this.uploadData.files.length) {
@@ -71,13 +91,18 @@
 					formData.append('prjSN', this.uploadData.prjSN);
 				}
 
+				this.isShow = true;
+				this.startPercentage();
 				uploadFiles(formData).then(resp => {
-					
+					this.isEnd = true;
+					this.percentage = 100;
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
+						this.errorMsg = resp.header.rspReturnMsg;
+						this.progressStatus = 'exception';
 						return;
 					} 
 
+					this.progressStatus = 'success';
 					this.$message({ message: '恭喜您已经上传文件成功', type: 'success' });
 					this.$refs.uploadComponent.clearFiles();
 				});
