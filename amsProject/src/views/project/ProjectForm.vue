@@ -45,22 +45,22 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="发件日期" prop="noticeTime">
-					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" style="width: 100%;"></el-date-picker>
+					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="有效期" prop="effectiveTime">
-					<el-input-number v-model="formData.effectiveTime" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.effectiveTime" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="延期文号" prop="delaySN">
 					<el-input v-model="formData.delaySN" auto-complete="off" @change="delaySNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="延长期(月)" prop="delayCountDay">
-					<el-input-number v-model="formData.delayCountDay" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.delayCountDay" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="补正证号" prop="correctionSN">
 					<el-input v-model="formData.correctionSN" auto-complete="off" @change="correctionSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="补正日期" prop="correctionDate">
-					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" style="width: 100%;"></el-date-picker>
+					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="特别告知事项" prop="specialNotifi">
 					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off"></el-input>
