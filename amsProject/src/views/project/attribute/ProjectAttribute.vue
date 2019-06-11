@@ -22,7 +22,7 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="200"></el-table-column>
 			<el-table-column prop="serialNumber" label="建筑序号" width="150"></el-table-column>
 			<el-table-column prop="prjNature" label="项目性质" width="150"></el-table-column>
 			<el-table-column prop="prjAttr" label="规划项目/人防" width="150"></el-table-column>
@@ -43,7 +43,16 @@
 			<el-table-column prop="imgJudgeRes" label="影像判读结果" width="150"></el-table-column>
 			<el-table-column prop="exproprInfo" label="代征用地情况" width="150"></el-table-column>
 			<el-table-column prop="buldStatus" label="工程状态" width="150"></el-table-column>
-			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
+			<el-table-column label="备注" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.remark}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.remark}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column fixed="right"  label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>

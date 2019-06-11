@@ -4,10 +4,28 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-input v-model="filters.prjName" placeholder="项目名称"></el-input>
+					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
+					<el-input v-model="filters.prjUnit" placeholder="建设单位"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-input v-model="filters.prjAdr" placeholder="建设位置"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-select v-model="filters.prjType" placeholder="请选择建设类型" style="width: 100%;">
+						<el-option v-for="item in prjTypeOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					<el-input v-model="filters.specialNotifi" placeholder="特别告知事项"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-date-picker type="date" placeholder="发件日期" v-model="filters.noticeTime" value-format="yyyy/MM/dd"
+						format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
+				</el-form-item>
+				<el-form-item>
+					<el-input v-model="filters.remark" placeholder="备注"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" v-on:click="getProjectListPage">查询</el-button>
@@ -25,18 +43,36 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位" width="150"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="200"></el-table-column>
+			<el-table-column prop="prjUnit" label="建设单位" width="250"></el-table-column>
 			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
-			<el-table-column prop="prjName" label="工程名称" width="150"></el-table-column>
+			<el-table-column prop="prjName" label="工程名称" width="250"></el-table-column>
 			<el-table-column prop="prjType" label="建设类型" width="150"></el-table-column>
 			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
-			<el-table-column prop="contactInf" label="联系方式" width="150"></el-table-column>
+			<el-table-column prop="contactInf" label="联系方式" width="250"></el-table-column>
 			<el-table-column prop="prjTemSN" label="附带临建批号" width="150"></el-table-column>
-			<el-table-column prop="specialNotifi" label="特别告知事项" width="150"></el-table-column>
+			<el-table-column label="特别告知事项" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.specialNotifi}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.specialNotifi}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column prop="noticeTime" label="发件日期" width="150"></el-table-column>
 			<el-table-column prop="effectiveTime" label="有效时间" width="150"></el-table-column>
-			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
+			<el-table-column label="备注" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.remark}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.remark}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
 			<el-table-column prop="prjStatus" label="项目状态" width="150"></el-table-column>
 			<el-table-column prop="delaySN" label="延期文号" width="150"></el-table-column>
@@ -73,9 +109,15 @@
 	export default {
 		data() {
 			return {
+				prjTypeOptions: util.prjTypeOptions,
 				filters: {
-					prjName: '',
-					prjSN: ''
+					prjSN: '',
+					prjUnit: '',
+					prjAdr: '',
+					prjType: '',
+					specialNotifi: '',
+					noticeTime: '',
+					remark: ''
 				},
 				jbxxList: [],
 				total: 0,
@@ -101,9 +143,15 @@
 			},
 			// 获取项目基本信息列表
 			getProjectListPage() {
+				debugger;
 				let para = {
-					prjName: this.filters.prjName,
-					prjSN: this.filters.prjSN
+					prjSN: this.filters.prjSN,
+					prjUnit: this.filters.prjUnit,
+					prjAdr: this.filters.prjAdr,
+					prjType: this.filters.prjType,
+					specialNotifi: this.filters.specialNotifi,
+					noticeTime: this.filters.noticeTime,
+					remark: this.filters.remark
 				};
 				this.listLoading = true;
 				getProjectListPage(para, this.pageSize, this.pageNum).then((resp) => {
@@ -168,3 +216,4 @@
 		}
 	}
 </script>
+

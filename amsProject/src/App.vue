@@ -56,6 +56,12 @@ export default {
 		text-align: center;
 	}
 
+	.nowrap-text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	.fade-enter-active,
 	.fade-leave-active {
 		transition: all .2s ease;

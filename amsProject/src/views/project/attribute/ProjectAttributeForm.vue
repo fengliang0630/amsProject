@@ -11,25 +11,26 @@
 						placeholder="请输入内容" :trigger-on-focus="false"></el-autocomplete>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
-					<el-input-number v-if="!formData.id" v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-if="!formData.id" v-model="formData.serialNumber" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 					<el-input v-if="!!formData.id" v-model="formData.serialNumber" auto-complete="off" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="项目性质" prop="prjNature">
 					<el-input v-model="formData.prjNature" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="规划项目/人防" prop="prjAttr">
-					<el-select v-model="formData.prjAttr" placeholder="请选择规划项目/人防" style="width: 100%;">
-						<el-option v-for="item in prjAttrOptions" :key="item" :label="item" :value="item"></el-option>
-					</el-select>
+					<template>
+						<el-radio v-model="formData.prjAttr" :label="prjAttrOptions[0]">{{prjAttrOptions[0]}}</el-radio>
+						<el-radio v-model="formData.prjAttr" :label="prjAttrOptions[1]">{{prjAttrOptions[1]}}</el-radio>
+					</template>
 				</el-form-item>
 				<el-form-item label="平时用途" prop="peacetimeUses">
 					<el-input v-model="formData.peacetimeUses" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上层数" prop="aboveGroundLev">
-					<el-input-number v-model="formData.aboveGroundLev" :min="1" :max="200" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLev" :min="1" :max="200" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下层数" prop="underGroundLev">
-					<el-input-number v-model="formData.underGroundLev" :min="1" :max="200" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.underGroundLev" :min="1" :max="200" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上高度（米）" prop="aboveGroundHet">
 					<el-input-number v-model="formData.aboveGroundHet" :precision="2" :step="0.1" style="width:100%"></el-input-number>
@@ -38,10 +39,10 @@
 					<el-input-number v-model="formData.underGroundHet" :precision="2" :step="0.1" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="栋数" prop="buildings">
-					<el-input-number v-model="formData.buildings" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.buildings" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="住房套数" prop="housingStockNum">
-					<el-input-number v-model="formData.housingStockNum" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.housingStockNum" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
 				</el-form-item>
 				<el-form-item label="结构类型" prop="strucType">
 					<el-input v-model="formData.strucType" auto-complete="off"></el-input>
@@ -51,21 +52,21 @@
 					<el-input v-if="!formData.id" v-model="formData.checkDocSN" auto-complete="off" @change="checkDocSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验线日期" prop="checkDocDate">
-					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
+					<el-date-picker v-model="formData.checkDocDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="验收文号" prop="checkSN">
 					<el-input v-if="!!formData.id" v-model="formData.checkSN" auto-complete="off" readonly></el-input>
 					<el-input v-if="!formData.id" v-model="formData.checkSN" auto-complete="off" @change="checkSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="验收日期" prop="checkDate">
-					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" style="width:100%"></el-date-picker>
+					<el-date-picker v-model="formData.checkDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="撤（注）销证号" prop="cancelSN">
 					<el-input v-if="!!formData.id" v-model="formData.cancelSN" auto-complete="off" readonly></el-input>
 					<el-input v-if="!formData.id" v-model="formData.cancelSN" auto-complete="off" @change="cancelSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="撤（注）销日期" prop="cancelDate">
-					<el-input v-model="formData.cancelDate" auto-complete="off"></el-input>
+					<el-date-picker v-model="formData.cancelDate" align="right" type="date" placeholder="选择日期" value-format="yyyy/MM/dd" format="yyyy/MM/dd"  style="width:100%"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="影像判读结果" prop="imgJudgeRes">
 					<el-input v-model="formData.imgJudgeRes" auto-complete="off"></el-input>
@@ -184,6 +185,7 @@
 				});
 			},
 			submitHandler: function () {
+				console.log(this.formData.prjAttr);
 				this.$refs.formData.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {

@@ -124,6 +124,8 @@ export default {
 
     prjSNTypeOptions: ['城镇建设项目', '乡村建设项目', '临时建设项目', '补正项目'],
 
+    prjTypeOptions: ['', '新建', '改扩建'],
+
     menuTree : [
         {
           id: '1',

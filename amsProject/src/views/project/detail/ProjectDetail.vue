@@ -22,13 +22,13 @@
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSN" label="许可证号" width="150"></el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="200"></el-table-column>
 			<el-table-column prop="serialNumber" label="建筑序号" width="150"></el-table-column>
-			<el-table-column prop="serialFunct" label="建筑功能" width="150"></el-table-column>
-			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="150"></el-table-column>
-			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="150"></el-table-column>
-			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="150"></el-table-column>
-			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="150"></el-table-column>
+			<el-table-column prop="serialFunct" label="建筑功能" width="200"></el-table-column>
+			<el-table-column prop="aboveGroundArea" label="地上建筑面积（平方米）" width="200"></el-table-column>
+			<el-table-column prop="underGroundArea" label="地下建筑面积（平方米）" width="200"></el-table-column>
+			<el-table-column prop="blendArea" label="混合建筑面积（平方米）" width="200"></el-table-column>
+			<el-table-column prop="aboveGroundLen" label="地上建筑长度（米）" width="200"></el-table-column>
 			<el-table-column prop="prjClasfiName1" label="一级分类" width="150"></el-table-column>
 			<el-table-column prop="prjClasfiName2" label="二级分类" width="150"></el-table-column>
 			<el-table-column prop="prjClasfiName3" label="三级分类" width="150"></el-table-column>

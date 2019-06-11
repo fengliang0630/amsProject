@@ -45,7 +45,7 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="发件日期" prop="noticeTime">
-					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
+					<el-date-picker type="date" placeholder="发件日期" v-model="formData.noticeTime" value-format="yyyy/MM/dd" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="有效期" prop="effectiveTime">
 					<el-input-number v-model="formData.effectiveTime" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
@@ -60,7 +60,7 @@
 					<el-input v-model="formData.correctionSN" auto-complete="off" @change="correctionSNChange"></el-input>
 				</el-form-item>
 				<el-form-item label="补正日期" prop="correctionDate">
-					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
+					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" value-format="yyyy/MM/dd" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="特别告知事项" prop="specialNotifi">
 					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off"></el-input>
@@ -87,7 +87,7 @@
 				show: true,
 				formLoading: false,
 				title: '',
-				prjTypeOptions: ['新建', '改扩建'],
+				prjTypeOptions: util.prjTypeOptions,
 				prjSNTypeOptions: util.prjSNTypeOptions,
 				prjAdrCodeOptons: [],
 				remarkRequired: { required: true, message: '不能为空', trigger: 'blur' },
@@ -122,7 +122,6 @@
 						{ max: 10, message: '最大长度10', trigger: 'blur' }
 					],
 					contactInf: [
-						{ validator: util.validatorUtils.checkMobile, trigger: 'blur' },
 						{ max: 100, message: '最大长度100', trigger: 'blur' }
 					],
 					prjTemSN: [
