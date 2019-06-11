@@ -17,7 +17,7 @@
 
 		<!--列表-->
 		<el-table :data="xmsxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
-			<el-table-column fixed="left"  width="60">
+			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
@@ -44,7 +44,7 @@
 			<el-table-column prop="exproprInfo" label="代征用地情况" width="150"></el-table-column>
 			<el-table-column prop="buldStatus" label="工程状态" width="150"></el-table-column>
 			<el-table-column prop="remark" label="备注" width="150"></el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column fixed="right"  label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

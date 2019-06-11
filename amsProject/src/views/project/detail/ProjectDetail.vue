@@ -17,7 +17,7 @@
 
 		<!--列表-->
 		<el-table :data="xmmxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
-			<el-table-column fixed="left"  width="60">
+			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
 				</template>
@@ -34,7 +34,7 @@
 			<el-table-column prop="prjClasfiName3" label="三级分类" width="150"></el-table-column>
 			<el-table-column prop="prjClasfiName4" label="四级分类" width="150"></el-table-column>
 			<el-table-column prop="prjClasfiName5" label="五级分类" width="150"></el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column fixed="right"  label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

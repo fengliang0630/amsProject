@@ -43,7 +43,7 @@
 			<el-table-column prop="delayCountDay" label="延长期" width="150"></el-table-column>
 			<el-table-column prop="correctionSN" label="补正证号" width="150"></el-table-column>
 			<el-table-column prop="correctionDate" label="补正日期" width="150"></el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column fixed="right" label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>

@@ -239,7 +239,7 @@
 					return;
 				}
 
-				getView003().then(resp => {
+				getView003({prjSN: this.filters.prjSN}).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({
 							message: '查询view003失败',
@@ -294,9 +294,7 @@
 	#exportTable1 th {
 		background-color: #b7b5b5;
 	}
-	#exportTable1 th, #exportTable1 td {
-		text-align: center;
-	}
+	
 	#view003Page .el-table div.cell, #view003Page .el-table div.cell .name-wrapper {
 		overflow: hidden;
 		text-overflow: ellipsis;
