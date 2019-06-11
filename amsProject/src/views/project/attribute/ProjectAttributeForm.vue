@@ -96,7 +96,7 @@
 				show: true,
 				formLoading: false,
 				title: '',
-				prjAttrOptions: ['规划项目性质:', '人防工程情况:'],
+				prjAttrOptions: ['规划项目性质：', '人防工程情况：'],
 				formRules: {
 					prjSN: [
 						{ required: true,  message: '不能为空', trigger: 'blur' }
