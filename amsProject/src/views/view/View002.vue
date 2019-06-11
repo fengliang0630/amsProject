@@ -47,34 +47,65 @@
 					</el-form>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjStatus" label="项目状态" width="100"></el-table-column>
-			<el-table-column prop="prjUnit" label="建设单位" width="150"></el-table-column>
-			<el-table-column prop="prjAdr" label="建设位置" width="150"></el-table-column>
+			<el-table-column prop="prjStatus" label="项目状态" width="130"></el-table-column>
+			<el-table-column label="建设单位" width="200">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjUnit}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjUnit}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
+			<el-table-column label="建设位置" width="200">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjAdr}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjAdr}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column  label="工程名称" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
-						<p>{{ scope.row.prjName }}</p>
-						<div slot="reference" class="name-wrapper">{{ scope.row.prjName }}</div>
+						<p><span>{{scope.row.prjName}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjName}}</span>
+						</div>
 					</el-popover>
 				</template>
 			</el-table-column>
 			<el-table-column prop="prjType" label="项目类型" width="150"></el-table-column>
-			<el-table-column prop="prjXz" label="项目性质" width="150"></el-table-column>
+			<el-table-column label="项目性质" width="150">
+				<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.prjXz}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.prjXz}}</span>
+						</div>
+					</el-popover>
+				</template>
+			</el-table-column>
 			<el-table-column prop="contacts" label="联系人" width="150"></el-table-column>
-			<el-table-column prop="contactInf" label="联系方式" width="150"></el-table-column>
+			<el-table-column prop="contactInf" label="联系方式" width="200"></el-table-column>
 			<el-table-column prop="prjMark" label="项目标识" width="150"></el-table-column>
 			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
 			<el-table-column label="特别告知事项" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
-						<p>{{ scope.row.specialNotifi }}</p>
-						<div slot="reference" class="name-wrapper">{{ scope.row.specialNotifi }}</div>
+						<p><span>{{scope.row.specialNotifi}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.specialNotifi}}</span>
+						</div>
 					</el-popover>
 				</template>
 			</el-table-column>
 			<el-table-column label="附带临建批号" width="250">
 				<template slot-scope="scope">
-					<el-button size="small" @click="goProject(scope.row.prjTemSN)">{{scope.row.prjTemSN}}</el-button>
+					<el-button v-if="scope.row.prjTemSN" size="small" @click="goProject(scope.row.prjTemSN)">{{scope.row.prjTemSN}}</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column prop="prjXz" label="影像" width="150">
@@ -91,7 +122,7 @@
 								<el-button v-if="remarkItem.isHref" size="small" @click="goProject(remarkItem.val)">{{remarkItem.val}}</el-button>
 							</template>
 						</p>
-						<div slot="reference" class="name-wrapper">
+						<div slot="reference" class="name-wrapper nowrap-text">
 							<template v-for="remarkItem in remarkAddClickTag(scope.row.remark)">
 								<span v-if="!remarkItem.isHref">{{remarkItem.val}}</span>
 								<el-button v-if="remarkItem.isHref" size="small" @click="goProject(remarkItem.val)">{{remarkItem.val}}</el-button>
@@ -263,19 +294,6 @@
 
 <style lang="scss" scoped>
 	#view002 {
-		.el-table {
-			div.cell {
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				.name-wrapper {
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-				}
-			}
-		}
-
 		.el-dialog__body {padding-top: 0;}
 
 		#exportTable { display: none; }

@@ -64,6 +64,10 @@
 
                     let points = resp.points;
 
+                    if (!points.length) {
+                        this.map.centerAndZoom(new BMap.Point('116.53974519970919', '40.04219375358758'), 14);
+                    }
+
                     for(let i = 0;i < points.length; i++){
                         let longlatVArray = points[i].longlatV.substring(0, points[i].longlatV.length - 1).split('|');
                         let psT = [];

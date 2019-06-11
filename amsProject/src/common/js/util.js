@@ -62,8 +62,8 @@ export default {
 
     validatorUtils: {
         checkSpecialChar(rule, value, callback) {
-            rule.message = '不能包含特殊字符:!！~$^#￥&<>@"{}*\\+\'';
-            const reg = new RegExp('[!！~$^#￥&<>@"{}*\\+\']');
+            rule.message = '不能包含特殊字符:\\<>"\'';
+            const reg = new RegExp('[\\<>"\']');
             if (reg.test(value)) {
                 return callback(new Error());
             } else {

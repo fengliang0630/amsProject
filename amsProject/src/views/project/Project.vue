@@ -99,6 +99,12 @@
 			</el-table-column>
 			<el-table-column prop="noticeTime" label="发件日期" width="150"></el-table-column>
 			<el-table-column prop="effectiveTime" label="有效时间" width="150"></el-table-column>
+			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
+			<el-table-column prop="prjStatus" label="项目状态" width="150"></el-table-column>
+			<el-table-column prop="delaySN" label="延期文号" width="150"></el-table-column>
+			<el-table-column prop="delayCountDay" label="延长期" width="150"></el-table-column>
+			<el-table-column prop="correctionSN" label="补正证号" width="150"></el-table-column>
+			<el-table-column prop="correctionDate" label="补正日期" width="150"></el-table-column>
 			<el-table-column label="备注" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
@@ -109,12 +115,6 @@
 					</el-popover>
 				</template>
 			</el-table-column>
-			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
-			<el-table-column prop="prjStatus" label="项目状态" width="150"></el-table-column>
-			<el-table-column prop="delaySN" label="延期文号" width="150"></el-table-column>
-			<el-table-column prop="delayCountDay" label="延长期" width="150"></el-table-column>
-			<el-table-column prop="correctionSN" label="补正证号" width="150"></el-table-column>
-			<el-table-column prop="correctionDate" label="补正日期" width="150"></el-table-column>
 			<el-table-column fixed="right" label="操作" width="150">
 				<template slot-scope="scope">
 					<el-button size="small" @click="showFormHandler(scope.$index, scope.row)">编辑</el-button>
@@ -179,7 +179,6 @@
 			},
 			// 获取项目基本信息列表
 			getProjectListPage() {
-				debugger;
 				let para = {
 					prjSN: this.filters.prjSN,
 					prjUnit: this.filters.prjUnit,

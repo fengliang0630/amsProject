@@ -11,7 +11,7 @@
 					<el-input v-model="addForm.roleName" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="角色备注" prop="remark">
-					<el-input type="textarea" v-model="addForm.remark"></el-input>
+					<el-input type="textarea" v-model="addForm.remark" :autosize="{ minRows: 4, maxRows: 6}"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">

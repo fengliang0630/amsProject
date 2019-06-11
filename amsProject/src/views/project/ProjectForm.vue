@@ -63,10 +63,10 @@
 					<el-date-picker type="date" placeholder="补正日期" v-model="formData.correctionDate" value-format="yyyy/MM/dd" format="yyyy/MM/dd" style="width: 100%;"></el-date-picker>
 				</el-form-item>
 				<el-form-item label="特别告知事项" prop="specialNotifi">
-					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off"></el-input>
+					<el-input type="textarea" v-model="formData.specialNotifi" auto-complete="off" :autosize="{ minRows: 4, maxRows: 6}"></el-input>
 				</el-form-item>
 				<el-form-item label="备注" prop="remark">
-					<el-input type="textarea" v-model="formData.remark" auto-complete="off"></el-input>
+					<el-input type="textarea" v-model="formData.remark" auto-complete="off" :autosize="{ minRows: 4, maxRows: 6}"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">

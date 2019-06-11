@@ -11,22 +11,23 @@
 						placeholder="请输入内容" :trigger-on-focus="false"></el-autocomplete>
 				</el-form-item>
 				<el-form-item label="建筑序号" prop="serialNumber">
-					<el-input-number v-model="formData.serialNumber" :min="1" style="width:100%"></el-input-number>
+					<el-input-number v-if="!formData.id" v-model="formData.serialNumber" :min="1" style="width:100%" :step="1" :precision="0"></el-input-number>
+					<el-input v-if="!!formData.id" v-model="formData.serialNumber" auto-complete="off" readonly></el-input>
 				</el-form-item>
 				<el-form-item label="建筑功能" prop="serialFunct">
 					<el-input v-model="formData.serialFunct" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地上建筑面积（平方米）" prop="aboveGroundArea">
-					<el-input-number v-model="formData.aboveGroundArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundArea" :precision="2" :step="0.1" :min="0"  style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地下建筑面积（平方米）" prop="underGroundArea">
-					<el-input-number v-model="formData.underGroundArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.underGroundArea" :precision="2" :step="0.1" :min="0" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="混合建筑面积（平方米）" prop="blendArea">
-					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :min="0" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上建筑长度（米）" prop="aboveGroundLen">
-					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :max="10" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :min="0" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="一级分类" prop="prjClasfiName1">
 					<el-select v-model="formData.prjClasfiName1" filterable placeholder="请选择一级分类" 
