@@ -3,7 +3,10 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
+					<el-select v-model="filters.prjSN" filterable remote reserve-keyword placeholder="请选择许可证号" 
+						:remote-method="filterPrjSNMethod" collapse-tags :title="filters.prjSN" style="width:100%">
+						<el-option v-for="item in prjSNOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" v-on:click="getView003">查询</el-button>
@@ -205,7 +208,7 @@
 </template>
 
 <script>
-	import { getView003 } from '../../api/api';
+	import { getView003, queryDataByLike } from '../../api/api';
 	import FileSaver from 'file-saver';
 
 	export default {
@@ -218,10 +221,21 @@
 				isShowEmptyInfo: true,
 				prjClasfiName1: '',
 				prjClasfiName2List: [],
+				prjSNOptions: [],
 				listLoading: false
 			}
 		},
 		methods: {
+			filterPrjSNMethod(query) {
+				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
+						return;
+					}
+					this.prjSNOptions = resp.list;
+				});
+			},
 			exportView003() {
 				if (!this.prjClasfiName1) {
 					this.$message({ message: '请您先输入正确的许可证号，统计相应的数据后，再进行导出', type: 'error' });

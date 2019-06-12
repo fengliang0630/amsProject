@@ -5,7 +5,7 @@
 		<el-form label-width="150px" size="medium" v-loading="listLoading">
 			<el-form-item label="许可证号:" >{{formData.prjSN}}</el-form-item>
 			<el-form-item label="建设单位:">{{formData.prjUnit}}</el-form-item>
-			<el-form-item label="建设位置:">{{formData.prjAdrDetail}}</el-form-item>
+			<el-form-item label="建设位置:">{{formData.prjAdr}}</el-form-item>
 			<el-form-item label="工程名称:">{{formData.prjName}}</el-form-item>
 			<el-form-item label="建设类型:">{{formData.prjType}}</el-form-item>
 			<el-form-item label="联系人:">{{formData.contacts}}</el-form-item>
