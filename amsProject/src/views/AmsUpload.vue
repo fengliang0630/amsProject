@@ -27,7 +27,7 @@
 			</div>
 		</el-col>
 		<el-col v-if="isShow" :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-progress type="circle" :percentage="percentage" :status="progressStatus"></el-progress>
+			<el-progress :percentage="percentage" :status="progressStatus" style="width:80%;"></el-progress>
 			<p style="width: 50%;color: red;line-height: 30px;">{{errorMsg}}</p>
 		</el-col>
 	</el-row>
