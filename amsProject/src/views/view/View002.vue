@@ -47,6 +47,7 @@
 			<el-table-column type="expand">
 				<template slot-scope="props">
 					<el-form label-position="left" class="demo-table-expand">
+						<el-form-item label="许可证号"><span>{{ props.row.prjSN }}</span></el-form-item>
 						<el-form-item label="项目状态"><span>{{ props.row.prjStatus }}</span></el-form-item>
 						<el-form-item label="建设单位"><span>{{ props.row.prjUnit }}</span></el-form-item>
 						<el-form-item label="建设位置"><span>{{ props.row.prjAdr }}</span></el-form-item>
@@ -68,6 +69,7 @@
 					</el-form>
 				</template>
 			</el-table-column>
+			<el-table-column prop="prjSN" label="许可证号" width="200"></el-table-column>
 			<el-table-column prop="prjStatus" label="项目状态" width="130"></el-table-column>
 			<el-table-column label="建设单位" width="200">
 				<template slot-scope="scope">

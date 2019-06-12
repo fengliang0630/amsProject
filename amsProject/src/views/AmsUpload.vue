@@ -1,6 +1,6 @@
 <template>
 	<el-row id="uploadPage" class="container">
-		<el-col :span="12" class="toolbar" style="padding-bottom: 0px;">
+		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<div class="filter-item">
 				<label>上传类型</label>
 				<div>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</el-col>
-		<el-col v-if="isShow" :span="12" class="toolbar" style="padding-bottom: 0px;">
+		<el-col v-if="isShow" :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-progress type="circle" :percentage="percentage" :status="progressStatus"></el-progress>
 			<p>{{errorMsg}}</p>
 		</el-col>

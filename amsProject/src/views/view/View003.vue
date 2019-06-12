@@ -14,6 +14,10 @@
 			</el-form>
 		</el-col>
 
+		<p v-if="isShowEmptyInfo" class="emptyInfo">
+			<span>请您输入许可证号，查询统计数据</span>
+		</p>
+
 		<h3>{{prjClasfiName1}}</h3>
 		<div v-for="prjClasfiName2Obj in prjClasfiName2List">
 
@@ -221,6 +225,7 @@
 				filters: {
 					prjSN: ''
 				},
+				isShowEmptyInfo: true,
 				prjClasfiName1: '',
 				prjClasfiName2List: [],
 				listLoading: false
@@ -241,12 +246,11 @@
 
 				getView003({prjSN: this.filters.prjSN}).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
-						this.$message({
-							message: resp.header.rspReturnMsg,
-							type: 'error'
-						});
+						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
+
+					this.isShowEmptyInfo = false;
 
 					if (resp.viewList) {
 						for (let prjClasfiName1 in resp.viewList) {
@@ -280,6 +284,8 @@
 								);
 							}
 						}
+					} else {
+						this.$message({ message: '该许可证的统计数据是空的', type: 'error' });
 					}
 
 					
@@ -289,15 +295,30 @@
 	}
 </script>
 
-
-<style scope>
-	#exportTable1 th {
-		background-color: #b7b5b5;
+<style lang="scss" scoped>
+	#exportTable1 {
+		th {background-color: #b7b5b5;}
 	}
-	
-	#view003Page .el-table div.cell, #view003Page .el-table div.cell .name-wrapper {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+
+	#view003Page {
+		.el-table {
+			div.cell {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				.name-wrapper {
+					overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				}
+			}
+		}
+
+		.emptyInfo {
+			display: inline-block;
+			width: 100%;
+			font-size: 20px;
+			text-align: center;
+		}
 	}
 </style>
