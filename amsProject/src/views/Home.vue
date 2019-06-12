@@ -72,7 +72,7 @@
 		data() {
 			return {
 				activeMenuId: '',
-				sysName:'ams 系统',
+				sysName:'ams 系统 1.0.0',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '../../static/user.png',

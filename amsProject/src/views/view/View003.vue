@@ -141,7 +141,7 @@
 		</div>
 
 		
-		<el-dialog :visible.sync="isShowImg"  title="查看">
+		<el-dialog :visible.sync="isShowImg" :fullscreen=true  title="查看">
 			<ams-show-img v-if="isShowImg" :fileName="fileName" :prjSN="filters.prjSN"></ams-show-img>
 		</el-dialog>
 
