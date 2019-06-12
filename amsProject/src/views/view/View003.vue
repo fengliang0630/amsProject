@@ -55,7 +55,14 @@
 					</template>
 				</el-table-column>
 				<el-table-column prop="serialNumber" width="120" label="建筑序号"></el-table-column>
-				<el-table-column prop="prjNature" label="项目性质" width="200"></el-table-column>
+				<el-table-column label="项目性质" width="200">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top">
+							<p>{{ scope.row.prjNature }}</p>
+							<div slot="reference" class="name-wrapper">{{ scope.row.prjNature }}</div>
+						</el-popover>
+					</template>
+				</el-table-column>
 				<el-table-column prop="sumArea" label="总建筑面积(平方米)" width="150"></el-table-column>
 				<el-table-column label="总建筑面积(平方米)">
 					<el-table-column prop="aboveGroundSumArea" label="地上" width="120"></el-table-column>
@@ -83,7 +90,14 @@
 					</el-popover>
 				</template>
 				</el-table-column>
-				<el-table-column prop="strucType" label="结构类型" width="150"></el-table-column>
+				<el-table-column label="结构类型" width="150">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top">
+							<p>{{ scope.row.strucType }}</p>
+							<div slot="reference" class="name-wrapper">{{ scope.row.strucType }}</div>
+						</el-popover>
+					</template>
+				</el-table-column>
 				<el-table-column label="验线文号" width="150">
 					<template slot-scope="scope">
 						<el-button size="small" @click="showImg(scope.row.checkDocSN)">{{scope.row.checkDocSN}}</el-button>
@@ -98,8 +112,23 @@
 				<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
 				<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
 				<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
-				<el-table-column prop="imgJudgeRes" label="影像判读结果" width="120"></el-table-column>
-				<el-table-column prop="exproprInfo" label="代征用地情况" width="120"></el-table-column>
+				<el-table-column label="影像判读结果" width="120">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top">
+							<p>{{ scope.row.imgJudgeRes }}</p>
+							<div slot="reference" class="name-wrapper">{{ scope.row.imgJudgeRes }}</div>
+						</el-popover>
+					</template>
+				</el-table-column>
+				<el-table-column prop="exproprInfo" label="代征用地情况" width="120">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top">
+							<p>{{ scope.row.exproprInfo }}</p>
+							<div slot="reference" class="name-wrapper">{{ scope.row.exproprInfo }}</div>
+						</el-popover>
+					</template>
+				</el-table-column>
+				</el-table-column>
 				<el-table-column label="备注" width="120">
 					<template slot-scope="scope">
 						<el-popover trigger="hover" placement="top">

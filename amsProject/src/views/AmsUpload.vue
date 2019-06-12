@@ -12,7 +12,10 @@
 			<div class="filter-item" v-if="uploadData.upLoadType === 'SAVE'">
 				<label>许可证号</label>
 				<div>
-					<el-input v-model="uploadData.prjSN" placeholder="许可证号"></el-input>
+					<el-select v-model="uploadData.prjSN" filterable remote reserve-keyword placeholder="请选择许可证号" 
+						:remote-method="filterPrjSNMethod" collapse-tags :title="uploadData.prjSN" style="width:100%">
+						<el-option v-for="item in prjSNOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
 				</div>
 			</div>
 			<div class="filter-item" v-if="!!uploadData.upLoadType">
@@ -34,7 +37,7 @@
 </template>
 
 <script>
-	import { uploadFiles } from '../api/api';
+	import { uploadFiles, queryDataByLike } from '../api/api';
 
 	export default {
 		data() {
@@ -51,10 +54,21 @@
 					prjSN: '',
 					files: []
 				},
-				time: null
+				time: null,
+				prjSNOptions: []
 			}
 		},
 		methods: {
+			filterPrjSNMethod(query) {
+				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
+
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
+						return;
+					}
+					this.prjSNOptions = resp.list;
+				});
+			},
 			upLoadTypeChange(val) {
 				if (val === 'ANALYSIS') {
 					this.uploadTypeMsg = '支持excel,dxf格式';

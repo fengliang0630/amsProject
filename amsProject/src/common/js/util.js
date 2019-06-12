@@ -164,7 +164,7 @@ export default {
         {
           id: '1',
           menuName: '基础功能',
-          iconCls: 'el-icon-message',
+          iconCls: 'fa fa-snowflake-o',
           children: [
             {id: '1_4', menuName: '日志查询', menuLink: '/log'}
           ]
@@ -172,7 +172,7 @@ export default {
         {
           id: '2',
           menuName: '业务功能',
-          iconCls: 'el-icon-message',
+          iconCls: 'fa fa-free-code-camp',
           children: [
             {id: '2_1', menuName: '项目基本信息管理', menuLink: '/project'},
             {id: '2_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
@@ -183,7 +183,7 @@ export default {
         {
           id: '3',
           menuName: '报表功能',
-          iconCls: 'el-icon-message',
+          iconCls: 'fa fa-area-chart',
           children: [      
             {id: '3_1', menuName: '复合统计', menuLink: '/view001'},
             {id: '3_2', menuName: '项目信息统计', menuLink: '/view002'},
@@ -193,7 +193,7 @@ export default {
         {
           id: '4',
           menuName: '快速导航',
-          iconCls: 'el-icon-message',
+          iconCls: 'fa fa-quora',
           children: [      
             {id: '4_1', menuName: '城镇建设项目', menuLink: '/view002/1'},
             {id: '4_2', menuName: '乡村建设项目', menuLink: '/view002/2'},

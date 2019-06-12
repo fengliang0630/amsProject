@@ -23,6 +23,9 @@
 
 <style lang="scss" scoped>
 	#imgPage {
+		width: 100%;
+		height: 500px;
+		overflow: auto;
 		text-align: center;
 	}
 </style>
