@@ -54,12 +54,8 @@
 						</el-table>
 					</template>
 				</el-table-column>
-				<el-table-column width="60" label="序号">
-					<template slot-scope="scope">
-						<span>{{scope.$index + 1}}</span>
-					</template>
-				</el-table-column>
-				<el-table-column prop="prjNature" label="项目性质" width="150"></el-table-column>
+				<el-table-column prop="serialNumber" width="120" label="建筑序号"></el-table-column>
+				<el-table-column prop="prjNature" label="项目性质" width="200"></el-table-column>
 				<el-table-column prop="sumArea" label="总建筑面积(平方米)" width="150"></el-table-column>
 				<el-table-column label="总建筑面积(平方米)">
 					<el-table-column prop="aboveGroundSumArea" label="地上" width="120"></el-table-column>
@@ -77,11 +73,28 @@
 				<el-table-column prop="buildings" label="栋数" width="150"></el-table-column>
 				<el-table-column prop="housingStockNum" label="住房套数" width="150"></el-table-column>
 				<el-table-column prop="buldStatus" label="工程状态" width="150"></el-table-column>
-				<el-table-column prop="peacetimeUses" label="平时用途" width="150"></el-table-column>
+				<el-table-column label="平时用途" width="150">
+					<template slot-scope="scope">
+					<el-popover trigger="hover" placement="top">
+						<p><span>{{scope.row.peacetimeUses}}</span></p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<span>{{scope.row.peacetimeUses}}</span>
+						</div>
+					</el-popover>
+				</template>
+				</el-table-column>
 				<el-table-column prop="strucType" label="结构类型" width="150"></el-table-column>
-				<el-table-column prop="checkDocSN" label="验线文号" width="150"></el-table-column>
+				<el-table-column label="验线文号" width="150">
+					<template slot-scope="scope">
+						<el-button size="small" @click="showImg(scope.row.checkDocSN)">{{scope.row.checkDocSN}}</el-button>
+					</template>
+				</el-table-column>
 				<el-table-column prop="checkDocDate" label="验线时间" width="150"></el-table-column>
-				<el-table-column prop="checkSN" label="验收文号" width="120"></el-table-column>
+				<el-table-column label="验收文号" width="120">
+					<template slot-scope="scope">
+						<el-button size="small" @click="showImg(scope.row.checkSN)">{{scope.row.checkSN}}</el-button>
+					</template>
+				</el-table-column>
 				<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
 				<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
 				<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
@@ -98,6 +111,11 @@
 			</el-table>
 		</div>
 
+		
+		<el-dialog :visible.sync="isShowImg"  title="查看">
+			<ams-show-img v-if="isShowImg" :fileName="fileName" :prjSN="filters.prjSN"></ams-show-img>
+		</el-dialog>
+
 		<div style="height:0;width:0;overflow:hidden;">
 			<div id="exportTable1" style="width: 5000px;">
 				<h2>{{prjClasfiName1}}</h2>
@@ -106,6 +124,7 @@
 					<table>
 						<thead>
 							<tr>
+								<th rowspan="2" style="width:180px;">建筑序号</th>
 								<th rowspan="2" style="width:180px;">项目性质</th>
 								<th rowspan="2" style="width:180px;">总建筑面积(平方米)</th>
 								<th colspan="2" style="width:180px;">总建筑面积(平方米)</th>
@@ -140,6 +159,7 @@
 						<tbody>
 							<template v-for="item in prjClasfiName2Obj.list">
 								<tr>
+									<td>{{item.serialNumber}}</td>
 									<td>{{item.prjNature}}</td>
 									<td>{{item.sumArea}}</td>
 									<td>{{item.aboveGroundSumArea}}</td>
@@ -210,6 +230,7 @@
 <script>
 	import { getView003, queryDataByLike } from '../../api/api';
 	import FileSaver from 'file-saver';
+	import ShowImg from './ShowImg';
 
 	export default {
 		data() {
@@ -222,10 +243,16 @@
 				prjClasfiName1: '',
 				prjClasfiName2List: [],
 				prjSNOptions: [],
-				listLoading: false
+				listLoading: false,
+				fileName: '',
+				isShowImg: false
 			}
 		},
 		methods: {
+			showImg(_fileName) {
+				this.fileName = _fileName;
+				this.isShowImg = true;
+			},
 			filterPrjSNMethod(query) {
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
 
@@ -308,6 +335,9 @@
 					
 				});
 			}
+		},
+		components: {
+			'ams-show-img': ShowImg
 		}
 	}
 </script>

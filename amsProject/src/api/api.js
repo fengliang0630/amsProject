@@ -238,6 +238,12 @@ export const uploadFiles = params => {
     return axios.post(`${base}/ams/api/upload`, params, config).then(res => res.data); 
 };
 
+// 组装下载地址
+export const getDownloadUrl = (fileName, prjSN) => { 
+    debugger;
+    return `${base}/ams/api/download?fname=${fileName}&prjSN=${prjSN}`; 
+};
+
 
 const pckParam = (params, headerParam) => {
     const userInfo = JSON.parse(sessionStorage.getItem('user'));
