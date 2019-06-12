@@ -4,7 +4,7 @@
 			<div class="filter-item">
 				<label>上传类型</label>
 				<div>
-					<el-select v-model="uploadData.upLoadType" placeholder="请选择上传类型" >
+					<el-select v-model="uploadData.upLoadType" placeholder="请选择上传类型" @change="upLoadTypeChange">
 						<el-option v-for="item in uploadTypeOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</div>
@@ -21,7 +21,7 @@
 					<el-upload ref="uploadComponent" class="upload-demo" action="" :auto-upload="false" :on-change="fileChange" >
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-						<div slot="tip" class="el-upload__tip">支持excel,dxf文档上传</div>
+						<div slot="tip" class="el-upload__tip">{{uploadTypeMsg}}</div>
 					</el-upload>
 				</div>
 			</div>
@@ -39,6 +39,7 @@
 	export default {
 		data() {
 			return {
+				uploadTypeMsg: '',
 				uploadTypeOptions: ['ANALYSIS', 'SAVE', 'DIC'],
 				progressStatus: '',
 				percentage: 0,
@@ -54,6 +55,15 @@
 			}
 		},
 		methods: {
+			upLoadTypeChange(val) {
+				if (val === 'ANALYSIS') {
+					this.uploadTypeMsg = '支持excel,dxf格式';
+				} else if (val === 'SAVE') {
+					this.uploadTypeMsg = '支持png格式';
+				} else if (val === 'DIC') {
+					this.uploadTypeMsg = '支持excel格式';
+				}
+			},
 			startPercentage() {
 				window.setTimeout(() => {
 					this.percentage += Math.ceil(Math.random()*10);
@@ -73,11 +83,24 @@
 
 				for (let i = 0; i < this.uploadData.files.length; i++) {
 					const fileName = this.uploadData.files[i].name;
-					if (!fileName.endsWith('.dxf') && !fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
-						this.$message({ message: '支持excel,dxf文档上传', type: 'error' });
-						return;
+
+					if (this.uploadData.upLoadType === 'ANALYSIS') {
+						if (!fileName.endsWith('.dxf') && !fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
+							this.$message({ message: '支持excel,dxf文档上传', type: 'error' });
+							return;
+						}
+					} else if (this.uploadData.upLoadType === 'SAVE') {
+						if (!fileName.endsWith('.png')) {
+							this.$message({ message: '支持png文档上传', type: 'error' });
+							return;
+						}
+					} else if (this.uploadData.upLoadType === 'DIC') {
+						if (!fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
+							this.$message({ message: '支持excel文档上传', type: 'error' });
+							return;
+						}
 					}
-				}
+				}				
 
 				var formData = new FormData();
 				formData.append("files", this.uploadData.files[0].raw);
