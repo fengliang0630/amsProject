@@ -15,7 +15,8 @@
 		</el-col>
 
 		<p v-if="isShowEmptyInfo" class="emptyInfo">
-			<span>请您输入许可证号，查询统计数据</span>
+			<span v-if="showType === '1'">请您输入许可证号，查询统计数据</span>
+			<span v-if="showType === '2'">该许可证下，未统计到任何数据</span>
 		</p>
 
 		<h3>{{prjClasfiName1}}</h3>
@@ -213,6 +214,7 @@
 				filters: {
 					prjSN: ''
 				},
+				showType: '1',
 				isShowEmptyInfo: true,
 				prjClasfiName1: '',
 				prjClasfiName2List: [],
@@ -221,6 +223,11 @@
 		},
 		methods: {
 			exportView003() {
+				if (!this.prjClasfiName1) {
+					this.$message({ message: '请您先输入正确的许可证号，统计相应的数据后，再进行导出', type: 'error' });
+					return;
+				}
+
 				const a = document.getElementById('exportTable1');
 				html2canvas(a).then(canvas => {
 					FileSaver.saveAs(canvas.toDataURL(), `项目详情统计.png`);
@@ -238,11 +245,10 @@
 						return;
 					}
 
-					this.isShowEmptyInfo = false;
-
 					const arr = Object.keys(resp.viewList);
 
 					if (arr.length) {
+						this.isShowEmptyInfo = false;
 						for (let prjClasfiName1 in resp.viewList) {
 							this.prjClasfiName1 = prjClasfiName1 + ':';
 							for (let prjClasfiName2Title in resp.viewList[prjClasfiName1]) {
@@ -276,7 +282,12 @@
 							}
 						}
 					} else {
-						this.$message({ message: '该许可证的统计数据是空的', type: 'error' });
+						this.$message({ message: '该许可证下，未统计到任何数据', type: 'error' });
+						this.showType = '2';
+
+						window.setTimeout(() => {
+							this.showType = '1';
+						}, 5000);
 					}
 
 					
