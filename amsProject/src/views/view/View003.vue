@@ -41,7 +41,7 @@
 								<el-table-column prop="aboveGroundArea" label="地上" width="120"></el-table-column>
 								<el-table-column prop="underGroundArea" label="地下" width="120"></el-table-column>
 							</el-table-column>
-							<el-table-column prop="aboveGroundArea" label="混合建筑面积" width="150"></el-table-column>
+							<el-table-column prop="blendArea" label="混合建筑面积" width="150"></el-table-column>
 							<el-table-column prop="aboveGroundLen" label="地上建筑长度" width="150"></el-table-column>
 							<el-table-column label="建筑类型" width="200">
 								<template slot-scope="scope">
@@ -189,7 +189,7 @@
 														<td>{{item1.serialFunct}}</td>
 														<td>{{item1.aboveGroundArea}}</td>
 														<td>{{item1.underGroundArea}}</td>
-														<td>{{item1.aboveGroundArea}}</td>
+														<td>{{item1.blendArea}}</td>
 														<td>{{item1.aboveGroundLen}}</td>
 														<td>{{item1.buldType}}</td>
 													</tr>
