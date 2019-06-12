@@ -58,7 +58,10 @@
 						<el-form-item label="联系方式"><span>{{ props.row.contactInf }}</span></el-form-item>
 						<el-form-item label="特别告知事项"><span>{{ props.row.specialNotifi }}</span></el-form-item>
 						<el-form-item label="附带临建批号">
-							<el-button size="small" @click="goProject(props.row.prjTemSN)">{{props.row.prjTemSN}}</el-button>
+							<template v-for="prjTemSNItem in remarkAddClickTag(props.row.prjTemSN)">
+								<span v-if="!prjTemSNItem.isHref">{{remarkItem.val}}</span>
+								<el-button v-if="prjTemSNItem.isHref" size="small" @click="goProject(prjTemSNItem.val)">{{prjTemSNItem.val}}</el-button>
+							</template>
 						</el-form-item>
 						<el-form-item label="备注">
 							<template v-for="remarkItem in remarkAddClickTag(props.row.remark)">
@@ -128,7 +131,20 @@
 			</el-table-column>
 			<el-table-column label="附带临建批号" width="250">
 				<template slot-scope="scope">
-					<el-button v-if="scope.row.prjTemSN" size="small" @click="goProject(scope.row.prjTemSN)">{{scope.row.prjTemSN}}</el-button>
+					<el-popover trigger="hover" placement="top">
+						<p>
+							<template v-for="prjTemSNItem in remarkAddClickTag(scope.row.prjTemSN)">
+								<span v-if="!prjTemSNItem.isHref">{{prjTemSNItem.val}}</span>
+								<el-button v-if="prjTemSNItem.isHref" size="small" @click="goProject(prjTemSNItem.val)">{{prjTemSNItem.val}}</el-button>
+							</template>
+						</p>
+						<div slot="reference" class="name-wrapper nowrap-text">
+							<template v-for="prjTemSNItem in remarkAddClickTag(scope.row.prjTemSN)">
+								<span v-if="!prjTemSNItem.isHref">{{prjTemSNItem.val}}</span>
+								<el-button v-if="prjTemSNItem.isHref" size="small" @click="goProject(prjTemSNItem.val)">{{prjTemSNItem.val}}</el-button>
+							</template>
+						</div>
+					</el-popover>
 				</template>
 			</el-table-column>
 			<el-table-column prop="prjXz" label="影像" width="150">

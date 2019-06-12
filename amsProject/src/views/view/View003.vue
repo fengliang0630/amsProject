@@ -265,6 +265,7 @@
 						this.isShowEmptyInfo = false;
 						for (let prjClasfiName1 in resp.viewList) {
 							this.prjClasfiName1 = prjClasfiName1 + ':';
+							this.prjClasfiName2List = [];
 							for (let prjClasfiName2Title in resp.viewList[prjClasfiName1]) {
 
 								const prjClasfiName2ListTem = [];
@@ -286,7 +287,7 @@
 									}
 								}
 
-								 this.prjClasfiName2List = [];
+								
 								this.prjClasfiName2List.push(
 									{
 										title: prjClasfiName2Title + ':',

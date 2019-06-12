@@ -11,7 +11,6 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 
 Vue.prototype.remarkAddClickTag= function (value) {
-
   if (!value) {
     return [{val: '', isHref: false}];
   }
