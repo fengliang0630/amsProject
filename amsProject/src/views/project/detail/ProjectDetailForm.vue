@@ -232,17 +232,15 @@
 						return;
 					}
 
-					this.formData = {
-						id: this.formTemData.id,
-						prjSN: this.formTemData.prjSN,
-						serialNumber: this.formTemData.serialNumber,
-						serialFunct: this.formTemData.serialFunct,
-						aboveGroundArea: this.formTemData.aboveGroundArea,
-						underGroundArea: this.formTemData.underGroundArea,
-						blendArea: this.formTemData.blendArea,
-						aboveGroundLen: this.formTemData.aboveGroundLen
-					};
-
+					this.formData.id = this.formTemData.id;
+					this.formData.prjSN = this.formTemData.prjSN;
+					this.formData.serialNumber = this.formTemData.serialNumber;
+					this.formData.serialFunct = this.formTemData.serialFunct;
+					this.formData.aboveGroundArea = this.formTemData.aboveGroundArea;
+					this.formData.underGroundArea = this.formTemData.underGroundArea;
+					this.formData.blendArea = this.formTemData.blendArea;
+					this.formData.aboveGroundLen = this.formTemData.aboveGroundLen;
+					
 					for (let i = 1; i < 6; i++) {
 						this[`prjClasfiName${i}Options`] = resp.viewObj[`prjClasfiName${i}List`] || [];
 						const obj = resp.viewObj[`prjClasfiName${i}Obj`];
