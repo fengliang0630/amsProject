@@ -27,7 +27,7 @@
 					<el-input-number v-model="formData.blendArea" :precision="2" :step="0.1" :min="0" style="width:100%"></el-input-number>
 				</el-form-item>
 				<el-form-item label="地上建筑长度（米）" prop="aboveGroundLen">
-					<el-input-number v-model="formData.aboveGroundLen" :precision="2" :step="0.1" :min="0" style="width:100%"></el-input-number>
+					<el-input-number v-model="formData.aboveGroundLen" :min="0" style="width:100%" :step="0.1" :precision="2"></el-input-number>
 				</el-form-item>
 				<el-form-item label="一级分类" prop="prjClasfiName1">
 					<el-select v-model="formData.prjClasfiName1" filterable placeholder="请选择一级分类" 
@@ -112,12 +112,7 @@
 				},
 				formData: {
 					prjSN: '',
-					serialNumber: '',
 					serialFunct: '',
-					aboveGroundArea: '',
-					underGroundArea: '',
-					blendArea: '',	
-					aboveGroundLen: '',
 					prjClasfiName1: '',
 					prjClasfiName2: '',
 					prjClasfiName3: '',
@@ -195,6 +190,7 @@
 							if (!!this.formData.id) {
 								para.id = this.formData.id;
 							}
+							
 							createOrUpdateProjectDetail(para).then((resp) => {
 								this.formLoading = false;
 								const respMsg= {message: '', type: ''}

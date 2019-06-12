@@ -5,7 +5,7 @@
 				<label>上传类型</label>
 				<div>
 					<el-select v-model="uploadData.upLoadType" placeholder="请选择上传类型" @change="upLoadTypeChange">
-						<el-option v-for="item in uploadTypeOptions" :key="item" :label="item" :value="item"></el-option>
+						<el-option v-for="item in uploadTypeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</div>
 			</div>
@@ -43,7 +43,11 @@
 		data() {
 			return {
 				uploadTypeMsg: '',
-				uploadTypeOptions: ['ANALYSIS', 'SAVE', 'DIC'],
+				uploadTypeOptions: [
+					{label: '地图信息/批量文档', value: 'ANALYSIS'},
+					{label: '文书信息', value: 'SAVE'},
+					{label: '基础数据', value: 'DIC'}
+				],
 				progressStatus: '',
 				percentage: 0,
 				errorMsg: '',
@@ -71,9 +75,9 @@
 			},
 			upLoadTypeChange(val) {
 				if (val === 'ANALYSIS') {
-					this.uploadTypeMsg = '支持excel,dxf格式';
+					this.uploadTypeMsg = '支持excel,dxf格式(dxf必须以许可证号命名)';
 				} else if (val === 'SAVE') {
-					this.uploadTypeMsg = '支持png格式';
+					this.uploadTypeMsg = '支持png格式(png必须以文书名命名)';
 				} else if (val === 'DIC') {
 					this.uploadTypeMsg = '支持excel格式';
 				}

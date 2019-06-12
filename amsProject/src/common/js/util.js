@@ -135,7 +135,7 @@ export default {
     ],
     
     prjTypeOptions: [
-        { id: '1', label: '请选择项目类型', value: ''},
+        { id: '1', label: '请选择建设类型', value: ''},
         { id: '2', label: '新建', value: '新建'},
         { id: '3', label: '改扩建', value: '改扩建'}
     ],
