@@ -28,7 +28,7 @@
 		</el-col>
 		<el-col v-if="isShow" :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-progress type="circle" :percentage="percentage" :status="progressStatus"></el-progress>
-			<p>{{errorMsg}}</p>
+			<p style="width: 50%;color: red;line-height: 30px;">{{errorMsg}}</p>
 		</el-col>
 	</el-row>
 </template>
@@ -103,6 +103,7 @@
 					} 
 
 					this.progressStatus = 'success';
+					this.errorMsg = '';
 					this.$message({ message: '恭喜您已经上传文件成功', type: 'success' });
 					this.$refs.uploadComponent.clearFiles();
 				});
