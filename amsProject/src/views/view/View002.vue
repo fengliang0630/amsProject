@@ -277,6 +277,7 @@
 					}
 
 					this.viewList = resp.viewList;
+					this.total = resp.header.rspPageCount;
 				});
 			},
 			exportExcel() {

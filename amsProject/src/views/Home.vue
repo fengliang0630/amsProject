@@ -45,9 +45,9 @@
 			<section class="content-container">
 				<div class="grid-content bg-purple-light">
 					<el-col :span="24" class="breadcrumb-container">
-						<strong class="title">{{$route.name}}</strong>
+						<strong class="title">{{breadcrumbData.length === 2 ? breadcrumbData[1].name : ''}}</strong>
 						<el-breadcrumb separator="/" class="breadcrumb-inner">
-							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+							<el-breadcrumb-item v-for="item in breadcrumbData" :key="item.id">
 								{{ item.name }}
 							</el-breadcrumb-item>
 						</el-breadcrumb>
@@ -77,6 +77,7 @@
 				sysUserName: '',
 				sysUserAvatar: '../../static/user.png',
 				menuTree: [],
+				breadcrumbData: [],
 				form: {
 					name: '',
 					region: '',
@@ -91,10 +92,16 @@
 		},
 		methods: {
 			handleSelect(key, keyPath) {
-
+				this.breadcrumbData = [];
 				let menuItem;
 				for(let i = 0; i < this.menuTree.length; i++) {
 					if (this.menuTree[i].id === keyPath[0]) {
+						this.breadcrumbData.push(
+							{
+								id: keyPath[0],
+								name: this.menuTree[i].menuName
+							}
+						);
 						menuItem = this.menuTree[i];
 						break;
 					}
@@ -102,6 +109,12 @@
 
 				for(let j = 0; j < menuItem.children.length; j++) {
 					if (menuItem.children[j].id === keyPath[1]) {
+						this.breadcrumbData.push(
+							{
+								id: keyPath[1],
+								name: menuItem.children[j].menuName
+							}
+						);
 						menuItem = menuItem.children[j];
 						break;
 					}
@@ -146,6 +159,12 @@
 					parentMenu.children.forEach(menuItem => {
 						if (menuItem.menuLink === a) {
 							this.activeMenuId = menuItem.id;
+							this.breadcrumbData.push(
+								{ id: parentMenu.id, name: parentMenu.menuName }
+							);
+							this.breadcrumbData.push(
+								{ id: menuItem.id, name: menuItem.menuName }
+							);
 						}
 					})
 				});

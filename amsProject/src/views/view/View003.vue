@@ -79,12 +79,8 @@
 				<el-table-column prop="checkDocDate" label="验线时间" width="150"></el-table-column>
 				<el-table-column prop="checkSN" label="验收文号" width="120"></el-table-column>
 				<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
-				<el-table-column prop="delaySN" label="延期文号" min-width="120"></el-table-column>
-				<el-table-column prop="delayCountDay" label="延长期" min-width="120"></el-table-column>
 				<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
 				<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
-				<el-table-column prop="correctionSN" label="补正证号" width="120"></el-table-column>
-				<el-table-column prop="correctionDate" label="补正日期" width="120"></el-table-column>
 				<el-table-column prop="imgJudgeRes" label="影像判读结果" width="120"></el-table-column>
 				<el-table-column prop="exproprInfo" label="代征用地情况" width="120"></el-table-column>
 				<el-table-column label="备注" width="120">
@@ -121,12 +117,8 @@
 								<th rowspan="2" style="width:180px;">验线时间</th>
 								<th rowspan="2" style="width:180px;">验收文号</th>
 								<th rowspan="2" style="width:180px;">验收时间</th>
-								<th rowspan="2" style="width:180px;">延期文号</th>
-								<th rowspan="2" style="width:180px;">延长期</th>
 								<th rowspan="2" style="width:180px;">撤（注）销证号</th>
 								<th rowspan="2" style="width:180px;">撤（注）销日期</th>
-								<th rowspan="2" style="width:180px;">补正证号</th>
-								<th rowspan="2" style="width:180px;">补正日期</th>
 								<th rowspan="2" style="width:180px;">影像判读结果</th>
 								<th rowspan="2" style="width:180px;">代征用地情况</th>
 								<th rowspan="2" style="width:180px;">备注</th>
@@ -162,12 +154,8 @@
 									<td>{{item.checkDocDate}}</td>
 									<td>{{item.checkSN}}</td>
 									<td>{{item.checkDate}}</td>
-									<td>{{item.delaySN}}</td>
-									<td>{{item.delayCountDay}}</td>
 									<td>{{item.cancelSN}}</td>
 									<td>{{item.cancelDate}}</td>
-									<td>{{item.correctionSN}}</td>
-									<td>{{item.correctionDate}}</td>
 									<td>{{item.imgJudgeRes}}</td>
 									<td>{{item.exproprInfo}}</td>
 									<td>{{item.remark}}</td>
@@ -252,12 +240,14 @@
 
 					this.isShowEmptyInfo = false;
 
-					if (resp.viewList) {
+					const arr = Object.keys(resp.viewList);
+
+					if (arr.length) {
 						for (let prjClasfiName1 in resp.viewList) {
 							this.prjClasfiName1 = prjClasfiName1 + ':';
 							for (let prjClasfiName2Title in resp.viewList[prjClasfiName1]) {
 
-								const prjClasfiName2List = [];
+								const prjClasfiName2ListTem = [];
 
 								for (let prjClasfiName2Obj in resp.viewList[prjClasfiName1][prjClasfiName2Title]) {
 									const tj = resp.viewList[prjClasfiName1][prjClasfiName2Title][prjClasfiName2Obj].tongj;
@@ -272,14 +262,15 @@
 												}
 											}
 										}
-										prjClasfiName2List.push(tj);
+										prjClasfiName2ListTem.push(tj);
 									}
 								}
 
+								 this.prjClasfiName2List = [];
 								this.prjClasfiName2List.push(
 									{
 										title: prjClasfiName2Title + ':',
-										list: prjClasfiName2List
+										list: prjClasfiName2ListTem
 									}
 								);
 							}
@@ -298,6 +289,7 @@
 <style lang="scss" scoped>
 	#exportTable1 {
 		th {background-color: #b7b5b5;}
+		td {border: 1px solid #000;}
 	}
 
 	#view003Page {

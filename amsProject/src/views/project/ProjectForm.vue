@@ -19,7 +19,7 @@
 					</el-input>
 				</el-form-item>
 				<el-form-item label="旧建设位置">
-					{{formData.prjAdr}}
+					<span style="width: 100%;display: inline-block;overflow: auto;white-space: nowrap;">{{formData.prjAdr}}</span>
 				</el-form-item>
 				<el-form-item label="工程名称" prop="prjName">
 					<el-input v-model="formData.prjName" auto-complete="off"></el-input>
