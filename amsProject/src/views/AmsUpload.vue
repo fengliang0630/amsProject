@@ -1,5 +1,5 @@
 <template>
-	<el-row id="uploadPage" class="container">
+	<el-row id="uploadPage">
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<div class="filter-item">
 				<label>上传类型</label>
@@ -28,10 +28,10 @@
 					</el-upload>
 				</div>
 			</div>
-		</el-col>
-		<el-col v-if="isShow" :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-progress :percentage="percentage" :status="progressStatus" style="width:80%;"></el-progress>
-			<p style="width: 50%;color: red;line-height: 30px;">{{errorMsg}}</p>
+			<div v-if="isShow" class="toolbar" style="padding-bottom: 0px;">
+				<el-progress :percentage="percentage" :status="progressStatus" style="width:80%;"></el-progress>
+				<p style="width: 80%;color: red;line-height: 30px;">{{errorMsg}}</p>
+			</div>
 		</el-col>
 	</el-row>
 </template>
@@ -44,9 +44,9 @@
 			return {
 				uploadTypeMsg: '',
 				uploadTypeOptions: [
-					{label: '地图信息/批量文档', value: 'ANALYSIS'},
-					{label: '文书信息', value: 'SAVE'},
-					{label: '基础数据', value: 'DIC'}
+					{label: '项目信息/地图数据', value: 'ANALYSIS'},
+					{label: '批文图片', value: 'SAVE'},
+					{label: '字典信息', value: 'DIC'}
 				],
 				progressStatus: '',
 				percentage: 0,
@@ -59,7 +59,8 @@
 					files: []
 				},
 				time: null,
-				prjSNOptions: []
+				prjSNOptions: [],
+				timer: null
 			}
 		},
 		methods: {
@@ -74,6 +75,9 @@
 				});
 			},
 			upLoadTypeChange(val) {
+				this.percentage = 0;
+				this.isShow = false;
+				this.uploadData.prjSN = '';
 				if (val === 'ANALYSIS') {
 					this.uploadTypeMsg = '支持excel,dxf格式(dxf必须以许可证号命名)';
 				} else if (val === 'SAVE') {
@@ -83,7 +87,10 @@
 				}
 			},
 			startPercentage() {
-				window.setTimeout(() => {
+				if (this.timer) {
+					window.clearTimeout(this.timer);
+				}
+				this.timer = window.setTimeout(() => {
 					this.percentage += Math.ceil(Math.random()*10);
 					if (this.percentage >= 100) {
 						this.percentage = 100;
@@ -140,6 +147,7 @@
 					if (resp.header.rspReturnCode !== '000000') {
 						this.errorMsg = resp.header.rspReturnMsg;
 						this.progressStatus = 'exception';
+						this.$refs.uploadComponent.clearFiles();
 						return;
 					} 
 
@@ -150,6 +158,8 @@
 				});
 			},
 			fileChange(file, fileList) {
+				this.percentage = 0;
+				this.isShow = false;
 				this.uploadData.files = fileList;
 			}
 		}

@@ -4,7 +4,7 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjYear.length" placement="top">
 						<div slot="content">{{filters.prjYear}}</div>
 						<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:80%"
 							collapse-tags :title="filters.prjYear">
@@ -13,7 +13,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjAdr.length" placement="top">
 						<div slot="content">{{filters.prjAdr}}</div>
 						<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请选择建设位置" 
 							:remote-method="filterPrjAdrMethod" collapse-tags :title="filters.prjAdr" style="width:100%">
@@ -22,7 +22,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjClasfiName1.length" placement="top">
 						<div slot="content">{{filters.prjClasfiName1}}</div>
 						<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请选择一级分类" 
 							:remote-method="filterPrjClasfiName1Method" collapse-tags :title="filters.prjClasfiName1"  style="width:100%">
@@ -31,7 +31,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjClasfiName2.length" placement="top">
 						<div slot="content">{{filters.prjClasfiName2}}</div>
 						<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请选择二级分类" 
 							:remote-method="filterPrjClasfiName2Method" collapse-tags :title="filters.prjClasfiName2"  style="width:100%">
@@ -40,7 +40,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjClasfiName3.length" placement="top">
 						<div slot="content">{{filters.prjClasfiName3}}</div>
 						<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请选择三级分类" 
 							:remote-method="filterPrjClasfiName3Method" collapse-tags :title="filters.prjClasfiName3"  style="width:100%">
@@ -49,7 +49,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjClasfiName4.length" placement="top">
 						<div slot="content">{{filters.prjClasfiName4}}</div>
 						<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请选择四级分类" 
 							:remote-method="filterPrjClasfiName4Method" collapse-tags :title="filters.prjClasfiName4"  style="width:100%">
@@ -58,7 +58,7 @@
 					</el-tooltip>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-tooltip placement="top">
+					<el-tooltip :disabled="!filters.prjClasfiName5.length" placement="top">
 						<div slot="content">{{filters.prjClasfiName5}}</div>
 						<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请选择五级分类" 
 							:remote-method="filterPrjClasfiName5Method" collapse-tags :title="filters.prjClasfiName5"  style="width:100%">
