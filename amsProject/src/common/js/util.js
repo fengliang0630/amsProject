@@ -160,46 +160,53 @@ export default {
 
     ],
 
-    menuTree : [
+    menuTree: [
         {
-          id: '1',
-          menuName: '基础功能',
-          iconCls: 'fa fa-snowflake-o',
-          children: [
-            {id: '1_4', menuName: '日志查询', menuLink: '/log'}
-          ]
+            id: '1',
+            menuName: '业务功能',
+            iconCls: 'fa fa-free-code-camp',
+            children: [
+                {id: '1_1', menuName: '项目基本信息管理', menuLink: '/project'},
+                {id: '1_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
+                {id: '1_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'}
+            ]
         },
         {
-          id: '2',
-          menuName: '业务功能',
-          iconCls: 'fa fa-free-code-camp',
-          children: [
-            {id: '2_1', menuName: '项目基本信息管理', menuLink: '/project'},
-            {id: '2_2', menuName: '项目属性信息管理', menuLink: '/ProjectAttribute'},
-            {id: '2_3', menuName: '项目明细信息管理', menuLink: '/projectDetail'},
-            {id: '2_4', menuName: '上传', menuLink: '/amsUpload'},
-          ]
+            id: '2',
+            menuName: '项目信息',
+            iconCls: 'fa fa-eercast',
+            children: [
+                {id: '2_1', menuName: '项目总览', menuLink: '/view002'},
+                {id: '2_2', menuName: '项目详情', menuLink: '/view003'}
+            ]
         },
         {
-          id: '3',
-          menuName: '报表功能',
-          iconCls: 'fa fa-area-chart',
-          children: [      
-            {id: '3_1', menuName: '复合统计', menuLink: '/view001'},
-            {id: '3_2', menuName: '项目信息统计', menuLink: '/view002'},
-            {id: '3_3', menuName: '项目详情统计', menuLink: '/view003'}
-          ]
+            id: '3',
+            menuName: '许可证类型',
+            iconCls: 'fa fa-quora',
+            children: [      
+                {id: '3_1', menuName: '城镇建设项目', menuLink: '/view002/1'},
+                {id: '3_2', menuName: '乡村建设项目', menuLink: '/view002/2'},
+                {id: '3_3', menuName: '临时建设项目', menuLink: '/view002/3'},
+                {id: '3_4', menuName: '补正项目', menuLink: '/view002/4'},
+            ]
         },
         {
-          id: '4',
-          menuName: '快速导航',
-          iconCls: 'fa fa-quora',
-          children: [      
-            {id: '4_1', menuName: '城镇建设项目', menuLink: '/view002/1'},
-            {id: '4_2', menuName: '乡村建设项目', menuLink: '/view002/2'},
-            {id: '4_3', menuName: '临时建设项目', menuLink: '/view002/3'},
-            {id: '4_4', menuName: '补正项目', menuLink: '/view002/4'},
-          ]
+            id: '4',
+            menuName: '统计分析',
+            iconCls: 'fa fa-area-chart',
+            children: [      
+                {id: '4_1', menuName: '复合统计', menuLink: '/view001'}
+            ]
+        },
+        {
+            id: '5',
+            menuName: '基础功能',
+            iconCls: 'fa fa-snowflake-o',
+            children: [
+                {id: '5_1', menuName: '数据上传', menuLink: '/amsUpload'},
+                {id: '5_2', menuName: '日志查询', menuLink: '/log'}
+            ]
         }
-      ]
+    ]
 };
