@@ -4,69 +4,78 @@
 			<div class="filter-item">
 				<label>上传类型</label>
 				<div>
-					<el-select v-model="uploadData.upLoadType" placeholder="请选择上传类型" @change="upLoadTypeChange">
+					<el-select v-model="param.upLoadType" placeholder="请选择上传类型" @change="upLoadTypeChange">
 						<el-option v-for="item in uploadTypeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</div>
 			</div>
-			<div class="filter-item" v-if="uploadData.upLoadType === 'SAVE'">
+			<div class="filter-item" v-if="param.upLoadType === 'SAVE'">
 				<label>许可证号</label>
 				<div>
-					<el-select v-model="uploadData.prjSN" filterable remote reserve-keyword placeholder="请选择许可证号" 
-						:remote-method="filterPrjSNMethod" collapse-tags :title="uploadData.prjSN" style="width:100%">
+					<el-select v-model="param.prjSN" filterable remote reserve-keyword placeholder="请录入许可证号" 
+						:remote-method="filterPrjSNMethod" collapse-tags :title="param.prjSN" style="width:100%">
 						<el-option v-for="item in prjSNOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</div>
 			</div>
-			<div class="filter-item" v-if="!!uploadData.upLoadType">
+			<div class="filter-item" v-if="!!param.upLoadType">
 				<label>选择上传文件</label>
 				<div>
-					<el-upload ref="uploadComponent" class="upload-demo" action="" :auto-upload="false" :on-change="fileChange" >
+					<el-upload ref="upload" multiple :action="uploadUrl" :file-list="fileList" :data="param" name="files" :auto-upload="false"
+						:on-success="successHadnler" :accept="acceptStr">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-						<div slot="tip" class="el-upload__tip">{{uploadTypeMsg}}</div>
+  						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传文件</el-button>
+						<div slot="tip" class="el-upload__tip" v-text="tipMsg"></div>
 					</el-upload>
 				</div>
 			</div>
-			<div v-if="isShow" class="toolbar" style="padding-bottom: 0px;">
-				<el-progress :percentage="percentage" :status="progressStatus" style="width:80%;"></el-progress>
-				<p style="width: 80%;color: red;line-height: 30px;">{{errorMsg}}</p>
+			<div v-if="isShowRespond" class="toolbar" style="padding-bottom: 0px;">
+				<p v-for="(msg, index) in errorMsg" :id="`msg_${index}`" class="error-msg" >
+					<i class="fa fa-chevron-up" @click="toggleMsg(index)"></i>
+					<span v-html="msg"></span>
+				</p>
 			</div>
 		</el-col>
 	</el-row>
 </template>
 
 <script>
-	import { uploadFiles, queryDataByLike } from '../api/api';
+	import { getUploadUrl, queryDataByLike } from '../api/api';
 
 	export default {
 		data() {
 			return {
-				uploadTypeMsg: '',
 				uploadTypeOptions: [
 					{label: '项目信息/地图数据', value: 'ANALYSIS'},
 					{label: '批文图片', value: 'SAVE'},
 					{label: '字典信息', value: 'DIC'}
 				],
-				progressStatus: '',
-				percentage: 0,
-				errorMsg: '',
-				isShow: false,
-				isEnd: false,
-				uploadData: {
-					upLoadType: '',
-					prjSN: '',
-					files: []
-				},
-				time: null,
 				prjSNOptions: [],
-				timer: null
+				acceptStr: '',
+				uploadUrl: getUploadUrl(),
+				fileList: [],
+				tipMsg: '',
+				param: {
+					upLoadType: ''
+				},
+				errorMsg: [],
+				isShowRespond: false
+
 			}
 		},
 		methods: {
+			toggleMsg(index) {
+				const msgDom = document.getElementById('msg_' + index);
+				if (msgDom.querySelector('i').classList[1] === 'fa-chevron-up') {
+					msgDom.className = 'error-msg hide';
+					msgDom.querySelector('i').className = 'fa fa-chevron-down';
+				} else {
+					msgDom.className = 'error-msg';
+					msgDom.querySelector('i').className = 'fa fa-chevron-up';
+				}
+			},
 			filterPrjSNMethod(query) {
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
-
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
 						return;
@@ -75,92 +84,38 @@
 				});
 			},
 			upLoadTypeChange(val) {
-				this.percentage = 0;
-				this.isShow = false;
-				this.uploadData.prjSN = '';
+				this.isShowRespond = false;
+				this.errorMsg = [];
+				if (this.$refs.upload) {
+					this.$refs.upload.clearFiles();
+				}
+				
 				if (val === 'ANALYSIS') {
-					this.uploadTypeMsg = '支持excel,dxf格式(dxf必须以许可证号命名)';
+					this.acceptStr = '.xlsx,.xls,.dxf';
+					this.tipMsg = '支持excel,dxf格式(dxf必须以许可证号命名)';
+					delete this.param.prjSN;
 				} else if (val === 'SAVE') {
-					this.uploadTypeMsg = '支持png格式(png必须以文书名命名)';
+					this.acceptStr = '.png';
+					this.tipMsg = '支持png格式(png必须以文书名命名)';
+					this.param.prjSN = '';
 				} else if (val === 'DIC') {
-					this.uploadTypeMsg = '支持excel格式';
+					this.acceptStr = '.xlsx,.xls';
+					this.tipMsg = '支持excel格式';
+					delete this.param.prjSN;
 				}
-			},
-			startPercentage() {
-				if (this.timer) {
-					window.clearTimeout(this.timer);
-				}
-				this.timer = window.setTimeout(() => {
-					this.percentage += Math.ceil(Math.random()*10);
-					if (this.percentage >= 100) {
-						this.percentage = 100;
-					} else {
-						this.startPercentage();
-					}
-				}, 2000);
 			},
 			submitUpload() {
-
-				if (!this.uploadData.files.length) {
-					this.$message({ message: '请您先选择需要上传的文件', type: 'error' });
+				if ( this.param.upLoadType === 'SAVE'&& !this.param.prjSN) {
+					this.$message({ message: '请您先输入许可证号', type: 'error' });
 					return;
 				}
-
-				for (let i = 0; i < this.uploadData.files.length; i++) {
-					const fileName = this.uploadData.files[i].name;
-
-					if (this.uploadData.upLoadType === 'ANALYSIS') {
-						if (!fileName.endsWith('.dxf') && !fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
-							this.$message({ message: '支持excel,dxf文档上传', type: 'error' });
-							return;
-						}
-					} else if (this.uploadData.upLoadType === 'SAVE') {
-						if (!fileName.endsWith('.png')) {
-							this.$message({ message: '支持png文档上传', type: 'error' });
-							return;
-						}
-					} else if (this.uploadData.upLoadType === 'DIC') {
-						if (!fileName.endsWith('.xls') && !fileName.endsWith('.xlsx')) {
-							this.$message({ message: '支持excel文档上传', type: 'error' });
-							return;
-						}
-					}
-				}				
-
-				var formData = new FormData();
-				formData.append("files", this.uploadData.files[0].raw);
-				formData.append('upLoadType', this.uploadData.upLoadType);
-
-				if (this.uploadData.upLoadType === 'SAVE') {
-					if (!this.uploadData.prjSN) {
-						this.$message({ message: '类型为save时，许可证号必传', type: 'error' });
-					}
-
-					formData.append('prjSN', this.uploadData.prjSN);
-				}
-
-				this.isShow = true;
-				this.startPercentage();
-				uploadFiles(formData).then(resp => {
-					this.isEnd = true;
-					this.percentage = 100;
-					if (resp.header.rspReturnCode !== '000000') {
-						this.errorMsg = resp.header.rspReturnMsg;
-						this.progressStatus = 'exception';
-						this.$refs.uploadComponent.clearFiles();
-						return;
-					} 
-
-					this.progressStatus = 'success';
-					this.errorMsg = '';
-					this.$message({ message: '恭喜您已经上传文件成功', type: 'success' });
-					this.$refs.uploadComponent.clearFiles();
-				});
+				this.isShowRespond = true;
+				this.$refs.upload.submit();
 			},
-			fileChange(file, fileList) {
-				this.percentage = 0;
-				this.isShow = false;
-				this.uploadData.files = fileList;
+			successHadnler(response, file, fileList) {
+				if (response.header.rspReturnCode === 'E') {
+					this.errorMsg.push(response.header.rspReturnMsg);
+				}
 			}
 		}
 	}
@@ -168,7 +123,6 @@
 
 <style lang="scss" scoped>
 	#uploadPage {
-		
 		.filter-item {
 			padding: 8px 40px;
 			label {
@@ -184,6 +138,32 @@
 				.el-upload__tip {
 					color: red;
 				}
+			}
+		}
+
+		.error-msg {
+			width: 80%;
+			color: red;
+			line-height: 30px;
+			border: 1px solid black;
+			position: relative;
+			height: 200px;
+			overflow: auto;
+			transition: height 1s;
+			-moz-transition: height 1s;	/* Firefox 4 */
+			-webkit-transition: height 1s;	/* Safari 和 Chrome */
+			-o-transition: height 1s;	/* Opera */
+
+			i {
+				position: absolute;
+				color: #000;
+				cursor: pointer;
+				top: 5px;
+    			right: 5px;
+			}
+
+			&.hide {
+				height: 30px;
 			}
 		}
 	}
