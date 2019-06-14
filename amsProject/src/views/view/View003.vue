@@ -3,7 +3,7 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
-					<el-select v-model="filters.prjSN" filterable remote reserve-keyword placeholder="请选择许可证号" 
+					<el-select v-model="filters.prjSN" filterable remote reserve-keyword placeholder="请录入许可证号" 
 						:remote-method="filterPrjSNMethod" collapse-tags :title="filters.prjSN" style="width:100%">
 						<el-option v-for="item in prjSNOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>

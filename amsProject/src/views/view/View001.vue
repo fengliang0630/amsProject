@@ -10,37 +10,37 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请模糊过滤建设位置" 
+					<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请录入建设位置" 
 							:remote-method="filterPrjAdrMethod" :title="filters.prjAdr" style="width:100%">
 							<el-option v-for="item in prjAdrOptions" :key="item" :label="item" :value="item"></el-option>
 						</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请模糊过滤一级分类" 
+					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请录入一级分类" 
 						:remote-method="filterPrjClasfiName1Method" :title="filters.prjClasfiName1"  style="width:100%">
 						<el-option v-for="item in prjClasfiName1Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请模糊过滤二级分类" 
+					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请录入二级分类" 
 						:remote-method="filterPrjClasfiName2Method" :title="filters.prjClasfiName2"  style="width:100%">
 						<el-option v-for="item in prjClasfiName2Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请模糊过滤三级分类" 
+					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请录入三级分类" 
 						:remote-method="filterPrjClasfiName3Method" :title="filters.prjClasfiName3"  style="width:100%">
 						<el-option v-for="item in prjClasfiName3Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请模糊过滤四级分类" 
+					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请录入四级分类" 
 						:remote-method="filterPrjClasfiName4Method" :title="filters.prjClasfiName4"  style="width:100%">
 						<el-option v-for="item in prjClasfiName4Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请模糊过滤五级分类" 
+					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请录入五级分类" 
 						:remote-method="filterPrjClasfiName5Method" :title="filters.prjClasfiName5"  style="width:100%">
 						<el-option v-for="item in prjClasfiName5Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
