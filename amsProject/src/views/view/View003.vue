@@ -100,13 +100,13 @@
 				</el-table-column>
 				<el-table-column label="验线文号" width="150">
 					<template slot-scope="scope">
-						<el-button size="small" @click="showImg(scope.row.checkDocSN)">{{scope.row.checkDocSN}}</el-button>
+						<el-button v-if="scope.row.checkDocSN" size="small" @click="showImg(scope.row.checkDocSN)">{{scope.row.checkDocSN}}</el-button>
 					</template>
 				</el-table-column>
 				<el-table-column prop="checkDocDate" label="验线时间" width="150"></el-table-column>
 				<el-table-column label="验收文号" width="120">
 					<template slot-scope="scope">
-						<el-button size="small" @click="showImg(scope.row.checkSN)">{{scope.row.checkSN}}</el-button>
+						<el-button v-if="scope.row.checkSN" size="small" @click="showImg(scope.row.checkSN)">{{scope.row.checkSN}}</el-button>
 					</template>
 				</el-table-column>
 				<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
