@@ -2,59 +2,67 @@
 	<section id="view001">
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true" :model="filters">
+			<el-form :inline="true" :class="isShowFilter ? 'show filter-form' : 'hide filter-form'" :model="filters">
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:80%"
+					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:100%"
 						:title="filters.prjYear">
 						<el-option v-for="item in yearOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请选择建设位置" 
+					<el-select v-model="filters.prjAdr" multiple filterable remote reserve-keyword placeholder="请模糊过滤建设位置" 
 							:remote-method="filterPrjAdrMethod" :title="filters.prjAdr" style="width:100%">
 							<el-option v-for="item in prjAdrOptions" :key="item" :label="item" :value="item"></el-option>
 						</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请选择一级分类" 
+					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请模糊过滤一级分类" 
 						:remote-method="filterPrjClasfiName1Method" :title="filters.prjClasfiName1"  style="width:100%">
 						<el-option v-for="item in prjClasfiName1Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请选择二级分类" 
+					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请模糊过滤二级分类" 
 						:remote-method="filterPrjClasfiName2Method" :title="filters.prjClasfiName2"  style="width:100%">
 						<el-option v-for="item in prjClasfiName2Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请选择三级分类" 
+					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请模糊过滤三级分类" 
 						:remote-method="filterPrjClasfiName3Method" :title="filters.prjClasfiName3"  style="width:100%">
 						<el-option v-for="item in prjClasfiName3Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请选择四级分类" 
+					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请模糊过滤四级分类" 
 						:remote-method="filterPrjClasfiName4Method" :title="filters.prjClasfiName4"  style="width:100%">
 						<el-option v-for="item in prjClasfiName4Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:31%;">
-					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请选择五级分类" 
+					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请模糊过滤五级分类" 
 						:remote-method="filterPrjClasfiName5Method" :title="filters.prjClasfiName5"  style="width:100%">
 						<el-option v-for="item in prjClasfiName5Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item style="width:31%;">&nbsp;</el-form-item>
-				<el-form-item style="width:31%;">
-					<el-button type="primary" v-on:click="getView001">查询</el-button>
-					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
-				</el-form-item>
-				<el-form-item style="width:100%;">
+			</el-form>
+			<el-form :inline="true" :model="filters">
+				<el-form-item style="width:68%;">
 					<label>选择显示列信息：</label>
 					<el-select v-model="showCol" multiple placeholder="请选择显示列"  style="width:80%">
 						<el-option v-for="item in showColOption" :key="item.value" :label="item.label" :value="item"></el-option>
 					</el-select>
+				</el-form-item>
+				<el-form-item style="width:14%;">
+					是否显示筛选：<el-switch
+						v-model="isShowFilter"
+						active-color="#13ce66"
+  						inactive-color="#ff4949">
+					</el-switch>
+				</el-form-item>
+				<el-form-item style="width:15%;">
+					<el-button type="primary" v-on:click="getView001">查询</el-button>
+					<el-button type="primary" v-on:click="exportExcel">导出</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -117,6 +125,7 @@
 	export default {
 		data() {
 			return {
+				isShowFilter: true,
 				showColOption: [
 					{ label: '年份', value: 'prjYear'},
 					{ label: '建设位置', value: 'prjAdr'},
@@ -264,4 +273,14 @@
 <style scope>
 	#exportTable {display: none;}
 	#view001 .el-form-item__content {width: 100%;}
+
+	.filter-form {
+		transition: height 1s;
+		-moz-transition: height 1s;	/* Firefox 4 */
+		-webkit-transition: height 1s;	/* Safari 和 Chrome */
+		-o-transition: height 1s;	/* Opera */
+		overflow: auto;
+	}
+	.show{height: 150px;}
+	.hide{height: 0;}
 </style>
