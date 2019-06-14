@@ -271,6 +271,8 @@
 						z-index:99999;
 						height:auto;
 						display:none;
+						background: #fff;
+    					min-width: 200px;
 					}
 
 				}
