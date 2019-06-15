@@ -22,9 +22,9 @@
 				<label>选择上传文件</label>
 				<div>
 					<el-upload ref="upload" multiple :action="uploadUrl" :file-list="fileList" :data="param" name="files" :auto-upload="false"
-						:on-success="successHadnler" :accept="acceptStr">
+						:on-success="successHadnler" :accept="acceptStr" :on-change="handleChange" :on-remove="removeHandler">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传文件</el-button>
+  						<el-button style="margin-left: 10px;" size="small" type="success" :disabled="!isSubmit" @click="submitUpload">上传文件</el-button>
 						<div slot="tip" class="el-upload__tip" v-text="tipMsg"></div>
 					</el-upload>
 				</div>
@@ -56,14 +56,32 @@
 				fileList: [],
 				tipMsg: '',
 				param: {
-					upLoadType: ''
+					upLoadType: '',
+					prjSN: ''
 				},
 				errorMsg: [],
-				isShowRespond: false
-
+				isShowRespond: false,
+				isSubmit: true
 			}
 		},
 		methods: {
+			handleChange(file, fileList) {
+				for (let i = 0; i < fileList.length; i++) {
+					if (file !== fileList[i] && file.name === fileList[i].name) {
+						this.$message({message: '您上传的附件中存在重名的附件，请确认无误后，再进行上传...', type: 'error'});
+						this.isSubmit = false;
+						return;
+					}
+				}
+				
+			},
+			removeHandler(file, fileList) {
+				const names1 = fileList.map(item => item.name);
+				const names2 = Array.from(new Set(names1));
+				if (names1.length === names2.length) {
+					this.isSubmit = true;
+				}
+			},
 			toggleMsg(index) {
 				const msgDom = document.getElementById('msg_' + index);
 				if (msgDom.querySelector('i').classList[1] === 'fa-chevron-up') {
@@ -93,15 +111,12 @@
 				if (val === 'ANALYSIS') {
 					this.acceptStr = '.xlsx,.xls,.dxf';
 					this.tipMsg = '支持excel,dxf格式(dxf必须以许可证号命名)';
-					delete this.param.prjSN;
 				} else if (val === 'SAVE') {
 					this.acceptStr = '.png';
 					this.tipMsg = '支持png格式(png必须以文书名命名)';
-					this.param.prjSN = '';
 				} else if (val === 'DIC') {
 					this.acceptStr = '.xlsx,.xls';
 					this.tipMsg = '支持excel格式';
-					delete this.param.prjSN;
 				}
 			},
 			submitUpload() {
@@ -110,7 +125,7 @@
 					return;
 				}
 				this.isShowRespond = true;
-				this.$refs.upload.submit();
+				// this.$refs.upload.submit();
 			},
 			successHadnler(response, file, fileList) {
 				if (response.header.rspReturnCode === 'E') {
