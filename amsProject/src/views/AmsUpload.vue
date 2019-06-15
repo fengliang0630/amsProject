@@ -125,7 +125,7 @@
 					return;
 				}
 				this.isShowRespond = true;
-				// this.$refs.upload.submit();
+				this.$refs.upload.submit();
 			},
 			successHadnler(response, file, fileList) {
 				if (response.header.rspReturnCode === 'E') {
