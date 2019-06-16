@@ -25,6 +25,7 @@
 						:on-success="successHadnler" :accept="acceptStr" :on-change="handleChange" :on-remove="removeHandler">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   						<el-button style="margin-left: 10px;" size="small" type="success" :disabled="!isSubmit" @click="submitUpload">上传文件</el-button>
+						  <el-button style="margin-left: 10px;" size="small" type="success" @click="clearAll">清空上传记录</el-button>
 						<div slot="tip" class="el-upload__tip" v-text="tipMsg"></div>
 					</el-upload>
 				</div>
@@ -65,15 +66,20 @@
 			}
 		},
 		methods: {
+			clearAll() {
+				this.isSubmit = true;
+				this.isShowRespond = false;
+				this.errorMsg = [];
+				this.$refs.upload.clearFiles();
+			},
 			handleChange(file, fileList) {
-				for (let i = 0; i < fileList.length; i++) {
-					if (file !== fileList[i] && file.name === fileList[i].name) {
-						this.$message({message: '您上传的附件中存在重名的附件，请确认无误后，再进行上传...', type: 'error'});
+				const names1 = fileList.map(item => item.name);
+				const names2 = Array.from(new Set(names1));
+				if (names1.length !== names2.length) {
+					this.$message({message: '您上传的附件中存在重名的附件，请确认无误后，再进行上传...', type: 'error'});
 						this.isSubmit = false;
 						return;
-					}
 				}
-				
 			},
 			removeHandler(file, fileList) {
 				const names1 = fileList.map(item => item.name);
@@ -130,6 +136,9 @@
 			successHadnler(response, file, fileList) {
 				if (response.header.rspReturnCode === 'E') {
 					this.errorMsg.push(response.header.rspReturnMsg);
+					file.status = 'fail';
+				} else {
+					file.status = 'success';
 				}
 			}
 		}
