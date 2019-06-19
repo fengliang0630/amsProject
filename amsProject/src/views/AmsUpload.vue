@@ -148,7 +148,8 @@
 					file.status = 'success';
 				}
 				
-				const loadingFiles = fileList.filter(item => item.statux === 'loading');
+				const loadingFiles = fileList.filter(item => item.status === 'uploading');
+				debugger;
 				if (!loadingFiles || loadingFiles.length === 0) {
 					this.loading = false;
 				}
