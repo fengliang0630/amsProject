@@ -4,7 +4,7 @@
 			<el-form :inline="true" :model="filters">
 				<el-form-item>
 					<el-select v-model="filters.prjSN" filterable remote reserve-keyword placeholder="请录入许可证号" 
-						:remote-method="filterPrjSNMethod" collapse-tags :title="filters.prjSN" style="width:100%">
+						:remote-method="filterPrjSNMethod" collapse-tags :title="filters.prjSN" style="width:350px">
 						<el-option v-for="item in prjSNOptions" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
@@ -283,6 +283,11 @@
 				this.isShowImg = true;
 			},
 			filterPrjSNMethod(query) {
+
+				if (!query) {
+					return;
+				}
+
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
 
 					if (resp.header.rspReturnCode !== '000000') {
