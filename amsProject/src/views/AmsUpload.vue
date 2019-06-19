@@ -1,5 +1,8 @@
 <template>
-	<el-row id="uploadPage">
+	<el-row id="uploadPage" v-loading="loading"
+		element-loading-text="文件上传中"
+		element-loading-spinner="el-icon-loading"
+		element-loading-background="rgba(0, 0, 0, 0.8)">
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<div class="filter-item">
 				<label>上传类型</label>
@@ -22,6 +25,7 @@
 				<label>选择上传文件</label>
 				<div>
 					<el-upload ref="upload" multiple :action="uploadUrl" :file-list="fileList" :data="param" name="files" :auto-upload="false"
+	
 						:on-success="successHadnler" :accept="acceptStr" :on-change="handleChange" :on-remove="removeHandler">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   						<el-button style="margin-left: 10px;" size="small" type="success" :disabled="!isSubmit" @click="submitUpload">上传文件</el-button>
@@ -62,7 +66,8 @@
 				},
 				errorMsg: [],
 				isShowRespond: false,
-				isSubmit: true
+				isSubmit: true,
+				loading: false
 			}
 		},
 		methods: {
@@ -132,6 +137,8 @@
 				}
 				this.isShowRespond = true;
 				this.$refs.upload.submit();
+				this.loading = true;
+				
 			},
 			successHadnler(response, file, fileList) {
 				if (response.header.rspReturnCode === 'E') {
@@ -139,6 +146,11 @@
 					file.status = 'fail';
 				} else {
 					file.status = 'success';
+				}
+				
+				const loadingFiles = fileList.filter(item => item.statux === 'loading');
+				if (!loadingFiles || loadingFiles.length === 0) {
+					this.loading = false;
 				}
 			}
 		}
