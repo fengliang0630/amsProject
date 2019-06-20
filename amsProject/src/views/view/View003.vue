@@ -23,11 +23,11 @@
 		</p>
 
 		<h3>{{prjClasfiName1}}</h3>
-		<div v-for="prjClasfiName2Obj in prjClasfiName2List">
+		<div v-for="prjClasfiName2Obj in prjClasfiName2List" style="width: 100%;">
 
 			<p>{{prjClasfiName2Obj.title}}</p>
 
-			<el-table :data="prjClasfiName2Obj.list" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
+			<el-table :data="prjClasfiName2Obj.list" highlight-current-row v-loading="listLoading" style="width: 100%;" :height="tableHeight" stripe border>
 				<el-table-column type="expand">
 					<template slot-scope="scope">
 						<el-table :data="scope.row.detailList" highlight-current-row v-loading="listLoading" stripe border>
@@ -274,7 +274,8 @@
 				prjSNOptions: [],
 				listLoading: false,
 				fileName: '',
-				isShowImg: false
+				isShowImg: false,
+				tableHeight: 0
 			}
 		},
 		methods: {
@@ -372,6 +373,9 @@
 		},
 		components: {
 			'ams-show-img': ShowImg
+		},
+		mounted() {
+			this.tableHeight = window.screen.availHeight - 500;
 		}
 	}
 </script>
