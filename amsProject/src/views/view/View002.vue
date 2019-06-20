@@ -59,7 +59,7 @@
 						<el-form-item label="特别告知事项"><span>{{ props.row.specialNotifi }}</span></el-form-item>
 						<el-form-item label="附带临建批号">
 							<template v-for="prjTemSNItem in remarkAddClickTag(props.row.prjTemSN)">
-								<span v-if="!prjTemSNItem.isHref">{{remarkItem.val}}</span>
+								<span v-if="!prjTemSNItem.isHref">{{prjTemSNItem.val}}</span>
 								<el-button v-if="prjTemSNItem.isHref" size="small" @click="goProject(prjTemSNItem.val)">{{prjTemSNItem.val}}</el-button>
 							</template>
 						</el-form-item>
