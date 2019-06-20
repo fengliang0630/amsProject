@@ -62,13 +62,10 @@
 						return;
 					}
 
-                    let points = resp.points;
-
-                    if (!points.length) {
-                        this.map.centerAndZoom(new BMap.Point('116.53974519970919', '40.04219375358758'), 14);
-                    }
+                    let points = resp.points;                    
 
                     for(let i = 0;i < points.length; i++){
+
                         let longlatVArray = points[i].longlatV.substring(0, points[i].longlatV.length - 1).split('|');
                         let psT = [];
                         for(var j = 0; j < longlatVArray.length; j++){
@@ -77,17 +74,38 @@
                             var mp = new BMap.Point(p[0], p[1]);
                             // 如果没有设置中心点 设置一个中心点
                             if (i === 0 && j === 0) {
-                                this.map.centerAndZoom(mp, 14);
+                                if (points[i].entiryType === 'LWPOLYLINE') {
+                                    this.map.centerAndZoom(mp, 14);
+                                }
+                                
                             }
                             psT.push(mp);
+
+                            if (points[i].entiryType !== 'LWPOLYLINE') {
+                                this.addMarker(mp, false);
+                            }
+
                         }
 
-                        this.map.addOverlay(new BMap.Polyline(psT)); // 画线 
+                        if (points[i].entiryType === 'LWPOLYLINE') {
+                            const a = new BMap.Polyline(psT);
+                            // a.setStrokeColor('#ff8000');
+                            this.map.addOverlay(a); // 画线         
+                        }
                     }
                 });
             },
-            addMarker(point) {
+            addMarker(point, enabledOperation) {
                 var marker = new BMap.Marker(point);
+                if (!enabledOperation) {
+                    var url = './static/1.png';
+                    
+                    var icon = new BMap.Icon(url, new BMap.Size(20,60));
+                    marker.setIcon(icon);
+                    this.map.addOverlay(marker);
+                    this.map.centerAndZoom(point, 18);
+                    return;
+                }
                 marker.enableDragging();
                 
                 let label = new BMap.Label();
@@ -131,7 +149,7 @@
                 }, 100));
                 marker.addContextMenu(menu);
                 this.map.addOverlay(marker);
-                this.map.centerAndZoom(point, 14);
+                this.map.centerAndZoom(point, 18);
                 
             },
             makePoint() {
@@ -155,7 +173,7 @@
                     this.res = resp.longlatV.split(',');
                     
                     const mp = new BMap.Point(this.res[0], this.res[1]);
-                    this.addMarker(mp);
+                    this.addMarker(mp, true);
                 });
 
                 
