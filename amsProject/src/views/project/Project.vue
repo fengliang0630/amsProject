@@ -37,7 +37,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="jbxxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
+		<el-table v-if="tableHeight > 0"  :data="jbxxList" highlight-current-row v-loading="listLoading" style="width: 100%;" :height="tableHeight" stripe border>
 			<el-table-column label="序号" width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
@@ -165,7 +165,8 @@
 				formParams: {
 					show: false,
 					data: null
-				}
+				},
+				tableHeight: 0
 			}
 		},
 		methods: {
@@ -195,6 +196,8 @@
 						this.$message({ message: resp.header.rspReturnMsg, type: 'error' });
 						return;
 					}
+
+					this.tableHeight = window.screen.availHeight - 500;
 
 					this.total = resp.header.rspPageCount;
 					this.jbxxList = resp.xmjbxxList;

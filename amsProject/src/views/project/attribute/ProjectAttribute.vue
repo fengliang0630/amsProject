@@ -16,7 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="xmsxList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
+		<el-table v-if="tableHeight > 0" :data="xmsxList" highlight-current-row v-loading="listLoading" style="width: 100%;" :height="tableHeight"  stripe border>
 			<el-table-column width="60">
 				<template slot-scope="scope">
 					<span>{{scope.$index + 1 + (pageNum - 1) * pageSize}}</span>
@@ -93,7 +93,8 @@
 				formParams: {
 					show: false,
 					data: null
-				}
+				},
+				tableHeight: 0
 			}
 		},
 		methods: {
@@ -120,6 +121,8 @@
 						});
 						return;
 					}
+
+					this.tableHeight = window.screen.availHeight - 500;
 
 					this.total = resp.header.rspPageCount;
 					this.xmsxList = resp.xmsxList;

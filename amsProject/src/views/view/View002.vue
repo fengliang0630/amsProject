@@ -203,6 +203,10 @@
 				<td>联系方式</td>
 				<td>项目标识</td>
 				<td>许可证类型</td>
+				<td>延期文号</td>
+				<td>延长期</td>
+				<td>补正证号</td>
+				<td>补正日期</td>
 				<td>特别告知事项</td>
 				<td>附带临建批号</td>
 				<td>影像</td>
@@ -219,6 +223,10 @@
 				<td>{{item.contactInf}}</td>
 				<td>{{item.prjMark}}</td>
 				<td>{{item.prjSNType}}</td>
+				<td>{{item.delaySN}}</td>
+				<td>{{item.delayCountDay}}</td>
+				<td>{{item.correctionSN}}</td>
+				<td>{{item.correctionDate}}</td>
 				<td>{{item.specialNotifi}}</td>
 				<td>{{item.prjTemSN}}</td>
 				<td>{{item.prjXz}}</td>

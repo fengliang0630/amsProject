@@ -110,7 +110,24 @@
 					</template>
 				</el-table-column>
 				<el-table-column prop="checkDate" label="验收日期" width="120"></el-table-column>
-				<el-table-column prop="cancelSN" label="撤（注）销证号" width="120"></el-table-column>
+				<el-table-column prop="cancelSN" label="撤（注）销证号" width="240">
+					<template slot-scope="scope">
+						<el-popover trigger="hover" placement="top">
+							<p>
+								<template v-for="cancelSNItem in remarkAddClickTag(scope.row.cancelSN)">
+									<span v-if="!cancelSNItem.isHref">{{cancelSNItem.val}}</span>
+									<el-button v-if="cancelSNItem.isHref" size="small" @click="goProject(cancelSNItem.val)">{{cancelSNItem.val}}</el-button>
+								</template>
+							</p>
+							<div slot="reference" class="name-wrapper nowrap-text">
+								<template v-for="cancelSNItem in remarkAddClickTag(scope.row.cancelSN)">
+									<span v-if="!cancelSNItem.isHref">{{cancelSNItem.val}}</span>
+									<el-button v-if="cancelSNItem.isHref" size="small" @click="goProject(cancelSNItem.val)">{{cancelSNItem.val}}</el-button>
+								</template>
+							</div>
+						</el-popover>
+					</template>
+				</el-table-column>
 				<el-table-column prop="cancelDate" label="撤（注）销日期" width="120"></el-table-column>
 				<el-table-column label="影像判读结果" width="120">
 					<template slot-scope="scope">
@@ -143,6 +160,10 @@
 		
 		<el-dialog :visible.sync="isShowImg" :fullscreen=true  title="查看">
 			<ams-show-img v-if="isShowImg" :fileName="fileName" :prjSN="filters.prjSN"></ams-show-img>
+		</el-dialog>
+
+		<el-dialog :visible.sync="projectViewParam.show" title="查询项目基本信息" top="3vh">
+			<ams-project-view v-if="projectViewParam.show" :prjSN="projectViewParam.prjSN"></ams-project-view>
 		</el-dialog>
 
 		<div style="height:0;width:0;overflow:hidden;">
@@ -259,6 +280,7 @@
 <script>
 	import { getView003, queryDataByLike } from '../../api/api';
 	import FileSaver from 'file-saver';
+	import ProjectViewVue from '../project/ProjectView.vue';
 	import ShowImg from './ShowImg';
 
 	export default {
@@ -275,10 +297,18 @@
 				listLoading: false,
 				fileName: '',
 				isShowImg: false,
-				tableHeight: 0
+				tableHeight: 0,
+				projectViewParam: {
+					prjSNTem: '',
+					show: false
+				},
 			}
 		},
 		methods: {
+			goProject(prjSN) {
+				this.projectViewParam.prjSN = prjSN;
+				this.projectViewParam.show = true;
+			},
 			showImg(_fileName) {
 				this.fileName = _fileName;
 				this.isShowImg = true;
@@ -372,7 +402,8 @@
 			}
 		},
 		components: {
-			'ams-show-img': ShowImg
+			'ams-show-img': ShowImg,
+			'ams-project-view': ProjectViewVue
 		},
 		mounted() {
 			this.tableHeight = window.screen.availHeight - 500;
