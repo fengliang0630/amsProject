@@ -122,7 +122,7 @@
 						return;
 					}
 
-					this.tableHeight = window.screen.availHeight - 500;
+					this.tableHeight = window.screen.availHeight - 450;
 
 					this.total = resp.header.rspPageCount;
 					this.xmsxList = resp.xmsxList;

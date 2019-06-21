@@ -143,7 +143,7 @@
 				if (readyFiles && readyFiles.length) {
 					this.loading = true;
 				} else {
-					this.$message({ message: '上传列表中不存在未上传得文件', type: 'error' });
+					this.$message({ message: '上传列表中不存在未上传的文件', type: 'error' });
 					return;
 				}
 				

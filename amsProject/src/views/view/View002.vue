@@ -326,7 +326,7 @@
 
 					this.viewList = resp.viewList;
 					this.total = resp.header.rspPageCount;
-					this.tableHeight = window.screen.availHeight - 500;
+					this.tableHeight = window.screen.availHeight - 450;
 				});
 			},
 			exportExcel() {
