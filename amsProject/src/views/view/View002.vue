@@ -43,7 +43,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="viewList" highlight-current-row v-loading="listLoading" style="width: 100%;"  stripe border>
+		<el-table v-if="tableHeight > 0" :data="viewList" highlight-current-row v-loading="listLoading" style="width: 100%;" :height="tableHeight" stripe border>
 			<el-table-column type="expand">
 				<template slot-scope="props">
 					<el-form label-position="left" class="demo-table-expand">
@@ -119,6 +119,18 @@
 			<el-table-column prop="contactInf" label="联系方式" width="200"></el-table-column>
 			<el-table-column prop="prjMark" label="项目标识" width="150"></el-table-column>
 			<el-table-column prop="prjSNType" label="许可证类型" width="150"></el-table-column>
+			<el-table-column label="延期文号" width="150">
+				<template slot-scope="scope">
+					<el-button v-if="scope.row.delaySN" size="small" @click="showImg(scope.row.delaySN)">{{scope.row.delaySN}}</el-button>
+				</template>
+			</el-table-column> 
+			<el-table-column prop="delayCountDay" label="延长期" width="150"></el-table-column>
+			<el-table-column label="补正证号" width="150"> 
+				<template slot-scope="scope">
+					<el-button v-if="scope.row.correctionSN" size="small" @click="showImg(scope.row.correctionSN)">{{scope.row.correctionSN}}</el-button>
+				</template>
+			</el-table-column>  
+			<el-table-column prop="correctionDate" label="补正日期" width="150"></el-table-column>
 			<el-table-column label="特别告知事项" width="150">
 				<template slot-scope="scope">
 					<el-popover trigger="hover" placement="top">
@@ -222,6 +234,10 @@
 			<ams-project-view v-if="projectViewParam.show" :prjSN="projectViewParam.prjSN"></ams-project-view>
 		</el-dialog>
 
+		<el-dialog :visible.sync="isShowImg" :fullscreen=true  title="查看">
+			<ams-show-img v-if="isShowImg" :fileName="fileName" :prjSN="filters.prjSN"></ams-show-img>
+		</el-dialog>
+
 	</section>
 </template>
 
@@ -230,7 +246,8 @@
 	import util from '../../common/js/util';
 	import AmsMapVue from '../AmsMap.vue';
 	import ProjectViewVue from '../project/ProjectView.vue';
-
+	import ShowImg from './ShowImg';
+	
 	export default {
 		data() {
 			return {
@@ -259,10 +276,17 @@
 				projectViewParam: {
 					prjSNTem: '',
 					show: false
-				}
+				},
+				tableHeight: 0,
+				isShowImg: false,
+				fileName: ''
 			}
 		},
 		methods: {
+			showImg(_fileName) {
+				this.fileName = _fileName;
+				this.isShowImg = true;
+			},
 			goProject(prjSN) {
 				this.projectViewParam.prjSN = prjSN;
 				this.projectViewParam.show = true;
@@ -294,6 +318,7 @@
 
 					this.viewList = resp.viewList;
 					this.total = resp.header.rspPageCount;
+					this.tableHeight = window.screen.availHeight - 500;
 				});
 			},
 			exportExcel() {
@@ -309,6 +334,7 @@
 				this.filters.prjSNType = '';
 			}
 			this.getView002();
+			
 		},
 		watch: {
 			'$route' (to, from) {
@@ -335,7 +361,8 @@
 		},
 		components: {
 			'ams-map': AmsMapVue,
-			'ams-project-view': ProjectViewVue
+			'ams-project-view': ProjectViewVue,
+			'ams-show-img': ShowImg
 		}
 	}
 </script>

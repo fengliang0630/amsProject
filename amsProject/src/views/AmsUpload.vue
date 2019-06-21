@@ -104,6 +104,10 @@
 				}
 			},
 			filterPrjSNMethod(query) {
+				if (!query) {
+					return;
+				}
+
 				queryDataByLike({tab: 'xmjbxx', key: 'prjSN', val: query}).then(resp => {
 					if (resp.header.rspReturnCode !== '000000') {
 						this.$message({message: resp.header.rspReturnMsg, type: 'error'});
@@ -135,9 +139,17 @@
 					this.$message({ message: '请您先输入许可证号', type: 'error' });
 					return;
 				}
+				const readyFiles = this.$refs.upload.uploadFiles.filter(item => item.status === 'ready');;
+				if (readyFiles && readyFiles.length) {
+					this.loading = true;
+				} else {
+					this.$message({ message: '上传列表中不存在未上传得文件', type: 'error' });
+					return;
+				}
+				
 				this.isShowRespond = true;
 				this.$refs.upload.submit();
-				this.loading = true;
+				
 				
 			},
 			successHadnler(response, file, fileList) {
@@ -149,7 +161,6 @@
 				}
 				
 				const loadingFiles = fileList.filter(item => item.status === 'uploading');
-				debugger;
 				if (!loadingFiles || loadingFiles.length === 0) {
 					this.loading = false;
 				}
