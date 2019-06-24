@@ -1,0 +1,21 @@
+localhost:8899/ams/addMenu
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"parent_id":"212",
+	"name":"角色管理",
+	"url":"/sys/rolemanager",
+	"order_num":"1"
+}
+
+
+"parent_id"为空的情况下，不要上送"parent_id":""
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130803931040055296】菜单添加成功"}}

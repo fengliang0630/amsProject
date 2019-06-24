@@ -1,0 +1,25 @@
+localhost:8899/ams/api/file/del
+
+请求：
+{
+    "header": {
+        "reqUserId": "xxw",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "id": 3
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 0,
+        "reqpageSize": 0,
+        "rspPageCount": 0,
+        "rspReturnCode": "000000",
+        "rspReturnMsg": "【1130490768818044928】删除成功 ！"
+    }
+}

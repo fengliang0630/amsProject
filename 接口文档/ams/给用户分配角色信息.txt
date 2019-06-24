@@ -1,0 +1,25 @@
+localhost:8899/ams/addUserAddRole
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg": "",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"userRoleList": [{
+			"userId": "140",
+			"roleId": "59"
+		},
+		{
+			"userId": "140",
+			"roleId": "60"
+		}
+	]
+}
+
+"userId"、 均为必输项  roleId 为空，则清除之前的权限
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130143490970353664】用户角色分配成功"}}

@@ -1,0 +1,54 @@
+localhost:8899/ams/api/xmsx/createOrUpdate
+
+具体字段参考表设计说明
+
+请求：
+
+请求数据中包含ID时，为更新操作，否则为新增操作
+{
+    "header": {
+        "reqUserId": "99999",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    //"id":数据库对应id
+    "aboveGroundHet": 8.1,
+    "aboveGroundLev": 6,
+    "buildings": 1,
+    "cancelDate": "2019-05-18",
+    "cancelSN": "撤（注）销证号",
+    "checkDate": "2019-05-18",
+    "checkDocDate": "2019-05-18",
+    "checkDocSN": "验线文号",
+    "checkSN": "验收文号",
+    "correctionDate": "2019-05-18",
+    "correctionSN": "补正证号",
+    "delayCountDay": "延长期",
+    "delaySN": "延期文号",
+    "exproprInfo": "代征用地情况",
+    "housingStockNum": 2,
+    "imgJudgeRes": "影像判读结果",
+    "peacetimeUses": "5",
+    "prjAttr": "规划项目性质/人防工程情况",
+    "prjNature": "项目性质",
+    "prjSN": "许可证号222",
+    "remark": "备注",
+    "serialNumber": 3,
+    "strucType": "结构类型",
+    "underGroundHet": 9.2,
+    "underGroundLev": 7
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 0,
+        "reqpageSize": 0,
+        "rspPageCount": 0,
+        "rspReturnCode": "000000",
+        "rspReturnMsg": "【1132171441786191872】保存成功 ！"
+    }
+}

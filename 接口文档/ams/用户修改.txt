@@ -1,0 +1,25 @@
+localhost:8899/ams/updateUser
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "0",
+		"rspPageCount": ""
+	},
+	"id":"138",
+	"password":"MTIzNDU2",
+	"username": "xxw3",
+	"name": "111111",
+	"deptId": 5,
+	"email": "tang@sinopes.cn",
+	"mobile": "15191455132",
+	"status": 5,
+	"sex": 18
+}
+
+"id"、"password"在前端不显示
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1129228265265954816】用户修改成功"}}

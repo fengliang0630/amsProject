@@ -1,0 +1,14 @@
+localhost:8899/ams/amsLogout
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg": "",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	}
+}
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1131538952285716480】用户退出成功"}}

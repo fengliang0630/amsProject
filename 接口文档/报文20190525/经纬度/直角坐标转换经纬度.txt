@@ -1,0 +1,39 @@
+localhost:8899/ams/api/dxf/convertZB
+
+请求：
+{
+    "header": {
+        "reqUserId": "xxw",
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "jd": 515067.0631366247,
+    "wd":318743.20442
+}
+
+返回正常：
+{
+    "longlatV": "116.53974519970919,40.04219375358758",
+    "header": {
+        "reqpageIndex": 1,
+        "reqUserId": "xxw",
+        "rspPageCount": 0,
+        "rspReturnMsg": "【1130483454467768320】交易成功",
+        "reqpageSize": 20,
+        "rspReturnCode": "000000"
+    }
+}
+返回异常：
+{
+    "header": {
+        "reqpageIndex": 0,
+        "reqpageSize": 0,
+        "rspPageCount": 0,
+        "rspReturnCode": "E",
+        "rspReturnMsg": "转换异常！"
+    }
+}
+

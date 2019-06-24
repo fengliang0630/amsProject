@@ -1,0 +1,21 @@
+localhost:8899/ams/updateMenu
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"213",
+	"parent_id":"212",
+	"name":"角色管理",
+	"url":"/sys/rolemanager",
+	"order_num":"2"
+}
+
+
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130804677156405248】菜单修改成功"}}

@@ -1,0 +1,68 @@
+v-bind:src="srcValue"	:src="srcValue"
+
+v-on:click="getMsg($event)"	@click="getMsg($event)"
+
+<li v-for="(item,key) in list">
+	{{key}}----{{item}}
+</li>
+
+
+
+<div v-if="ok">这是一个true</div>
+
+
+style scoped
+
+
+声明周期函数：
+beforeCreate	实例被创建之前
+Create			实例已经创建完成
+beforeMount		模板编译之前	
+Mounted			模板编译完成
+beforeUpdate	数据更新之前
+Update			数据更新完毕
+beforeDestroy	实例销毁之前
+Destroy			实例已经销毁
+
+
+data: function () {
+	return {};
+},
+methods: {
+
+},
+beforeCreate() {
+
+},
+
+
+ajax请求：
+vue-resource
+axios
+fetch-jsonp
+
+
+子组件获取父组件内容：
+home(父)    header(子)  方法也可以传递 一样的方式
+父组件：
+<v-header :title="title"></v-header>
+子组件(与method平级)：
+props: {
+	title: String
+}
+props: ['title']
+
+
+
+<v-header ref="header"></v-header>
+this.$refs.header.属性
+this.$refs.header.方法
+
+
+this.$parent.属性
+this.$parent.方法
+
+
+vue-router   router-view(路由入口)
+动态路由：   /home/:aid 	this.$router.params  	//获取动态路由传值
+get传值:	/home?aid=123	this.$route.query		//获取get传值

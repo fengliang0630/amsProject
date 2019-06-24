@@ -1,0 +1,16 @@
+localhost:8899/ams/deleteMenu
+
+{
+	"header": {
+		"reqUserId": "xxw",
+		"rspReturnCode": "",
+		"rspReturnMsg":"",
+		"reqpageSize": "20",
+		"reqpageIndex": "1",
+		"rspPageCount": ""
+	},
+	"id":"214"
+}
+
+
+{"header":{"reqpageIndex":0,"reqpageSize":0,"rspPageCount":0,"rspReturnCode":"000000","rspReturnMsg":"【1130804940747440128】菜单删除成功"}}

@@ -1,0 +1,40 @@
+localhost:8899/ams/api/xmmx/createOrUpdate
+
+具体字段参考表设计说明
+
+请求：
+
+请求数据中包含ID时，为更新操作，否则为新增操作
+
+请求：
+
+{
+    "header": {
+        "reqUserId": 99999,
+        "rspReturnCode": "",
+        "rspReturnMsg": "",
+        "reqpageSize": "20",
+        "reqpageIndex": "1",
+        "rspPageCount": ""
+    },
+    "id":901,
+    "aboveGroundArea": 4.2,
+    "aboveGroundLen": 7.2,
+    "blendArea": 6.2,
+    "prjClasfiCode": "",
+    "prjSN": "许可证号333",
+    "serialFunct": "建筑功能",
+    "serialNumber": 3,
+    "underGroundArea": 5.2
+}
+
+返回：
+{
+    "header": {
+        "reqpageIndex": 0,
+        "reqpageSize": 0,
+        "rspPageCount": 0,
+        "rspReturnCode": "000000",
+        "rspReturnMsg": "【1132180542511513600】保存成功 ！"
+    }
+}
