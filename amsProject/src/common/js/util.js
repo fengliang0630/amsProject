@@ -121,7 +121,7 @@ export default {
         const data = new Blob([excelBuffer], {
             type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
         });
-        FileSaver.saveAs(data, `${fileName}.xlsx`);
+        FileSaver.saveAs(data, `${fileName}.xls`);
     },
 
     paginationSize: [10, 20, 50, 100],

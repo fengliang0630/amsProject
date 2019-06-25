@@ -287,7 +287,7 @@
 					const data = new Blob([resp], {
 						type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
 					});
-					FileSaver.saveAs(data, `符合统计数据(全部).xlsx`);
+					FileSaver.saveAs(data, `复合统计(全部).xls`);
 				}).catch(error => {
 					this.loading = false;
 					this.$message({ message: error, type: 'error' });
@@ -295,7 +295,7 @@
 			},
 			exportCurrentPageExcel() {
 				const table = document.getElementById('exportTable');
-				util.exportExcel(table, '符合统计数据(当前页)');
+				util.exportExcel(table, '复合统计(当前页)');
 			}
 
 		},

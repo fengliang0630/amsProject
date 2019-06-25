@@ -350,7 +350,7 @@
 					const data = new Blob([resp], {
 						type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
 					});
-					FileSaver.saveAs(data, `项目信息统计数据(全部).xlsx`);
+					FileSaver.saveAs(data, `项目信息统计数据(全部).xls`);
 				}).catch(error => {
 					this.loading = false;
 					this.$message({ message: error, type: 'error' });
