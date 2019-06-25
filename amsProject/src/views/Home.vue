@@ -74,7 +74,7 @@
 			return {
 				activeMenuId: '',
 				sysName:'ams 系统',
-				sysVersion: '1.0.7',
+				sysVersion: '1.0.8',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '../../static/user.png',
