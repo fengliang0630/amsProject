@@ -38,8 +38,6 @@
 				</el-form-item>
 				<el-form-item style="width:23%;">
 					<el-button type="primary" v-on:click="getView002">查询</el-button>
-					<el-button type="primary" v-on:click="exportCurrentPageExcel">导出当前页</el-button>
-					<el-button type="primary" v-on:click="exportExcel">导出全部</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -188,6 +186,8 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
+			<el-button type="success" v-on:click="exportCurrentPageExcel"><i class="el-icon-download"></i>&nbsp;导出当前页</el-button>
+			<el-button type="primary" v-on:click="exportExcel"><i class="el-icon-download"></i>&nbsp;导出全部</el-button>
 			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
 				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
 			</el-pagination>
@@ -350,7 +350,7 @@
 					const data = new Blob([resp], {
 						type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
 					});
-					FileSaver.saveAs(data, `项目信息统计数据(全部).xls`);
+					FileSaver.saveAs(data, `项目信息统计数据(全部).xlsx`);
 				}).catch(error => {
 					this.loading = false;
 					this.$message({ message: error, type: 'error' });
