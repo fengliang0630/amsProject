@@ -74,7 +74,7 @@
 			return {
 				activeMenuId: '',
 				sysName:'建设工程规划许可证管理系统',
-				sysVersion: '1.0.9',
+				sysVersion: '1.1.0',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '../../static/user.png',
