@@ -71,4 +71,8 @@ export default {
 	.fade-leave-active {
 		opacity: 0;
 	}
+
+	.viewer-container {
+		z-index: 999999!important;
+	}
 </style>

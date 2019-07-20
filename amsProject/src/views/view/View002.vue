@@ -4,36 +4,66 @@
 	<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-input v-model="filters.prjUnit" placeholder="建设单位"></el-input>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-input v-model="filters.prjAdr" placeholder="建设位置"></el-input>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-input v-model="filters.prjName" placeholder="工程名称"></el-input>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-select v-model="filters.prjType" placeholder="请选择建设类型" style="width: 100%;">
 						<el-option v-for="item in prjTypeOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-select v-model="filters.prjStatus" placeholder="请选择项目状态" style="width: 100%;">
 						<el-option v-for="item in prjStatusOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-select v-model="filters.prjSNType" placeholder="请选择许可证类型" style="width: 100%;">
 						<el-option v-for="item in prjSNTypeOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item>
+				<el-form-item style="width:23%;">
 					<el-select v-model="filters.prjMark" placeholder="请选择许可证类型" style="width: 100%;">
 						<el-option v-for="item in prjMarkOptions" :key="item.id" :label="item.label" :value="item.value"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjClasfiName1" multiple filterable remote reserve-keyword placeholder="请录入一级分类" 
+						:remote-method="filterPrjClasfiName1Method" :title="filters.prjClasfiName1"  style="width:100%">
+						<el-option v-for="item in prjClasfiName1Options" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjClasfiName2" multiple filterable remote reserve-keyword placeholder="请录入二级分类" 
+						:remote-method="filterPrjClasfiName2Method" :title="filters.prjClasfiName2"  style="width:100%">
+						<el-option v-for="item in prjClasfiName2Options" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjClasfiName3" multiple filterable remote reserve-keyword placeholder="请录入三级分类" 
+						:remote-method="filterPrjClasfiName3Method" :title="filters.prjClasfiName3"  style="width:100%">
+						<el-option v-for="item in prjClasfiName3Options" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjClasfiName4" multiple filterable remote reserve-keyword placeholder="请录入四级分类" 
+						:remote-method="filterPrjClasfiName4Method" :title="filters.prjClasfiName4"  style="width:100%">
+						<el-option v-for="item in prjClasfiName4Options" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjClasfiName5" multiple filterable remote reserve-keyword placeholder="请录入五级分类" 
+						:remote-method="filterPrjClasfiName5Method" :title="filters.prjClasfiName5"  style="width:100%">
+						<el-option v-for="item in prjClasfiName5Options" :key="item" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item style="width:23%;">
@@ -197,7 +227,7 @@
 		<el-col :span="24" class="toolbar">
 			<el-button type="success" v-on:click="exportCurrentPageExcel"><i class="el-icon-download"></i>&nbsp;导出当前页</el-button>
 			<el-button type="primary" v-on:click="exportExcel"><i class="el-icon-download"></i>&nbsp;导出全部</el-button>
-			<el-pagination layout="sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
+			<el-pagination layout="total, sizes, prev, pager, next" @current-change="handleCurrentChange" @size-change="handleSizeChange"
 				:page-size="pageSize" :total="total" :page-sizes="paginationSize" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -261,7 +291,7 @@
 </template>
 
 <script>
-	import { getView002, downloadView002 } from '../../api/api';
+	import { getView002, downloadView002, getPrjClasfiNames } from '../../api/api';
 	import util from '../../common/js/util';
 	import AmsMapVue from '../AmsMap.vue';
 	import ProjectViewVue from '../project/ProjectView.vue';
@@ -282,8 +312,18 @@
 					prjAdr: '',
 					prjName: '',
 					prjType: '',
-					prjMark: ''
+					prjMark: '',
+					prjClasfiName1: [],
+					prjClasfiName2: [],
+					prjClasfiName3: [],
+					prjClasfiName4: [],
+					prjClasfiName5: []
 				},
+				prjClasfiName1Options: [],
+				prjClasfiName2Options: [],
+				prjClasfiName3Options: [],
+				prjClasfiName4Options: [],
+				prjClasfiName5Options: [],
 				viewList: [],
 				listLoading: false,
 				total: 0,
@@ -306,6 +346,48 @@
 			}
 		},
 		methods: {
+			filterPrjClasfiName1Method(query) {
+				this.queryPrjClasfiName(query, '1');
+			},
+
+			filterPrjClasfiName2Method(query) {
+				this.queryPrjClasfiName(query, '2');
+			},
+
+			filterPrjClasfiName3Method(query) {
+				this.queryPrjClasfiName(query, '3');
+			},
+
+			filterPrjClasfiName4Method(query) {
+				this.queryPrjClasfiName(query, '4');
+			},
+
+			filterPrjClasfiName5Method(query) {
+				this.queryPrjClasfiName(query, '5');
+			},
+			queryPrjClasfiName(query, type) {
+				if (!query) {
+					this[`prjClasfiName${type}Options`] = [];
+					return;
+				}
+				const param = {
+					name: query,
+					type: 'FJ',
+					other: type
+				};
+
+				getPrjClasfiNames(param).then(resp => {
+					if (resp.header.rspReturnCode !== '000000') {
+						this.$message({
+							message: resp.header.rspReturnMsg,
+							type: 'error'
+						});
+						return;
+					}
+
+					this[`prjClasfiName${type}Options`] = resp.classifiDicList;
+				});
+			},
 			goDetailReport(prjSN) {
 				this.$router.push({ path: `/view003/${prjSN}` });
 			},
@@ -352,7 +434,7 @@
 
 					this.viewList = resp.viewList;
 					this.total = resp.header.rspPageCount;
-					this.tableHeight = window.screen.availHeight - 450;
+					this.tableHeight = window.screen.availHeight - 550;
 				}).catch(error => {
 					this.loading = false;
 					this.$message({ message: error, type: 'error' });

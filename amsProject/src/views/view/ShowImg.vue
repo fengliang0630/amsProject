@@ -1,11 +1,20 @@
 <template>
 	<div id="imgPage">
-		<el-carousel type="card" :autoplay="autoplay" :height="height">
+		<el-carousel v-if="srcArray.length > 1" type="card" :autoplay="autoplay" :height="height">
 			<el-carousel-item v-for="item in srcArray" :key="item.id">
 				<h2 v-html="item.fileName"></h2>
-				<img :src="item.src" :height="heightNum"/>
+				<viewer>
+					<img :src="item.src" :height="heightNum"/>
+				</viewer >
+				
 			</el-carousel-item>
 		</el-carousel>
+		<viewer v-if="srcArray.length === 1">
+			<img :src="srcArray[0].src" :height="heightNum"/>
+		</viewer >
+		<div v-if="srcArray.length <= 0 ">
+			暂未找到响应附图
+		</div>
 	</div>
 </template>
 

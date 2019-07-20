@@ -36,7 +36,7 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="sizes, prev, pager, next" :page-sizes="paginationSize" @size-change="handleSizeChange"
+			<el-pagination layout="total, sizes, prev, pager, next" :page-sizes="paginationSize" @size-change="handleSizeChange"
 			 	@current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
