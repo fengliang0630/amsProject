@@ -75,7 +75,7 @@
 				isRouter: true,
 				activeMenuId: '',
 				sysName:'建设工程规划许可证管理系统',
-				sysVersion: '1.1.4',
+				sysVersion: '1.1.5',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '/static/user.jpg',

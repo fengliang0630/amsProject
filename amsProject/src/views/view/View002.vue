@@ -5,6 +5,12 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item style="width:23%;">
+					<el-select v-model="filters.prjYear" multiple placeholder="请选择年份"  style="width:100%"
+						:title="filters.prjYear">
+						<el-option v-for="item in yearOptions" :key="item" :label="item" :value="item"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item style="width:23%;">
 					<el-input v-model="filters.prjSN" placeholder="许可证号"></el-input>
 				</el-form-item>
 				<el-form-item style="width:23%;">
@@ -305,6 +311,7 @@
 				prjSNToMap: '',
 				isShowMap: false,
 				filters: {
+					prjYear: [],
 					prjSN: '',
 					prjUnit: '',
 					prjSNType: '',
@@ -334,6 +341,7 @@
 				prjStatusOptions: util.prjStatusOptions,
 				prjTypeOptions: util.prjTypeOptions,
 				prjMarkOptions: util.prjMarkOptions,
+				yearOptions: [],
 				projectViewParam: {
 					prjSNTem: '',
 					show: false
@@ -461,6 +469,11 @@
 			}
 		},
 		mounted() {
+			const y = new Date().getFullYear();
+			for (let i = 0; i < 20; i++) {
+				this.yearOptions.push(y - i);
+			}
+
 			const index = this.$route.params.prjSNType;
 			if (!isNaN(index)) {
 				this.filters.prjSNType = this.prjSNTypeOptions[Number(index)].value;

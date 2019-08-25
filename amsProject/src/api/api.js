@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// let base = '';
+// let base = 'http://10.208.8.225:8889';
 let base = 'http://154.8.232.103:8899';
 
 // 登录接口
