@@ -397,6 +397,7 @@
 				});
 			},
 			goDetailReport(prjSN) {
+				window.sessionStorage.setItem('params', JSON.stringify(this.filters));
 				this.$router.push({ path: `/view003/${prjSN}` });
 			},
 			viewImgHandler(_prjSN) {
@@ -480,6 +481,13 @@
 			} else {
 				this.filters.prjSNType = '';
 			}
+
+			const params = sessionStorage.getItem('params');
+			if (!!params) {
+				this.filters = JSON.parse(params);
+				sessionStorage.removeItem('params');
+			}
+
 			this.getView002();
 			
 		},

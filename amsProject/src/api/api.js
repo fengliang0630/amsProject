@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-let base = 'http://10.208.8.225:8899';
-// let base = 'http://154.8.232.103:8899';
+// let base = 'http://10.208.8.225:8899';
+let base = 'http://154.8.232.103:8899';
 
 // 登录接口
 export const login = params => { 

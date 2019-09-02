@@ -44,9 +44,13 @@ router.beforeEach((to, from, next) => {
   }
   let user = JSON.parse(sessionStorage.getItem('user'));
   if (!user && to.path != '/login') {
-    next({ path: '/login' })
+    next({ path: '/login' });
   } else {
-    next()
+    if (from.path.indexOf('/view003') > -1 && to.path.indexOf('/view002') === -1) {
+      sessionStorage.removeItem('params');
+    }
+
+    next();
   }
 })
 
